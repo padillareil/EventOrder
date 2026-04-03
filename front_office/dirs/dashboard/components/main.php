@@ -125,6 +125,10 @@
 
 <script>
   var stepper = new Stepper(document.querySelector('#stepper'))
+  // Bind Next button
+  document.getElementById('next-step').addEventListener('click', function () {
+    stepper.next();
+  });
 </script>
 
 

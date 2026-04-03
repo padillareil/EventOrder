@@ -121,7 +121,7 @@
 
   <!-- Footer: Action -->
   <div class="card-footer text-end">
-    <button class="btn btn-success btn-sm" type="button">
+    <button class="btn btn-sm text-white" type="button" id="stepper" onclick="stepper.next()" style="background-color: #bf9b30;">
       Next <i class="bi bi-chevron-right"></i>
     </button>
   </div>

@@ -1,4 +1,3 @@
-
 <div class="container col-md-11">
 	<div id="load_Home_dashboard"></div>
 
