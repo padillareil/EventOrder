@@ -14,6 +14,7 @@
   <link rel="stylesheet" type="text/css" href="assets/plugins/sweetalert2/sweetalert2.css">
   <link rel="stylesheet" type="text/css" href="assets/plugins/sweetalert2/sweetalert2.min.css">
   <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-icons/font/bootstrap-icons.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/login.css">
   <link rel="icon" href="assets/image/logo/favicon.png">
 </head>
 <body style="background-color: #363636;">
@@ -34,8 +35,10 @@
           <div class="form-floating mb-3 position-relative">
             <input type="password" name="Password" id="Password" class="form-control"  required>
             <label for="Password">Password</label>
-            <i class="bi bi-eye-slash position-absolute top-50 end-0 translate-middle-y me-3" 
-               id="togglePassword" style="cursor: pointer;"></i>
+            <i class="bi bi-eye-slash position-absolute top-50 end-0 translate-middle-y me-3" id="togglePassword" style="cursor: pointer;"></i>
+          </div>
+          <div id="login-error" class="text-danger small mb-2 d-none">
+            Invalid credentials.
           </div>
           <div class="form-checks ml-4 mb-4">
             <input class="form-check-input" type="checkbox" id="save-login">
@@ -63,3 +66,4 @@
 </html>
 
   
+

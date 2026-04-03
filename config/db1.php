@@ -1,7 +1,7 @@
 <?php
     $Hostname   = ''; 
     $servername = "192.168.101.68";
-    $database = "IAP_HELPDESK";
+    $database = "XING_EO";
     $username = "sa";
     $password = "SB1Admin";
     $PCName = "";

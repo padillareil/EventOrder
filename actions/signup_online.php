@@ -12,7 +12,7 @@ try {
 
     $conn->beginTransaction();
 
-    $ins_acc_online = $conn->prepare("INSERT INTO UserAccount (UserName, UserPassword, Role) VALUES(?,?,?)");
+    $ins_acc_online = $conn->prepare("INSERT INTO SysAccount (Username, Password, Role) VALUES(?,?,?)");
     $ins_acc_online->execute([$Username, $Password, $Role]);
 
     $conn->commit();

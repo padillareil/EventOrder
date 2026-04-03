@@ -42,9 +42,9 @@
            setCookie("Password", Password, 7);
          }
 
-         var role = parseInt(response.role);
-         if (role === 1) {
-           window.location.assign("admin/index.php");
+         var role = response.role;
+         if (role === 'FO') {
+           window.location.assign("front_office/index.php");
          }else if (role === 2){
            window.location.assign("home/index.php");
          } else if (role === 3){
@@ -55,6 +55,11 @@
 
        } else {
          console.log("Login failed: " + response.message);
+         $("#Username").addClass("input-error");
+         $("#Username").addClass("is-invalid");
+         $("#Password").addClass("input-error");
+         $("#Password").addClass("is-invalid");
+         $("#login-error").removeClass("d-none");
        }
      });
    });
@@ -75,3 +80,11 @@
  function deleteCookie(name) {
    document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
  }
+
+
+ /*Remove invalid danger upon on type*/
+ $("#Username, #Password").on("input", function () {
+     $(this).removeClass("input-error");
+      $(this).removeClass("is-invalid");
+     $("#login-error").addClass("d-none");
+ });
