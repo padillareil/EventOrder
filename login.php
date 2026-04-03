@@ -21,7 +21,7 @@
     <div class="col-md-6 col-lg-4">
       <div class="container min-vh-100 d-flex flex-column justify-content-center align-items-center">
         <div class="d-flex justify-content-center">
-          <img src="assets/image/logo/GXingLogo.png" alt="Grand Xing Logo" style="border-radius: 80%; height: 180px; width: 180px;">
+        <img src="assets/image/logo/GXingLogo.png" alt="Grand Xing Logo" style="border-radius: 50%; width: 300px; height: auto;">
         </div>
         <div class="text-center mb-4">
           <h5 style="color: #bf9b30;">Event Order</h5>
