@@ -46,6 +46,7 @@ try {
   <link rel="stylesheet" href="../assets/plugins/datepicker/jquery-ui.structure.min.css">
   <link rel="stylesheet" href="../assets/css/style.css">
   <!-- <link rel="stylesheet" type="text/css" href="../assets/css/logout.css"> -->
+  <link rel="stylesheet" type="text/css" href="../assets/css/skeleton.css">
   <link rel="icon" href="../assets/image/logo/favicon.png">
 
 </head>

@@ -61,6 +61,8 @@ $("#main-menu")
   $("#main-content").html(spinner);
   $("#main-breadcrumb").html(spinner);
 
+  Pace.restart();/*Pacer Restart*/
+
   $.post($file, function(data) {
     setTimeout(function() {
       $("#main-title").hide().html($maintitle).fadeIn(200);
@@ -84,6 +86,11 @@ $("#main-menu")
    var tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
   
+
+
+
+
+
 
   function logout() {
       $.post("actions/logout.php", {}, function(data) {

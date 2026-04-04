@@ -140,15 +140,15 @@
     <div class="modal-content border-0 rounded-4 shadow">
       <div class="modal-body text-center p-4">
         <div class="mb-3">
-          <i class="bi bi-exclamation-circle text-warning" style="font-size: 80px;"></i>
+          <i class="bi bi-exclamation-circle text-warning" style="font-size: 50px;"></i>
         </div>
-        <h5 class="mb-4">Are you sure you want to leave?</h5>
+        <h6 class="mb-4">Are you sure you want to leave?</h6>
         <div class="d-flex justify-content-center gap-2">
-          <button type="button" class="btn text-white fw-semibold" style="background-color: #bf9b30;" id="btn-logout" onclick="logout()">
+          <button type="button" class="btn btn-sm text-white fw-semibold" style="background-color: #bf9b30;" id="btn-logout" onclick="logout()">
               <span id="logout-text">Logout</span>
               <span id="logout-spinner" class="spinner-border spinner-border-sm ms-2 d-none" role="status" aria-hidden="true"></span>
           </button>
-          <button type="button" class="btn btn-dark fw-semibold" data-bs-dismiss="modal" id="btn-cancel">
+          <button type="button" class="btn btn-sm btn-dark fw-semibold" data-bs-dismiss="modal" id="btn-cancel">
               Cancel
           </button>
         </div>
