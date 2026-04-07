@@ -74,11 +74,23 @@
                          </div>
                      </div>
 
-                     <div class="step-page d-none" id="step-3"></div>
+                     <div class="step-page d-none" id="step-3">
+                      <div class="p-3">
+                          <?php include 'step3.php'; ?>
+                      </div>
+                     </div>
 
-                     <div class="step-page d-none" id="step-4"></div>
+                     <div class="step-page d-none" id="step-4">
+                      <div class="p-3">
+                          <?php include 'step4.php'; ?>
+                      </div>
+                     </div>
 
-                     <div class="step-page d-none" id="step-5"></div>
+                     <div class="step-page d-none" id="step-5">
+                      <div class="p-3">
+                          <?php include 'step5.php'; ?>
+                      </div>
+                     </div>
 
                  </div>
               </div>
@@ -194,3 +206,4 @@ $(document).ready(function () {
       border-color: #bf9b30;
   }
 </style>
+

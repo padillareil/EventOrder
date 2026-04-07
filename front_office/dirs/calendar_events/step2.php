@@ -3,11 +3,11 @@
         <div class="d-flex align-items-center justify-content-between mb-3">
             <div class="d-flex align-items-center">
                 <span class="badge rounded-pill me-2 bg-danger">3</span>
-                <h6 class="fw-bold mb-0 text-uppercase">Venue</h6>
+                <h6 class="fw-bold mb-0 text-uppercase">Venue Setup</h6>
             </div>
         </div>
         <div class="mt-2 mb-2">
-            <button id="btn-add-venue" class="btn py-2 btn-primary shadow" type="button" onclick="createVenue()">
+            <button id="btn-add-venue" class="btn px-5 py-2 btn-primary shadow" type="button" onclick="createVenue()">
                 <i class="bi bi-plus-lg"></i> Add Venue
             </button>
         </div>
@@ -23,55 +23,45 @@
                 </div>
             </div>
         </div>
-
         <!-- Dynamic List -->
         <div id="venue-list" class="d-none"></div>
-
     </div>
 </div>
 
 
 <script>
-  function createVenue() {
-      const container = document.getElementById('event-rooms-container');
-      const template = document.getElementById('venue-form-template');
-      const emptyState = document.getElementById('empty-state');
+ function createVenue() {
+     const container = document.getElementById('event-rooms-container');
+     const template = document.getElementById('venue-form-template');
+     const emptyState = document.getElementById('empty-state');
+     if (emptyState) {
+         emptyState.style.display = 'none';
+     }
+     const clone = template.content.cloneNode(true);
+     container.prepend(clone);
+     updateVenueIndices(); 
+ }
 
-      // 1. Hide the empty state if it's currently visible
-      if (emptyState) {
-          emptyState.style.display = 'none';
-      }
+ function updateVenueIndices() {
+     const venues = document.querySelectorAll('.venue-instance');
+     venues.forEach((venue, index) => {
+         const indexSpan = venue.querySelector('.venue-index');
+         if (indexSpan) {
+             indexSpan.textContent = index + 1; 
+         }
+     });
+ }
 
-      // 2. Clone and Append the form
-      const clone = template.content.cloneNode(true);
-      
-      // Select the card within the clone to add a remove listener
-      const card = clone.querySelector('.card');
-      
-      // Add event listener to the "Remove" button specifically
-      const removeBtn = clone.querySelector('.btn-link, .btn-close');
-      // Note: If you use the template from my previous message, 
-      // we can override the onclick to handle the empty state check
-      
-      container.appendChild(clone);
-  }
-
-  // Add this function to handle smart deletion
   function removeVenue(button) {
       const card = button.closest('.card');
       const container = document.getElementById('event-rooms-container');
       const emptyState = document.getElementById('empty-state');
-      
       card.remove();
-
-      // Check if there are any cards left (excluding the empty-state div)
       const remainingCards = container.querySelectorAll('.card').length;
-      
       if (remainingCards === 0 && emptyState) {
           emptyState.style.display = 'block';
       }
   }
-
 </script>
 
 <?php include 'template.php';  ?>

@@ -1,5 +1,5 @@
 <div class="row g-4">
-    <div class="col-lg-7">
+    <div class="col-md-6">
         <div class="d-flex align-items-center mb-3">
             <span class="badge rounded-pill me-2 bg-danger">1</span>
             <h6 class="fw-bold mb-0 tracking-wide text-uppercase">Event Information</h6>
@@ -76,7 +76,7 @@
         </div>
     </div>
 
-    <div class="col-lg-5">
+    <div class="col-md-6">
         <div class="p-4 rounded-4 shadow-lg bg-light h-100 border">
             <div class="d-flex align-items-center mb-4">
                 <span class="badge rounded-pill me-2 bg-danger">2</span>

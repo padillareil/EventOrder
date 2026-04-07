@@ -103,12 +103,6 @@ try {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="ammendment">
-                                <i class="nav-icon bi bi-clipboard2-check"></i>
-                                <p>Ammendment</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <p class="text-muted">Account</p>
                         </li>
                         <!-- <li class="nav-item">

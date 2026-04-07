@@ -31,6 +31,10 @@
                     </select>
                 </div>
                 <div class="col-md-6">
+                    <label class="form-label fw-semibold text-secondary">Room No.</label>
+                    <input type="number" name="room-number" id="room-number" class="form-control form-control-lg border-primary" required>
+                </div>
+                <div class="col-md-12">
                     <label class="form-label fw-semibold text-secondary">Layout</label>
                     <select class="form-select form-select-lg border-primary shadow-none py-2 fs-6">
                         <option value="Banquet Style">Banquet Style</option>
@@ -47,3 +51,5 @@
         </div>
     </div>
 </template>
+
+
