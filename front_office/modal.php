@@ -144,11 +144,11 @@
         </div>
         <h6 class="mb-4">Are you sure you want to leave?</h6>
         <div class="d-flex justify-content-center gap-2">
-          <button type="button" class="btn btn-sm text-white fw-semibold" style="background-color: #bf9b30;" id="btn-logout" onclick="logout()">
+          <button type="button" class="btn text-white fw-semibold" style="background-color: #bf9b30;" id="btn-logout" onclick="logout()">
               <span id="logout-text">Logout</span>
               <span id="logout-spinner" class="spinner-border spinner-border-sm ms-2 d-none" role="status" aria-hidden="true"></span>
           </button>
-          <button type="button" class="btn btn-sm btn-dark fw-semibold" data-bs-dismiss="modal" id="btn-cancel">
+          <button type="button" class="btn btn-dark fw-semibold" data-bs-dismiss="modal" id="btn-cancel">
               Cancel
           </button>
         </div>

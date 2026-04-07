@@ -68,7 +68,7 @@ try {
                 </li>
             </ul>
         </nav>
-        <aside class="main-sidebar sidebar-dark-info elevation-5">
+        <aside class="main-sidebar sidebar-dark-secondary elevation-4">
             <p class="text-center brand-link">
                 <a href="index.php" style="text-decoration: none; color: inherit;">
                     <img src="../assets/image/logo/favicon.png" alt="User Logo" id="profile-image"style="width: 100px; height: 100px; object-fit: cover;">
@@ -85,38 +85,38 @@ try {
                             <p class="text-muted">Menu</p>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link active" name="menu" menucode="dashboard">
-                                <i class="nav-icon bi bi-grid"></i>
-                                <p>Dashboard</p>
+                            <a href="#" class="nav-link active" name="menu" menucode="calendar_events">
+                                <i class="nva-icon bi bi-calendar2-event"></i>
+                                <p>Hotel Event</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link" name="menu" menucode="apply_service">
                                 <i class="nav-icon bi bi-card-checklist"></i>
-                                <p>Bookings</p>
+                                <p>Ammendment</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="apply_service">
+                            <a href="#" class="nav-link" name="menu" menucode="eventorder">
                                 <i class="nav-icon bi bi-clipboard2-check"></i>
-                                <p>Events</p>
+                                <p>Event Order</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="apply_service">
-                                <i class="nav-icon bi bi-calendar2-week"></i>
-                                <p>Event Calendar</p>
+                            <a href="#" class="nav-link" name="menu" menucode="ammendment">
+                                <i class="nav-icon bi bi-clipboard2-check"></i>
+                                <p>Ammendment</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <p class="text-muted">Account</p>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="#" class="nav-link" name="menu" menucode="apply_service">
                                 <i class="nav-icon bi bi-flag"></i>
                                 <p>Reports</p>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a href="#" class="nav-link" name="menu" menucode="settings" data-bs-toggle="tooltip" data-bs-title="Settings" data-bs-placement="right">
                                 <i class="nav-icon bi bi-gear"></i>

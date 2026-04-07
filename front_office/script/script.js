@@ -29,10 +29,10 @@ $("#main-menu")
   let $mainbreadcrumb = "";
 
   switch (menucode) {
-    case "dashboard":
+    case "calendar_events":
       $maintitle = "";
       $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
-      $file = "dirs/dashboard/dashboard.php";
+      $file = "dirs/calendar_events/calendar_events.php";
       break;
     case "help":
       $maintitle = "";
