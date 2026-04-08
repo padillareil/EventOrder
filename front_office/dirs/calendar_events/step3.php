@@ -1,6 +1,12 @@
 <div class="overscroll-auto" style="height: 50vh;">
     <div class="row g-4">
         <div class="col-12">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <div class="d-flex align-items-center">
+                    <span class="badge rounded-pill me-2 bg-danger">4</span>
+                    <h6 class="fw-bold mb-0 text-uppercase">Decor & Audio Setup</h6>
+                </div>
+            </div>
             <div class="card border-0 shadow-lg rounded-4">
                 <div class="card-header bg-white border-0 pt-4 px-4 pb-2">
                     <div class="d-flex align-items-center">

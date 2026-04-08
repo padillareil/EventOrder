@@ -1,5 +1,5 @@
-<div class="row g-4">
-    <div class="col-md-6">
+<div class="row">
+    <div class="col-md-12">
         <div class="d-flex align-items-center mb-3">
             <span class="badge rounded-pill me-2 bg-danger">1</span>
             <h6 class="fw-bold mb-0 tracking-wide text-uppercase">Event Information</h6>
@@ -73,45 +73,43 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="col-md-6">
-        <div class="p-4 rounded-4 shadow-lg bg-light h-100 border">
-            <div class="d-flex align-items-center mb-4">
-                <span class="badge rounded-pill me-2 bg-danger">2</span>
-                <h6 class="fw-bold mb-0 tracking-wide text-uppercase">Engager Information</h6>
-            </div>
-            
-            <div class="mb-3">
-                <label class="form-label fw-semibold text-secondary">Person in Charge</label>
-                <input type="text" class="form-control border-primary shadow-sm" placeholder="Full name">
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label fw-semibold text-secondary">Address</label>
-                <textarea class="form-control border-primary shadow-sm" rows="2"></textarea>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label fw-semibold text-secondary">Contact Number</label>
-                <input type="text" class="form-control border-primary shadow-sm" placeholder="+63 000 000 000">
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label fw-semibold text-secondary">Email</label>
-                <input type="email" class="form-control border-primary shadow-sm" placeholder="gx@grandxing.com">
-            </div>
-
-            <div class="mt-4 p-3 bg-white rounded-3 shadow-sm">
-                <label class="form-label">Rate (per Pax)</label>
-                <div class="input-group">
-                    <span class="input-group-text">₱</span>
-                    <input type="text" class="form-control border-primary shadow-none" value="0">
+            <div class="col-12 mt-4">
+                <div class="d-flex align-items-center mb-4">
+                    <span class="badge rounded-pill me-2 bg-danger">2</span>
+                    <h6 class="fw-bold mb-0 tracking-wide text-uppercase">Engager Information</h6>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label fw-semibold text-secondary">Person in Charge</label>
+                        <input type="text" class="form-control border-primary shadow-sm" placeholder="Full name">
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label fw-semibold text-secondary">Contact Number</label>
+                        <input type="text" class="form-control border-primary shadow-sm" placeholder="+63 000 000 000">
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label fw-semibold text-secondary">Address</label>
+                        <textarea class="form-control border-primary shadow-sm" rows="2"></textarea>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label fw-semibold text-secondary">Email</label>
+                        <input type="email" class="form-control border-primary shadow-sm" placeholder="gx@grandxing.com">
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label">Rate (per Pax)</label>
+                        <div class="input-group">
+                            <span class="input-group-text">₱</span>
+                            <input type="text" class="form-control border-primary shadow-none" value="0">
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            
         </div>
     </div>
+
 </div>
 
 

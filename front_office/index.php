@@ -38,6 +38,10 @@ try {
   <link rel="stylesheet" href="../assets/plugins/datatables/datatables.min.css">
   <link rel="stylesheet" type="text/css" href="../assets/plugins/bs-stepper/css/bs-stepper.min.css">
   <link rel="stylesheet" type="text/css" href="../assets/plugins/pace/themes/gold/pace-theme-minimal.css">
+  <link rel="stylesheet" type="text/css" href="../assets/plugins/jsgrid/jsgrid-theme.min.css">
+  <link rel="stylesheet" type="text/css" href="../assets/plugins/jsgrid/jsgrid-theme.css">
+
+
   <link rel="stylesheet" href="../assets/css/datatables.min.css">
   <link rel="stylesheet" href="../assets/plugins/toastr/toastr.min.css">
   <link rel="stylesheet" href="../assets/plugins/sweetalert2/sweetalert2.min.css">
@@ -166,6 +170,7 @@ try {
 <script src="../assets/plugins/chart.js/Chart.min.js"></script>
 <script src="../assets/plugins/moment/moment.min.js"></script>
 <script src="../assets/plugins/pace/pace.min.js"></script>
+<script src="../assets/plugins/jsgrid/jsgrid.min.js"></script>
 <script src="../assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>
 <script src="../assets/plugins/daterangepicker/daterangepicker.js"></script>
 <script src="../assets/plugins/datatables/datatables.min.js"></script>

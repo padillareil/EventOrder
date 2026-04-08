@@ -99,11 +99,15 @@
                 <button type="button" class="btn btn-danger fw-semibold me-auto" data-bs-dismiss="modal">
                  <i class="bi bi-trash"></i> Discard
                 </button>
+               
                   <button id="btn-back" class="btn py-2 btn-secondary shadow fw-semibold d-none" type="button">
                      Back
                   </button>
-                  <button id="btn-next" class="btn px-5 py-2 fw-bold btn-primary shadow" type="button"> 
+                  <button id="btn-next" class="btn px-5 py-2 fw-bold btn-success shadow" type="button"> 
                       Next
+                  </button>
+                  <button id="btn-next" class="btn px-5 py-2 fw-bold btn-secondary shadow" type="button"> 
+                      Save Draft
                   </button>
               </div>
           </div>
@@ -134,7 +138,7 @@ $(document).ready(function () {
 
         // NEXT BUTTON TEXT
         if (step === totalSteps) {
-            $('#btn-next').text('Finish');
+            $('#btn-next').text('Save');
         } else {
             $('#btn-next').text('Next');
         }

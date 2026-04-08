@@ -1,7 +1,12 @@
 <div class="overscroll-auto px-2" style="height: 60vh; overflow-y: auto;">
     <div class="row g-4">
-        
         <div class="col-12">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <div class="d-flex align-items-center">
+                    <span class="badge rounded-pill me-2 bg-danger">4</span>
+                    <h6 class="fw-bold mb-0 text-uppercase">Food & Menus Setup</h6>
+                </div>
+            </div>
             <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
                 <div class="card-header bg-white border-0 pt-4 px-4 pb-2">
                     <h6 class="fw-bold mb-0 text-uppercase small tracking-wider">Snacks</h6>
@@ -23,7 +28,7 @@
                     </div>
                     <div class="px-4 py-2 border-top bg-white">
                         <button type="button" class="btn btn-sm text-success fw-bold p-0" onclick="addCustomItem('snacks-list')">
-                            <i class="bi bi-plus-circle-fill me-1"></i> Add Custom Snack
+                            <i class="bi bi-plus-circle-fill me-1"></i> Add Snack Option
                         </button>
                     </div>
                     <div class="p-3 bg-light-subtle border-top">
@@ -55,7 +60,7 @@
                     </div>
                     <div class="px-4 py-2 border-top bg-white">
                         <button type="button" class="btn btn-sm text-success fw-bold p-0" onclick="addCustomItem('dinner-list')">
-                            <i class="bi bi-plus-circle-fill me-1"></i> Add Custom Option
+                            <i class="bi bi-plus-circle-fill me-1"></i> Add Dinner Option
                         </button>
                     </div>
                     <div class="p-3 bg-light-subtle border-top">
@@ -110,7 +115,7 @@
                     <h6 class="fw-bold mb-0 text-uppercase small tracking-wider">Beverages</h6>
                 </div>
                 <div class="card-body p-0">
-                    <div class="list-group list-group-flush" id="maincourse-list">
+                    <div class="list-group list-group-flush" id="beverage-list">
                         <label class="list-group-item px-4 py-3 selection-row">
                             <div class="form-check custom-check-success mb-0">
                                 <input class="form-check-input me-3" type="checkbox">
@@ -131,12 +136,31 @@
                         </label>
                     </div>
                     <div class="px-4 py-2 border-top bg-white">
-                        <button type="button" class="btn btn-sm text-success fw-bold p-0" onclick="addCustomItem('maincourse-list')">
+                        <button type="button" class="btn btn-sm text-success fw-bold p-0" onclick="addCustomItem('beverage-list')">
                             <i class="bi bi-plus-circle-fill me-1"></i> Add Beverage
                         </button>
                     </div>
                     <div class="p-3 bg-light-subtle border-top">
-                        <textarea class="form-control form-control-sm border-primary shadow-none" rows="2" placeholder="List specific dishes here..."></textarea>
+                        <textarea class="form-control form-control-sm border-primary shadow-none" rows="2" placeholder="List specific beverage here..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="card-header bg-white border-0 pt-4 px-4 pb-2">
+                    <h6 class="fw-bold mb-0 text-uppercase small tracking-wider">Add-ons</h6>
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush" id="addons-list">
+                    </div>
+                    <div class="px-4 py-2 border-top bg-white">
+                        <button type="button" class="btn btn-sm text-success fw-bold p-0" onclick="addCustomItem('addons-list')">
+                            <i class="bi bi-plus-circle-fill me-1"></i> Add Add-ons
+                        </button>
+                    </div>
+                    <div class="p-3 bg-light-subtle border-top">
+                        <textarea class="form-control form-control-sm border-primary shadow-none" rows="2" placeholder="List specific add-ons here..."></textarea>
                     </div>
                 </div>
             </div>
