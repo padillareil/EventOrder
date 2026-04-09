@@ -34,13 +34,23 @@ $("#main-menu")
       $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
       $file = "dirs/calendar_events/calendar_events.php";
       break;
+    case "ammendment":
+      $maintitle = "";
+      $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
+      $file = "dirs/ammendment/ammendment.php";
+    break;
+    case "eventorder":
+      $maintitle = "";
+      $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
+      $file = "dirs/eventorder/eventorder.php";
+    break;
     case "help":
       $maintitle = "";
       $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
       $file = "dirs/help/help.php";
-      break;
+    break;
     case "settings":
-      $maintitle = "Account Settings";
+      $maintitle = "";
       $mainbreadcrumb = `<li class="breadcrumb-item active">Settings</li>`;
       $file = "dirs/settings/settings.php";
       break;
@@ -216,6 +226,16 @@ $("#main-menu")
           }
       });
   }
+
+
+
+  /*Function Modal to apply Ammendment*/
+  function showHelp() {
+      var modal = document.getElementById('mdl-help');
+      var modal = new bootstrap.Modal(modal);
+      modal.show();
+  }
+
 
 //   function checkAccess() {  
 //     $.post("actions/get_accntaccess.php", {}, function(data) {

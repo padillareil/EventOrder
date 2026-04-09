@@ -31,7 +31,8 @@
             <div class="col-md-6">
                 <label class="form-label fw-semibold text-secondary">Day</label>
                 <select class="form-select border-primary shadow-none">
-                    <option selected value="Monday">Monday</option>
+                    <option selected value="N/A">N/A</option>
+                    <option value="Monday">Monday</option>
                     <option value="Tuesday">Tuesday</option>
                     <option value="Wednesday">Wednesday</option>
                     <option value="Thursday">Thursday</option>

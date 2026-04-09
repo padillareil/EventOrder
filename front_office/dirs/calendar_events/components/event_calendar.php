@@ -1,10 +1,14 @@
-<div class="d-flex align-items-center mb-3">
-    <div class="p-2 rounded-circle me-3" style="background-color: rgba(191, 155, 48, 0.1);">
-        <i class="bi bi-calendar-event text-primary"></i>
+<div class="d-flex align-items-center">
+    <div class="p-3 rounded-3 me-3 mb-2" style="background-color: rgba(191, 155, 48, 0.1);">
+        <i class="bi bi-calendar-event fs-5 text-custom-gold"></i>
     </div>
-    <h5 class="mb-0 fw-bold text-dark">Upcoming Events</h5>
+    <div>
+        <h5 class="mb-0 fw-bold text-dark">Upcoming Events</h5>
+        <p class="text-muted small mb-0">Monitor calendar events and availability schedule here.</p>
+    </div>
 </div>
-<p class="text-muted small">Monitor calendar events and availability schedule here.</p>
+
+
 <div class="border rounded-3 p-5 text-center bg-light border-dashed">
     <span class="text-muted">No events scheduled for today.</span>
 </div>

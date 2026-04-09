@@ -41,6 +41,7 @@ try {
   <link rel="stylesheet" type="text/css" href="../assets/plugins/jsgrid/jsgrid-theme.min.css">
   <link rel="stylesheet" type="text/css" href="../assets/plugins/jsgrid/jsgrid-theme.css">
 
+    <link rel="stylesheet" type="text/css" href="../assets/plugins/fullcalendar/main.css">
 
   <link rel="stylesheet" href="../assets/css/datatables.min.css">
   <link rel="stylesheet" href="../assets/plugins/toastr/toastr.min.css">
@@ -95,7 +96,7 @@ try {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="apply_service">
+                            <a href="#" class="nav-link" name="menu" menucode="ammendment">
                                 <i class="nav-icon bi bi-card-checklist"></i>
                                 <p>Ammendment</p>
                             </a>
@@ -116,13 +117,13 @@ try {
                             </a>
                         </li> -->
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="settings" data-bs-toggle="tooltip" data-bs-title="Settings" data-bs-placement="right">
-                                <i class="nav-icon bi bi-gear"></i>
+                            <a href="#" class="nav-link" name="menu" menucode="settings">
+                                <i class="nav-icon i bi-gear"></i>
                                 <p>Settings</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="help">
+                            <a href="#" class="nav-link" name="menu" onclick="showHelp()">
                                 <i class="nav-icon bi bi-info-circle"></i>
                                 <p>Help</p>
                             </a>
@@ -169,6 +170,11 @@ try {
 <script src="../assets/plugins/toastr/toastr.min.js"></script>
 <script src="../assets/plugins/chart.js/Chart.min.js"></script>
 <script src="../assets/plugins/moment/moment.min.js"></script>
+
+<!-- <script src="../assets/plugins/fullcalendar/main.min.js"></script> -->
+
+
+
 <script src="../assets/plugins/pace/pace.min.js"></script>
 <script src="../assets/plugins/jsgrid/jsgrid.min.js"></script>
 <script src="../assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>
@@ -198,3 +204,4 @@ try {
     color: white !important;
 }
 </style>
+
