@@ -1,4 +1,4 @@
-<div class="card border-0 shadow-lg rounded-0 mt-2">
+<div class="card  shadow-lg rounded-4 overflow-hidden mt-2">
     <div class="card-header bg-white border-0 pt-4 px-4">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
             <div class="d-flex align-items-center">
