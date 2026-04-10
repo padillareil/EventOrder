@@ -1,76 +1,6 @@
-// $(document).on("click", "a[menucode='eventorder']", function () {
-//   setTimeout(() => {
-//     startTour(); // or a different tour for EO
-//   }, 800); // wait for content load
-// });
-
-// $(document).on("click", "a[menucode='calendar_events']", function () {
-//   let menucode = $(this).attr("menucode");
-
-//   $("#main-content").load("modules/" + menucode + ".php", function () {
-//     // ✅ Content is now loaded → safe to start
-//     startTour();
-//   });
-// });
-
-// function startTour() {
-//   const driver = window.driver.js.driver;
-
-//   const tour = driver({
-//     showProgress: true,
-//     animate: true,
-//     smoothScroll: true,
-//     steps: [
-//       {
-//         element: '#btn-toggle-sidebar',
-//         popover: {
-//           title: 'Sidebar Toggle',
-//           description: 'Click here to collapse or expand the sidebar.'
-//         }
-//       },
-//       {
-//         element: '#notif-bell',
-//         popover: {
-//           title: 'Notifications',
-//           description: 'Check event order updates here.'
-//         }
-//       },
-//       {
-//         element: '#menu-calendar',
-//         popover: {
-//           title: 'Hotel Event',
-//           description: 'View and manage all scheduled events.'
-//         }
-//       },
-//       {
-//         element: '#menu-eventorder',
-//         popover: {
-//           title: 'Event Order',
-//           description: 'Create and manage event orders here.'
-//         }
-//       },
-//       {
-//         element: '#main-content',
-//         popover: {
-//           title: 'Main Workspace',
-//           description: 'This is where your selected module will load.'
-//         }
-//       },
-//       {
-//         element: '#menu-help',
-//         popover: {
-//           title: 'Help Section',
-//           description: 'Click here anytime to replay this guide.'
-//         }
-//       }
-//     ]
-//   });
-
-//   tour.drive();
-// }
 $(document).on("click", "a[name='menu']", function () {
   let menucode = $(this).attr("menucode");
-  loadPage(menucode);
+  // loadPage(menucode);
 });
 
 function startHelpTour() {
@@ -100,8 +30,8 @@ const STEP = {
   SETTINGS_CLICK: 8,
   SETTINGS_PAGE: 9,
 
-  HELP: 10,
-  FINAL: 11
+  // HELP: 10,
+  FINAL: 10
 };
 
 
@@ -240,12 +170,15 @@ function getSteps() {
       element: '#main-content',
       popover: {
         title: 'Account Settings',
-        description: 'This is wher you manage profile, security, and system settings'
+        description: 'This is wher you manage profile, security, and system settings',
+        onNextClick: () => {
+          window.location.reload();
+        }
       }
     },
 
     /* 11 - HELP */
-   {
+   /*{
      element: '#menu-help',
      popover: {
        title: 'Help',
@@ -255,7 +188,7 @@ function getSteps() {
          window.location.reload();
        }
      }
-   },
+   },*/
 
   ];
 }
@@ -338,7 +271,14 @@ function getPagePath(menucode) {
 /* =========================
    HELP CLICK OVERRIDE
 ========================= */
-$(document).on("click", "#menu-help", function (e) {
+/*$(document).on("click", "#menu-help", function (e) {
   e.preventDefault();
   showHelp();
-});
+});*/
+
+
+
+
+function loadEOTesting() {
+    document.getElementById('menu-eventorder').click();
+}

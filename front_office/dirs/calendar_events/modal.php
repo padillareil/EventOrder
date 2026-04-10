@@ -10,7 +10,7 @@
                 <div class="bs-stepper vertical" id="stepper">
                   <div class="bs-stepper-header bg-light border-end p-4" style="min-width: 180px;">
                       <div class="mb-4">
-                          <h6 class="fw-bold mb-0">New Event Order</h6>
+                          <h6 class="fw-bold mb-0">Book Order</h6>
                           <p class="text-muted small">Complete the sections below</p>
                       </div>
                       <div class="step" data-target="#step-1">

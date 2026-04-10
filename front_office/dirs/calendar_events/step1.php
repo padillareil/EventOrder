@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="d-flex align-items-center mb-3">
-            <span class="badge rounded-pill me-2 bg-danger">1</span>
+
             <h6 class="fw-bold mb-0 tracking-wide text-uppercase">Event Information</h6>
         </div>
         
@@ -16,19 +16,19 @@
                 <input type="date" id="date-start" name="date-start" class="form-control border-primary shadow-none" required>
             </div>
             <div class="col-md-6">
+                <label class="form-label fw-semibold text-secondary">Time Start</label>
+                <input type="time" id="time-start" name="time-start" class="form-control border-primary shadow-none" required>
+            </div>
+            <div class="col-md-6">
                 <label class="form-label fw-semibold text-secondary">Date End</label>
                 <input type="date" id="date-end" name="date-end" class="form-control border-primary shadow-none" required>
             </div>
            
             <div class="col-md-6">
-                <label class="form-label fw-semibold text-secondary">Time Start</label>
-                <input type="time" id="time-start" name="time-start" class="form-control border-primary shadow-none" required>
-            </div>
-            <div class="col-md-6">
                 <label class="form-label fw-semibold text-secondary">Time End</label>
                 <input type="time" id="time-end" name="time-end" class="form-control border-primary shadow-none" required>
             </div>
-            <div class="col-md-6">
+            <!-- <div class="col-md-6">
                 <label class="form-label fw-semibold text-secondary">Day</label>
                 <select class="form-select border-primary shadow-none">
                     <option selected value="N/A">N/A</option>
@@ -40,8 +40,8 @@
                     <option value="Saturday">Saturday</option>
                     <option value="Sunday">Sunday</option>
                 </select>
-            </div>
-            <div class="col-md-6">
+            </div> -->
+            <div class="col-md-12">
                 <label class="form-label fw-semibold text-secondary">Booking Category</label>
                 <select class="form-select border-primary shadow-none">
                   <option selected value="">Choose...</option>
@@ -77,7 +77,7 @@
 
             <div class="col-12 mt-4">
                 <div class="d-flex align-items-center mb-4">
-                    <span class="badge rounded-pill me-2 bg-danger">2</span>
+
                     <h6 class="fw-bold mb-0 tracking-wide text-uppercase">Engager Information</h6>
                 </div>
                 <div class="row">

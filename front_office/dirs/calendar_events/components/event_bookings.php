@@ -10,7 +10,7 @@
 
 
 <div class="mt-3">
-    <button class="btn btn-primary" type="button" onclick="addEO()"><i class="bi bi-plus-lg"></i> New Event Order</button>
+    <button class="btn btn-primary" type="button" onclick="addEO()"><i class="bi bi-plus-lg"></i> New Booking</button>
 </div>
 
 <div class="card border-0 shadow-sm rounded-4 overflow-hidden mt-2">

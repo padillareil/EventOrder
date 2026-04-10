@@ -6,7 +6,7 @@
                     <i class="bi bi-file-earmark-spreadsheet fs-5 text-custom-gold"></i>
                 </div>
                 <div>
-                    <h5 class="mb-0 fw-bold text-dark">Event Orders Master Record</h5>
+                    <h5 class="mb-0 fw-bold text-dark">Event Orders Record</h5>
                     <p class="text-muted small mb-0">Generate reports and export event data to Excel.</p>
                 </div>
             </div>
@@ -123,7 +123,7 @@
                         </td>
                         <td class="text-center">
                             <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2">
-                                Tentative
+                                Pending
                             </span>
                         </td>
                         <td class="text-end pe-4">

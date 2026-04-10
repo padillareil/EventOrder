@@ -30,7 +30,6 @@
                 </div> -->
                 <div class="d-flex align-items-center justify-content-between mb-3">
                     <div class="d-flex align-items-center">
-                        <span class="badge rounded-pill me-2 bg-danger">5</span>
                         <h6 class="fw-bold mb-0 text-uppercase">Booking Summary</h6>
                     </div>
                 </div>

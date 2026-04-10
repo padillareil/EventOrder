@@ -96,7 +96,7 @@ try {
                         <span class="position-absolute top-1 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
                     </a>
                     
-                    <div class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-0 p-0 mt-2" style="width: 320px;">
+                    <div class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-0 p-0 mt-2" style="width: 320px;" id="notify-dropdown">
                         <div class="p-3 border-bottom bg-white">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h6 class="fw-bold m-0" style="font-size: 0.8rem; letter-spacing: 0.5px;">NOTIFICATIONS UPDATES</h6>
@@ -104,9 +104,9 @@ try {
                             </div>
                         </div>
 
-                        <div class="list-group list-group-flush" style="max-height: 350px; overflow-y: auto;">
+                        <div class="list-group list-group-flush" style="max-height: 350px; overflow-y: auto;" >
                             
-                            <a href="#" class="list-group-item list-group-item-action border-bottom p-3">
+                            <a href="#" class="list-group-item list-group-item-action border-bottom p-3" onclick="loadEOTesting()">
                                 <p class="small m-0 text-muted mb-1 text-uppercase fw-bold" style="font-size: 0.65rem;">[ APPROVAL ]</p>
                                 <p class="small m-0 text-dark fw-bold">EO #10001 HAS BEEN APPROVED</p>
                                 <p class="small m-0 text-muted mt-1">Level 2 signature verified by Financial Dept.</p>
@@ -122,7 +122,7 @@ try {
                         </div>
 
                         <a href="#" class="d-block text-center py-2 bg-light text-decoration-none text-dark fw-bold border-top" style="font-size: 0.7rem; letter-spacing: 1px;">
-                            VIEW ALL SYSTEM UPDATES —>
+                            View All Event Updates
                         </a>
                     </div>
                 </li>
@@ -172,7 +172,7 @@ try {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="help" id="menu-help">
+                            <a href="#" class="nav-link" onclick="showHelp()">
                                 <i class="nav-icon bi bi-info-circle"></i>
                                 <p>Help</p>
                             </a>

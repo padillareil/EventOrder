@@ -1,14 +1,14 @@
 <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
     <div class="card-header bg-white border-0 pt-4 px-4">
-        <ul class="nav nav-pills bg-light p-1 rounded-3 d-inline-flex" id="eventTabs" role="tablist">
+        <ul class="nav nav-pills bg-light p-1 rounded-pill d-inline-flex border" id="eventTabs" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active rounded-3 py-2 px-4 fw-medium" 
+                <button class="nav-link active rounded-pill py-2 px-4 fw-medium" 
                         id="calendar-tab" data-bs-toggle="tab" data-bs-target="#calendar" type="button">
-                    <i class="bi bi-calendar-range me-2"></i>Calendar
+                   <i class="bi bi-calendar-range me-2"></i>Calendar
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link rounded-3 py-2 px-4 fw-medium" 
+                <button class="nav-link rounded-pill py-2 px-4 fw-medium" 
                         id="bookings-tab" data-bs-toggle="tab" data-bs-target="#bookings" type="button">
                     <i class="bi bi-bookmark-check me-2"></i>Bookings
                 </button>
@@ -28,7 +28,6 @@
         </div>
     </div>
 </div>
-
 
 <style>
     #eventTabs .nav-link.active {
