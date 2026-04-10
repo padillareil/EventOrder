@@ -121,7 +121,7 @@ try {
                             </a>
                         </div>
 
-                        <a href="#" class="d-block text-center py-2 bg-light text-decoration-none text-dark fw-bold border-top" style="font-size: 0.7rem; letter-spacing: 1px;">
+                        <a href="#" class="d-block text-center py-2 bg-light text-decoration-none text-dark fw-bold border-top" style="font-size: 0.7rem; letter-spacing: 1px;" onclick="viewallNotificationTesting()">
                             View All Event Updates
                         </a>
                     </div>
@@ -153,7 +153,7 @@ try {
                         <li class="nav-item">
                             <a href="#" class="nav-link" name="menu" menucode="ammendment" id="menu-amendment">
                                 <i class="nav-icon bi bi-card-checklist"></i>
-                                <p>Ammendment</p>
+                                <p>Amendment</p>
                             </a>
                         </li>
                         <li class="nav-item">

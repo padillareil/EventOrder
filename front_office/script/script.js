@@ -232,6 +232,16 @@ $("#main-menu")
   }
 
 
+/*function load all notification lists*/
+  function viewallNotificationTesting() {
+      $.post("dirs/notifications/notifications.php", {
+      }, function (data){
+          $("#main-content").html(data);
+      });
+  }
+
+
+
 //   function checkAccess() {  
 //     $.post("actions/get_accntaccess.php", {}, function(data) {
 //         let response = JSON.parse(data);
