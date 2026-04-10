@@ -160,103 +160,146 @@
 <!-- Modal Help Instructions for Event Order System -->
 <div class="modal fade" id="mdl-help" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-scrollable">
-        <div class="modal-content border-0 shadow-lg rounded-4">
-            <div class="modal-header border-0 pb-0 pt-4 px-4 d-flex align-items-center">
-                <div class="p-2 rounded-3 me-3" style="background-color: rgba(191, 155, 48, 0.1);">
-                    <i class="bi bi-shield-check text-custom-gold fs-4"></i>
+        <div class="modal-content border-0 shadow-lg rounded-0">
+            <div class="modal-header border-0 pt-4 px-4 pb-0">
+                <div class="w-100 border-bottom pb-3">
+                    <h4 class="fw-bold m-0" style="letter-spacing: -0.5px;">System Guide & FAQ</h4>
+                    <!-- <p class="text-muted small mb-0 text-uppercase" style="letter-spacing: 1px;">Standard Operating Procedures • Event Order Management</p> -->
+                </div>
+                <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body p-4">
+                <div class="mb-5">
+                <div class="input-group border px-3 py-1 bg-light">
+                   <span class="input-group-text bg-transparent border-0"><i class="bi bi-search text-muted small"></i></span>
+                   <input type="search" class="form-control bg-transparent border-0 small" placeholder="What's in your mind...">
+               </div>
+                </div>
+
+                <div class="mb-5">
+                    <h6 class="fw-bold text-uppercase border-start border-3 border-dark ps-2 mb-4" style="font-size: 0.8rem; letter-spacing: 1px;">The Event Order Lifecycle</h6>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-3">
+                            <p class="fw-bold m-0" style="font-size: 0.75rem;">[ STEP 01 ]</p>
+                            <p class="fw-bold text-dark mb-1">Creation</p>
+                            <p class="small text-muted">Draft the EO with tentative pax and venue. System status: <span class="text-dark fw-bold">DRAFT</span>.</p>
+                        </div>
+                        <div class="col-md-3 border-start">
+                            <p class="fw-bold m-0" style="font-size: 0.75rem;">[ STEP 02 ]</p>
+                            <p class="fw-bold text-dark mb-1">Downpayment</p>
+                            <p class="small text-muted">Apply the 50% deposit receipt. Status moves to <span class="text-dark fw-bold">PENDING APPROVAL</span>.</p>
+                        </div>
+                        <div class="col-md-3 border-start">
+                            <p class="fw-bold m-0" style="font-size: 0.75rem;">[ STEP 03 ]</p>
+                            <p class="fw-bold text-dark mb-1">Verification</p>
+                            <p class="small text-muted">Manager reviews floor plan and menu. Status moves to <span class="text-dark fw-bold">APPROVED</span>.</p>
+                        </div>
+                        <div class="col-md-3 border-start">
+                            <p class="fw-bold m-0" style="font-size: 0.75rem;">[ STEP 04 ]</p>
+                            <p class="fw-bold text-dark mb-1">Execution</p>
+                            <p class="small text-muted">Final EO is printed for Kitchen/Banquet. No further edits allowed without Amendment.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h6 class="fw-bold text-uppercase border-start border-3 border-dark ps-2 mb-4" style="font-size: 0.8rem; letter-spacing: 1px;">Frequently Asked Questions</h6>
+                    
+                    <div class="accordion accordion-flush" id="faqAccordion">
+                        
+                        <div class="accordion-item border-bottom">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed px-0 py-3 fw-bold bg-transparent shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    Can I edit an Event Order after it has been "Approved"?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body px-0 py-2 small text-muted">
+                                    No direct edits are allowed on approved EOs. You must use the <strong class="text-dark">"Add Amendment"</strong> feature. This creates a version history (Rev 1, Rev 2) so all departments are aware of the changes.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item border-bottom">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed px-0 py-3 fw-bold bg-transparent shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    What happens if the client fails to settle the balance 48 hours before?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body px-0 py-2 small text-muted">
+                                    The system will flag the EO as <strong class="text-danger">OVERDUE</strong>. Banquet and Kitchen are advised not to pull ingredients or setup furniture until the Sales Manager provides a financial override.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item border-bottom">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed px-0 py-3 fw-bold bg-transparent shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    How do I recover my account if the automated reset fails?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body px-0 py-2 small text-muted">
+                                    If you cannot access your recovery email, you must send a formal request to the <strong class="text-dark">System Administrator</strong>. 
+                                    <br><br>
+                                    Your email must include a <strong class="text-dark">specific reason</strong> for the manual override (e.g., *Device Theft/Loss, 2FA De-synchronization, or Personnel Transfer*). For security compliance, manual resets require an identity verification voucher from your Department Head.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item border-bottom">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed px-0 py-3 fw-bold bg-transparent shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                    Why can't I change my Designation or Employee ID myself?
+                                </button>
+                            </h2>
+                            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body px-0 py-2 small text-muted">
+                                    Designations and Employee IDs are tied to your <strong class="text-dark">Authority Levels</strong>. These are locked to prevent unauthorized approval escalations. Please contact System Administration for any departmental transfers.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item border-bottom">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed px-0 py-3 fw-bold bg-transparent shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
+                                    What is the difference between Level 1 and Level 2 Authority?
+                                </button>
+                            </h2>
+                            <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body px-0 py-2 small text-muted">
+                                    <strong class="text-dark">Level 1</strong> is for operational setup (Menu/Venue). <strong class="text-dark">Level 2</strong> is for financial decisions (Discounts/Pricing). If your account only has Level 1, you can draft an EO but cannot "Finalize" it if the price has been modified.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item border-bottom">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed px-0 py-3 fw-bold bg-transparent shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    How do I link a receipt from a different department?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body px-0 py-2 small text-muted">
+                                    Use the "External Receipt" field under the Payment tab. Input the OR number and the issuing department (e.g., Front Office or F&B Outlet) for cross-referencing.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer border-top p-4 d-flex justify-content-between align-items-center">
+                <div class="text-muted">
+                    <span class="fw-bold text-dark">System Support:</span> call 09306460704 • granxingimperialhoteladmin@gmail.com
                 </div>
                 <div>
-                    <h5 class="modal-title fw-bold text-dark">System Rules & Guidelines</h5>
-                    <p class="text-muted small mb-0">Standard Operating Procedures (SOP) for Event Orders.</p>
-                </div>
-                <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="modal-body mb-0 p-4">
-                <div class="input-group input-group-sm bg-light border rounded-pill px-3 py-1 mb-4">
-                    <span class="input-group-text bg-transparent border-0"><i class="bi bi-search text-muted"></i></span>
-                    <input type="text" class="form-control bg-transparent border-0 shadow-none" placeholder="Search for a specific rule or SOP...">
-                </div>
-
-                <div class="accordion accordion-flush custom-help-accordion" id="helpAccordion">
-                    
-                    <div class="accordion-item border-0 mb-3 shadow-sm rounded-4 overflow-hidden">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#rule1">
-                                <span class="badge bg-gold me-3">01</span> Payment & Receipt Requirements
-                            </button>
-                        </h2>
-                        <div id="rule1" class="accordion-collapse collapse" data-bs-parent="#helpAccordion">
-                            <div class="accordion-body bg-light-subtle small">
-                                <div class="p-2 border-start border-4 border-success mb-2">
-                                    <strong class="text-dark">Verification:</strong> No Event Order is valid without a linked **Official Receipt (OR)** number.
-                                </div>
-                                <ul class="text-muted">
-                                    <li><strong>Downpayment:</strong> 50% must be recorded to confirm venue blocking.</li>
-                                    <li><strong>Final Payment:</strong> Must be settled 48 hours prior to event setup.</li>
-                                    <li>Staff must verify receipt authenticity via the Accounting Module before "Level 2 Approval."</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item border-0 mb-3 shadow-sm rounded-4 overflow-hidden">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#rule2">
-                                <span class="badge bg-gold me-3">02</span> Amendment Submission Policy
-                            </button>
-                        </h2>
-                        <div id="rule2" class="accordion-collapse collapse" data-bs-parent="#helpAccordion">
-                            <div class="accordion-body bg-light-subtle small">
-                                <p class="text-muted mb-2">Changes to the event setup (pax count, menu, or AV) follow these time-locks:</p>
-                                <table class="table table-sm table-bordered bg-white mb-0">
-                                    <thead class="bg-light">
-                                        <tr class="small">
-                                            <th>Timeframe</th>
-                                            <th>Required Approval</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="small">
-                                        <tr>
-                                            <td>> 72 Hours</td>
-                                            <td>Department Head (Level 1)</td>
-                                        </tr>
-                                        <tr>
-                                            <td>< 24 Hours</td>
-                                            <td>Executive Manager (Level 3)</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item border-0 shadow-sm rounded-4 overflow-hidden">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed fw-bold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#rule3">
-                                <span class="badge bg-gold me-3">03</span> Digital Approval & Accountability
-                            </button>
-                        </h2>
-                        <div id="rule3" class="accordion-collapse collapse" data-bs-parent="#helpAccordion">
-                            <div class="accordion-body bg-light-subtle small">
-                                <p class="text-muted">The digital signature on the **Event Order Receipt** serves as the final authority for the Banquet and Kitchen teams.</p>
-                                <div class="alert alert-warning border-0 small py-2 mb-0">
-                                    <i class="bi bi-exclamation-triangle-fill me-2"></i> 
-                                    Do not proceed with setup if the EO status is "Draft" or "Pending Payment."
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="modal-footer border-0 p-4 pt-0">
-                <div class="bg-dark rounded-pill w-100 p-2 px-3 d-flex justify-content-between align-items-center">
-                    <div class="small text-white-50">
-                        <i class="bi bi-headset me-2"></i> Technical Issues? Local: 888
-                    </div>
-                    <button type="button" class="btn btn-sm btn-gold px-4 rounded-pill text-white fw-bold" data-bs-dismiss="modal">I Understand</button>
+                    <button type="button" class="btn btn-outline-dark rounded-0 px-4 py-2 small fw-bold text-uppercase" data-bs-dismiss="modal" style="letter-spacing: 1px;">Close Manual</button>
+                    <button type="button" class="btn btn-dark rounded-0 px-4 py-2 small fw-bold text-uppercase" style="letter-spacing: 1px;">Print SOP</button>
                 </div>
             </div>
         </div>

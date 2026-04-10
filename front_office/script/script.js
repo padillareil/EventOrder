@@ -44,11 +44,6 @@ $("#main-menu")
       $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
       $file = "dirs/eventorder/eventorder.php";
     break;
-    case "help":
-      $maintitle = "";
-      $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
-      $file = "dirs/help/help.php";
-    break;
     case "settings":
       $maintitle = "";
       $mainbreadcrumb = `<li class="breadcrumb-item active">Settings</li>`;

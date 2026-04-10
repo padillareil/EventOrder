@@ -42,6 +42,7 @@ try {
   <link rel="stylesheet" type="text/css" href="../assets/plugins/jsgrid/jsgrid-theme.css">
 
     <link rel="stylesheet" type="text/css" href="../assets/plugins/fullcalendar/main.css">
+<link rel="stylesheet" type="text/css" href="../assets/plugins/driver.js/dist/driver.css">
 
   <link rel="stylesheet" href="../assets/css/datatables.min.css">
   <link rel="stylesheet" href="../assets/plugins/toastr/toastr.min.css">
@@ -57,7 +58,7 @@ try {
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-        <nav class="main-header navbar navbar-expand bg-light">
+        <!-- <nav class="main-header navbar navbar-expand bg-light">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
@@ -70,6 +71,60 @@ try {
                             <input type="hidden" id="clockvalue">
                         </strong>
                     </a>
+                </li>
+            </ul>
+        </nav> -->
+        <nav class="main-header navbar navbar-expand bg-light border-bottom">
+            <ul class="navbar-nav w-100">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button" id="btn-toggle-sidebar"><i class="fas fa-bars"></i></a>
+                </li>
+
+                <li class="nav-item text-info">
+                    <a href="#" class="nav-link text-center" onclick="startHelpTour()">
+                        <i class="bi bi-clock ml-4"></i>
+                        <strong class="ml-2">
+                            <span id="clock"></span>
+                            <input type="hidden" id="clockvalue">
+                        </strong>
+                    </a>
+                </li>
+
+                <li class="nav-item dropdown ms-auto pe-3" id="notif-bell">
+                    <a class="nav-link position-relative" data-bs-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="bi bi-bell"></i>
+                        <span class="position-absolute top-1 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
+                    </a>
+                    
+                    <div class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-0 p-0 mt-2" style="width: 320px;">
+                        <div class="p-3 border-bottom bg-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h6 class="fw-bold m-0" style="font-size: 0.8rem; letter-spacing: 0.5px;">NOTIFICATIONS UPDATES</h6>
+                                <span class="badge bg-dark rounded-0" style="font-size: 0.6rem;">3 NEW</span>
+                            </div>
+                        </div>
+
+                        <div class="list-group list-group-flush" style="max-height: 350px; overflow-y: auto;">
+                            
+                            <a href="#" class="list-group-item list-group-item-action border-bottom p-3">
+                                <p class="small m-0 text-muted mb-1 text-uppercase fw-bold" style="font-size: 0.65rem;">[ APPROVAL ]</p>
+                                <p class="small m-0 text-dark fw-bold">EO #10001 HAS BEEN APPROVED</p>
+                                <p class="small m-0 text-muted mt-1">Level 2 signature verified by Financial Dept.</p>
+                                <p class="text-muted mt-1 m-0" style="font-size: 0.6rem;">2 minutes ago</p>
+                            </a>
+
+                            <a href="#" class="list-group-item list-group-item-action border-bottom p-3 bg-light-subtle">
+                                <p class="small m-0 text-muted mb-1 text-uppercase fw-bold" style="font-size: 0.65rem;">[ AMENDMENT ]</p>
+                                <p class="small m-0 text-dark fw-bold">EO #09842 PAX CHANGE</p>
+                                <p class="small m-0 text-muted mt-1">Kitchen notified of update (+20 pax).</p>
+                                <p class="text-muted mt-1 m-0" style="font-size: 0.6rem;">1 hour ago</p>
+                            </a>
+                        </div>
+
+                        <a href="#" class="d-block text-center py-2 bg-light text-decoration-none text-dark fw-bold border-top" style="font-size: 0.7rem; letter-spacing: 1px;">
+                            VIEW ALL SYSTEM UPDATES —>
+                        </a>
+                    </div>
                 </li>
             </ul>
         </nav>
@@ -85,24 +140,24 @@ try {
 
             <div class="sidebar">
                 <nav id="main-menu" class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" >
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
                             <p class="text-muted">Menu</p>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link active" name="menu" menucode="calendar_events">
+                            <a href="#" class="nav-link active" name="menu" menucode="calendar_events" id="menu-calendar">
                                 <i class="nva-icon bi bi-calendar2-event"></i>
                                 <p>Hotel Event</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="ammendment">
+                            <a href="#" class="nav-link" name="menu" menucode="ammendment" id="menu-amendment">
                                 <i class="nav-icon bi bi-card-checklist"></i>
                                 <p>Ammendment</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="eventorder">
+                            <a href="#" class="nav-link" name="menu" menucode="eventorder" id="menu-eventorder">
                                 <i class="nav-icon bi bi-clipboard2-check"></i>
                                 <p>Event Order</p>
                             </a>
@@ -110,20 +165,14 @@ try {
                         <li class="nav-item">
                             <p class="text-muted">Account</p>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="apply_service">
-                                <i class="nav-icon bi bi-flag"></i>
-                                <p>Reports</p>
-                            </a>
-                        </li> -->
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="settings">
+                            <a href="#" class="nav-link" name="menu" menucode="settings"  id="menu-settings">
                                 <i class="nav-icon i bi-gear"></i>
                                 <p>Settings</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" onclick="showHelp()">
+                            <a href="#" class="nav-link" name="menu" menucode="help" id="menu-help">
                                 <i class="nav-icon bi bi-info-circle"></i>
                                 <p>Help</p>
                             </a>
@@ -173,7 +222,7 @@ try {
 
 <!-- <script src="../assets/plugins/fullcalendar/main.min.js"></script> -->
 
-
+<script src="../assets/plugins/driver.js/dist/driver.js.iife.js"></script>
 
 <script src="../assets/plugins/pace/pace.min.js"></script>
 <script src="../assets/plugins/jsgrid/jsgrid.min.js"></script>
@@ -189,6 +238,7 @@ try {
 <script src="../assets/js/datatables.min.js"></script>
 <script src="../assets/plugins/datepicker/jquery-ui.min.js"></script>
 <script src="script/script.js"></script>
+<script src="script/driver_guide.js"></script>
 <?php include 'modal.php';?>
 </body>
 </html>
@@ -204,4 +254,6 @@ try {
     color: white !important;
 }
 </style>
+
+
 

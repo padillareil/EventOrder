@@ -16,8 +16,11 @@
                     <span class="small text-muted me-2">To</span>
                     <input type="date" class="form-control form-control-sm bg-transparent border-0 fw-medium p-0" style="width: 110px; font-size: 0.8rem;">
                 </div>
-                <button class="btn btn-light border-0 p-2" title="Refresh">
+                <button class="btn btn-light border-0 p-2" type="button" title="Refresh">
                     <i class="bi bi-arrow-clockwise text-primary"></i>
+                </button>
+                <button class="btn bg-secondary-subtle border-0 p-2" type="button" title="Draft Amendments">
+                    <i class="bi bi-pencil-square"></i> Draft
                 </button>
             </div>
         </div>

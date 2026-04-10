@@ -3,7 +3,7 @@
         <i class="bi bi-calendar-event fs-5 text-custom-gold"></i>
     </div>
     <div>
-        <h5 class="mb-0 fw-bold text-dark">Upcoming Events</h5>
+        <h5 class="mb-0 fw-bold text-dark">Calendar of Events</h5>
         <p class="text-muted small mb-0">Monitor calendar events and availability schedule here.</p>
     </div>
 </div>
