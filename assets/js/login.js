@@ -45,8 +45,8 @@
          var role = response.role;
          if (role === 'FO') {
            window.location.assign("front_office/index.php");
-         }else if (role === 2){
-           window.location.assign("home/index.php");
+         }else if (role === 'Admin'){
+           window.location.assign("admin/index.php");
          } else if (role === 3){
            window.location.assign("index.php");
          } else {

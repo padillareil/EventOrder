@@ -11,7 +11,7 @@ if (!isset($_SESSION['Uid'])) {
 $User = $_SESSION['Uid'];
 
 try {
-    $ua = $conn->prepare("EXEC dbo.[SESSION_USERACCOUNT] ?");
+    $ua = $conn->prepare("EXEC dbo.[Session_User_Account] ?");
     $ua->execute([$User]);
     $user = $ua->fetch(PDO::FETCH_ASSOC);
 

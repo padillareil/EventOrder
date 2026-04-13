@@ -1,17 +1,17 @@
 <?php
-session_start();
 require_once "../config/connection.php";
 require_once "../config/functions.php";
+session_start();
 
 
-if (!isset($_SESSION['Uid'])) {
-    header('Location: ../login.php');
+if (!isset($_SESSION['Aid'])) {
+    header('Location: login.php');
     exit();
 }
-$User = $_SESSION['Uid'];
+$User = $_SESSION['Aid'];
 
 try {
-    $ua = $conn->prepare("EXEC dbo.[SESSION_USERACCOUNT] ?");
+    $ua = $conn->prepare("EXEC dbo.[Session_User_Admin] ?");
     $ua->execute([$User]);
     $user = $ua->fetch(PDO::FETCH_ASSOC);
 
@@ -27,7 +27,7 @@ try {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>OneService</title>
+  <title>Admin</title>
   <link rel="stylesheet" href="../assets/plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" type="text/css" href="../assets/plugins/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../assets/css/adminlte.min.css">
@@ -41,7 +41,6 @@ try {
   <link rel="stylesheet" href="../assets/plugins/daterangepicker/daterangepicker.css">
   <link rel="stylesheet" href="../assets/plugins/summernote/summernote-lite.min.css">
   <link rel="stylesheet" href="../assets/plugins/datepicker/jquery-ui.structure.min.css">
-  <link rel="stylesheet" href="../node_modules/uikit/dist/css/uikit.min.css">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="icon" href="../assets/image/logo/favicon.png">
 
@@ -64,12 +63,13 @@ try {
                 </li>
             </ul>
         </nav>
-        <aside class="main-sidebar sidebar-dark-danger elevation-5">
+        <aside class="main-sidebar sidebar-dark-info elevation-5">
             <p class="text-center brand-link">
                 <a href="index.php" style="text-decoration: none; color: inherit;">
-                    <img src="../assets/image/logo/favicon.png" alt="iServe Admin" id="profile-image"style="width: 100px; height: 100px; object-fit: cover;">
+                    <img src="../assets/image/logo/favicon.png" alt="User Logo" id="profile-image"style="width: 100px; height: 100px; object-fit: cover;">
                     <br>
                 </a>
+                <br>
             </p>
             <div class="sidebar">
                 <nav id="main-menu" class="mt-2">
@@ -78,45 +78,15 @@ try {
                             <p class="text-muted">Menu</p>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link active" name="menu" menucode="create_account" data-bs-toggle="tooltip" data-bs-title="Create Account" data-bs-placement="right">
-                                <i class="nav-icon bi bi-grid"></i>
-                                <p>Create Account</p>
-                            </a>
-                        </li>
-                       <!--  <li class="nav-item">
-                             <a href="#" class="nav-link" name="menu" menucode="ho_office" data-bs-toggle="tooltip" data-bs-title="HO Management" data-bs-placement="right">
-                                <i class="nav-icon bi bi-buildings"></i>
-                                <p>HO Management</p>
-                            </a>
-                        </li> 
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="report" data-bs-toggle="tooltip" data-bs-title="Branch Management" data-bs-placement="right">
-                                <i class="nav-icon bi bi-building-fill"></i>
-                                <p>Branch Management</p>
-                            </a>
-                         </li> 
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="report" data-bs-toggle="tooltip" data-bs-title="Ticket Management" data-bs-placement="right">
-                                <i class="nav-icon bi bi-chat-square-text"></i>
-                                <p>Ticket Management</p>
-                            </a>
-                        </li> 
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="report" data-bs-toggle="tooltip" data-bs-title="KPI Performance" data-bs-placement="right">
-                                <i class="nav-icon bi bi-graph-up-arrow"></i>
-                                <p>KPI Performance</p>
-                            </a>
-                        </li> 
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="logs" data-bs-toggle="tooltip" data-bs-title="Activity Logs" data-bs-placement="right">
-                                <i class="nav-icon bi bi-table"></i>
-                                <p>Logs</p>
+                            <a href="#" class="nav-link active" name="menu" menucode="menu_setup">
+                                <i class="nav-icon bi bi-menu-app"></i>
+                                <p>Menu Setup</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="member" data-bs-toggle="tooltip" data-bs-title="Add Member" data-bs-placement="right">
-                                <i class="nav-icon bi bi-person-plus"></i>
-                                <p>Add Member</p>
+                            <a href="#" class="nav-link" name="menu" menucode="apply_service">
+                                <i class="nav-icon bi bi-file-earmark-post"></i>
+                                <p>Services</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -125,12 +95,6 @@ try {
                                 <p>Settings</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" data-bs-toggle="tooltip" data-bs-title="Help" data-bs-placement="right">
-                                <i class="nav-icon bi bi-question-circle"></i>
-                                <p>Help</p>
-                            </a>
-                        </li> -->
                         <hr>
                         <li class="nav-item">
                             <a href="#" class="nav-link" onclick="logout()">
@@ -138,12 +102,12 @@ try {
                                 <p>Logout</p>
                             </a>
                         </li>
-                        <li class="nav-item d-flex align-items-center ms-3 mt-2">
+                       <!--  <li class="nav-item d-flex align-items-center ms-3 mt-2">
                           <div class="form-check m-0 ml-1">
                             <input class="form-check-input" type="checkbox" id="theme-mode" onclick="loadTheme()">
                             <label class="form-check-label text-white ms-2" for="theme-mode" id="theme-label">Theme</label>
                           </div>
-                        </li>
+                        </li> -->
                     </ul>
                 </nav>
             </div>
@@ -190,9 +154,8 @@ try {
 <script src="../assets/js/global-scripts.js"></script>
 <script src="../assets/js/datatables.min.js"></script>
 <script src="../assets/plugins/datepicker/jquery-ui.min.js"></script>
-<script src="../node_modules/uikit/dist/js/uikit.min.js"></script>
-<script src="../node_modules/xlsx/dist/xlsx.full.min.js"></script>
-<script src="script/script.js"></script>
+<!-- <script src="../node_modules/xlsx/dist/xlsx.full.min.js"></script> -->
+<script src="script/switch.js"></script>
 <?php include 'modal.php';?>
 </body>
 </html>
