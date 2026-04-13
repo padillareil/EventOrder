@@ -83,15 +83,19 @@ $("#main-menu")
    var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
    var tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
-  
+   
 
-  function logout() {
-      $.post("actions/logout.php", {}, function(data) {
-          if ($.trim(data) == "OK") {
-              window.location.assign("index.php");
-          }
-      });
-    }
+function logout() {
+  $.post("../actions/logout_admin.php", {}, function(data) {
+      if ($.trim(data) == "OK") {
+          window.location.assign("index.php");
+      }
+  });
+}
+
+
+
+
 
 
 /*Security*/
