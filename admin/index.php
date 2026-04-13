@@ -67,7 +67,7 @@ try {
             <p class="text-center brand-link">
                 <a href="index.php" style="text-decoration: none; color: inherit;">
                     <img src="../assets/image/logo/favicon.png" alt="User Logo" id="profile-image"style="width: 100px; height: 100px; object-fit: cover;">
-                    <br>
+                    <br>Admin
                 </a>
                 <br>
             </p>
