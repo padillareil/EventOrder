@@ -1,0 +1,14 @@
+<div class="justify-content-end mr-4 d-flex mt-2 gap-2">
+	<div class="input-group border bg-light px-3 flex-grow-1" style="max-width: 300px;">
+	    <span class="input-group-text bg-transparent border-0 p-0 me-2">
+	        <i class="bi bi-search text-muted small"></i>
+	    </span>
+	    <input type="search" id="search-vegetable" class="form-control bg-transparent border-0 small py-2 shadow-none" placeholder="Search...">
+	</div>
+	<button class="btn btn-primary" type="button" onclick="addVegetable()"><i class="bi bi-plus-lg"></i> Add Vegetable</button>
+</div>
+
+<!-- Load Appetizers Content -->
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+	<div id="load_Vegetable_content"></div>
+</div>

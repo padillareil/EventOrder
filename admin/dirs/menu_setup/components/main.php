@@ -1,6 +1,6 @@
 <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
     <div class="card-header bg-white border-0 pt-4 px-4">
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-2">
             <div class="d-flex align-items-center">
                 <div class="p-3 rounded-3 me-3" style="background-color: rgba(191, 155, 48, 0.1);">
                     <i class="bi bi-card-list fs-5 text-custom-gold"></i>
@@ -28,7 +28,7 @@
         </ul>
     </div>
 
-    <div class="card-body p-4">
+    <div class="card-body p-2">
         <div class="tab-content" id="foodMenuContent">
             <div class="tab-pane fade show active" id="food_menus" role="tabpanel">
                 <?php include 'menus.php'; ?>

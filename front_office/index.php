@@ -40,9 +40,8 @@ try {
   <link rel="stylesheet" type="text/css" href="../assets/plugins/pace/themes/gold/pace-theme-minimal.css">
   <link rel="stylesheet" type="text/css" href="../assets/plugins/jsgrid/jsgrid-theme.min.css">
   <link rel="stylesheet" type="text/css" href="../assets/plugins/jsgrid/jsgrid-theme.css">
-
-    <link rel="stylesheet" type="text/css" href="../assets/plugins/fullcalendar/main.css">
-<link rel="stylesheet" type="text/css" href="../assets/plugins/driver.js/dist/driver.css">
+  <link rel="stylesheet" type="text/css" href="../assets/plugins/fullcalendar/main.css">
+  <link rel="stylesheet" type="text/css" href="../assets/plugins/driver.js/dist/driver.css">
 
   <link rel="stylesheet" href="../assets/css/datatables.min.css">
   <link rel="stylesheet" href="../assets/plugins/toastr/toastr.min.css">

@@ -1,259 +1,176 @@
-<div class="card border-0 shadow-lg rounded-4 overflow-hidden mt-2">
-   <div class="card-header bg-white border-0 pt-4 px-4 pb-3">
-       <div class="row g-3 align-items-center">
-           
-           <div class="col-12 col-md-8 col-lg-7 d-flex align-items-center gap-2">
-               <button id="btnCreatePackage" class="btn btn-primary px-3 py-2 d-flex align-items-center gap-2 shadow-lg border-0">
-                   <i class="bi bi-plus-lg"></i>
-                   <span>Create Package</span>
-               </button>
+<nav class="navbar bg-body-light">
+  <div class="container-fluid">
+    <div class="d-flex align-items-center px-2 py-3 overflow-auto hide-scrollbar">
+        <ul class="nav nav-pills flex-nowrap gap-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active rounded-pill px-5 py-2 fw-bold small border border-info" data-bs-toggle="pill" data-bs-target="#Appetizers" type="button">Appetizers</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill px-3 py-2 fw-bold small border border-info" data-bs-toggle="pill" type="button" data-bs-target="#Beverages">Beverages</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill px-3 py-2 fw-bold small border border-info" data-bs-toggle="pill" type="button" data-bs-target="#Breakfast">Breakfast</button>
+            </li>
+         
+            <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill px-3 py-2 fw-bold small border border-info" data-bs-toggle="pill" type="button" data-bs-target="#Desserts">Desserts</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link rounded-pill px-3 py-2 fw-bold small border border-info" data-bs-toggle="pill" type="button" data-bs-target="#MainCourse">Main Course</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill px-3 py-2 fw-bold small border border-info" data-bs-toggle="pill" type="button" data-bs-target="#Pastry">Pastry</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill px-3 py-2 fw-bold small border border-info" data-bs-toggle="pill" type="button" data-bs-target="#Pasta">Pasta</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill px-3 py-2 fw-bold small border border-info" data-bs-toggle="pill" data-bs-target="#Salads" type="button">Salads</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill px-3 py-2 fw-bold small border border-info" data-bs-toggle="pill" type="button" data-bs-target="#Snacks">Snacks</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill px-3 py-2 fw-bold small border border-info" data-bs-toggle="pill" type="button" data-bs-target="#Soup">Soup</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill px-3 py-2 fw-bold small border border-info" data-bs-toggle="pill" type="button" data-bs-target="#Vegetable">Vegetable</button>
+            </li>
+        </ul>
+    </div>
+  </div>
+</nav>
 
-               <div class="input-group border bg-light px-3 flex-grow-1" style="max-width: 300px;">
-                   <span class="input-group-text bg-transparent border-0 p-0 me-2">
-                       <i class="bi bi-search text-muted small"></i>
-                   </span>
-                   <input type="search" class="form-control bg-transparent border-0 small py-2 shadow-none" placeholder="Search menu...">
-               </div>
-           </div>
-
-           <div class="col-12 col-md-4 col-lg-5 d-flex justify-content-md-end align-items-center gap-2">
-               <div class="d-flex align-items-center bg-light border px-3 py-1">
-                   <i class="bi bi-funnel text-muted small me-2"></i>
-                   <select class="form-select form-select-sm bg-transparent border-0 shadow-none fw-medium" style="cursor: pointer; min-width: 100px;">
-                       <option selected value="">All Menu</option>
-                       <option value="Dessert">Dessert</option>
-                       <option value="Main Course">Main Course</option>
-                       <option value="Snack">Snack</option>
-                   </select>
-               </div>
-
-               <button class="btn btn-light border rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="min-width: 40px; height: 40px;" title="Refresh">
-                   <i class="bi bi-arrow-clockwise text-primary"></i>
-               </button>
-           </div>
-
-       </div>
-   </div>
-
-   <div class="card-body p-4">
-       <div class="category-section mb-5 px-4">
-           <div class="d-flex align-items-center mb-4 sticky-top bg-white py-2" style="z-index: 10;">
-               <div class="bg-primary rounded-pill me-2" style="width: 4px; height: 20px;"></div>
-               <h6 class="fw-bold mb-0 text-uppercase small tracking-wider">Main Course</h6>
-               <div class="flex-grow-1 ms-3 border-bottom opacity-25"></div>
-           </div>
-           
-           <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
-               
-               <div class="col">
-                   <input type="checkbox" class="btn-check" id="dessert-1" autocomplete="off">
-                   <label class="btn btn-outline-light d-flex align-items-center p-3 rounded-4 border w-100 h-100 transition-all shadow-sm selection-card" for="dessert-1">
-                       <div class="custom-check-indicator me-3">
-                           <i class="bi bi-check-circle-fill fs-5 text-primary check-icon"></i>
-                           <i class="bi bi-circle fs-5 text-muted uncheck-icon"></i>
-                       </div>
-                       <div class="text-start">
-                           <span class="fw-bold text-dark d-block mb-0">Beef Brocolli</span>
-                           <small class="text-muted">Yummy</small>
-                       </div>
-                   </label>
-               </div>
-
-               <div class="col">
-                   <input type="checkbox" class="btn-check" id="dessert-2" autocomplete="off">
-                   <label class="btn btn-outline-light d-flex align-items-center p-3 rounded-4 border w-100 h-100 transition-all shadow-sm selection-card" for="dessert-2">
-                       <div class="custom-check-indicator me-3">
-                           <i class="bi bi-check-circle-fill fs-5 text-primary check-icon"></i>
-                           <i class="bi bi-circle fs-5 text-muted uncheck-icon"></i>
-                       </div>
-                       <div class="text-start">
-                           <span class="fw-bold text-dark d-block mb-0">Lechon Paksiw</span>
-                           <small class="text-muted">Yummy</small>
-                       </div>
-                   </label>
-               </div>
-
-               <div class="col">
-                   <input type="checkbox" class="btn-check" id="dessert-3" autocomplete="off">
-                   <label class="btn btn-outline-light d-flex align-items-center p-3 rounded-4 border w-100 h-100 transition-all shadow-sm selection-card" for="dessert-3">
-                       <div class="custom-check-indicator me-3">
-                           <i class="bi bi-check-circle-fill fs-5 text-primary check-icon"></i>
-                           <i class="bi bi-circle fs-5 text-muted uncheck-icon"></i>
-                       </div>
-                       <div class="text-start">
-                           <span class="fw-bold text-dark d-block mb-0">Leche Flan</span>
-                           <small class="text-muted">Classic Filipino Custard</small>
-                       </div>
-                   </label>
-               </div>
-
-               <div class="col">
-                   <input type="checkbox" class="btn-check" id="dessert-4" autocomplete="off">
-                   <label class="btn btn-outline-light d-flex align-items-center p-3 rounded-4 border w-100 h-100 transition-all shadow-sm selection-card" for="dessert-4">
-                       <div class="custom-check-indicator me-3">
-                           <i class="bi bi-check-circle-fill fs-5 text-primary check-icon"></i>
-                           <i class="bi bi-circle fs-5 text-muted uncheck-icon"></i>
-                       </div>
-                       <div class="text-start">
-                           <span class="fw-bold text-dark d-block mb-0">Buko Pandan</span>
-                           <small class="text-muted">Creamy & Aromatic</small>
-                       </div>
-                   </label>
-               </div>
-
-               <div class="col">
-                   <div class="selection-card d-flex align-items-center justify-content-center p-3 rounded-4 border border-2 border-dashed bg-light h-100 cursor-pointer transition-all add-menu-btn" 
-                        onclick="handleAddNewMenu()" 
-                        style="min-height: 82px;">
-                       
-                       <div class="text-center">
-                           <i class="bi bi-plus-circle-dotted text-primary fs-4 d-block mb-1"></i>
-                           <span class="fw-bold text-primary small text-uppercase tracking-wide">Add Custom Menu</span>
-                       </div>
-                   </div>
-               </div>
-
-              
-
-           </div>
-       </div>
-       <div class="category-section mb-5 px-4">
-           <div class="d-flex align-items-center mb-4 sticky-top bg-white py-2" style="z-index: 10;">
-               <div class="bg-primary rounded-pill me-2" style="width: 4px; height: 20px;"></div>
-               <h6 class="fw-bold mb-0 text-uppercase small tracking-wider">Dessert Selection</h6>
-               <div class="flex-grow-1 ms-3 border-bottom opacity-25"></div>
-           </div>
-           
-           <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
-               
-               <div class="col">
-                   <input type="checkbox" class="btn-check" id="dessert-1" autocomplete="off">
-                   <label class="btn btn-outline-light d-flex align-items-center p-3 rounded-4 border w-100 h-100 transition-all shadow-sm selection-card" for="dessert-1">
-                       <div class="custom-check-indicator me-3">
-                           <i class="bi bi-check-circle-fill fs-5 text-primary check-icon"></i>
-                           <i class="bi bi-circle fs-5 text-muted uncheck-icon"></i>
-                       </div>
-                       <div class="text-start">
-                           <span class="fw-bold text-dark d-block mb-0">Gulaman w/ Lychee</span>
-                           <small class="text-muted">Refreshing & Sweet</small>
-                       </div>
-                   </label>
-               </div>
-
-               <div class="col">
-                   <input type="checkbox" class="btn-check" id="dessert-2" autocomplete="off">
-                   <label class="btn btn-outline-light d-flex align-items-center p-3 rounded-4 border w-100 h-100 transition-all shadow-sm selection-card" for="dessert-2">
-                       <div class="custom-check-indicator me-3">
-                           <i class="bi bi-check-circle-fill fs-5 text-primary check-icon"></i>
-                           <i class="bi bi-circle fs-5 text-muted uncheck-icon"></i>
-                       </div>
-                       <div class="text-start">
-                           <span class="fw-bold text-dark d-block mb-0">Soft Serve Ice Cream</span>
-                           <small class="text-muted">Vanilla or Chocolate</small>
-                       </div>
-                   </label>
-               </div>
-
-               <div class="col">
-                   <input type="checkbox" class="btn-check" id="dessert-3" autocomplete="off">
-                   <label class="btn btn-outline-light d-flex align-items-center p-3 rounded-4 border w-100 h-100 transition-all shadow-sm selection-card" for="dessert-3">
-                       <div class="custom-check-indicator me-3">
-                           <i class="bi bi-check-circle-fill fs-5 text-primary check-icon"></i>
-                           <i class="bi bi-circle fs-5 text-muted uncheck-icon"></i>
-                       </div>
-                       <div class="text-start">
-                           <span class="fw-bold text-dark d-block mb-0">Leche Flan</span>
-                           <small class="text-muted">Classic Filipino Custard</small>
-                       </div>
-                   </label>
-               </div>
-
-               <div class="col">
-                   <input type="checkbox" class="btn-check" id="dessert-4" autocomplete="off">
-                   <label class="btn btn-outline-light d-flex align-items-center p-3 rounded-4 border w-100 h-100 transition-all shadow-sm selection-card" for="dessert-4">
-                       <div class="custom-check-indicator me-3">
-                           <i class="bi bi-check-circle-fill fs-5 text-primary check-icon"></i>
-                           <i class="bi bi-circle fs-5 text-muted uncheck-icon"></i>
-                       </div>
-                       <div class="text-start">
-                           <span class="fw-bold text-dark d-block mb-0">Buko Pandan</span>
-                           <small class="text-muted">Creamy & Aromatic</small>
-                       </div>
-                   </label>
-               </div>
-
-           </div>
-       </div>
-
-     
-   </div>
-
-
-
-</div>
-
+<form id="frm-add-package">
+    <div class="card border-0 overflow-auto mt-2" style="height: 60vh;">
+       <div class="card-body p-0 border-bottom">
+            <div class="tab-content" id="foodMenuContent">
+                <div class="tab-pane fade show active" id="Appetizers" role="tabpanel">
+                    <?php include 'menu_sorting/appetizer.php'; ?>
+                </div>
+                <div class="tab-pane fade" id="MainCourse" role="tabpanel">
+                    <?php include 'menu_sorting/maincourse.php'; ?>
+                </div>
+                <div class="tab-pane fade show" id="Salads" role="tabpanel">
+                    <?php include 'menu_sorting/salads.php'; ?>
+                </div>
+                <div class="tab-pane fade" id="Desserts" role="tabpanel">
+                    <?php include 'menu_sorting/desserts.php'; ?>
+                </div>
+                <div class="tab-pane fade" id="Beverages" role="tabpanel">
+                    <?php include 'menu_sorting/beverages.php'; ?>
+                </div>
+                <div class="tab-pane fade show" id="Pastry" role="tabpanel">
+                    <?php include 'menu_sorting/pastry.php'; ?>
+                </div>
+                <div class="tab-pane fade" id="Breakfast" role="tabpanel">
+                    <?php include 'menu_sorting/breakfast.php'; ?>
+                </div>
+                <div class="tab-pane fade" id="Snacks" role="tabpanel">
+                    <?php include 'menu_sorting/snacks.php'; ?>
+                </div>
+                <div class="tab-pane fade" id="Pasta" role="tabpanel">
+                    <?php include 'menu_sorting/pasta.php'; ?>
+                </div>
+                <div class="tab-pane fade" id="Soup" role="tabpanel">
+                    <?php include 'menu_sorting/soup.php'; ?>
+                </div>
+                <div class="tab-pane fade" id="Vegetable" role="tabpanel">
+                    <?php include 'menu_sorting/vegetable.php'; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 
 
 
 
 <style>
+    /* Base Card */
     .selection-card {
-        border-color: #eee !important;
-        transition: all 0.2s ease;
-    }
-    .selection-card:hover {
-        background-color: #f8f9fa !important;
-        border-color: #0d6efd !important;
-        transform: translateY(-2px);
-    }
-    .cursor-pointer {
+        border: 1px solid #e9ecef !important;
+        background-color: #ffffff;
         cursor: pointer;
-    }
-    /* Change text color when checkbox is checked */
-    .form-check-input:checked + span {
-        color: #0d6efd !important;
+        transition: all 0.25s ease-in-out;
     }
 
+    /* Hover State */
+    .selection-card:hover {
+        background-color: #f8f9fa !important;
+        transform: translateY(-3px);
+    }
+
+    /* THE SUCCESS STATE (When Checked) */
+    .btn-check:checked + .selection-card {
+        background-color: #f1fdf7 !important; /* Very light success green */
+        border-color: #198754 !important;      /* Bootstrap Success Green */
+        box-shadow: 0 4px 12px rgba(25, 135, 84, 0.15) !important;
+    }
+
+    /* Text and Icon Logic */
     .check-icon { display: none; }
     .btn-check:checked + .selection-card .check-icon { display: block; }
     .btn-check:checked + .selection-card .uncheck-icon { display: none; }
 
-    /* Text Color change when selected */
-    .btn-check:checked + .selection-card .text-dark {
-        color: #0d6efd !important;
+    /* Change item name to green when selected */
+    .btn-check:checked + .selection-card .item-name {
+        color: #198754 !important;
     }
+
+    /* Base circle style */
+    .bs-stepper-circle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border: 2px solid #bf9b30; /* outline color changed to gold */
+        border-radius: 50%;         
+        background-color: #fff;     
+        color: #bf9b30;             /* icon color matches outline */
+        transition: all 0.3s ease;
+    }
+
+    /* Active or completed step */
+    .bs-stepper .step.active .bs-stepper-circle,
+    .bs-stepper .step.complete .bs-stepper-circle {
+        background-color: #bf9b30; /* fill with gold on active/complete */
+        color: #fff;               /* icon becomes white */
+        border-color: #bf9b30;     
+    }
+
+    /* Hover effect */
+    .bs-stepper .step .step-trigger:hover .bs-stepper-circle {
+        background-color: #fff2d1; /* light gold hover effect */
+        border-color: #bf9b30;
+    }
+
+
 </style>
 
-<style>
-    /* Dashed border for the "Add" action */
-    .border-dashed {
-        border-style: dashed !important;
-        border-color: #dee2e6 !important;
-    }
 
-    .add-menu-btn {
-        background-color: #fdfdfd !important;
-        opacity: 0.8;
-    }
-
-    .add-menu-btn:hover {
-        background-color: #ffffff !important;
-        border-color: #0d6efd !important;
-        opacity: 1;
-        transform: scale(1.02);
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    }
-
-    .transition-all {
-        transition: all 0.2s ease-in-out;
-    }
-</style>
-
+<!-- 
 <script>
 function handleAddNewMenu() {
     // You can trigger a Modal or a SweetAlert here
     console.log("Open custom menu input...");
     alert("Triggering Custom Menu Modal!");
 }
-</script>
+
+
+
+
+  /*Filter Menu*/
+  $("#search_food_menu").on("keydown", function (e) {
+      if (e.key === "Enter") {
+          loadFoodMenusList();
+      }
+  });
+  
+  $("#filter_menus").on("change", function () {
+      loadFoodMenusList();
+  });
+
+</script> -->
