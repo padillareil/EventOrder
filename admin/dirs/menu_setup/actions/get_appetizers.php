@@ -1,23 +1,21 @@
 <?php
   require_once "../../../../config/connection_food.php";
+  $CurrentPage  = $_POST['CurrentPage'] ?? 1;
+  $PageSize     = $_POST['PageSize'] ?? 20;
+  $Search       = $_POST['Search'];
+
 try {
   $conn->beginTransaction();
 
-    $fetch_menucat = $conn->prepare("
-      SELECT 
-        Category, Mid
-      FROM FoodMenu 
-      GROUP BY Category, Mid
-      ORDER BY Category
-    ");
-    $fetch_menucat->execute();
-    $get_menu = $fetch_menucat->fetchAll(PDO::FETCH_ASSOC);
+    $fetch_appetizers = $conn->prepare("EXEC dbo.[Food_Appetizers] ?,?,?");
+    $fetch_appetizers->execute([$CurrentPage,$PageSize,$Search]);
+    $get_appetizers = $fetch_appetizers->fetchAll(PDO::FETCH_ASSOC);
 
   $conn->commit();
 
   $response = array(
     "isSuccess" => 'success',
-    "Data" => $get_menu
+    "Data" => $get_appetizers
   );
   echo json_encode($response);
 

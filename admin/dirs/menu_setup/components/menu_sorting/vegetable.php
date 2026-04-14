@@ -5,10 +5,20 @@
 	    </span>
 	    <input type="search" id="search-vegetable" class="form-control bg-transparent border-0 small py-2 shadow-none" placeholder="Search...">
 	</div>
-	<button class="btn btn-primary" type="button" onclick="addVegetable()"><i class="bi bi-plus-lg"></i> Add Vegetable</button>
+	<button class="btn btn-primary" type="button" onclick="addVegetable()"><i class="bi bi-plus-lg"></i> Add Vegie</button>
 </div>
 
 <!-- Load Appetizers Content -->
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
 	<div id="load_Vegetable_content"></div>
+
+			<div class="d-flex flex-column align-items-center text-muted py-5">
+	           <div class="mb-3" style="font-size: 40px; opacity: .35;">
+	                <i class="bi bi-card-list"></i>
+	           </div>
+	           <div class="fw-semibold">No Menu Available.</div>
+	           <div class="small opacity-75">
+	               Click the button 'Add Vegetable' to create menu.
+	           </div>
+	       </div>
 </div>

@@ -11,4 +11,14 @@
 <!-- Load Appetizers Content -->
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
 	<div id="load_Pastry_content"></div>
+
+			<div class="d-flex flex-column align-items-center text-muted py-5">
+	           <div class="mb-3" style="font-size: 40px; opacity: .35;">
+	                <i class="bi bi-card-list"></i>
+	           </div>
+	           <div class="fw-semibold">No Menu Available.</div>
+	           <div class="small opacity-75">
+	               Click the button 'Add Pastry' to create menu.
+	           </div>
+	       </div>
 </div>
