@@ -42,9 +42,8 @@
 </nav>
 
 <form id="frm-add-package">
-    <div class="card border-0 overflow-auto mt-2" style="height: 60vh;">
-       <div class="card-body p-0 border-bottom">
-            <div class="tab-content" id="foodMenuContent">
+  
+            <div class="tab-content mt-2" id="foodMenuContent">
                 <div class="tab-pane fade show active" id="Appetizers" role="tabpanel">
                     <?php include 'menu_sorting/appetizer.php'; ?>
                 </div>
@@ -79,8 +78,6 @@
                     <?php include 'menu_sorting/vegetable.php'; ?>
                 </div>
             </div>
-        </div>
-    </div>
 </form>
 
 

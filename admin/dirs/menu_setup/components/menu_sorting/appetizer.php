@@ -7,103 +7,88 @@
 	</div>
 	<button class="btn btn-primary" type="button" onclick="addAppetizer()"><i class="bi bi-plus-lg"></i> Add Appetizer</button>
 </div>
+<div class="card">
+	<div class="card-body p-0">
+	    <div class="table-responsive overflow-auto" style="height: 50vh;">
+	        <table class="table table-hover align-middle mb-0">
+	            <thead class="sticky-top bg-white border-bottom" style="z-index: 5;">
+	                <tr>
+	                    <th class="ps-4 py-3 border-0 text-uppercase small fw-bold text-muted" style="width: 80px;">#</th>
+	                    <th class="py-3 border-0 text-uppercase small fw-bold text-muted">Menu Name</th>
+	                    <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center">Description</th>
+	                    <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center">Ingredient</th>
+	                    <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center">Status</th>
+	                    <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center">Actions</th>
+	                </tr>
+	            </thead>
+	            <tbody class="border-top-0" id="load_Appetizers_content">
+	            </tbody>
+	        </table>
+	    </div>
+	</div>
 
-<!-- Load Appetizers Content -->
-<div class="row mt-3">
-	<div id="load_Appetizers_content">
+	<div class="card-footer">
+	    <nav>
+	        <ul class="pagination" id="pagination-appetizer">
+	            <li class="page-item" id="li-prev">
+	                <a class="page-link" href="#" id="btn-preview-appetizer">Previous</a>
+	            </li>
+	            <li class="page-item" id="li-next">
+	                <a class="page-link" href="#" id="btn-next-appetizer">Next</a>
+	            </li>
+	        </ul>
+	    </nav>
+	    <div id="page-info-appetizer" class="mt-3 small text-muted"></div>
 	</div>
 </div>
 
 
 
-<style>
-    /* Base Card */
-    .selection-card {
-        border: 1px solid #e9ecef !important;
-        background-color: #ffffff;
-        cursor: pointer;
-        transition: all 0.25s ease-in-out;
-    }
-
-    /* Hover State */
-    .selection-card:hover {
-        background-color: #f8f9fa !important;
-        transform: translateY(-3px);
-    }
-
-    /* THE SUCCESS STATE (When Checked) */
-    .btn-check:checked + .selection-card {
-        background-color: #f1fdf7 !important; /* Very light success green */
-        border-color: #198754 !important;      /* Bootstrap Success Green */
-        box-shadow: 0 4px 12px rgba(25, 135, 84, 0.15) !important;
-    }
-
-    /* Text and Icon Logic */
-    .check-icon { display: none; }
-    .btn-check:checked + .selection-card .check-icon { display: block; }
-    .btn-check:checked + .selection-card .uncheck-icon { display: none; }
-
-    /* Change item name to green when selected */
-    .btn-check:checked + .selection-card .item-name {
-        color: #198754 !important;
-    }
-    .selection-card {
-        transition: all 0.25s ease, transform 0.2s ease;
-    }
-</style>
 
 <script>
 	var CurrentPage = 1;
-	var PageSize = 20;
+	var PageSize = 10;
 	var totalPages = 1;
 	var isPackageMode = false;
 	var selectedItems = [];
 
 
-	function loadAppetizers() {
+	function loadAppetizers(page = 1) {
+	    CurrentPage = page; 
 	    var display = $("#load_Appetizers_content");
-
 	    display.html(`
-	        <div class="text-center py-5 text-muted">
-	            <div class="spinner-border text-danger"></div>
-	            <div class="mt-2">Loading...</div>
-	        </div>
+	            <tr>
+		            <td colspan="6" class="p-5 text-center text-muted">
+		    			<div class="spinner-border text-dark"></div>
+		                <div class="mt-2">Loading...</div>
+		    		</td>
+	            </tr>
 	    `);
-
 	    var Search = $("#search-appetizers").val();
-
-	    $.post("dirs/menu_setup/actions/get_appetizers.php", {
+	    $.post("dirs/menu_setup/actions/get_pagination_appetizer.php", {
 	        CurrentPage,
 	        PageSize,
 	        Search
 	    }, function (data) {
-
 	        let response;
 
 	        try {
 	            response = JSON.parse(data);
 	        } catch (e) {
-	            display.html(`<div class="text-danger text-center py-4">Server Error</div>`);
+	            display.html(`<div class="text-dark text-center py-4">Server Error</div>`);
 	            return;
 	        }
-
 	        if ($.trim(response.isSuccess) === "success") {
-
 	            AppetizerContent(response.Data);
-
 	            totalPages = (response.Data && response.Data.length > 0)
 	                ? parseInt(response.Data[0].TotalPages)
 	                : 1;
 
-	           /* PageNumberAppetizer();
-	            PaginationAppetizer();*/
-
+	                AppetizerPageNumber();
+	                AppetizerPaginationUi();
 	        } else {
-
 	            emptyStateAppetizer("Appetizers menu was empty.");
-
 	        }
-
 	    });
 	}
 
@@ -112,127 +97,191 @@
 	    const display = $("#load_Appetizers_content");
 
 	    if (!data || data.length === 0) {
-	        showEmptyState("Click 'Add Appetizer' to create menu.");
+	        showEmptyState("No menu available.");
 	        return;
 	    }
 
-	    display.html(`<div class="row g-3" id="appetizer-grid"></div>`);
-	    const grid = $("#appetizer-grid");
+	    display.empty();
 
 	    data.forEach(apptzr => {
+	        display.append(`
+	           <tr class="appetizer-row align-middle" data-value="${apptzr.LineNum}">
+	               <td class="text-muted fw-medium small">
+	                   ${apptzr.OrderNumber}
+	               </td>
 
-	        const checkboxId = "apptzr_" + apptzr.ID;
+	               <td>
+	                   <div class="fw-semibold text-dark">
+	                       ${apptzr.DishName}
+	                   </div>
+	               </td>
 
-	        grid.append(`
-	            <div class="col-md-4 col-lg-3">
-	                
-	                <input type="checkbox" 
-	                       class="btn-check appetizer-checkbox"
-	                       id="${checkboxId}"
-	                       value="${apptzr.ID}"
-	                       autocomplete="off">
+	               <td class="text-muted small">
+	                   ${apptzr.Description || '—'}
+	               </td>
 
-	                <label for="${checkboxId}" 
-	                       class="btn btn-outline-light d-flex align-items-center p-3 rounded-4 border w-100 h-100 transition-all shadow-sm selection-card">
+	               <td class="text-muted small">
+	                   ${apptzr.Ingredients || '—'}
+	               </td>
+	        	 	<td>
+	        	 	    <span class="badge px-3 py-2 rounded-pill toggle-status cursor-pointer
+	        	 	        ${apptzr.DishStatus === "Active" ? "bg-success-subtle text-success" : "bg-danger-subtle text-danger"}"
+	        	 	        data-id="${apptzr.LineNum}"
+	        	 	        data-status="${apptzr.DishStatus}">
+	        	 	        ${apptzr.DishStatus}
+	        	 	    </span>
+	        	 	</td>
 
-	                    <div class="custom-check-indicator me-3">
-	                        <i class="bi bi-check-circle-fill fs-5 text-success check-icon"></i>
-	                        <i class="bi bi-circle fs-5 text-muted uncheck-icon"></i>
-	                    </div>
+	               <td class="text-center">
+	                   <div class="dropdown">
+	                       <button class="btn btn-sm btn-icon btn-light rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+	                           <i class="bi bi-three-dots-vertical"></i>
+	                       </button>
 
-	                    <div class="text-start">
-	                        <span class="fw-bold text-dark d-block mb-0 item-name">
-	                            ${apptzr.DishName}
-	                        </span>
-	                        <small class="text-muted">
-	                            ${apptzr.Description || 'No description'}
-	                        </small>
-	                    </div>
+	                       <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+	                           <li>
+	                               <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="mdleditAppetizer('${apptzr.LineNum}')">  <i class="bi bi-pencil text-primary"></i>  Edit
+	                               </a>
+	                           </li>
+	                           <li>
+	                               <a class="dropdown-item d-flex align-items-center gap-2 text-danger"href="#"onclick="removemdlAppetizer('${apptzr.LineNum}')"> <i class="bi bi-trash"></i> Remove
+	                               </a>
+	                           </li>
 
-	                </label>
-	            </div>
+	                           <li>
+	                               <hr class="dropdown-divider">
+	                           </li>
+
+	                           <li>
+	                               <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="enableAppetizer('${apptzr.LineNum}')">  <i class="bi bi-toggle-on text-success"></i>  Enable
+	                               </a>
+	                           </li>
+
+	                           <li>
+	                               <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="disableAppetizer('${apptzr.LineNum}')">  <i class="bi bi-toggle-off text-secondary"></i>  Disable
+	                               </a>
+	                           </li>
+	                       </ul>
+	                   </div>
+	               </td>
+	           </tr>
 	        `);
 	    });
 	}
 
-	
-
-
+	/*Function for no record of appetizers*/
 	function emptyStateAppetizer(message) {
 	    $("#load_Appetizers_content").html(`
-	        <div class="d-flex flex-column align-items-center text-muted py-5">
-	            <div class="mb-3" style="font-size: 40px; opacity: .35;">
-	                <i class="bi bi-card-list"></i>
-	            </div>
-	            <div class="fw-semibold">No Menu Available.</div>
-	            <div class="small opacity-75">${message}</div>
-	        </div>
+	        <tr>
+	          <td colspan="6" class="p-5 text-center text-muted">
+	              <i class="bi bi-card-list"></i> 
+	              <br>
+	                  No Menu Available!
+	    	<div class="small opacity-75">${message}</div>
+	              </td>
+	        </tr>
+	    `);
+	}
+
+	/*Function for no record of appetizers*/
+	function showEmptyState(message) {
+	    $("#load_Appetizers_content").html(`
+	        <tr>
+	          <td colspan="6" class="p-5 text-center text-muted">
+	              <i class="bi bi-card-list"></i> 
+	              <br>
+	                  No Menu Available!
+	    	<div class="small opacity-75">${message}</div>
+	              </td>
+	        </tr>
 	    `);
 	}
 
 
-	$(document).on("change", ".appetizer-checkbox", function () {
-	    const id = $(this).val();
-	    const card = $(this).closest(".appetizer-card");
-
-	    if (this.checked) {
-	        if (!selectedItems.includes(id)) {
-	            selectedItems.push(id);
-	        }
-	        card.addClass("selected");
+	/*Function to count page number page 1 of and so on*/
+	function AppetizerPaginationUi() {
+	    $("#page-info-appetizer").text("Page " + CurrentPage + " of " + totalPages);
+	    if (CurrentPage <= 1) {
+	        $("#li-prev").addClass("disabled");
 	    } else {
-	        selectedItems = selectedItems.filter(x => x != id);
-	        card.removeClass("selected");
+	        $("#li-prev").removeClass("disabled");
 	    }
-
-	    updatePackageBar();
-	});
-
-	function updatePackageBar() {
-	    if (isPackageMode && selectedItems.length > 0) {
-	        $("#package-bar").removeClass("d-none");
-	        $("#selected-count").text(selectedItems.length);
+	    if (CurrentPage >= totalPages) {
+	        $("#li-next").addClass("disabled");
 	    } else {
-	        $("#package-bar").addClass("d-none");
+	        $("#li-next").removeClass("disabled");
+	    }
+	}
+	/*Function to build list of pagination*/
+	function AppetizerPageNumber() {
+	    $("#pagination-appetizer li.page-number-appetizer").remove();
+	    let prevLi = $("#li-prev");
+	    let maxVisible = 5;
+	    let start = Math.max(1, CurrentPage - 2);
+	    let end = Math.min(totalPages, start + maxVisible - 1);
+	    if (end - start < maxVisible - 1) {
+	        start = Math.max(1, end - maxVisible + 1);
+	    }
+	    if (start > 1) {
+	        insertPage(1, prevLi);
+	        prevLi = prevLi.next();
+
+	        if (start > 2) {
+	            prevLi.after(`<li class="page-item page-number-appetizer disabled"><span class="page-link">...</span></li>`);
+	            prevLi = prevLi.next();
+	        }
+	    }
+	    for (let i = start; i <= end; i++) {
+	        insertPage(i, prevLi);
+	        prevLi = prevLi.next();
+	    }
+	    if (end < totalPages) {
+	        if (end < totalPages - 1) {
+	            prevLi.after(`<li class="page-item page-number-appetizer disabled"><span class="page-link">...</span></li>`);
+	            prevLi = prevLi.next();
+	        }
+	        insertPage(totalPages, prevLi);
+	    }
+	    function insertPage(i, ref) {
+	        let activeClass = (i === CurrentPage) ? "active" : "";
+
+	        let li = `
+	            <li class="page-item page-number-appetizer ${activeClass}">
+	                <a class="page-link" href="#" data-page="${i}">${i}</a>
+	            </li>
+	        `;
+
+	        $(li).insertAfter(ref);
 	    }
 	}
 
-
-/*pAgination*/
-	$(document).on("click", ".page-link", function (e) {
-	    e.preventDefault();
-	    CurrentPage = parseInt($(this).data("page"));
-	    loadAppetizers();
-	});
-
-	$("#btn-preview").on("click", function () {
-	    if (CurrentPage > 1) {
-	        CurrentPage--;
+	/*Search-appetizer*/
+	$("#search-appetizers").on("keydown", function(e) {
+	    if (e.key === "Enter") {
 	        loadAppetizers();
 	    }
 	});
 
-	$("#btn-next").on("click", function () {
-	    if (CurrentPage < totalPages) {
-	        CurrentPage++;
-	        loadAppetizers();
-	    }
-	});
+	  /* Pagination + Fetch Blocked Accounts */
+	  $("#btn-preview-appetizer").on("click", function(e) {
+	      e.preventDefault();
+
+	      if (CurrentPage > 1) {
+	          loadAppetizers(CurrentPage - 1);
+	      }
+	  });
+
+	/*Function load all important tags tickets*/
+	  $("#btn-next-appetizer").on("click", function(e) {
+	      e.preventDefault();
+
+	      if (CurrentPage < totalPages) {
+	          loadAppetizers(CurrentPage + 1);
+	      }
+	  });
 </script>
 
 
-<style>
-	.appetizer-card {
-	    cursor: pointer;
-	    transition: 0.2s ease;
-	}
 
-	.appetizer-card:hover {
-	    transform: scale(1.02);
-	}
 
-	.appetizer-card.selected {
-	    border: 2px solid #0d6efd;
-	    background: #f0f7ff;
-	}
-</style>
+

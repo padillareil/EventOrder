@@ -138,7 +138,7 @@ try {
       </section>
     </div>
     <footer class="main-footer">
-        <small>Imperial Appliance Plaza. All rights reserved.</small>
+        <small>Grand Xing-Event Order v0.1.</small>
         <span id="current-year"></span>
         <div class="float-right d-none d-sm-inline-block">
         </div>

@@ -37,6 +37,10 @@
                        <span class="spinner-border spinner-border-sm d-none" id="btn-spinner-appetizer"></span>
                        <span class="btn-text-appetizer">Save</span>
                      </button>
+                     <button id="btn-update-appetizer" class="btn btn-success shadow-sm d-none" type="button">
+                       <span class="btn-text-appetizer">Update</span>
+                       <span id="btn-spinner-appetizer-upd" class="spinner-border spinner-border-sm ms-2 d-none"></span>
+                     </button>
                       <button class="btn btn-secondary  shadow-sm btn-sm" data-bs-dismiss="modal" type="reset" id="btn-cancel-appetizer">Cancel</button>
                     </div>
                 </div>
@@ -131,6 +135,10 @@
                      <button id="btn-submit-beverage" class="btn btn-success shadow-sm" type="submit">
                        <span class="spinner-border spinner-border-sm d-none" id="btn-spinner-beverage"></span>
                        <span class="btn-text-beverage">Save</span>
+                     </button>
+                     <button id="btn-update-beverage" class="btn btn-success shadow-sm d-none" type="button">
+                       <span class="btn-text-beverage">Update</span>
+                       <span id="btn-spinner-beverage-upd" class="spinner-border spinner-border-sm ms-2 d-none"></span>
                      </button>
                       <button class="btn btn-secondary  shadow-sm btn-sm" data-bs-dismiss="modal" type="reset" id="btn-cancel-beverage">Cancel</button>
                     </div>
