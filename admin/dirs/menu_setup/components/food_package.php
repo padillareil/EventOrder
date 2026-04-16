@@ -1,4 +1,4 @@
-<div class="card border-0 shadow-sm rounded-4 overflow-hidden mt-3">
+<div class="card border-0 shadow-sm rounded-4 overflow-hidden mt-3" id="foodpackage_content">
     <div class="card-header bg-white border-0 pt-4 px-4 pb-3">
         <div class="row g-3 align-items-center">
             <div class="col-12 col-md-6 d-flex align-items-center gap-3">
@@ -6,12 +6,15 @@
                 <span class="badge rounded-pill bg-light text-dark border fw-medium px-3">24 Total</span>
             </div>
             <div class="col-12 col-md-6 d-flex justify-content-md-end">
-                <div class="input-group border bg-light px-3 flex-grow-1" style="max-width: 300px;">
+                <div class="input-group border mr-2 bg-light px-3 flex-grow-1" style="max-width: 300px;">
                     <span class="input-group-text bg-transparent border-0 p-0 me-2">
                         <i class="bi bi-search text-muted small"></i>
                     </span>
                     <input type="search" class="form-control bg-transparent border-0 small py-2 shadow-none" placeholder="Search...">
                 </div>
+                <button class="btn btn-link text-decoration-none text-secondary" type="button" onclick="createPackage()" title="Setup Event Food Package">
+                    <i class="bi bi-ui-checks-grid text-lg"></i>
+                </button>
             </div>
         </div>
     </div>

@@ -19,7 +19,7 @@
 		 $validate_entry->execute([$DishName, $Group]);
 
 		 if ($validate_entry->fetchColumn() > 0) {
-		     exit('This beverage already exists.');
+		     exit('This menu already exists.');
 		 }
 
 

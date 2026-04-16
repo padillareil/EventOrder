@@ -7,7 +7,7 @@
 	</div>
 	<button class="btn btn-primary" type="button" onclick="addAppetizer()"><i class="bi bi-plus-lg"></i> Add Appetizer</button>
 </div>
-<div class="card">
+<div class="card mt-2">
 	<div class="card-body p-0">
 	    <div class="table-responsive overflow-auto" style="height: 50vh;">
 	        <table class="table table-hover align-middle mb-0">
@@ -30,10 +30,10 @@
 	<div class="card-footer">
 	    <nav>
 	        <ul class="pagination" id="pagination-appetizer">
-	            <li class="page-item" id="li-prev">
+	            <li class="page-item" id="li-prev-appetizer">
 	                <a class="page-link" href="#" id="btn-preview-appetizer">Previous</a>
 	            </li>
-	            <li class="page-item" id="li-next">
+	            <li class="page-item" id="li-next-appetizer">
 	                <a class="page-link" href="#" id="btn-next-appetizer">Next</a>
 	            </li>
 	        </ul>
@@ -116,14 +116,14 @@
 	                   </div>
 	               </td>
 
-	               <td class="text-muted small">
+	               <td class="text-muted text-center small">
 	                   ${apptzr.Description || '—'}
 	               </td>
 
-	               <td class="text-muted small">
+	               <td class="text-muted text-center small">
 	                   ${apptzr.Ingredients || '—'}
 	               </td>
-	        	 	<td>
+	        	 	<td class="text-center">
 	        	 	    <span class="badge px-3 py-2 rounded-pill toggle-status cursor-pointer
 	        	 	        ${apptzr.DishStatus === "Active" ? "bg-success-subtle text-success" : "bg-danger-subtle text-danger"}"
 	        	 	        data-id="${apptzr.LineNum}"
@@ -202,20 +202,20 @@
 	function AppetizerPaginationUi() {
 	    $("#page-info-appetizer").text("Page " + CurrentPage + " of " + totalPages);
 	    if (CurrentPage <= 1) {
-	        $("#li-prev").addClass("disabled");
+	        $("#li-prev-appetizer").addClass("disabled");
 	    } else {
-	        $("#li-prev").removeClass("disabled");
+	        $("#li-prev-appetizer").removeClass("disabled");
 	    }
 	    if (CurrentPage >= totalPages) {
-	        $("#li-next").addClass("disabled");
+	        $("#li-next-appetizer").addClass("disabled");
 	    } else {
-	        $("#li-next").removeClass("disabled");
+	        $("#li-next-appetizer").removeClass("disabled");
 	    }
 	}
 	/*Function to build list of pagination*/
 	function AppetizerPageNumber() {
 	    $("#pagination-appetizer li.page-number-appetizer").remove();
-	    let prevLi = $("#li-prev");
+	    let prevLi = $("#li-prev-appetizer");
 	    let maxVisible = 5;
 	    let start = Math.max(1, CurrentPage - 2);
 	    let end = Math.min(totalPages, start + maxVisible - 1);
@@ -223,7 +223,7 @@
 	        start = Math.max(1, end - maxVisible + 1);
 	    }
 	    if (start > 1) {
-	        insertPage(1, prevLi);
+	        insertPageAppetizer(1, prevLi);
 	        prevLi = prevLi.next();
 
 	        if (start > 2) {
@@ -232,7 +232,7 @@
 	        }
 	    }
 	    for (let i = start; i <= end; i++) {
-	        insertPage(i, prevLi);
+	        insertPageAppetizer(i, prevLi);
 	        prevLi = prevLi.next();
 	    }
 	    if (end < totalPages) {
@@ -240,9 +240,9 @@
 	            prevLi.after(`<li class="page-item page-number-appetizer disabled"><span class="page-link">...</span></li>`);
 	            prevLi = prevLi.next();
 	        }
-	        insertPage(totalPages, prevLi);
+	        insertPageAppetizer(totalPages, prevLi);
 	    }
-	    function insertPage(i, ref) {
+	    function insertPageAppetizer(i, ref) {
 	        let activeClass = (i === CurrentPage) ? "active" : "";
 
 	        let li = `

@@ -50,6 +50,11 @@
 </form>
 
 <script>
+    /*Function remove update button when closing*/
+    $("#btn-cancel-appetizer").on("click", function() {
+        $("#btn-update-appetizer").addClass('d-none');
+    });
+
     $("#frm-add-appetizer").submit(function(event){
         event.preventDefault();
         let $btnSubmit = $("#btn-submit-appetizer");
@@ -77,8 +82,7 @@
             if($.trim(data) == "OK"){
                 $("#frm-add-appetizer")[0].reset();
                 $("#mdl-add-appetizer").modal('hide');
-                loadFoodMenusSetup();
-
+                loadAppetizers(CurrentPage - 1);
                 Swal.fire({
                     toast: true,
                     position: "top-end",
@@ -125,7 +129,8 @@
                         </div>
                         <div class="mt-3 mb-3">
                             <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Description</label>
-                            <textarea class="form-control h-100" name="beverage-description" rows="2" id="beverage-description" required></textarea>
+                            <textarea class="form-control h-100" name="beverage-description" rows="2" id="beverage-description" required maxlength="200"></textarea>
+                            <div class="form-text small">Max 200 Characters.</div>
                         </div>
                         
                     </div>
@@ -150,6 +155,11 @@
 
 
 <script>
+    /*Function remove update button when closing*/
+    $("#btn-cancel-beverage").on("click", function() {
+        $("#btn-update-beverage").addClass('d-none');
+    });
+
     $("#frm-add-beverage").submit(function(event){
         event.preventDefault();
         let $btnSubmit = $("#btn-submit-beverage");
@@ -177,8 +187,7 @@
             if($.trim(data) == "OK"){
                 $("#frm-add-beverage")[0].reset();
                 $("#mdl-add-beverage").modal('hide');
-                loadFoodMenusSetup();
-
+               loadBeverage(CurrentPage);
                 Swal.fire({
                     toast: true,
                     position: "top-end",
@@ -222,12 +231,14 @@
 
                         <div class="col-12">
                             <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Description</label>
-                            <textarea class="form-control" name="breakfast-description" rows="3" id="breakfast-description" required></textarea>
+                            <textarea class="form-control" name="breakfast-description" rows="3" id="breakfast-description" required maxlength="200"></textarea>
+                            <div class="form-text small">Max 200 Characters.</div>
                         </div>
 
                         <div class="col-12">
                             <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Main Ingredients</label>
-                            <textarea class="form-control" name="breakfast-ingredients" rows="3" id="breakfast-ingredients" required></textarea>
+                            <textarea class="form-control" name="breakfast-ingredients" rows="3" id="breakfast-ingredients" required maxlength="200"></textarea>
+                            <div class="form-text small">Max 200 Characters.</div>
                         </div>
                     </div>
                 </div>
@@ -236,6 +247,10 @@
                      <button id="btn-submit-breakfast" class="btn btn-success shadow-sm" type="submit">
                        <span class="spinner-border spinner-border-sm d-none" id="btn-spinner-breakfast"></span>
                        <span class="btn-text-breakfast">Save</span>
+                     </button>
+                     <button id="btn-update-breakfast" class="btn btn-success shadow-sm d-none" type="button">
+                       <span class="btn-text-breakfast">Update</span>
+                       <span id="btn-spinner-breakfast-upd" class="spinner-border spinner-border-sm ms-2 d-none"></span>
                      </button>
                       <button class="btn btn-secondary  shadow-sm btn-sm" data-bs-dismiss="modal" type="reset" id="btn-cancel-breakfast">Cancel</button>
                     </div>
@@ -246,6 +261,13 @@
 </form>
 
 <script>
+    /*Function remove update button when closing*/
+    $("#btn-cancel-breakfast").on("click", function() {
+        $("#btn-update-breakfast").addClass('d-none');
+    });
+    
+
+
     $("#frm-add-breakfast").submit(function(event){
         event.preventDefault();
         let $btnSubmit = $("#btn-submit-breakfast");
@@ -273,8 +295,7 @@
             if($.trim(data) == "OK"){
                 $("#frm-add-breakfast")[0].reset();
                 $("#mdl-add-breakfast").modal('hide');
-                loadFoodMenusSetup();
-
+                loadBreakfast(CurrentPage);
                 Swal.fire({
                     toast: true,
                     position: "top-end",
@@ -319,12 +340,14 @@
 
                         <div class="col-12">
                             <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Description</label>
-                            <textarea class="form-control" name="dessert-description" rows="3" id="dessert-description" required></textarea>
+                            <textarea class="form-control" name="dessert-description" rows="3" id="dessert-description" required maxlength="200"></textarea>
+                            <div class="form-text small">Max 200 Characters.</div>
                         </div>
 
                         <div class="col-12">
                             <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Main Ingredients</label>
-                            <textarea class="form-control" name="dessert-ingredients" rows="3" id="dessert-ingredients" required></textarea>
+                            <textarea class="form-control" name="dessert-ingredients" rows="3" id="dessert-ingredients" required maxlength="200"></textarea>
+                            <div class="form-text small">Max 200 Characters.</div>
                         </div>
                     </div>
                 </div>
@@ -333,6 +356,10 @@
                      <button id="btn-submit-dessert" class="btn btn-success shadow-sm" type="submit">
                        <span class="spinner-border spinner-border-sm d-none" id="btn-spinner-dessert"></span>
                        <span class="btn-text-dessert">Save</span>
+                     </button>
+                     <button id="btn-update-dessert" class="btn btn-success shadow-sm d-none" type="button">
+                       <span class="btn-text-dessert">Update</span>
+                       <span id="btn-spinner-dessert-upd" class="spinner-border spinner-border-sm ms-2 d-none"></span>
                      </button>
                       <button class="btn btn-secondary  shadow-sm btn-sm" data-bs-dismiss="modal" type="reset" id="btn-cancel-dessert">Cancel</button>
                     </div>
@@ -343,6 +370,12 @@
 </form>
 
 <script>
+    /*Function remove update button when closing*/
+    $("#btn-cancel-dessert").on("click", function() {
+        $("#btn-update-dessert").addClass('d-none');
+    });
+
+
     $("#frm-add-dessert").submit(function(event){
         event.preventDefault();
         let $btnSubmit = $("#btn-submit-dessert");
@@ -370,7 +403,7 @@
             if($.trim(data) == "OK"){
                 $("#frm-add-dessert")[0].reset();
                 $("#mdl-add-dessert").modal('hide');
-                loadFoodMenusSetup();
+                loadDessert(CurrentPage);
                 Swal.fire({
                     toast: true,
                     position: "top-end",
@@ -414,12 +447,14 @@
                         </div>
                         <div class="col-12">
                             <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Description</label>
-                            <textarea class="form-control" name="main-course-description" id="main-course-description" rows="3" required></textarea>
+                            <textarea class="form-control" name="main-course-description" id="main-course-description" rows="3" required maxlength="200"></textarea>
+                            <div class="form-text small">Max 200 Characters.</div>
                         </div>
 
                         <div class="col-12">
                             <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Main Ingredients</label>
-                            <textarea class="form-control" name="main-course-ingredients" id="main-course-ingredients" rows="3" required></textarea>
+                            <textarea class="form-control" name="main-course-ingredients" id="main-course-ingredients" rows="3" required maxlength="200"></textarea>
+                            <div class="form-text small">Max 200 Characters.</div>
                         </div>
                     </div>
                 </div>
@@ -428,6 +463,10 @@
                      <button id="btn-submit-maincourse" class="btn btn-success shadow-sm" type="submit">
                        <span class="spinner-border spinner-border-sm d-none" id="btn-spinner-maincourse"></span>
                        <span class="btn-text-maincourse">Save</span>
+                     </button>
+                     <button id="btn-update-maincourse" class="btn btn-success shadow-sm d-none" type="button">
+                       <span class="btn-text-maincourse">Update</span>
+                       <span id="btn-spinner-maincourse-upd" class="spinner-border spinner-border-sm ms-2 d-none"></span>
                      </button>
                       <button class="btn btn-secondary  shadow-sm btn-sm" data-bs-dismiss="modal" type="reset" id="btn-cancel-maincourse">Cancel</button>
                     </div>
@@ -438,6 +477,12 @@
 </form>
 
 <script>
+    /*Function remove update button when closing*/
+    $("#btn-cancel-maincourse").on("click", function() {
+        $("#btn-update-maincourse").addClass('d-none');
+    });
+
+
     $("#frm-add-maincourse").submit(function(event){
         event.preventDefault();
         let $btnSubmit = $("#btn-submit-maincourse");
@@ -465,7 +510,7 @@
             if($.trim(data) == "OK"){
                 $("#frm-add-maincourse")[0].reset();
                 $("#mdl-add-maincourse").modal('hide');
-                loadFoodMenusSetup();
+                loadMainCourse(CurrentPage);
                 Swal.fire({
                     toast: true,
                     position: "top-end",
@@ -510,12 +555,14 @@
                         </div>
                         <div class="col-12">
                             <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Description</label>
-                            <textarea class="form-control" name="pastry-description" id="pastry-description" rows="2"></textarea>
+                            <textarea class="form-control" name="pastry-description" id="pastry-description" rows="2" maxlength="200"></textarea>
+                            <div class="form-text small">Max 200 Characters.</div>
                         </div>
 
                         <div class="col-12">
                             <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Main Ingredients</label>
-                            <textarea class="form-control" name="pastry-ingredients" id="pastry-ingredients" rows="2" required></textarea>
+                            <textarea class="form-control" name="pastry-ingredients" id="pastry-ingredients" rows="2" required maxlength="200"></textarea>
+                            <div class="form-text small">Max 200 Characters.</div>
                         </div>
                     </div>
                 </div>
@@ -524,6 +571,10 @@
                      <button id="btn-submit-pastry" class="btn btn-success shadow-sm" type="submit">
                        <span class="spinner-border spinner-border-sm d-none" id="btn-spinner-pastry"></span>
                        <span class="btn-text-pastry">Save</span>
+                     </button>
+                     <button id="btn-update-pastry" class="btn btn-success shadow-sm d-none" type="button">
+                       <span class="btn-text-pastry">Update</span>
+                       <span id="btn-spinner-pastry-upd" class="spinner-border spinner-border-sm ms-2 d-none"></span>
                      </button>
                       <button class="btn btn-secondary  shadow-sm btn-sm" data-bs-dismiss="modal" type="reset" id="btn-cancel-pastry">Cancel</button>
                     </div>
@@ -534,6 +585,12 @@
 </form>
 
 <script>
+    /*Function remove update button when closing*/
+    $("#btn-cancel-pastry").on("click", function() {
+        $("#btn-update-pastry").addClass('d-none');
+    });
+
+
     $("#frm-add-pastry").submit(function(event){
         event.preventDefault();
         let $btnSubmit = $("#btn-submit-pastry");
@@ -561,7 +618,7 @@
             if($.trim(data) == "OK"){
                 $("#frm-add-pastry")[0].reset();
                 $("#mdl-add-pastry").modal('hide');
-                loadFoodMenusSetup();
+                loadPastry(CurrentPage);
                 Swal.fire({
                     toast: true,
                     position: "top-end",
@@ -605,12 +662,14 @@
                         </div>
                         <div class="col-12">
                             <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Description</label>
-                            <textarea class="form-control" name="pasta-description" rows="2"></textarea>
+                            <textarea class="form-control" name="pasta-description" rows="2" maxlength="200"></textarea>
+                            <div class="form-text small">Max 200 Characters.</div>
                         </div>
 
                         <div class="col-12">
                             <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Main Ingredients</label>
-                            <textarea class="form-control" name="pasta-ingredients" rows="2" required></textarea>
+                            <textarea class="form-control" name="pasta-ingredients" rows="2" required maxlength="200"></textarea>
+                            <div class="form-text small">Max 200 Characters.</div>
                         </div>
                     </div>
                 </div>
@@ -619,6 +678,10 @@
                      <button id="btn-submit-pasta" class="btn btn-success shadow-sm" type="submit">
                        <span class="spinner-border spinner-border-sm d-none" id="btn-spinner-pasta"></span>
                        <span class="btn-text-pasta">Save</span>
+                     </button>
+                     <button id="btn-update-pasta" class="btn btn-success shadow-sm d-none" type="button">
+                       <span class="btn-text-pasta">Update</span>
+                       <span id="btn-spinner-pasta-upd" class="spinner-border spinner-border-sm ms-2 d-none"></span>
                      </button>
                       <button class="btn btn-secondary  shadow-sm btn-sm" data-bs-dismiss="modal" type="reset" id="btn-cancel-pasta">Cancel</button>
                     </div>
@@ -629,6 +692,12 @@
 </form>
 
 <script>
+    /*Function remove update button when closing*/
+    $("#btn-cancel-pasta").on("click", function() {
+        $("#btn-update-pasta").addClass('d-none');
+    });
+
+
     $("#frm-add-pasta").submit(function(event){
         event.preventDefault();
         let $btnSubmit = $("#btn-submit-pasta");
@@ -656,7 +725,7 @@
             if($.trim(data) == "OK"){
                 $("#frm-add-pasta")[0].reset();
                 $("#mdl-add-pasta").modal('hide');
-                loadFoodMenusSetup();
+                loadPasta(CurrentPage);
                 Swal.fire({
                     toast: true,
                     position: "top-end",
@@ -701,12 +770,14 @@
 
                         <div class="col-12">
                             <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Description</label>
-                            <textarea class="form-control" name="salad-description" id="salad-description" rows="2"></textarea>
+                            <textarea class="form-control" name="salad-description" id="salad-description" rows="2" maxlength="200"></textarea>
+                            <div class="form-text small">Max 200 Characters.</div>
                         </div>
 
                         <div class="col-12">
                             <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Main Ingredients</label>
-                            <textarea class="form-control" name="salad-ingredients" id="salad-ingredients" rows="2" required></textarea>
+                            <textarea class="form-control" name="salad-ingredients" id="salad-ingredients" rows="2" required maxlength="200"></textarea>
+                            <div class="form-text small">Max 200 Characters.</div>
                         </div>
                     </div>
                 </div>
@@ -715,6 +786,10 @@
                      <button id="btn-submit-salad" class="btn btn-success shadow-sm" type="submit">
                        <span class="spinner-border spinner-border-sm d-none" id="btn-spinner-salad"></span>
                        <span class="btn-text-salad">Save</span>
+                     </button>
+                     <button id="btn-update-salad" class="btn btn-success shadow-sm d-none" type="button">
+                       <span class="btn-text-salad">Update</span>
+                       <span id="btn-spinner-salad-upd" class="spinner-border spinner-border-sm ms-2 d-none"></span>
                      </button>
                       <button class="btn btn-secondary  shadow-sm btn-sm" data-bs-dismiss="modal" type="reset" id="btn-cancel-salad">Cancel</button>
                     </div>
@@ -726,6 +801,12 @@
 
 
 <script>
+    /*Function remove update button when closing*/
+    $("#btn-cancel-salad").on("click", function() {
+        $("#btn-update-salad").addClass('d-none');
+    });
+
+
     $("#frm-add-salad").submit(function(event){
         event.preventDefault();
         let $btnSubmit = $("#btn-submit-salad");
@@ -753,7 +834,7 @@
             if($.trim(data) == "OK"){
                 $("#frm-add-salad")[0].reset();
                 $("#mdl-add-salad").modal('hide');
-                loadFoodMenusSetup();
+                loadSalad(CurrentPage);
                 Swal.fire({
                     toast: true,
                     position: "top-end",
@@ -797,12 +878,14 @@
 
                         <div class="col-12">
                             <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Description</label>
-                            <textarea class="form-control" name="snack-description" id="snack-description" rows="2"></textarea>
+                            <textarea class="form-control" name="snack-description" id="snack-description" rows="2" maxlength="200"></textarea>
+                            <div class="form-text small">Max 200 Characters.</div>
                         </div>
 
                         <div class="col-12">
                             <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Main Ingredients</label>
-                            <textarea class="form-control" name="snack-ingredients" id="snack-ingredients" rows="2" required></textarea>
+                            <textarea class="form-control" name="snack-ingredients" id="snack-ingredients" rows="2" required maxlength="200"></textarea>
+                            <div class="form-text small">Max 200 Characters.</div>
                         </div>
                     </div>
                 </div>
@@ -811,6 +894,10 @@
                      <button id="btn-submit-snack" class="btn btn-success shadow-sm" type="submit">
                        <span class="spinner-border spinner-border-sm d-none" id="btn-spinner-snack"></span>
                        <span class="btn-text-snack">Save</span>
+                     </button>
+                     <button id="btn-update-snack" class="btn btn-success shadow-sm d-none" type="button">
+                       <span class="btn-text-snack">Update</span>
+                       <span id="btn-spinner-snack-upd" class="spinner-border spinner-border-sm ms-2 d-none"></span>
                      </button>
                       <button class="btn btn-secondary  shadow-sm btn-sm" data-bs-dismiss="modal" type="reset" id="btn-cancel-snack">Cancel</button>
                     </div>
@@ -821,6 +908,12 @@
 </form>
 
 <script>
+    /*Function remove update button when closing*/
+    $("#btn-cancel-snack").on("click", function() {
+        $("#btn-update-snack").addClass('d-none');
+    });
+
+
     $("#frm-add-snack").submit(function(event){
         event.preventDefault();
         let $btnSubmit = $("#btn-submit-snack");
@@ -848,7 +941,7 @@
             if($.trim(data) == "OK"){
                 $("#frm-add-snack")[0].reset();
                 $("#mdl-add-snack").modal('hide');
-                loadFoodMenusSetup();
+                loadSnack(CurrentPage);
                 Swal.fire({
                     toast: true,
                     position: "top-end",
@@ -892,12 +985,14 @@
 
                         <div class="col-12">
                             <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Description</label>
-                            <textarea class="form-control" name="soup-description" id="soup-description" rows="2"></textarea>
+                            <textarea class="form-control" name="soup-description" id="soup-description" rows="2" maxlength="200"></textarea>
+                            <div class="form-text small">Max 200 Characters.</div>
                         </div>
 
                         <div class="col-12">
                             <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Main Ingredients</label>
-                            <textarea class="form-control" name="soup-ingredients" id="soup-ingredients" rows="2" required></textarea>
+                            <textarea class="form-control" name="soup-ingredients" id="soup-ingredients" rows="2" required maxlength="200"></textarea>
+                            <div class="form-text small">Max 200 Characters.</div>
                         </div>
                     </div>
                 </div>
@@ -906,6 +1001,10 @@
                      <button id="btn-submit-soup" class="btn btn-success shadow-sm" type="submit">
                        <span class="spinner-border spinner-border-sm d-none" id="btn-spinner-soup"></span>
                        <span class="btn-text-soup">Save</span>
+                     </button>
+                     <button id="btn-update-soup" class="btn btn-success shadow-sm d-none" type="button">
+                       <span class="btn-text-soup">Update</span>
+                       <span id="btn-spinner-soup-upd" class="spinner-border spinner-border-sm ms-2 d-none"></span>
                      </button>
                       <button class="btn btn-secondary  shadow-sm btn-sm" data-bs-dismiss="modal" type="reset" id="btn-cancel-soup">Cancel</button>
                     </div>
@@ -916,6 +1015,13 @@
 </form>
 
 <script>
+    /*Function remove update button when closing*/
+    $("#btn-cancel-soup").on("click", function() {
+        $("#btn-update-soup").addClass('d-none');
+    });
+
+
+
     $("#frm-add-soup").submit(function(event){
         event.preventDefault();
         let $btnSubmit = $("#btn-submit-soup");
@@ -943,7 +1049,7 @@
             if($.trim(data) == "OK"){
                 $("#frm-add-soup")[0].reset();
                 $("#mdl-add-soup").modal('hide');
-                loadFoodMenusSetup();
+                loadSoup(CurrentPage);
                 Swal.fire({
                     toast: true,
                     position: "top-end",
@@ -986,12 +1092,14 @@
 
                         <div class="col-12">
                             <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Description</label>
-                            <textarea class="form-control" name="vegetable-description" id="vegetable-description" rows="2"></textarea>
+                            <textarea class="form-control" name="vegetable-description" id="vegetable-description" rows="2" maxlength="200"></textarea>
+                            <div class="form-text small">Max 200 Characters.</div>
                         </div>
 
                         <div class="col-12">
                             <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Main Ingredients</label>
-                            <textarea class="form-control" name="vegetable-ingredients" id="vegetable-ingredients" rows="2" required></textarea>
+                            <textarea class="form-control" name="vegetable-ingredients" id="vegetable-ingredients" rows="2" required maxlength="200"></textarea>
+                            <div class="form-text small">Max 200 Characters.</div>
                         </div>
                     </div>
                 </div>
@@ -1000,6 +1108,10 @@
                     <button id="btn-submit-vegetables" class="btn btn-success shadow-sm" type="submit">
                       <span class="spinner-border spinner-border-sm d-none" id="btn-spinner-vegetables"></span>
                       <span class="btn-text-vegetables">Save</span>
+                    </button>
+                    <button id="btn-update-vegie" class="btn btn-success shadow-sm d-none" type="button">
+                      <span class="btn-text-vegie">Update</span>
+                      <span id="btn-spinner-vegie-upd" class="spinner-border spinner-border-sm ms-2 d-none"></span>
                     </button>
                      <button class="btn btn-secondary  shadow-sm btn-sm" data-bs-dismiss="modal" type="reset" id="btn-cancel-vegetables">Cancel</button>
                    </div>
@@ -1010,20 +1122,26 @@
 </form>
 
 <script>
+    /*Function remove update button when closing*/
+    $("#btn-cancel-vegie").on("click", function() {
+        $("#btn-update-vegie").addClass('d-none');
+    });
+
+
     $("#frm-add-vegetables").submit(function(event){
         event.preventDefault();
-        let $btnSubmit = $("#btn-submit-vegetables");
-        let $btnCancel = $("#btn-cancel-vegetables");
+        let $btnSubmit = $("#btn-submit-vegetable");
+        let $btnCancel = $("#btn-cancel-vegetable");
         let $spinner = $("#btn-spinner");
-        let $text = $btnSubmit.find(".btn-text-vegetables");
+        let $text = $btnSubmit.find(".btn-text-vegetable");
         $btnSubmit.prop("disabled", true);
         $btnCancel.prop("disabled", true);
         $spinner.removeClass("d-none");
         $text.text("Saving...");
 
-        var DishName  = $("#vegetables-name").val();
-        var Description   = $("#vegetables-description").val();
-        var Ingredient  = $("#vegetables-ingredients").val();
+        var DishName  = $("#vegetable-name").val();
+        var Description   = $("#vegetable-description").val();
+        var Ingredient  = $("#vegetable-ingredients").val();
 
         $.post("dirs/menu_setup/actions/save_vegetables.php", {
             DishName: DishName,
@@ -1037,7 +1155,7 @@
             if($.trim(data) == "OK"){
                 $("#frm-add-vegetables")[0].reset();
                 $("#mdl-add-vegetables").modal('hide');
-                loadFoodMenusSetup();
+                loadVegie(CurrentPage);
                 Swal.fire({
                     toast: true,
                     position: "top-end",

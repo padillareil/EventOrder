@@ -8,17 +8,456 @@
 	<button class="btn btn-primary" type="button" onclick="addSoup()"><i class="bi bi-plus-lg"></i> Add Soup</button>
 </div>
 
-<!-- Load Appetizers Content -->
-<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
-	<div id="load_Soup_content"></div>
-
-			<div class="d-flex flex-column align-items-center text-muted py-5">
-	           <div class="mb-3" style="font-size: 40px; opacity: .35;">
-	                <i class="bi bi-card-list"></i>
-	           </div>
-	           <div class="fw-semibold">No Menu Available.</div>
-	           <div class="small opacity-75">
-	               Click the button 'Add Soup' to create menu.
-	           </div>
-	       </div>
+<!-- Load Soup Content -->
+<div class="card mt-2">
+	<div class="card-body p-0">
+	    <div class="table-responsive overflow-auto" style="height: 50vh;">
+	        <table class="table table-hover align-middle mb-0">
+	            <thead class="sticky-top bg-white border-bottom" style="z-index: 5;">
+	                <tr>
+	                    <th class="ps-4 py-3 border-0 text-uppercase small fw-bold text-muted" style="width: 80px;">#</th>
+	                    <th class="py-3 border-0 text-uppercase small fw-bold text-muted">Menu Name</th>
+	                    <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center">Description</th>
+	                    <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center">Ingredient</th>
+	                    <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center">Status</th>
+	                    <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center">Actions</th>
+	                </tr>
+	            </thead>
+	            <tbody class="border-top-0" id="load_Soup_content">
+	            </tbody>
+	        </table>
+	    </div>
+	</div>
+	<div class="card-footer">
+	    <nav>
+	        <ul class="pagination" id="pagination-soup">
+	            <li class="page-item" id="li-prev-soup">
+	                <a class="page-link" href="#" id="btn-preview-soup">Previous</a>
+	            </li>
+	            <li class="page-item" id="li-next-soup">
+	                <a class="page-link" href="#" id="btn-next-soup">Next</a>
+	            </li>
+	        </ul>
+	    </nav>
+	    <div id="page-info-soup" class="mt-3 small text-muted"></div>
+	</div>
 </div>
+
+<script>
+	var CurrentPage = 1;
+	var PageSize = 10;
+	var totalPages = 1;
+	var isPackageMode = false;
+	var selectedItems = [];
+
+
+	function loadSoup(page = 1) {
+	    CurrentPage = page; 
+	    var display = $("#load_Soup_content");
+	    display.html(`
+	            <tr>
+		            <td colspan="6" class="p-5 text-center text-muted">
+		    			<div class="spinner-border text-dark"></div>
+		                <div class="mt-2">Loading...</div>
+		    		</td>
+	            </tr>
+	    `);
+	    var Search = $("#search-snack").val();
+	    $.post("dirs/menu_setup/actions/get_pagination_soup.php", {
+	        CurrentPage,
+	        PageSize,
+	        Search
+	    }, function (data) {
+	        let response;
+
+	        try {
+	            response = JSON.parse(data);
+	        } catch (e) {
+	            display.html(`<div class="text-dark text-center py-4">Server Error</div>`);
+	            return;
+	        }
+	        if ($.trim(response.isSuccess) === "success") {
+	            SoupContent(response.Data);
+	            totalPages = (response.Data && response.Data.length > 0)
+	                ? parseInt(response.Data[0].TotalPages)
+	                : 1;
+
+	                SoupPageNumber();
+	                SoupPaginationUi();
+	        } else {
+	            emptyStateSoup("soup menu was empty.");
+	        }
+	    });
+	}
+
+
+	function SoupContent(data) {
+	    const display = $("#load_Soup_content");
+
+	    if (!data || data.length === 0) {
+	        showEmptyStateSoup("No menu available.");
+	        return;
+	    }
+
+	    display.empty();
+
+	    data.forEach(soup => {
+	        display.append(`
+	           <tr class="soup-row align-middle" data-value="${soup.LineNum}">
+	               <td class="text-muted fw-medium small">
+	                   ${soup.OrderNumber}
+	               </td>
+
+	               <td>
+	                   <div class="fw-semibold text-dark">
+	                       ${soup.DishName}
+	                   </div>
+	               </td>
+
+	               <td class="text-muted text-center small">
+	                   ${soup.Description || '—'}
+	               </td>
+
+	               <td class="text-muted text-center small">
+	                   ${soup.Ingredients || '—'}
+	               </td>
+	        	 	<td class="text-center">
+	        	 	    <span class="badge px-3 py-2 rounded-pill toggle-status cursor-pointer
+	        	 	        ${soup.DishStatus === "Active" ? "bg-success-subtle text-success" : "bg-danger-subtle text-danger"}"
+	        	 	        data-id="${soup.LineNum}"
+	        	 	        data-status="${soup.DishStatus}">
+	        	 	        ${soup.DishStatus}
+	        	 	    </span>
+	        	 	</td>
+
+	               <td class="text-center">
+	                   <div class="dropdown">
+	                       <button class="btn btn-sm btn-icon btn-light rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+	                           <i class="bi bi-three-dots-vertical"></i>
+	                       </button>
+
+	                       <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+	                           <li>
+	                               <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="mdleditSoup('${soup.LineNum}')">  <i class="bi bi-pencil text-primary"></i>  Edit
+	                               </a>
+	                           </li>
+	                           <li>
+	                               <a class="dropdown-item d-flex align-items-center gap-2 text-danger"href="#"onclick="removemdlSoup('${soup.LineNum}')"> <i class="bi bi-trash"></i> Remove
+	                               </a>
+	                           </li>
+
+	                           <li>
+	                               <hr class="dropdown-divider">
+	                           </li>
+
+	                           <li>
+	                               <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="enableSoup('${soup.LineNum}')">  <i class="bi bi-toggle-on text-success"></i>  Enable
+	                               </a>
+	                           </li>
+
+	                           <li>
+	                               <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="disableSoup('${soup.LineNum}')">  <i class="bi bi-toggle-off text-secondary"></i>  Disable
+	                               </a>
+	                           </li>
+	                       </ul>
+	                   </div>
+	               </td>
+	           </tr>
+	        `);
+	    });
+	}
+
+	/*Function for no record of snack*/
+	function emptyStateSoup(message) {
+	    $("#load_Soup_content").html(`
+	        <tr>
+	          <td colspan="6" class="p-5 text-center text-muted">
+	              <i class="bi bi-card-list"></i> 
+	              <br>
+	                  No Menu Available!
+	    	<div class="small opacity-75">${message}</div>
+	              </td>
+	        </tr>
+	    `);
+	}
+
+	/*Function for no record of snack*/
+	function showEmptyStateSoup(message) {
+	    $("#load_Soup_content").html(`
+	        <tr>
+	          <td colspan="6" class="p-5 text-center text-muted">
+	              <i class="bi bi-card-list"></i> 
+	              <br>
+	                  No Menu Available!
+	    	<div class="small opacity-75">${message}</div>
+	              </td>
+	        </tr>
+	    `);
+	}
+
+
+	/*Function to count page number page 1 of and so on*/
+	function SoupPaginationUi() {
+	    $("#page-info-soup").text("Page " + CurrentPage + " of " + totalPages);
+	    if (CurrentPage <= 1) {
+	        $("#li-prev-soup").addClass("disabled");
+	    } else {
+	        $("#li-prev-soup").removeClass("disabled");
+	    }
+	    if (CurrentPage >= totalPages) {
+	        $("#li-next-soup").addClass("disabled");
+	    } else {
+	        $("#li-next-soup").removeClass("disabled");
+	    }
+	}
+	/*Function to build list of pagination*/
+	function SoupPageNumber() {
+	    $("#pagination-soup li.page-number-soup").remove();
+	    let prevLi = $("#li-prev-soup");
+	    let maxVisible = 5;
+	    let start = Math.max(1, CurrentPage - 2);
+	    let end = Math.min(totalPages, start + maxVisible - 1);
+	    if (end - start < maxVisible - 1) {
+	        start = Math.max(1, end - maxVisible + 1);
+	    }
+	    if (start > 1) {
+	        insertPageSoup(1, prevLi);
+	        prevLi = prevLi.next();
+
+	        if (start > 2) {
+	            prevLi.after(`<li class="page-item page-number-soup disabled"><span class="page-link">...</span></li>`);
+	            prevLi = prevLi.next();
+	        }
+	    }
+	    for (let i = start; i <= end; i++) {
+	        insertPageSoup(i, prevLi);
+	        prevLi = prevLi.next();
+	    }
+	    if (end < totalPages) {
+	        if (end < totalPages - 1) {
+	            prevLi.after(`<li class="page-item page-number-soup disabled"><span class="page-link">...</span></li>`);
+	            prevLi = prevLi.next();
+	        }
+	        insertPageSoup(totalPages, prevLi);
+	    }
+	    function insertPageSoup(i, ref) {
+	        let activeClass = (i === CurrentPage) ? "active" : "";
+
+	        let li = `
+	            <li class="page-item page-number-soup ${activeClass}">
+	                <a class="page-link" href="#" data-page="${i}">${i}</a>
+	            </li>
+	        `;
+
+	        $(li).insertAfter(ref);
+	    }
+	}
+
+	/*search-soup*/
+	$("#search-soup").on("keydown", function(e) {
+	    if (e.key === "Enter") {
+	        loadSoup();
+	    }
+	});
+
+	  /* Pagination + Fetch Blocked Accounts */
+	  $("#btn-preview-soup").on("click", function(e) {
+	      e.preventDefault();
+
+	      if (CurrentPage > 1) {
+	          loadSoup(CurrentPage - 1);
+	      }
+	  });
+
+	/*Function load all important tags tickets*/
+	  $("#btn-next-soup").on("click", function(e) {
+	      e.preventDefault();
+
+	      if (CurrentPage < totalPages) {
+	          loadSoup(CurrentPage + 1);
+	      }
+	  });
+
+	  /*Function to update details*/
+	  function mdleditSoup(LineNum){
+	      $("#mdl-add-soup").modal('show');
+	      $("#btn-update-soup").removeClass('d-none');
+	      $("#btn-submit-soup").addClass('d-none');
+
+	      $.post("dirs/menu_setup/actions/get_menu.php",{
+	          LineNum : LineNum
+	      },function(data){
+	          response = JSON.parse(data);
+	          if(jQuery.trim(response.isSuccess) == "success"){
+	              $("#soup-id").val(response.Data.LineNum);
+	              $("#soup-name").val(response.Data.DishName);
+	              $("#soup-description").val(response.Data.Description);
+	              $("#soup-ingredients").val(response.Data.Ingredients);
+	          }else{
+	              Swal.fire({
+	                  icon: 'warning',
+	                  title: 'Notice',
+	                  text: $.trim(response.Data)
+	              });
+	          }
+	      });
+	  }
+
+	  /*Function update soup details*/
+	    $("#btn-update-soup").on("click", function () {
+	        let $btn = $(this);
+	        let $spinner = $("#btn-spinner-soup-upd");
+	        let $text = $btn.find(".btn-text-soup");
+	        let $btnCancel = $("#btn-cancel-soup");
+	        let LineNum     = $("#soup-id").val();
+	        let DishName    = $("#soup-name").val();
+	        let Description = $("#soup-description").val();
+	        let Ingredients = $("#soup-ingredients").val();
+	        $btn.prop("disabled", true);
+	        $btnCancel.prop("disabled", true);
+	        $spinner.removeClass("d-none");
+	        $text.text("Updating...");
+	        $.post("dirs/menu_setup/actions/update_menu.php", {
+	            LineNum: LineNum,
+	            DishName: DishName,
+	            Description: Description,
+	            Ingredients: Ingredients
+	        })
+	        .done(function (data) {
+	            if ($.trim(data) === "success") {
+	                $("#mdl-add-soup").modal("hide");
+	                Swal.fire({
+	                    icon: "success",
+	                    title: "Success",
+	                    text: "Updated successfully",
+	                    showConfirmButton: false,
+	                    timer: 2000,
+	                    timerProgressBar: true
+	                });
+	                loadSoup(CurrentPage);
+	            } else {
+	                Swal.fire({
+	                    icon: "error",
+	                    title: "Oops!",
+	                    text: data
+	                });
+	            }
+
+	        })
+	        .fail(function () {
+
+	            Swal.fire({
+	                icon: "error",
+	                title: "Error",
+	                text: "Server error occurred"
+	            });
+
+	        })
+	        .always(function () {
+	            $btn.prop("disabled", false);
+	            $btnCancel.prop("disabled", false);
+	            $spinner.addClass("d-none");
+	            $text.text("Update");
+
+	        });
+
+	    });
+
+	    /*Function to remove this menu prompt*/
+	    function removemdlSoup(LineNum) {
+	        Swal.fire({
+	            title: "Remove this menu.",
+	            text: "This menu will be permanently removed.",
+	            icon: "warning",
+	            showCancelButton: true,
+	            confirmButtonColor: "#d33",
+	            cancelButtonColor: "#6c757d",
+	            confirmButtonText: "Remove",
+	            cancelButtonText: "Cancel"
+	        }).then((result) => {
+	            if (result.isConfirmed) {
+	                removeSoup(LineNum);
+	            }
+	        });
+	    }
+
+	    /*Function to remove script*/
+	    function removeSoup(LineNum){
+	        $.post("dirs/menu_setup/actions/delete_menu.php", {
+	            LineNum : LineNum
+	        },function(data){
+	            if(jQuery.trim(data) == "success"){
+	                loadSoup(CurrentPage);
+	                Swal.fire({
+	                    icon: "success",
+	                    title: "Menu Removed",
+	                    text: "successfully.",
+	                    showConfirmButton: false,
+	                    timer: 2000,
+	                    timerProgressBar: true
+	                });  
+	            }else{
+	                 Swal.fire({
+	                    icon: "error",
+	                    title: "Oops!",
+	                    text: data
+	                });
+	            }
+	        });
+	    }
+
+	    /*Function enable menu*/
+	    function enableSoup(LineNum){
+	      var Status = 'Active';
+	        $.post("dirs/menu_setup/actions/update_status.php", {
+	            LineNum : LineNum,
+	            Status : Status
+	        },function(data){
+	            if(jQuery.trim(data) == "success"){
+	                loadSoup();
+	                Swal.fire({
+	                    icon: "success",
+	                    title: "Menu Active",
+	                    text: "successfully.",
+	                    showConfirmButton: false,
+	                    timer: 2000,
+	                    timerProgressBar: true
+	                });  
+	            }else{
+	                 Swal.fire({
+	                    icon: "error",
+	                    title: "Oops!",
+	                    text: data
+	                });
+	            }
+	        });
+	    }
+
+	    /*Function enable menu*/
+	    function disableSoup(LineNum){
+	      var Status = 'In-Active';
+	        $.post("dirs/menu_setup/actions/update_status.php", {
+	            LineNum : LineNum,
+	            Status : Status
+	        },function(data){
+	            if(jQuery.trim(data) == "success"){
+	                loadSoup(CurrentPage);
+	                Swal.fire({
+	                    icon: "success",
+	                    title: "Menu In-Active",
+	                    text: "successfully.",
+	                    showConfirmButton: false,
+	                    timer: 2000,
+	                    timerProgressBar: true
+	                });  
+	            }else{
+	                 Swal.fire({
+	                    icon: "error",
+	                    title: "Oops!",
+	                    text: data
+	                });
+	            }
+	        });
+	    }
+
+</script>

@@ -9,6 +9,15 @@ function loadFoodMenusSetup() {
         $("#load_FoodMenus").html(data);
         loadAppetizers();
         loadBeverage();
+        loadBreakfast();
+        loadDessert();
+        loadMainCourse();
+        loadPastry();
+        loadPasta();
+        loadSalad();
+        loadSnack();
+        loadSoup();
+        loadVegie();
     });
 }
 
@@ -16,59 +25,88 @@ function loadFoodMenusSetup() {
 /*Function Create Appetizer form*/
 function addAppetizer() {
     $("#mdl-add-appetizer").modal('show');
+    $("#btn-submit-appetizer").removeClass('d-none');
 }
 
 /*Function Create Beverage form*/
 function addBeverage() {
     $("#mdl-add-beverage").modal('show');
+    $("#btn-submit-beverage").removeClass('d-none');
 }
 
 
 /*Function Create Breakfast form*/
 function addBreakFast() {
     $("#mdl-add-breakfast").modal('show');
+    $("#btn-submit-breakfast").removeClass('d-none');
 }
 
 
 /*Function Create Dessert form*/
 function addDessert() {
     $("#mdl-add-dessert").modal('show');
+    $("#btn-submit-dessert").removeClass('d-none');
 }
 
 /*Function Create Dessert form*/
 function adMaincourse() {
     $("#mdl-add-maincourse").modal('show');
+    $("#btn-submit-maincourse").removeClass('d-none');
 }
 
 /*Function Create Pasta form*/
 function addPasta() {
     $("#mdl-add-pasta").modal('show');
+    $("#btn-submit-pasta").removeClass('d-none');
 }
 
 /*Function Create Pastry form*/
 function addPastry() {
     $("#mdl-add-pastry").modal('show');
+    $("#btn-submit-pastry").removeClass('d-none');
 }
 
 /*Function Create Salad form*/
 function addSalads() {
     $("#mdl-add-salad").modal('show');
+    $("#btn-submit-salad").removeClass('d-none');
 }
 
 /*Function Create Snack form*/
 function addSnack() {
     $("#mdl-add-snack").modal('show');
+    $("#btn-submit-snack").removeClass('d-none');
 }
 
 /*Function Create Soup form*/
 function addSoup() {
     $("#mdl-add-soup").modal('show');
+    $("#btn-submit-soup").removeClass('d-none');
 }
 
 /*Function Create vegetable form*/
 function addVegetable() {
     $("#mdl-add-vegetables").modal('show');
+    $("#btn-submit-vegetables").removeClass('d-none');
 }
+
+/*Function create a Food package for Event*/
+function createPackage() {
+    $.post("dirs/menu_setup/package_form.php", {
+    }, function (data){
+        $("#foodpackage_content").html(data);
+    });
+}
+
+
+function loadMenuPackage() {
+  $.post("dirs/menu_setup/components/food_package.php", {
+  }, function (data){
+      $("#foodpackage_content").html(data);
+  });
+}
+
+
 
 /*Appetizers------------aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*/
 
@@ -123,7 +161,10 @@ function mdleditAppetizer(LineNum){
               Swal.fire({
                   icon: "success",
                   title: "Success",
-                  text: "Updated successfully"
+                  text: "Updated successfully",
+                  showConfirmButton: false,
+                  timer: 2000,
+                  timerProgressBar: true
               });
               loadAppetizers(CurrentPage);
           } else {
@@ -182,7 +223,10 @@ function mdleditAppetizer(LineNum){
               Swal.fire({
                   icon: "success",
                   title: "Menu Removed",
-                  text: "successfully."
+                  text: "successfully.",
+                  showConfirmButton: false,
+                  timer: 2000,
+                  timerProgressBar: true
               });  
           }else{
                Swal.fire({
@@ -206,7 +250,10 @@ function mdleditAppetizer(LineNum){
               Swal.fire({
                   icon: "success",
                   title: "Menu Active",
-                  text: "successfully."
+                  text: "successfully.",
+                  showConfirmButton: false,
+                  timer: 2000,
+                  timerProgressBar: true
               });  
           }else{
                Swal.fire({
@@ -230,7 +277,10 @@ function mdleditAppetizer(LineNum){
               Swal.fire({
                   icon: "success",
                   title: "Menu In-Active",
-                  text: "successfully."
+                  text: "successfully.",
+                  showConfirmButton: false,
+                  timer: 2000,
+                  timerProgressBar: true
               });  
           }else{
                Swal.fire({

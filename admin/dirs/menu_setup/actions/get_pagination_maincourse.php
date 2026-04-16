@@ -3,7 +3,7 @@
   $CurrentPage  = $_POST['CurrentPage'] ?? 1;
   $PageSize     = $_POST['PageSize'] ?? 20;
   $Search       = $_POST['Search'];
-  $Menu         = 'Beverage';
+  $Menu         = 'Main Course';
 
 try {
   $conn->beginTransaction();

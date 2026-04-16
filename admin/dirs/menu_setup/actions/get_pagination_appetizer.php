@@ -8,7 +8,7 @@
 try {
   $conn->beginTransaction();
 
-    $fetch_appetizers = $conn->prepare("EXEC dbo.[Appetizers_Pagination] ?,?,?,?");
+    $fetch_appetizers = $conn->prepare("EXEC dbo.[FoodMenu_Pagination] ?,?,?,?");
     $fetch_appetizers->execute([$CurrentPage,$PageSize,$Search,$Menu]);
     $get_appetizers = $fetch_appetizers->fetchAll(PDO::FETCH_ASSOC);
 

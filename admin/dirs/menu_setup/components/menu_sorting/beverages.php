@@ -9,7 +9,7 @@
 </div>
 
 <!-- Load beverages Content -->
-<div class="card">
+<div class="card mt-2">
 	<div class="card-body p-0">
 	    <div class="table-responsive overflow-auto" style="height: 50vh;">
 	        <table class="table table-hover align-middle mb-0">
@@ -28,14 +28,13 @@
 	        </table>
 	    </div>
 	</div>
-
 	<div class="card-footer">
 	    <nav>
 	        <ul class="pagination" id="pagination-beverage">
-	            <li class="page-item" id="li-prev">
+	            <li class="page-item" id="li-prev-beverage">
 	                <a class="page-link" href="#" id="btn-preview-beverage">Previous</a>
 	            </li>
-	            <li class="page-item" id="li-next">
+	            <li class="page-item" id="li-next-beverage">
 	                <a class="page-link" href="#" id="btn-next-beverage">Next</a>
 	            </li>
 	        </ul>
@@ -102,32 +101,32 @@
 
 	    display.empty();
 
-	    data.forEach(apptzr => {
+	    data.forEach(bev => {
 	        display.append(`
-	           <tr class="beverage-row align-middle" data-value="${apptzr.LineNum}">
+	           <tr class="beverage-row align-middle" data-value="${bev.LineNum}">
 	               <td class="text-muted fw-medium small">
-	                   ${apptzr.OrderNumber}
+	                   ${bev.OrderNumber}
 	               </td>
 
 	               <td>
 	                   <div class="fw-semibold text-dark">
-	                       ${apptzr.DishName}
+	                       ${bev.DishName}
 	                   </div>
 	               </td>
 
-	               <td class="text-muted small">
-	                   ${apptzr.Description || '—'}
+	               <td class="text-muted text-center small">
+	                   ${bev.Description || '—'}
 	               </td>
 
-	               <td class="text-muted small">
-	                   ${apptzr.Ingredients || '—'}
+	               <td class="text-muted text-center small">
+	                   ${bev.Ingredients || '—'}
 	               </td>
-	        	 	<td>
+	        	 	<td class="text-center">
 	        	 	    <span class="badge px-3 py-2 rounded-pill toggle-status cursor-pointer
-	        	 	        ${apptzr.DishStatus === "Active" ? "bg-success-subtle text-success" : "bg-danger-subtle text-danger"}"
-	        	 	        data-id="${apptzr.LineNum}"
-	        	 	        data-status="${apptzr.DishStatus}">
-	        	 	        ${apptzr.DishStatus}
+	        	 	        ${bev.DishStatus === "Active" ? "bg-success-subtle text-success" : "bg-danger-subtle text-danger"}"
+	        	 	        data-id="${bev.LineNum}"
+	        	 	        data-status="${bev.DishStatus}">
+	        	 	        ${bev.DishStatus}
 	        	 	    </span>
 	        	 	</td>
 
@@ -139,11 +138,11 @@
 
 	                       <ul class="dropdown-menu dropdown-menu-end shadow-sm">
 	                           <li>
-	                               <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="mdleditBeverage('${apptzr.LineNum}')">  <i class="bi bi-pencil text-primary"></i>  Edit
+	                               <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="mdleditBeverage('${bev.LineNum}')">  <i class="bi bi-pencil text-primary"></i>  Edit
 	                               </a>
 	                           </li>
 	                           <li>
-	                               <a class="dropdown-item d-flex align-items-center gap-2 text-danger"href="#"onclick="removemdlBeverage('${apptzr.LineNum}')"> <i class="bi bi-trash"></i> Remove
+	                               <a class="dropdown-item d-flex align-items-center gap-2 text-danger"href="#"onclick="removemdlBeverage('${bev.LineNum}')"> <i class="bi bi-trash"></i> Remove
 	                               </a>
 	                           </li>
 
@@ -152,12 +151,12 @@
 	                           </li>
 
 	                           <li>
-	                               <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="enableBeverage('${apptzr.LineNum}')">  <i class="bi bi-toggle-on text-success"></i>  Enable
+	                               <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="enableBeverage('${bev.LineNum}')">  <i class="bi bi-toggle-on text-success"></i>  Enable
 	                               </a>
 	                           </li>
 
 	                           <li>
-	                               <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="disableBeverage('${apptzr.LineNum}')">  <i class="bi bi-toggle-off text-secondary"></i>  Disable
+	                               <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="disableBeverage('${bev.LineNum}')">  <i class="bi bi-toggle-off text-secondary"></i>  Disable
 	                               </a>
 	                           </li>
 	                       </ul>
@@ -201,20 +200,20 @@
 	function BeveragePaginationUi() {
 	    $("#page-info-beverage").text("Page " + CurrentPage + " of " + totalPages);
 	    if (CurrentPage <= 1) {
-	        $("#li-prev").addClass("disabled");
+	        $("#li-prev-beverage").addClass("disabled");
 	    } else {
-	        $("#li-prev").removeClass("disabled");
+	        $("#li-prev-beverage").removeClass("disabled");
 	    }
 	    if (CurrentPage >= totalPages) {
-	        $("#li-next").addClass("disabled");
+	        $("#li-next-beverage").addClass("disabled");
 	    } else {
-	        $("#li-next").removeClass("disabled");
+	        $("#li-next-beverage").removeClass("disabled");
 	    }
 	}
 	/*Function to build list of pagination*/
 	function BeveragePageNumber() {
 	    $("#pagination-beverage li.page-number-beverage").remove();
-	    let prevLi = $("#li-prev");
+	    let prevLi = $("#li-prev-beverage");
 	    let maxVisible = 5;
 	    let start = Math.max(1, CurrentPage - 2);
 	    let end = Math.min(totalPages, start + maxVisible - 1);
@@ -222,7 +221,7 @@
 	        start = Math.max(1, end - maxVisible + 1);
 	    }
 	    if (start > 1) {
-	        insertPage(1, prevLi);
+	        insertPageBreakfast(1, prevLi);
 	        prevLi = prevLi.next();
 
 	        if (start > 2) {
@@ -231,7 +230,7 @@
 	        }
 	    }
 	    for (let i = start; i <= end; i++) {
-	        insertPage(i, prevLi);
+	        insertPageBreakfast(i, prevLi);
 	        prevLi = prevLi.next();
 	    }
 	    if (end < totalPages) {
@@ -239,9 +238,9 @@
 	            prevLi.after(`<li class="page-item page-number-beverage disabled"><span class="page-link">...</span></li>`);
 	            prevLi = prevLi.next();
 	        }
-	        insertPage(totalPages, prevLi);
+	        insertPageBreakfast(totalPages, prevLi);
 	    }
-	    function insertPage(i, ref) {
+	    function insertPageBreakfast(i, ref) {
 	        let activeClass = (i === CurrentPage) ? "active" : "";
 
 	        let li = `
@@ -330,7 +329,10 @@
 	                Swal.fire({
 	                    icon: "success",
 	                    title: "Success",
-	                    text: "Updated successfully"
+	                    text: "Updated successfully",
+	                    showConfirmButton: false,
+	                    timer: 2000,
+	                    timerProgressBar: true
 	                });
 	                loadBeverage(CurrentPage);
 	            } else {
@@ -389,7 +391,10 @@
 	                Swal.fire({
 	                    icon: "success",
 	                    title: "Menu Removed",
-	                    text: "successfully."
+	                    text: "successfully.",
+	                    showConfirmButton: false,
+	                    timer: 2000,
+	                    timerProgressBar: true
 	                });  
 	            }else{
 	                 Swal.fire({
@@ -413,7 +418,10 @@
 	                Swal.fire({
 	                    icon: "success",
 	                    title: "Menu Active",
-	                    text: "successfully."
+	                    text: "successfully.",
+	                    showConfirmButton: false,
+	                    timer: 2000,
+	                    timerProgressBar: true
 	                });  
 	            }else{
 	                 Swal.fire({
@@ -437,7 +445,10 @@
 	                Swal.fire({
 	                    icon: "success",
 	                    title: "Menu In-Active",
-	                    text: "successfully."
+	                    text: "successfully.",
+	                    showConfirmButton: false,
+	                    timer: 2000,
+	                    timerProgressBar: true
 	                });  
 	            }else{
 	                 Swal.fire({

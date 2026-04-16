@@ -41,46 +41,44 @@
   </div>
 </nav>
 
-<form id="frm-add-package">
-  
-            <div class="tab-content mt-2" id="foodMenuContent">
-                <div class="tab-pane fade show active" id="Appetizers" role="tabpanel">
-                    <?php include 'menu_sorting/appetizer.php'; ?>
-                </div>
-                <div class="tab-pane fade" id="MainCourse" role="tabpanel">
-                    <?php include 'menu_sorting/maincourse.php'; ?>
-                </div>
-                <div class="tab-pane fade show" id="Salads" role="tabpanel">
-                    <?php include 'menu_sorting/salads.php'; ?>
-                </div>
-                <div class="tab-pane fade" id="Desserts" role="tabpanel">
-                    <?php include 'menu_sorting/desserts.php'; ?>
-                </div>
-                <div class="tab-pane fade" id="Beverages" role="tabpanel">
-                    <?php include 'menu_sorting/beverages.php'; ?>
-                </div>
-                <div class="tab-pane fade show" id="Pastry" role="tabpanel">
-                    <?php include 'menu_sorting/pastry.php'; ?>
-                </div>
-                <div class="tab-pane fade" id="Breakfast" role="tabpanel">
-                    <?php include 'menu_sorting/breakfast.php'; ?>
-                </div>
-                <div class="tab-pane fade" id="Snacks" role="tabpanel">
-                    <?php include 'menu_sorting/snacks.php'; ?>
-                </div>
-                <div class="tab-pane fade" id="Pasta" role="tabpanel">
-                    <?php include 'menu_sorting/pasta.php'; ?>
-                </div>
-                <div class="tab-pane fade" id="Soup" role="tabpanel">
-                    <?php include 'menu_sorting/soup.php'; ?>
-                </div>
-                <div class="tab-pane fade" id="Vegetable" role="tabpanel">
-                    <?php include 'menu_sorting/vegetable.php'; ?>
-                </div>
-            </div>
-</form>
 
+<div class="tab-content mt-2" id="foodMenuContent">
+    <div class="tab-pane fade show active" id="Appetizers" role="tabpanel">
+        <?php include 'menu_sorting/appetizer.php'; ?>
+    </div>
+    <div class="tab-pane fade" id="MainCourse" role="tabpanel">
+        <?php include 'menu_sorting/maincourse.php'; ?>
+    </div>
+    <div class="tab-pane fade show" id="Salads" role="tabpanel">
+        <?php include 'menu_sorting/salads.php'; ?>
+    </div>
+    <div class="tab-pane fade" id="Desserts" role="tabpanel">
+        <?php include 'menu_sorting/desserts.php'; ?>
+    </div>
+    <div class="tab-pane fade" id="Beverages" role="tabpanel">
+        <?php include 'menu_sorting/beverages.php'; ?>
+    </div>
+    <div class="tab-pane fade show" id="Pastry" role="tabpanel">
+        <?php include 'menu_sorting/pastry.php'; ?>
+    </div>
+    <div class="tab-pane fade" id="Breakfast" role="tabpanel">
+        <?php include 'menu_sorting/breakfast.php'; ?>
+    </div>
+    <div class="tab-pane fade" id="Snacks" role="tabpanel">
+        <?php include 'menu_sorting/snacks.php'; ?>
+    </div>
+    <div class="tab-pane fade" id="Pasta" role="tabpanel">
+        <?php include 'menu_sorting/pasta.php'; ?>
+    </div>
+    <div class="tab-pane fade" id="Soup" role="tabpanel">
+        <?php include 'menu_sorting/soup.php'; ?>
+    </div>
+    <div class="tab-pane fade" id="Vegetable" role="tabpanel">
+        <?php include 'menu_sorting/vegetable.php'; ?>
+    </div>
+</div>
 
+    
 
 
 
