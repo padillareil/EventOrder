@@ -7,6 +7,7 @@ function loadFoodMenusSetup() {
     $.post("dirs/menu_setup/components/main.php", {
     }, function (data){
         $("#load_FoodMenus").html(data);
+        loadMenuPackageTemplate();
         loadAppetizers();
         loadBeverage();
         loadBreakfast();
@@ -26,12 +27,14 @@ function loadFoodMenusSetup() {
 function addAppetizer() {
     $("#mdl-add-appetizer").modal('show');
     $("#btn-submit-appetizer").removeClass('d-none');
+    $("#btn-cancel-appetizer").click();
 }
 
 /*Function Create Beverage form*/
 function addBeverage() {
     $("#mdl-add-beverage").modal('show');
     $("#btn-submit-beverage").removeClass('d-none');
+    $("#btn-cancel-beverage").click();
 }
 
 
@@ -39,6 +42,7 @@ function addBeverage() {
 function addBreakFast() {
     $("#mdl-add-breakfast").modal('show');
     $("#btn-submit-breakfast").removeClass('d-none');
+    $("#btn-cancel-breakfast").click();
 }
 
 
@@ -46,48 +50,57 @@ function addBreakFast() {
 function addDessert() {
     $("#mdl-add-dessert").modal('show');
     $("#btn-submit-dessert").removeClass('d-none');
+    $("#btn-cancel-dessert").click();
+
 }
 
 /*Function Create Dessert form*/
 function adMaincourse() {
     $("#mdl-add-maincourse").modal('show');
     $("#btn-submit-maincourse").removeClass('d-none');
+    $("#btn-cancel-maincourse").click();
 }
 
 /*Function Create Pasta form*/
 function addPasta() {
     $("#mdl-add-pasta").modal('show');
     $("#btn-submit-pasta").removeClass('d-none');
+    $("#btn-cancel-pasta").click();
 }
 
 /*Function Create Pastry form*/
 function addPastry() {
     $("#mdl-add-pastry").modal('show');
     $("#btn-submit-pastry").removeClass('d-none');
+    $("#btn-cancel-pastry").click();
 }
 
 /*Function Create Salad form*/
 function addSalads() {
     $("#mdl-add-salad").modal('show');
     $("#btn-submit-salad").removeClass('d-none');
+    $("#btn-cancel-salad").click();
 }
 
 /*Function Create Snack form*/
 function addSnack() {
     $("#mdl-add-snack").modal('show');
     $("#btn-submit-snack").removeClass('d-none');
+    $("#btn-cancel-snack").click();
 }
 
 /*Function Create Soup form*/
 function addSoup() {
     $("#mdl-add-soup").modal('show');
     $("#btn-submit-soup").removeClass('d-none');
+    $("#btn-cancel-soup").click();
 }
 
 /*Function Create vegetable form*/
 function addVegetable() {
     $("#mdl-add-vegetables").modal('show');
-    $("#btn-submit-vegetables").removeClass('d-none');
+    $("#btn-submit-vegetables").removeClass('d-none')
+    $("#btn-cancel-vegetables").click();
 }
 
 /*Function create a Food package for Event*/
@@ -95,6 +108,8 @@ function createPackage() {
     $.post("dirs/menu_setup/package_form.php", {
     }, function (data){
         $("#foodpackage_content").html(data);
+      loadMenuList();
+      loadMenuPackageTemplate();
     });
 }
 
@@ -103,6 +118,7 @@ function loadMenuPackage() {
   $.post("dirs/menu_setup/components/food_package.php", {
   }, function (data){
       $("#foodpackage_content").html(data);
+      loadMenuPackageTemplate();
   });
 }
 
@@ -293,3 +309,104 @@ function mdleditAppetizer(LineNum){
   }
 
   /*Appetizers------------aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*/
+
+/*Checkbox List of Menus for Creating a Venu Package*/
+  function loadMenuList() {
+    showLoaderMenulist();
+    $.ajax({
+      url: "dirs/menu_setup/actions/get_package_menulist.php",
+      type: "POST",
+      data: {},
+      timeout: 8000,
+      success: function (data) {
+        try {
+          const response = JSON.parse(data);
+          if ($.trim(response.isSuccess) === "success") {
+            let menus = response.Data;
+            menus.sort((a, b) => {
+              return a.DishGroup.localeCompare(b.DishGroup) || a.DishName.localeCompare(b.DishName);
+            });
+            let html = "";
+            let currentGroup = null;
+            menus.forEach(item => {
+              const isInactive = item.DishStatus === "In-Active";
+              if (currentGroup !== item.DishGroup) {
+                if (currentGroup !== null) {
+                  html += `</div></div>`;
+                }
+                html += `
+                  <div class="mb-3 border rounded-4">
+
+                    <div class="px-4 pt-3 pb-2 border-bottom bg-success text-white">
+                      <h6 class="fw-bold mb-0 text-uppercase small">
+                        ${item.DishGroup}
+                      </h6>
+                    </div>
+                    <div class="list-group list-group-flush">
+                `;
+                currentGroup = item.DishGroup;
+              }
+              html += `
+                <label class="list-group-item px-4 py-3 selection-row ${isInactive ? 'inactive-item' : ''}">
+                  <div class="form-check mb-0">
+                    <input class="form-check-input border border-primary me-3" type="checkbox" name="menu-variant" value="${item.LineNum}"
+                      ${isInactive ? "disabled" : ""}>
+                    <span class="fw-semibold text-dark ${isInactive ? 'text-muted text-decoration-line-through' : ''}">
+                      ${item.DishName}
+                    </span>
+                  </div>
+                </label>
+              `;
+            });
+            if (currentGroup !== null) {
+              html += `</div></div>`;
+            }
+            $("#food-event-menulist").html(html);
+          } else {
+            showErrorMenuList();
+          }
+        } catch (e) {
+          showErrorMenuList();
+        }
+      },
+      error: function () {
+        showErrorMenuList();
+      }
+    });
+  }
+
+/*Function loader for prepareing*/
+  function showLoaderMenulist() {
+    $("#food-event-menulist").html(`
+      <div class="d-flex flex-column align-items-center justify-content-center py-5 text-muted">
+        <div class="spinner-border text-dark mb-3" role="status"></div>
+        <div class="small">Loading menu...</div>
+      </div>
+    `);
+  }
+
+  function showErrorMenuList() {
+    $("#food-event-menulist").html(`
+      <div class="text-center py-5 text-muted">
+        <i class="bi bi-wifi-off fs-4 mb-3"></i>
+        <div class="fw-semibold">Slow Network</div>
+        <div class="small mb-3">Please reload again</div>
+        <button class="btn btn-link" onclick="loadMenuList()">
+          <i class="bi bi-arrow-clockwise text-dark me-1"></i>
+        </button>
+      </div>
+    `);
+  }
+
+  /*Function Count total package created*/
+  function totalPackage() {
+      $.post("dirs/menu_setup/actions/get_menupackage_count.php", {}, function (data) {
+          let response = JSON.parse(data);
+          if ($.trim(response.isSuccess) === "success") {
+              let total = response.Data.TotalPackage;
+              $("#total-package-created").text(total + " Total");
+          } else {
+              console.log($.trim(response.Data));
+          }
+      });
+  }

@@ -494,9 +494,9 @@
         $spinner.removeClass("d-none");
         $text.text("Saving...");
 
-        var DishName  = $("#maincourse-name").val();
-        var Description   = $("#maincourse-description").val();
-        var Ingredient  = $("#maincourse-ingredients").val();
+        var DishName  = $("#main-course-name").val();
+        var Description   = $("#main-course-description").val();
+        var Ingredient  = $("#main-course-ingredients").val();
 
         $.post("dirs/menu_setup/actions/save_maincourse.php", {
             DishName: DishName,
@@ -658,17 +658,17 @@
                     <div class="row g-3">
                         <div class="col-12">
                             <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Pasta Name</label>
-                            <input type="text" class="form-control" name="pasta-name" required>
+                            <input type="text" class="form-control" name="pasta-name" id="pasta-name" required>
                         </div>
                         <div class="col-12">
                             <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Description</label>
-                            <textarea class="form-control" name="pasta-description" rows="2" maxlength="200"></textarea>
+                            <textarea class="form-control" name="pasta-description" id="pasta-description" rows="2" maxlength="200"></textarea>
                             <div class="form-text small">Max 200 Characters.</div>
                         </div>
 
                         <div class="col-12">
                             <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Main Ingredients</label>
-                            <textarea class="form-control" name="pasta-ingredients" rows="2" required maxlength="200"></textarea>
+                            <textarea class="form-control" name="pasta-ingredients" id="pasta-ingredients" rows="2" required maxlength="200"></textarea>
                             <div class="form-text small">Max 200 Characters.</div>
                         </div>
                     </div>

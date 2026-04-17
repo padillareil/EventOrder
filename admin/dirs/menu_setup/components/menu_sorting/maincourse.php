@@ -290,9 +290,9 @@
 	          response = JSON.parse(data);
 	          if(jQuery.trim(response.isSuccess) == "success"){
 	              $("#maincourse-id").val(response.Data.LineNum);
-	              $("#maincourse-name").val(response.Data.DishName);
-	              $("#maincourse-description").val(response.Data.Description);
-	              $("#maincourse-ingredients").val(response.Data.Ingredients);
+	              $("#main-course-name").val(response.Data.DishName);
+	              $("#main-course-description").val(response.Data.Description);
+	              $("#main-course-ingredients").val(response.Data.Ingredients);
 	          }else{
 	              Swal.fire({
 	                  icon: 'warning',
@@ -310,9 +310,9 @@
 	        let $text = $btn.find(".btn-text-maincourse");
 	        let $btnCancel = $("#btn-cancel-maincourse");
 	        let LineNum     = $("#maincourse-id").val();
-	        let DishName    = $("#maincourse-name").val();
-	        let Description = $("#maincourse-description").val();
-	        let Ingredients = $("#maincourse-ingredients").val();
+	        let DishName    = $("#main-course-name").val();
+	        let Description = $("#main-course-description").val();
+	        let Ingredients = $("#main-course-ingredients").val();
 	        $btn.prop("disabled", true);
 	        $btnCancel.prop("disabled", true);
 	        $spinner.removeClass("d-none");
