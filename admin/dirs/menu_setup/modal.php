@@ -1177,3 +1177,37 @@
         });
     });
 </script>
+
+
+
+<!-- Package View Details review content only-->
+<div class="modal fade" id="mdl-view-package" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+            <div class="modal-header border-0 pb-0 pt-4 px-4 d-flex align-items-center">
+                <div>
+                    <h5 class="modal-title fw-bold text-dark">Review Package Summary</h5>
+                    <p class="text-muted small mb-0">#PKG10001</p>
+
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body p-4">
+                <h5 class="fw-bold">Executive Summit Package</h5>
+                <p>We shall provide you the following amenities on other audio visual equipment on minimal charges</p>
+                <ul>
+                    <li>LCD ProjectoR with widescreen rental.</li>
+                    <li>LEDWALL.</li>
+                    <li>PARLED LIGHTS.</li>
+                    <li>MOVING HEADS LIGHT.</li>
+                    <li>Wireless microphone.</li>
+                </ul>
+                <p class="text-muted small">Total Food (10).</p>
+            </div>
+            <div class="modal-footer">
+               <button class="btn btn-primary" type="button">Next</button>
+            </div>
+        </div>
+    </div>
+</div>

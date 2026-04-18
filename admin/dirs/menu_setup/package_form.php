@@ -65,7 +65,7 @@
         </div>
 
       </div>
-
+      
     </div>
 
     <div class="card-footer">
@@ -130,17 +130,17 @@
     /*Function create a Package*/
     $("#frm-add-package").submit(function (event) {
         event.preventDefault();
-        let $btnSubmit = $("#btn-submit-package");
-        let $spinner = $("#btn-spinner-submit-package");
-        let $text = $btnSubmit.find(".btn-text-package");
-        let $btnClear = $("#btn-clear-package");
-        let EventName = $("#event-name").val();
-        let EngagerCategory = $("#engager-category").val();
-        let PaxAmount = $("#pax-amount").val();
-        let Inclusion = $("#event-inclusion").val();
-        let PaymentArrangement = $("#event-payment-arrangement").val();
-        let Note = $("#event-note").val();
-        let Menus = [];
+        var $btnSubmit = $("#btn-submit-package");
+        var $spinner = $("#btn-spinner-submit-package");
+        var $text = $btnSubmit.find(".btn-text-package");
+        var $btnClear = $("#btn-clear-package");
+        var EventName = $("#event-name").val();
+        var EngagerCategory = $("#engager-category").val();
+        var PaxAmount = $("#pax-amount").val();
+        var Inclusion = $("#event-inclusion").val();
+        var PaymentArrangement = $("#event-payment-arrangement").val();
+        var Note = $("#event-note").val();
+        var Menus = [];
         $("input[name='menu-variant']:checked").each(function () {
             Menus.push($(this).val());
         });
@@ -168,7 +168,6 @@
             Menus: Menus
         }, function (data) {
             $btnSubmit.prop("disabled", false);
-            $btnDraft.prop("disabled", false);
             $btnClear.prop("disabled", false);
             $spinner.addClass("d-none");
             $text.text("Save");

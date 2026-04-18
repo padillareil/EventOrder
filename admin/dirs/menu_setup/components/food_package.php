@@ -2,7 +2,7 @@
     <div class="card-header bg-white border-0 pt-4 px-4 pb-3">
         <div class="row g-3 align-items-center">
             <div class="col-12 col-md-6 d-flex align-items-center gap-3">
-                <h5 class="fw-bold mb-0">Menu Packages</h5>
+                <h5 class="fw-bold mb-0">Package List</h5>
                 <span class="badge rounded-pill bg-light text-dark border fw-medium px-3" id="total-package-created"></span>
             </div>
             <div class="col-12 col-md-6 d-flex justify-content-md-end">
@@ -26,6 +26,7 @@
                     <tr>
                         <th class="ps-4 py-3 border-0 text-uppercase small fw-bold text-muted" style="width: 80px;">#</th>
                         <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center">Package Code</th>
+                        <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center">Event Type</th>
                         <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center">Category</th>
                         <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center">Status</th>
                         <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center pe-4">Actions</th>
@@ -66,7 +67,7 @@
         var display = $("#load_Package_Menu_content");
         display.html(`
                 <tr>
-                    <td colspan="5" class="p-5 text-center text-muted">
+                    <td colspan="6" class="p-5 text-center text-muted">
                         <div class="spinner-border text-dark"></div>
                         <div class="mt-2">Loading...</div>
                     </td>
@@ -106,7 +107,7 @@
         const display = $("#load_Package_Menu_content");
 
         if (!data || data.length === 0) {
-            showEmptyStatePkgMenu("No menu available.");
+            showEmptyStatePkgMenu("No available.");
             return;
         }
 
@@ -122,6 +123,10 @@
                    <td class="text-muted text-center small">
                        ${bev.BuffetNum_tmp || '—'}
                    </td>
+
+                    <td class="text-muted text-center small">
+                        ${bev.EventName || '—'}
+                    </td>
 
                    <td class="text-muted text-center small">
                        ${bev.EngagerType || '—'}
@@ -143,7 +148,7 @@
 
                            <ul class="dropdown-menu dropdown-menu-end shadow-sm">
                                <li>
-                                   <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="mdlViewPackage('${bev.DocEntry}')">  <i class="bi bi-file-earmark-text"></i>  View Package
+                                   <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="mdlViewPackage('${bev.DocEntry}')">  <i class="bi bi-file-earmark-text"></i>  Review Package
                                    </a>
                                </li>
                                 <li>
@@ -180,7 +185,7 @@
     function emptyStatePkgMenu(message) {
         $("#load_Package_Menu_content").html(`
             <tr>
-              <td colspan="5" class="p-5 text-center text-muted">
+              <td colspan="6" class="p-5 text-center text-muted">
                   <i class="bi bi-card-list text-lg"></i> 
                   <br>
                       No Menu Package Available!
@@ -194,7 +199,7 @@
     function showEmptyStatePkgMenu(message) {
         $("#load_Package_Menu_content").html(`
             <tr>
-              <td colspan="5" class="p-5 text-center text-muted">
+              <td colspan="6" class="p-5 text-center text-muted">
                   <i class="bi bi-card-list text-lg"></i> 
                   <br>
                       No Menu Package Available!
@@ -286,6 +291,12 @@
               loadMenuPackageTemplate(CurrentPage + 1);
           }
       });
+
+
+      function mdlViewPackage() {
+          $("#mdl-view-package").modal('show');
+      }
+
 
 
       /*Function to remove this menu prompt*/
