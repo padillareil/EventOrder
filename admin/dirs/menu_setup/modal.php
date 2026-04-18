@@ -1359,13 +1359,13 @@
                 <ul>
 
                     List of Food Package Setup:
-                    <li>LCD ProjectoR with widescreen rental.</li>
-                    <li>LEDWALL.</li>
+                    <li>Appetizer(1).</li>
+                    <li>Dessert(2).</li>
                     <li>PARLED LIGHTS.</li>
                     <li>MOVING HEADS LIGHT.</li>
                     <li>Wireless microphone.</li>
                 </ul>
-                <p class="text-muted small">Total Food (10).</p>
+                <p class="text-muted small">Total Package Food (10).</p>
             </div>
             <div class="modal-footer">
                <button class="btn btn-primary" type="button">Next</button>
