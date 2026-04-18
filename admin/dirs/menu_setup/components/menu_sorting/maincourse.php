@@ -243,7 +243,7 @@
 	    function insertPageMainCourse(i, ref) {
 	        let activeClass = (i === CurrentPage) ? "active" : "";
 
-	        let li = `
+	        var li = `
 	            <li class="page-item page-number-maincourse ${activeClass}">
 	                <a class="page-link" href="#" data-page="${i}">${i}</a>
 	            </li>
@@ -460,4 +460,11 @@
 	        });
 	    }
 
+	    $(document).on("click", "#pagination-maincourse .page-link", function(e) {
+	        e.preventDefault();
+	        var page = $(this).data("page");
+	        if (page && page !== CurrentPage) {
+	            loadMainCourse(page);
+	        }
+	    });
 </script>

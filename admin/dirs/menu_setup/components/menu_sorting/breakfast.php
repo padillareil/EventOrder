@@ -460,4 +460,13 @@
 	        });
 	    }
 
+	    $(document).on("click", "#pagination-breakfast .page-link", function(e) {
+	        e.preventDefault();
+
+	        var page = $(this).data("page");
+	        if (page && page !== CurrentPage) {
+	            loadBreakfast(page);
+	        }
+	    });
+
 </script>

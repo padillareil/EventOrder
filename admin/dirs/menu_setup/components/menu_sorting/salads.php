@@ -243,7 +243,7 @@
 	    function insertPageSalad(i, ref) {
 	        let activeClass = (i === CurrentPage) ? "active" : "";
 
-	        let li = `
+	        var li = `
 	            <li class="page-item page-number-salad ${activeClass}">
 	                <a class="page-link" href="#" data-page="${i}">${i}</a>
 	            </li>
@@ -459,5 +459,13 @@
 	            }
 	        });
 	    }
+
+	    $(document).on("click", "#pagination-salad .page-link", function(e) {
+	        e.preventDefault();
+	        var page = $(this).data("page");
+	        if (page && page !== CurrentPage) {
+	            loadSalad(page);
+	        }
+	    });
 
 </script>

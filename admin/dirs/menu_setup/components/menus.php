@@ -146,26 +146,24 @@
 </style>
 
 
-<!-- 
 <script>
-function handleAddNewMenu() {
-    // You can trigger a Modal or a SweetAlert here
-    console.log("Open custom menu input...");
-    alert("Triggering Custom Menu Modal!");
-}
+    /*Function every toggle it will call its data*/
+    $(document).on('shown.bs.tab', 'button[data-bs-toggle="pill"]', function (e) {
 
+        let target = $(e.target).attr("data-bs-target");
 
-
-
-  /*Filter Menu*/
-  $("#search_food_menu").on("keydown", function (e) {
-      if (e.key === "Enter") {
-          loadFoodMenusList();
-      }
-  });
-  
-  $("#filter_menus").on("change", function () {
-      loadFoodMenusList();
-  });
-
-</script> -->
+        switch (target) {
+            case "#Appetizers": loadAppetizers(); break;
+            case "#Beverages": loadBeverage(); break;
+            case "#Breakfast": loadBreakfast(); break;
+            case "#Desserts": loadDessert(); break;
+            case "#MainCourse": loadMainCourse(); break;
+            case "#Pastry": loadPastry(); break;
+            case "#Pasta": loadPasta(); break;
+            case "#Salads": loadSalad(); break;
+            case "#Snacks": loadSnack(); break;
+            case "#Soup": loadSoup(); break;
+            case "#Vegetable": loadVegie(); break;
+        }
+    });
+</script>

@@ -9,16 +9,6 @@ function loadFoodMenusSetup() {
         $("#load_FoodMenus").html(data);
         loadMenuPackageTemplate();
         loadAppetizers();
-        loadBeverage();
-        loadBreakfast();
-        loadDessert();
-        loadMainCourse();
-        loadPastry();
-        loadPasta();
-        loadSalad();
-        loadSnack();
-        loadSoup();
-        loadVegie();
     });
 }
 

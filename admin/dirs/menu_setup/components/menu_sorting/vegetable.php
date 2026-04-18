@@ -243,7 +243,7 @@
 	    function insertPageVegie(i, ref) {
 	        let activeClass = (i === CurrentPage) ? "active" : "";
 
-	        let li = `
+	        var li = `
 	            <li class="page-item page-number-vegie ${activeClass}">
 	                <a class="page-link" href="#" data-page="${i}">${i}</a>
 	            </li>
@@ -460,4 +460,11 @@
 	        });
 	    }
 
+	    $(document).on("click", "#pagination-vegie .page-link", function(e) {
+	        e.preventDefault();
+	        var page = $(this).data("page");
+	        if (page && page !== CurrentPage) {
+	            loadVegie(page);
+	        }
+	    });
 </script>

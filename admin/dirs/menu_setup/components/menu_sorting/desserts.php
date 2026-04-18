@@ -243,7 +243,7 @@
 	    function insertPageDessert(i, ref) {
 	        let activeClass = (i === CurrentPage) ? "active" : "";
 
-	        let li = `
+	        var li = `
 	            <li class="page-item page-number-dessert ${activeClass}">
 	                <a class="page-link" href="#" data-page="${i}">${i}</a>
 	            </li>
@@ -459,5 +459,14 @@
 	            }
 	        });
 	    }
+
+
+	    $(document).on("click", "#pagination-dessert .page-link", function(e) {
+	        e.preventDefault();
+	        var page = $(this).data("page");
+	        if (page && page !== CurrentPage) {
+	            loadDessert(page);
+	        }
+	    });
 
 </script>

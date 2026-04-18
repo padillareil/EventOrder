@@ -215,10 +215,10 @@
 	/*Function to build list of pagination*/
 	function AppetizerPageNumber() {
 	    $("#pagination-appetizer li.page-number-appetizer").remove();
-	    let prevLi = $("#li-prev-appetizer");
-	    let maxVisible = 5;
-	    let start = Math.max(1, CurrentPage - 2);
-	    let end = Math.min(totalPages, start + maxVisible - 1);
+	    var prevLi = $("#li-prev-appetizer");
+	    var maxVisible = 5;
+	    var start = Math.max(1, CurrentPage - 2);
+	    var end = Math.min(totalPages, start + maxVisible - 1);
 	    if (end - start < maxVisible - 1) {
 	        start = Math.max(1, end - maxVisible + 1);
 	    }
@@ -231,7 +231,7 @@
 	            prevLi = prevLi.next();
 	        }
 	    }
-	    for (let i = start; i <= end; i++) {
+	    for (var i = start; i <= end; i++) {
 	        insertPageAppetizer(i, prevLi);
 	        prevLi = prevLi.next();
 	    }
@@ -243,9 +243,9 @@
 	        insertPageAppetizer(totalPages, prevLi);
 	    }
 	    function insertPageAppetizer(i, ref) {
-	        let activeClass = (i === CurrentPage) ? "active" : "";
+	        var activeClass = (i === CurrentPage) ? "active" : "";
 
-	        let li = `
+	        var li = `
 	            <li class="page-item page-number-appetizer ${activeClass}">
 	                <a class="page-link" href="#" data-page="${i}">${i}</a>
 	            </li>
@@ -277,6 +277,16 @@
 
 	      if (CurrentPage < totalPages) {
 	          loadAppetizers(CurrentPage + 1);
+	      }
+	  });
+
+
+	  $(document).on("click", "#pagination-appetizer .page-link", function(e) {
+	      e.preventDefault();
+
+	      var page = $(this).data("page");
+	      if (page && page !== CurrentPage) {
+	          loadAppetizers(page);
 	      }
 	  });
 </script>
