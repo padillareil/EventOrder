@@ -6,7 +6,7 @@
 try {
   $conn->beginTransaction();
 
-    $del_menu= $conn->prepare("DELETE FROM Event_Food_Package_H WHERE DocEntry=?");
+    $del_menu= $conn->prepare("DELETE FROM VenuePackage_H WHERE DocEntry=?");
     $del_menu->execute([ $DocEntry ]);
 
   $conn->commit();

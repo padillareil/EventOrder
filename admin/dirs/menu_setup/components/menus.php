@@ -16,7 +16,9 @@
                 <button class="nav-link rounded-pill px-3 py-2 fw-bold small border border-info" data-bs-toggle="pill" type="button" data-bs-target="#Desserts">Desserts</button>
             </li>
             <li class="nav-item" role="presentation">
-              <button class="nav-link rounded-pill px-3 py-2 fw-bold small border border-info" data-bs-toggle="pill" type="button" data-bs-target="#MainCourse">Main Course</button>
+              <button class="nav-link rounded-pill px-3 py-2 fw-bold small border border-info" data-bs-toggle="pill" type="button" data-bs-target="#MainCourse">
+                  Main Course
+              </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link rounded-pill px-3 py-2 fw-bold small border border-info" data-bs-toggle="pill" type="button" data-bs-target="#Pastry">Pastry</button>
@@ -83,6 +85,9 @@
 
 
 <style>
+    #pills-tab .nav-link {
+        white-space: nowrap;
+    }
     /* Base Card */
     .selection-card {
         border: 1px solid #e9ecef !important;

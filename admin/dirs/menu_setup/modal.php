@@ -1179,6 +1179,166 @@
 </script>
 
 
+<!-- Modal to Create Package -->
+<form id="frm-add-venuepackage">
+    <div class="modal fade" id="mdl-add-package" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header border-0 pb-0 pt-4 px-4 d-flex align-items-center">
+                    <div>
+                        <h5 class="modal-title fw-bold text-dark">New Venue Package</h5>
+                        <p class="text-muted small mb-0">Add package setup to package list.</p>
+                    </div>
+                </div>
+                <div class="modal-body p-4">
+                    <input type="hidden" id="package_id">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-2">
+                                 <label class="form-label fw-semibold text-dark small">Package No.</label>
+                                 <input type="text" class="form-control py-2 px-3 shadow-none" id="package-number" readonly>
+                            </div>
+                            <div class="mb-2">
+                              <label class="form-label fw-semibold text-dark small">Package Name (Package-Alias)</label>
+                              <input type="text" class="form-control py-2 px-3 shadow-none" id="package-name" required>
+                            </div>
+                            <div class="mb-2">
+                              <label class="form-label fw-semibold text-dark small">Package Category</label>
+                              <select class="form-select py-2 px-3" id="event-category" required>
+                                <option selected value="">Select Category</option>
+                                <option value="Associations Event">Associations Event</option>
+                                <option value="Organization Event">Organization Event</option>
+                                <option value="Corporate Event">Corporate Event</option>
+                                <option value="Educational Event">Educational Event</option>
+                                <option value="Government Event">Government Event</option>
+                                <option value="Private Event">Private Event</option>
+                                <option value="Health Care Event">Health Care Event</option>
+                                <option value="Travel Tour Event">Travel Tour Event</option>
+                              </select>
+                            </div>
+                            <div class="mb-2">
+                              <label class="form-label fw-semibold text-dark small">Per Pax Amount</label>
+                              <div class="input-group">
+                                <span class="input-group-text text-muted">₱</span>
+                                <input type="number" id="pax-amount" class="form-control py-2 shadow-none" placeholder="0.00" required>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 overflow-auto" style="height: 50vh;">
+                            <small class="text-center fw-semibold text-dark">Food Quantity Setup</small>
+                            <div id="food_categories_display" class="mt-3"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="justify-content-end d-flex gap-2">
+                     <button id="btn-submit-package" class="btn btn-success shadow-sm" type="submit">
+                       <span class="spinner-border spinner-border-sm d-none" id="btn-spinner-package"></span>
+                       <span class="btn-text-package">Save</span>
+                     </button>
+                     <button id="btn-update-package" class="btn btn-success shadow-sm d-none" type="button">
+                       <span class="btn-text-package">Update</span>
+                       <span id="btn-spinner-package-upd" class="spinner-border spinner-border-sm ms-2 d-none"></span>
+                     </button>
+                      <button class="btn btn-secondary  shadow-sm btn-sm" data-bs-dismiss="modal" type="reset" id="btn-cancel-package">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    // Function to show the input field of checked food Category
+    $(document).on("change", ".category-checkbox", function () {
+        let row = $(this).closest(".category-row");
+        let qtyBox = row.find(".quantity-wrapper");
+        let input = row.find(".category-qty");
+        if ($(this).is(":checked")) {
+            qtyBox.removeClass("d-none");
+            input.val(1).focus();
+        } else {
+            qtyBox.addClass("d-none");
+            input.val(""); 
+        }
+    });
+
+
+    /*Function create a Venue Package*/
+    $("#frm-add-venuepackage").submit(function (event) {
+        event.preventDefault();
+        var $btnSubmit = $("#btn-submit-package");
+        var $spinner = $("#btn-spinner-submit-package");
+        var $text = $btnSubmit.find(".btn-text-package");
+        var $btnClear = $("#btn-cancel-package");
+
+        var EventName = $("#package-name").val();
+        var Category = $("#event-category").val();
+        var PaxAmount = $("#pax-amount").val();
+        var FoodCategory = [];
+        $(".category-row").each(function () {
+            let checkbox = $(this).find(".category-checkbox");
+            let qty = $(this).find(".category-qty").val();
+            if (checkbox.is(":checked")) {
+                FoodCategory.push({
+                    Mid: checkbox.val(),
+                    Quantity: qty ? parseInt(qty) : 1
+                });
+            }
+        });
+
+        if (FoodCategory.length === 0) {
+            Swal.fire({
+                icon: "warning",
+                title: "No Menu selected",
+                text: "Please setup category before saving."
+            });
+            return;
+        }
+
+        $btnSubmit.prop("disabled", true);
+        $spinner.removeClass("d-none");
+        $text.text("Saving...");
+        $btnClear.prop("disabled", true);
+
+        $.post("dirs/menu_setup/actions/save_create_package.php", {
+            EventName: EventName,
+            Category: Category,
+            PaxAmount: PaxAmount,
+            FoodCategory: JSON.stringify(FoodCategory)
+        }, function (data) {
+            $btnSubmit.prop("disabled", false);
+            $btnClear.prop("disabled", false);
+            $spinner.addClass("d-none");
+            $text.text("Save");
+            if ($.trim(data) == "OK") {
+                $("#frm-add-venuepackage")[0].reset();
+                $("#mdl-add-package").modal('hide');
+                loadMenuPackage();
+                Swal.fire({
+                    toast: true,
+                    position: "top-end",
+                    icon: "success",
+                    title: "New Venue Package",
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true
+                });
+
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops!",
+                    text: data,
+                    confirmButtonText: "OK"
+                });
+            }
+        });
+    });
+
+
+</script>
+
 
 <!-- Package View Details review content only-->
 <div class="modal fade" id="mdl-view-package" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
@@ -1194,9 +1354,11 @@
             </div>
 
             <div class="modal-body p-4">
-                <h5 class="fw-bold">Executive Summit Package</h5>
-                <p>We shall provide you the following amenities on other audio visual equipment on minimal charges</p>
+                <h5 class="fw-bold">EventName:   Executive Summit Package</h5>
+                <p>Event Summary</p>
                 <ul>
+
+                    List of Food Package Setup:
                     <li>LCD ProjectoR with widescreen rental.</li>
                     <li>LEDWALL.</li>
                     <li>PARLED LIGHTS.</li>

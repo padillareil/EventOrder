@@ -93,16 +93,6 @@ function addVegetable() {
     $("#btn-cancel-vegetables").click();
 }
 
-/*Function create a Food package for Event*/
-function createPackage() {
-    $.post("dirs/menu_setup/package_form.php", {
-    }, function (data){
-        $("#foodpackage_content").html(data);
-      loadMenuList();
-      loadMenuPackageTemplate();
-    });
-}
-
 
 function loadMenuPackage() {
   $.post("dirs/menu_setup/components/food_package.php", {
@@ -397,6 +387,61 @@ function mdleditAppetizer(LineNum){
               $("#total-package-created").text(total + " Total");
           } else {
               console.log($.trim(response.Data));
+          }
+      });
+  }
+
+  
+  /*Function to create Venue Package*/
+  function addPackage() {
+      $("#mdl-add-package").modal('show');
+      const display = $("#food_categories_display");
+      display.html(`
+          <div class="text-center p-4 text-muted">
+              <div class="spinner-border text-dark"></div>
+              <div class="mt-2">Loading categories...</div>
+          </div>
+      `);
+      $.post("dirs/menu_setup/actions/get_foodcategory.php", {}, function (data) {
+          let response;
+          try {
+              response = JSON.parse(data);
+          } catch (e) {
+              display.html(`<div class="text-danger text-center">Server Error</div>`);
+              return;
+          }
+          if ($.trim(response.isSuccess) === "success") {
+            $("#package-number").val(response.PackageCode.PKGNumber);
+              let categories = response.Data;
+              if (!categories || categories.length === 0) {
+                  display.html(`<div class="text-muted text-center">No categories found</div>`);
+                  return;
+              }
+              let html = `<div class="row g-2">`;
+              categories.forEach(cat => {
+                  let id = `cat-${cat.Mid}`;
+                  html += `
+                      <div class="row align-items-center mb-2 category-row">
+                          <div class="col">
+                              <div class="form-check d-flex align-items-center">
+                                  <input type="checkbox" id="${id}" class="form-check-input category-checkbox me-2" name="" value="${cat.Category}">
+                                  <label for="${id}" class="form-check-label mb-0">
+                                      ${cat.Category}
+                                  </label>
+                              </div>
+                          </div>
+                          <div class="col-auto">
+                              <div class="quantity-wrapper d-none">
+                                  <input type="number" class="form-control form-control-sm category-qty" style="width: 80px;" placeholder="0" min="1">
+                              </div>
+                          </div>
+                      </div>
+                  `;
+              });
+              html += `</div>`;
+              display.html(html);
+          } else {
+              display.html(`<div class="text-danger text-center">${response.Data}</div>`);
           }
       });
   }

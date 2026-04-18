@@ -7,8 +7,8 @@
     try {
         $conn->beginTransaction();
         $fetch_status = $conn->prepare("
-            SELECT BuffStatus
-            FROM Event_Food_Package_H 
+            SELECT PackageStatus
+            FROM VenuePackage_H 
             WHERE DocEntry = ?
         ");
         $fetch_status->execute([$DocEntry]);
@@ -19,8 +19,8 @@
             exit;
         }
         $upd_status = $conn->prepare("
-            UPDATE Event_Food_Package_H 
-            SET BuffStatus = ? 
+            UPDATE VenuePackage_H 
+            SET PackageStatus = ? 
             WHERE DocEntry = ?
         ");
         $upd_status->execute([$Status, $DocEntry]);

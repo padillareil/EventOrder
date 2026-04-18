@@ -21,8 +21,14 @@
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link rounded-pill py-2 px-4 fw-medium" 
+                        id="approved-tab" data-bs-toggle="tab" data-bs-target="#custom_menu" type="button">
+                    <i class="bi bi-columns-gap me-2"></i>Custom Menu
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill py-2 px-4 fw-medium" 
                         id="approved-tab" data-bs-toggle="tab" data-bs-target="#food_package" type="button">
-                    <i class="bi bi-box-seam me-2"></i>Menu Package
+                    <i class="bi bi-box-seam me-2"></i>Venue Package
                 </button>
             </li>
         </ul>
@@ -32,6 +38,9 @@
         <div class="tab-content" id="foodMenuContent">
             <div class="tab-pane fade show active" id="food_menus" role="tabpanel">
                 <?php include 'menus.php'; ?>
+            </div>
+            <div class="tab-pane fade" id="custom_menu" role="tabpanel">
+                <?php include 'custom_menu.php'; ?>
             </div>
             <div class="tab-pane fade" id="food_package" role="tabpanel">
                 <?php include 'food_package.php'; ?>

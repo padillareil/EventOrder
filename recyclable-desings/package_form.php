@@ -17,7 +17,7 @@
         <div class="col-md-4">
             <!-- Event Name -->
             <div class="mb-3">
-              <label class="form-label fw-semibold text-dark small">Event Name</label>
+              <label class="form-label fw-semibold text-dark small">Package</label>
               <input type="text" class="form-control py-2 px-3 shadow-none" id="event-name" required>
             </div>
             <!-- Engager Category -->
@@ -65,7 +65,7 @@
         </div>
 
       </div>
-      
+
     </div>
 
     <div class="card-footer">

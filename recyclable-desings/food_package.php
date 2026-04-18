@@ -12,9 +12,10 @@
                     </span>
                     <input type="search" class="form-control bg-transparent border-0 small py-2 shadow-none" id="search-package" placeholder="Search...">
                 </div>
-                <button class="btn btn-link text-decoration-none text-secondary" type="button" onclick="addPackage()" title="Setup Event Food Package">
+                <button class="btn btn-link text-decoration-none text-secondary" type="button" onclick="createPackage()" title="Setup Event Food Package">
                     <i class="bi bi-ui-checks-grid text-lg"></i>
                 </button>
+                <button class="btn btn-primary" type="button" onclick="addPackage()"><i class="bi bi-plus-lg"></i> Add Package</button>
             </div>
         </div>
     </div>
@@ -97,7 +98,7 @@
                     PkgMenuPageNumber();
                     PkgMenuPaginationUi();
             } else {
-                emptyStatePkgMenu("venue package was empty.");
+                emptyStatePkgMenu("package menu was empty.");
             }
         });
     }
@@ -105,42 +106,44 @@
 
     function PackageMenuContent(data) {
         const display = $("#load_Package_Menu_content");
+
         if (!data || data.length === 0) {
             showEmptyStatePkgMenu("No available.");
             return;
         }
+
         display.empty();
 
         data.forEach(bev => {
             display.append(`
                <tr class="beverage-row align-middle" data-value="${bev.DocEntry}">
                    <td class="text-muted fw-medium small">
-                       ${bev.OrderNumber}
+                       ${bev.DocEntry}
                    </td>
 
                    <td class="text-muted text-center small">
-                       ${bev.VenPkg_Code || '—'}
+                       ${bev.BuffetNum_tmp || '—'}
                    </td>
 
                     <td class="text-muted text-center small">
-                        ${bev.PackageName || '—'}
+                        ${bev.EventName || '—'}
                     </td>
 
                    <td class="text-muted text-center small">
-                       ${bev.PackageCategory || '—'}
+                       ${bev.EngagerType || '—'}
                    </td>
                     <td class="text-center">
                         <span class="badge px-3 py-2 rounded-pill toggle-status cursor-pointer
-                            ${bev.PackageStatus === "Active" ? "bg-success-subtle text-success" : "bg-danger-subtle text-danger"}"
+                            ${bev.BuffStatus === "Active" ? "bg-success-subtle text-success" : "bg-danger-subtle text-danger"}"
                             data-id="${bev.DocEntry}"
-                            data-status="${bev.PackageStatus}">
-                            ${bev.PackageStatus}
+                            data-status="${bev.BuffStatus}">
+                            ${bev.BuffStatus}
                         </span>
                     </td>
 
                    <td class="text-center">
                        <div class="dropdown">
-                           <button class="btn btn-sm btn-icon btn-light rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="function() {}alse">
+                           <button class="btn btn-sm btn-icon btn-light rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                <i class="bi bi-three-dots-vertical"></i>
                            </button>
 
@@ -186,7 +189,7 @@
               <td colspan="6" class="p-5 text-center text-muted">
                   <i class="bi bi-card-list text-lg"></i> 
                   <br>
-                      No Venue Package Available!
+                      No Menu Package Available!
             <div class="small opacity-75">${message}</div>
                   </td>
             </tr>
@@ -200,7 +203,7 @@
               <td colspan="6" class="p-5 text-center text-muted">
                   <i class="bi bi-card-list text-lg"></i> 
                   <br>
-                      No Venue Package Available!
+                      No Menu Package Available!
             <div class="small opacity-75">${message}</div>
                   </td>
             </tr>
