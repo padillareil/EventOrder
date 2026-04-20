@@ -11,10 +11,33 @@ $FoodCategory = isset($_POST['FoodCategory'])
 try {
 
     $conn->beginTransaction();
+
+    /* ✅ 1. Validate Event Name */
+    $validate_eventname = $conn->prepare("
+        SELECT COUNT(DocEntry)
+        FROM VenuePackage_H 
+        WHERE PackageName = ?
+    ");
+    $validate_eventname->execute([$EventName]);
+
+    if ($validate_eventname->fetchColumn() > 0) {
+        throw new Exception('This event already exists.');
+    }
+
     $fetch_pkgnum = $conn->prepare("EXEC dbo.[PackageCode]");
     $fetch_pkgnum->execute();
     $get_pkgnum = $fetch_pkgnum->fetch(PDO::FETCH_ASSOC);
     $PKGNumber = $get_pkgnum['PKGNumber'];
+
+
+    $ins_header = $conn->prepare("EXEC dbo.[Create_Package] ?,?,?,?");
+    $ins_header->execute([
+        $EventName,
+        $PKGNumber,
+        $Category,
+        $PaxAmount
+    ]);
+
 
     if (!empty($FoodCategory)) {
 
@@ -32,23 +55,13 @@ try {
         }
     }
 
-    $ins_header = $conn->prepare("EXEC dbo.[Create_Package] ?,?,?,?");
-    $ins_header->execute([
-        $EventName,
-        $PKGNumber,
-        $Category,
-        $PaxAmount
-    ]);
-
     $conn->commit();
 
-    echo "OK";
-
-} catch (PDOException $e) {
+    echo "OK"; 
+} catch (Exception $e) {
 
     $conn->rollback();
 
-    echo "<b>Warning. Please Contact System Developer.<br/></b>" 
-         . $e->getMessage();
+    echo $e->getMessage();
 }
 ?>

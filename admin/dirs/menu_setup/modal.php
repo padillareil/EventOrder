@@ -1217,7 +1217,7 @@
                               </select>
                             </div>
                             <div class="mb-2">
-                              <label class="form-label fw-semibold text-dark small">Per Pax Amount</label>
+                              <label class="form-label fw-semibold text-dark small">Rate Per Pax</label>
                               <div class="input-group">
                                 <span class="input-group-text text-muted">₱</span>
                                 <input type="number" id="pax-amount" class="form-control py-2 shadow-none" placeholder="0.00" required>
@@ -1342,34 +1342,18 @@
 
 <!-- Package View Details review content only-->
 <div class="modal fade" id="mdl-view-package" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content border-0 shadow-lg rounded-4">
-            <div class="modal-header border-0 pb-0 pt-4 px-4 d-flex align-items-center">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+            <div class="modal-header border-0 pb-0 pt-4 px-4 d-flex align-items-start">
                 <div>
-                    <h5 class="modal-title fw-bold text-dark">Review Package Summary</h5>
-                    <p class="text-muted small mb-0">#PKG10001</p>
-
+                    <h5 class="modal-title fw-bold text-dark mb-0">Package Summary</h5>
+                    # <small id="package-code"></small> 
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-
-            <div class="modal-body p-4">
-                <h5 class="fw-bold">EventName:   Executive Summit Package</h5>
-                <p>Event Summary</p>
-                <ul>
-
-                    List of Food Package Setup:
-                    <li>Appetizer(1).</li>
-                    <li>Dessert(2).</li>
-                    <li>PARLED LIGHTS.</li>
-                    <li>MOVING HEADS LIGHT.</li>
-                    <li>Wireless microphone.</li>
-                </ul>
-                <p class="text-muted small">Total Package Food (10).</p>
+            <div class="modal-body p-4" id="review-package">
             </div>
-            <div class="modal-footer">
-               <button class="btn btn-primary" type="button">Next</button>
-            </div>
+           
         </div>
     </div>
 </div>

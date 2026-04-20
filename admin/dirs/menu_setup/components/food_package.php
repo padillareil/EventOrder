@@ -291,12 +291,82 @@
       });
 
 
-      function mdlViewPackage() {
+      /*Function show modal Event package Summary*/
+      function mdlViewPackage(DocEntry) {
           $("#mdl-view-package").modal('show');
+          var display = $("#review-package");
+          
+          display.html(`
+              <div class="text-center py-5">
+                  <div class="spinner-border text-warning" role="status"></div>
+                  <div class="mt-2 text-muted small fw-bold text-uppercase">Fetching Details...</div>
+              </div>
+          `);
+
+          $.post("dirs/menu_setup/actions/get_pkgsummary.php", {
+              DocEntry: DocEntry
+          }, function (data) {
+              let response = JSON.parse(data);
+              if ($.trim(response.isSuccess) == "success") {
+                  let header = response.Header;
+                  let foods = response.Foods;
+
+                  $("#package-code").text(header.VenPkg_Code);
+
+                  // Grouping Logic
+                  let grouped = {};
+                  foods.forEach(item => {
+                      if (!grouped[item.FoodGroup]) grouped[item.FoodGroup] = 0;
+                      grouped[item.FoodGroup] += parseInt(item.SetupQty);
+                  });
+
+                  let foodList = "";
+                  let totalItems = 0;
+                  Object.keys(grouped).forEach(group => {
+                      foodList += `
+                          <div class="d-flex justify-content-between align-items-center mb-2 p-2 border-start border-3 border-warning bg-light rounded-end">
+                              <span class="text-dark fw-medium ps-2">${group}</span>
+                              <span class="badge bg-success-subtle text-success px-1 py-2 rounded-pill toggle-status cursor-pointer border ">${grouped[group]}</span>
+                          </div>`;
+                      totalItems += grouped[group];
+                  });
+
+                  display.html(`
+                      <div class="mb-4 border-bottom pb-3">
+                          <h4 class="fw-bold mb-1" style="color: #bf9b30;">${header.PackageName}</h4>
+                          <div class="d-flex align-items-center">
+                              <p class="text-muted small text-uppercase letter-spacing-1">${header.PackageCategory}</p>
+                          </div>
+                      </div>
+
+                      <div class="mb-4">
+                          <label class="form-label small fw-bold text-uppercase opacity-50 mb-3 text-spacing-1">Menu Setup</label>
+                          ${foodList || '<div class="text-muted text-center small py-3 italic">No items configured</div>'}
+                      </div>
+
+                      <div class="rounded-4 p-4 text-white shadow-sm mb-3" style="background: linear-gradient(135deg, #bf9b30 0%, #a68525 100%);">
+                          <div class="d-flex justify-content-between align-items-center">
+                              <div>
+                                  <p class="mb-0 small opacity-75 text-uppercase fw-bold">Rate Per Pax</p>
+                                  <h2 class="fw-bold mb-0">₱ ${Number(header.PaxAmount).toLocaleString()}</h2>
+                              </div>
+                              <div class="text-end">
+                                  <i class="bi bi-people-fill fs-1 opacity-25"></i>
+                              </div>
+                          </div>
+                      </div>
+                  `);
+
+              } else {
+                  display.html(`
+                      <div class="alert alert-danger rounded-4 d-flex align-items-center" role="alert">
+                          <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                          <div>Unable to retrieve package data.</div>
+                      </div>
+                  `);
+              }
+          });
       }
-
-
-
       /*Function to remove this menu prompt*/
       function removemdlPackage(DocEntry) {
           Swal.fire({
