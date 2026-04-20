@@ -9,6 +9,7 @@ function loadFoodMenusSetup() {
         $("#load_FoodMenus").html(data);
         loadMenuPackageTemplate();
         loadAppetizers();
+        loadCustomMenu();
     });
 }
 
@@ -102,6 +103,22 @@ function loadMenuPackage() {
   });
 }
 
+/*Function to load on custom menu*/
+function loadCustomMenu() {
+  $.post("dirs/menu_setup/components/custom_menu.php", {
+  }, function (data){
+      $("#foodpackage_content").html(data);
+      loadCustomMenu();
+  });
+}
+
+/*Function to add Custom Menu Modal*/
+function addCustomMenu() {
+    $("#btn-submit-custom").removeClass('d-none');
+    $("#btn-update-custom").addClass('d-none');
+    $("#mdl-add-customenu").modal('show');
+    loadFoodCategories(); // no selected value
+}
 
 
 /*Appetizers------------aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*/
@@ -402,6 +419,10 @@ function mdleditAppetizer(LineNum){
               <div class="mt-2">Loading categories...</div>
           </div>
       `);
+      $("#package-title").text('New Venue Package');
+      $("#package-description").text('Add package setup to package list.');
+      $("#btn-submit-package").removeClass('d-none');
+      $("#btn-update-package").addClass('d-none');
       $.post("dirs/menu_setup/actions/get_foodcategory.php", {}, function (data) {
           let response;
           try {
@@ -445,3 +466,8 @@ function mdleditAppetizer(LineNum){
           }
       });
   }
+
+
+
+
+

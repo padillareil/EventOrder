@@ -5,7 +5,7 @@ try {
 
     $stmt = $conn->prepare("
         SELECT COUNT(DocEntry) AS TotalPackage
-        FROM Event_Food_Package_H
+        FROM VenuePackage_H
     ");
     $stmt->execute();
 

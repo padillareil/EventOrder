@@ -1186,8 +1186,8 @@
             <div class="modal-content border-0 shadow-lg rounded-4">
                 <div class="modal-header border-0 pb-0 pt-4 px-4 d-flex align-items-center">
                     <div>
-                        <h5 class="modal-title fw-bold text-dark">New Venue Package</h5>
-                        <p class="text-muted small mb-0">Add package setup to package list.</p>
+                        <h5 class="modal-title fw-bold text-dark" id="package-title">New Venue Package</h5>
+                        <p class="text-muted small mb-0" id="package-description">Add package setup to package list.</p>
                     </div>
                 </div>
                 <div class="modal-body p-4">
@@ -1200,7 +1200,7 @@
                             </div>
                             <div class="mb-2">
                               <label class="form-label fw-semibold text-dark small">Package Name (Package-Alias)</label>
-                              <input type="text" class="form-control py-2 px-3 shadow-none" id="package-name" required>
+                              <input type="text" class="form-control py-2 px-3 shadow-none" id="package-name" required maxlength="50">
                             </div>
                             <div class="mb-2">
                               <label class="form-label fw-semibold text-dark small">Package Category</label>
@@ -1357,3 +1357,121 @@
         </div>
     </div>
 </div>
+
+
+<!-- Modal add Custom Menu -->
+<form id="frm-add-customenu">
+    <div class="modal fade" id="mdl-add-customenu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header border-0 pb-0 pt-4 px-4 d-flex align-items-center">
+                    <div>
+                        <h5 class="modal-title fw-bold text-dark" id="cutommenu-title">New Custom Menu</h5>
+                        <p class="text-muted small mb-0" id="cutommenu-description">Add a special order to custom menu list.</p>
+                        <p class="d-none text-muted" id="custommenu-code"></p>
+                    </div>
+                </div>
+
+                <div class="modal-body p-4">
+                    <input type="hidden" id="custommenu-id">
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Menu Name</label>
+                            <input type="text" class="form-control" name="custom-name" id="custom-name" required maxlength="100">
+                        </div>
+
+                        <div class="mb-2">
+                          <label class="form-label fw-bold text-uppercase text-muted small">Category</label>
+                          <select class="form-select py-2 px-3" id="item-category" required>
+                          </select>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Description</label>
+                            <textarea class="form-control bg-light" name="custom-description" id="custom-description" rows="2" maxlength="200" required></textarea>
+                            <div class="form-text small">Max 200 Characters.</div>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label small fw-bold text-uppercase text-muted tracking-wider">Main Ingredients</label>
+                            <textarea class="form-control bg-light" name="custom-ingredients" id="custom-ingredients" rows="2"  maxlength="200" required></textarea>
+                            <div class="form-text small">Max 200 Characters.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="justify-content-end d-flex gap-2">
+                     <button id="btn-submit-custom" class="btn btn-success shadow-sm" type="submit">
+                       <span class="spinner-border spinner-border-sm d-none" id="btn-spinner-custom"></span>
+                       <span class="btn-text-custom">Save</span>
+                     </button>
+                     <button id="btn-update-custom" class="btn btn-success shadow-sm d-none" type="button">
+                       <span class="btn-text-custom">Update</span>
+                       <span id="btn-spinner-custom-upd" class="spinner-border spinner-border-sm ms-2 d-none"></span>
+                     </button>
+                      <button class="btn btn-secondary  shadow-sm btn-sm" data-bs-dismiss="modal" type="reset" id="btn-cancel-custom">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    /*Function remove update button when closing*/
+    $("#btn-cancel-custom").on("click", function() {
+        $("#btn-update-custom").addClass('d-none');
+    });
+
+    $("#frm-add-customenu").submit(function(event){
+        event.preventDefault();
+        let $btnSubmit = $("#btn-submit-custom");
+        let $btnCancel = $("#btn-cancel-custom");
+        let $spinner = $("#btn-spinner");
+        let $text = $btnSubmit.find(".btn-text-custom");
+        $btnSubmit.prop("disabled", true);
+        $btnCancel.prop("disabled", true);
+        $spinner.removeClass("d-none");
+        $text.text("Saving...");
+
+        var DishName  = $("#custom-name").val();
+        var Category  = $("#item-category").val();
+        var Description   = $("#custom-description").val();
+        var Ingredient  = $("#custom-ingredients").val();
+
+        $.post("dirs/menu_setup/actions/save_custommenu.php", {
+            DishName: DishName,
+            Category: Category,
+            Description: Description,
+            Ingredient: Ingredient,
+        }, function(data){
+            $btnSubmit.prop("disabled", false);
+            $btnCancel.prop("disabled", false);
+            $spinner.addClass("d-none");
+            $text.text("Save");
+            if($.trim(data) == "OK"){
+                $("#frm-add-customenu")[0].reset();
+                $("#mdl-add-customenu").modal('hide');
+                loadCustomMenu();
+                Swal.fire({
+                    toast: true,
+                    position: "top-end",
+                    icon: "success",
+                    title: "New Custom Menu",
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true
+                });
+
+            }else{
+               Swal.fire({
+                 icon: "error",
+                 title: "Oops!",
+                 text: data,
+                 confirmButtonText: "OK"
+               });
+            }
+        });
+    });
+</script>
+

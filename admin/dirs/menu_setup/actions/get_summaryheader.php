@@ -1,0 +1,39 @@
+<?php
+  require_once "../../../../config/connection_food.php";
+
+  $DocEntry     = $_POST['DocEntry'];
+
+try {
+  $conn->beginTransaction();
+
+    $fetch_header = $conn->prepare("
+      SELECT 
+        DocEntry,
+        VenPkg_Code,
+        PackageName,
+        PackageCategory,
+        PaxAmount,
+        PackageStatus
+      FROM VenuePackage_H 
+      WHERE DocEntry =?
+    ");
+    $fetch_header->execute([ $DocEntry ]);
+    $get_header = $fetch_header->fetch(PDO::FETCH_ASSOC);
+
+  $conn->commit();
+
+  $response = array(
+    "isSuccess" => 'success',
+    "Data" => $get_header
+  );
+  echo json_encode($response);
+
+}catch (PDOException $e){
+  $conn->rollback();
+  $response = array(
+    "isSuccess" => 'Failed',
+    "Data" => "<b>Error. Please Contact System Developer. <br/></b>".$e->getMessage()
+  );
+  echo json_encode($response);
+}
+?>

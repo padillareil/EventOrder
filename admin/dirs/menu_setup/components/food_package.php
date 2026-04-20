@@ -113,7 +113,7 @@
 
         data.forEach(bev => {
             display.append(`
-               <tr class="beverage-row align-middle" data-value="${bev.DocEntry}">
+               <tr class="beverage-row align-middle" data-value="${bev.DocEntry}" ondblclick="mdlViewPackage('${bev.DocEntry}')">
                    <td class="text-muted fw-medium small">
                        ${bev.OrderNumber}
                    </td>
@@ -145,10 +145,6 @@
                            </button>
 
                            <ul class="dropdown-menu dropdown-menu-end shadow-sm">
-                               <li>
-                                   <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="mdlViewPackage('${bev.DocEntry}')">  <i class="bi bi-file-earmark-text"></i>  Review Package
-                                   </a>
-                               </li>
                                 <li>
                                     <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="mdlEditPackage('${bev.DocEntry}')">  <i class="bi bi-pencil"></i>  Edit Package
                                     </a>
@@ -200,7 +196,7 @@
               <td colspan="6" class="p-5 text-center text-muted">
                   <i class="bi bi-card-list text-lg"></i> 
                   <br>
-                      No Venue Package Available!
+                      No  Record Found!
             <div class="small opacity-75">${message}</div>
                   </td>
             </tr>
@@ -291,18 +287,206 @@
       });
 
 
+
+    /*Function to edit package*/
+    function mdlEditPackage(DocEntry) {
+        $("#mdl-add-package").modal('show');
+        $("#btn-submit-package").addClass("d-none");
+        $("#btn-update-package").removeClass("d-none");
+        $("#package-title").text('Update Venue Package');
+        $("#btn-submit-package").addClass('d-none');
+        $("#package-description").text('Update package setup to package list.');
+        const display = $("#food_categories_display");
+        display.html(`
+            <div class="text-center p-4 text-muted">
+                <div class="spinner-border text-dark"></div>
+                <div class="mt-2">Loading...</div>
+            </div>
+        `);
+        $.post("dirs/menu_setup/actions/get_summaryheader.php", {
+            DocEntry: DocEntry
+        }, function (data) {
+            let response = JSON.parse(data);
+            if ($.trim(response.isSuccess) === "success") {
+                let header = response.Data;
+                $("#package_id").val(header.DocEntry);
+                $("#package-number").val(header.VenPkg_Code);
+                $("#package-name").val(header.PackageName);
+                $("#event-category").val(header.PackageCategory);
+                $("#pax-amount").val(header.PaxAmount);
+                $.post("dirs/menu_setup/actions/get_editcategory.php", {
+                    PackageCode: header.VenPkg_Code
+                }, function (foodData) {
+                    let foodResponse = JSON.parse(foodData);
+                    if ($.trim(foodResponse.isSuccess) === "success") {
+                        let existingFoods = foodResponse.Data;
+                        loadCategoriesForEdit(existingFoods);
+                    } else {
+                        display.html(`<div class="text-danger text-center">${foodResponse.Data}</div>`);
+                    }
+                });
+            } else {
+                display.html(`<div class="text-danger text-center">${response.Data}</div>`);
+            }
+        });
+    }
+/*Function to display for edit package*/
+   function loadCategoriesForEdit(existingFoods) {
+       const display = $("#food_categories_display");
+       $.post("dirs/menu_setup/actions/get_foodcategory.php", {}, function (data) {
+           let response = JSON.parse(data);
+           if ($.trim(response.isSuccess) === "success") {
+               let categories = response.Data;
+               let foodMap = {};
+               existingFoods.forEach(item => {
+                   foodMap[item.FoodGroup] = item.SetupQty;
+               });
+               let html = `<div class="row g-2">`;
+               categories.forEach(cat => {
+                   let id = `cat-${cat.Mid}`;
+                   let isChecked = foodMap[cat.Category] !== undefined;
+                   let qty = isChecked ? foodMap[cat.Category] : "";
+                   html += `
+                       <div class="row align-items-center mb-2 editcategory-row">
+                           <div class="col">
+                               <div class="form-check d-flex align-items-center">
+
+                                   <input  type="checkbox" id="${id}" class="form-check-input editcategory-checkbox me-2" name="edit-menus" value="${cat.Category}" ${isChecked ? "checked" : ""}
+                                   >
+
+                                   <label for="${id}" class="form-check-label mb-0">
+                                       ${cat.Category}
+                                   </label>
+
+                               </div>
+                           </div>
+
+                           <div class="col-auto">
+                               <div class="quantity-wrapper ${isChecked ? "" : "d-none"}">
+                                   <input type="number" class="form-control form-control-sm editcategory-qty" style="width: 80px;" value="${qty}" min="1">
+                               </div>
+                           </div>
+                       </div>
+                   `;
+               });
+               html += `</div>`;
+               display.html(html);
+           } else {
+               display.html(`<div class="text-danger text-center">${response.Data}</div>`);
+           }
+       });
+   }
+
+/*Function to apply edit */
+   $(document).on("change", ".editcategory-checkbox", function () {
+       let row = $(this).closest(".editcategory-row");
+       let qtyBox = row.find(".quantity-wrapper");
+       if ($(this).is(":checked")) {
+           qtyBox.removeClass("d-none");
+           let input = row.find(".editcategory-qty");
+           if (!input.val()) {
+               input.val(1);
+           }
+       } else {
+           qtyBox.addClass("d-none");
+           row.find(".editcategory-qty").val("");
+       }
+   });
+     /*Function to apply edit package*/ 
+   $("#btn-update-package").on("click", function () {
+
+       let $btnSubmit = $("#btn-update-package");
+       let $spinner = $("#btn-spinner-package-upd");
+       let $text = $btnSubmit.find(".btn-text-package");
+       let $btnClose = $("#btn-cancel-package");
+
+       let PackageCode = $("#package-number").val();
+       let EventName = $("#package-name").val();
+       let PackageCategory = $("#event-category").val();
+       let PaxAmount = $("#pax-amount").val();
+
+       let Menus = [];
+
+       $(".editcategory-row").each(function () {
+
+           let checkbox = $(this).find(".editcategory-checkbox");
+
+           if (checkbox.is(":checked")) {
+
+               Menus.push({
+                   Category: checkbox.val(),
+                   Qty: $(this).find(".editcategory-qty").val() || 1
+               });
+           }
+       });
+
+       if (Menus.length === 0) {
+           Swal.fire({
+               icon: "warning",
+               title: "No Menu Selected",
+               text: "Please select at least one category."
+           });
+           return;
+       }
+
+       $btnSubmit.prop("disabled", true);
+       $spinner.removeClass("d-none");
+       $text.text("Updating...");
+       $btnClose.prop("disabled", true);
+
+       $.post("dirs/menu_setup/actions/update_packagesetup.php", {
+
+           PackageCode: PackageCode,
+           EventName: EventName,
+           PackageCategory: PackageCategory,
+           PaxAmount: PaxAmount,
+
+           // 🔥 IMPORTANT FIX
+           FoodCategory: JSON.stringify(Menus)
+
+       }, function (data) {
+
+           $btnSubmit.prop("disabled", false);
+           $spinner.addClass("d-none");
+           $text.text("Update");
+           $btnClose.prop("disabled", false);
+
+           if ($.trim(data) === "OK") {
+
+               $("#frm-add-venuepackage")[0].reset();
+               $("#mdl-add-package").modal("hide");
+
+               loadMenuPackageTemplate();
+
+               Swal.fire({
+                   toast: true,
+                   position: "top-end",
+                   icon: "success",
+                   title: "Successfully Updated",
+                   showConfirmButton: false,
+                   timer: 2000
+               });
+
+           } else {
+               Swal.fire({
+                   icon: "error",
+                   title: "Oops!",
+                   text: data
+               });
+           }
+       });
+   });
+       
       /*Function show modal Event package Summary*/
       function mdlViewPackage(DocEntry) {
           $("#mdl-view-package").modal('show');
           var display = $("#review-package");
-          
           display.html(`
               <div class="text-center py-5">
                   <div class="spinner-border text-warning" role="status"></div>
                   <div class="mt-2 text-muted small fw-bold text-uppercase">Fetching Details...</div>
               </div>
           `);
-
           $.post("dirs/menu_setup/actions/get_pkgsummary.php", {
               DocEntry: DocEntry
           }, function (data) {
@@ -330,7 +514,6 @@
                           </div>`;
                       totalItems += grouped[group];
                   });
-
                   display.html(`
                       <div class="mb-4 border-bottom pb-3">
                           <h4 class="fw-bold mb-1" style="color: #bf9b30;">${header.PackageName}</h4>
@@ -338,12 +521,10 @@
                               <p class="text-muted small text-uppercase letter-spacing-1">${header.PackageCategory}</p>
                           </div>
                       </div>
-
                       <div class="mb-4">
                           <label class="form-label small fw-bold text-uppercase opacity-50 mb-3 text-spacing-1">Menu Setup</label>
                           ${foodList || '<div class="text-muted text-center small py-3 italic">No items configured</div>'}
                       </div>
-
                       <div class="rounded-4 p-4 text-white shadow-sm mb-3" style="background: linear-gradient(135deg, #bf9b30 0%, #a68525 100%);">
                           <div class="d-flex justify-content-between align-items-center">
                               <div>
