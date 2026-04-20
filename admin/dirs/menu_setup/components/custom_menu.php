@@ -91,8 +91,8 @@
 	                ? parseInt(response.Data[0].TotalPages)
 	                : 1;
 
-	                CustomMenuPageNumber();
 	                CustomMenuPaginationUi();
+	                CustomMenuPageNumber();
 	        } else {
 	            emptyStateCustom("venue package was empty.");
 	        }
@@ -206,18 +206,20 @@
 
 	/*Function to count page number page 1 of and so on*/
 	function CustomMenuPaginationUi() {
-	    $("#pagination-custommenu").text("Page " + CurrentPage + " of " + totalPages);
+	    $("#page-info-custommenu").text("Page " + CurrentPage + " of " + totalPages);
 	    if (CurrentPage <= 1) {
 	        $("#li-prev-custommenu").addClass("disabled");
 	    } else {
 	        $("#li-prev-custommenu").removeClass("disabled");
 	    }
+
 	    if (CurrentPage >= totalPages) {
 	        $("#li-next-custommenu").addClass("disabled");
 	    } else {
 	        $("#li-next-custommenu").removeClass("disabled");
 	    }
 	}
+
 	/*Function to build list of pagination*/
 	function CustomMenuPageNumber() {
 	    $("#pagination-custommenu li.page-number-custommenu").remove();

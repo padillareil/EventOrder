@@ -206,18 +206,21 @@
 
     /*Function to count page number page 1 of and so on*/
     function PkgMenuPaginationUi() {
-        $("#pagination-packages").text("Page " + CurrentPage + " of " + totalPages);
+        $("#page-info-packages").text("Page " + CurrentPage + " of " + totalPages);
         if (CurrentPage <= 1) {
             $("#li-prev-packages").addClass("disabled");
         } else {
             $("#li-prev-packages").removeClass("disabled");
         }
+
         if (CurrentPage >= totalPages) {
             $("#li-next-packages").addClass("disabled");
         } else {
             $("#li-next-packages").removeClass("disabled");
         }
     }
+
+
     /*Function to build list of pagination*/
     function PkgMenuPageNumber() {
         $("#pagination-packages li.page-number-packages").remove();
