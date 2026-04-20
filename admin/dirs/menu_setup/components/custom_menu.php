@@ -11,7 +11,9 @@
 	                </span>
 	                <input type="search" class="form-control bg-transparent border-0 small py-2 shadow-none" id="search-custom_menu" placeholder="Search...">
 	            </div>
-	            <button class="btn btn-primary" type="button" onclick="addCustomMenu()"><i class="bi bi-plus-lg"></i> Add Custom</button>
+	            <button class="btn btn-link text-decoration-none text-secondary" type="button" onclick="addCustomMenu()">
+	            	<i class="bi bi-ui-checks-grid text-lg"></i>
+	            </button>
 	        </div>
 	    </div>
 	</div>
@@ -65,13 +67,13 @@
 	    var display = $("#load_CustomMenu_content");
 	    display.html(`
 	            <tr>
-	                <td colspan="6" class="p-5 text-center text-muted">
+	                <td colspan="7" class="p-5 text-center text-muted">
 	                    <div class="spinner-border text-dark"></div>
 	                    <div class="mt-2">Loading...</div>
 	                </td>
 	            </tr>
 	    `);
-	    var Search = $("#search-package").val();
+	    var Search = $("#search-custom_menu").val();
 	    $.post("dirs/menu_setup/actions/get_pagination_custommenu.php", {
 	        CurrentPage,
 	        PageSize,
@@ -179,7 +181,7 @@
 	function emptyStateCustom(message) {
 	    $("#load_CustomMenu_content").html(`
 	        <tr>
-	          <td colspan="6" class="p-5 text-center text-muted">
+	          <td colspan="7" class="p-5 text-center text-muted">
 	              <i class="bi bi-card-list text-lg"></i> 
 	              <br>
 	                  No Venue Package Available!
@@ -193,7 +195,7 @@
 	function showEmptyStateCustom(message) {
 	    $("#load_CustomMenu_content").html(`
 	        <tr>
-	          <td colspan="6" class="p-5 text-center text-muted">
+	          <td colspan="7" class="p-5 text-center text-muted">
 	              <i class="bi bi-card-list text-lg"></i> 
 	              <br>
 	                  No  Record Found!
@@ -263,7 +265,7 @@
 	    }
 	}
 
-	/*search-package*/
+	/*search-custom_menu*/
 	$("#search-custom_menu").on("keydown", function(e) {
 	    if (e.key === "Enter") {
 	        loadCustomMenu();

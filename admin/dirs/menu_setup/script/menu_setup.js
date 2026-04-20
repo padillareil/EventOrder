@@ -117,6 +117,8 @@ function addCustomMenu() {
     $("#btn-submit-custom").removeClass('d-none');
     $("#btn-update-custom").addClass('d-none');
     $("#mdl-add-customenu").modal('show');
+    $("#cutommenu-title").text('New Custom Menu');
+    $("#cutommenu-description").text('Add a special order to custom menu list.');
     loadFoodCategories(); // no selected value
 }
 
