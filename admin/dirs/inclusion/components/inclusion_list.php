@@ -433,7 +433,7 @@ $("#frm-add-inclusion").on("keydown", function (e) {
           $btnClose.prop("disabled", false);
 
           if ($.trim(data) === "success") {
-
+              $text.text("Update");
               $("#frm-add-inclusion")[0].reset();
               $("#mdl-add-inclusion").modal("hide");
               loadVenueInclusion();

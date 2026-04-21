@@ -438,6 +438,8 @@ $("#frm-add-custom").on("keydown", function (e) {
 
               $("#frm-add-custom")[0].reset();
               $("#mdl-add-custom").modal("hide");
+              $text.text("Update");
+
               loadCustomServices();
 
               Swal.fire({
