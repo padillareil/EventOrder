@@ -25,9 +25,9 @@
                 <thead class="sticky-top bg-white border-bottom" style="z-index: 5;">
                     <tr>
                         <th class="ps-4 py-3 border-0 text-uppercase small fw-bold text-muted" style="width: 80px;">#</th>
-                        <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center">Package Code</th>
-                        <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center">Event Type</th>
-                        <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center">Category</th>
+                        <th class="py-3 border-0 text-uppercase small fw-bold text-muted">Package Code</th>
+                        <th class="py-3 border-0 text-uppercase small fw-bold text-muted">Event Type</th>
+                        <th class="py-3 border-0 text-uppercase small fw-bold text-muted">Category</th>
                         <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center">Status</th>
                         <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center pe-4">Actions</th>
                     </tr>
@@ -118,15 +118,15 @@
                        ${bev.OrderNumber}
                    </td>
 
-                   <td class="text-muted text-center small">
+                   <td class="fw-semibold text-muted small">
                        ${bev.VenPkg_Code || '—'}
                    </td>
 
-                    <td class="text-muted text-center small">
+                    <td class="fw-semibold text-muted small">
                         ${bev.PackageName || '—'}
                     </td>
 
-                   <td class="text-muted text-center small">
+                   <td class="fw-semibold text-muted small">
                        ${bev.PackageCategory || '—'}
                    </td>
                     <td class="text-center">
@@ -145,6 +145,10 @@
                            </button>
 
                            <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="mdlViewPackage('${bev.DocEntry}')"><i class="bi bi-file-earmark-text"></i> Review Package
+                                    </a>
+                                </li>
                                 <li>
                                     <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="mdlEditPackage('${bev.DocEntry}')">  <i class="bi bi-pencil"></i>  Edit Package
                                     </a>

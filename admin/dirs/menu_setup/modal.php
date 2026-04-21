@@ -1249,6 +1249,12 @@
 </form>
 
 <script>
+    $("#frm-add-venuepackage").on("keydown", function (e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            return false;
+        }
+    });
     // Function to show the input field of checked food Category
     $(document).on("change", ".category-checkbox", function () {
         let row = $(this).closest(".category-row");
@@ -1418,6 +1424,13 @@
 </form>
 
 <script>
+    $("#frm-add-customenu").on("keydown", function (e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            return false;
+        }
+    });
+    
     /*Function remove update button when closing*/
     $("#btn-cancel-custom").on("click", function() {
         $("#btn-update-custom").addClass('d-none');

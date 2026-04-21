@@ -86,15 +86,15 @@ try {
                             <p class="text-muted">Menu</p>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link active" name="menu" menucode="menu_setup">
+                            <a href="#" class="nav-link" name="menu" menucode="menu_setup">
                                 <i class="nav-icon bi bi-menu-app"></i>
                                 <p>Menu Setup</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="apply_service">
+                            <a href="#" class="nav-link active" name="menu" menucode="inclusion">
                                 <i class="nav-icon bi bi-card-checklist"></i>
-                                <p>Venue Inclusion</p>
+                                <p>Inclusion Setup</p>
                             </a>
                         </li>
                         <li class="nav-item">

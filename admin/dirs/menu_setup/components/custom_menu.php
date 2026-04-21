@@ -23,9 +23,9 @@
 	            <thead class="sticky-top bg-white border-bottom" style="z-index: 5;">
 	                <tr>
 	                    <th class="ps-4 py-3 border-0 text-uppercase small fw-bold text-muted" style="width: 80px;">#</th>
-	                    <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center">Custom Code</th>
-	                    <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center">Menu</th>
-	                    <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center">Category</th>
+	                    <th class="py-3 border-0 text-uppercase small fw-bold text-muted">Custom Code</th>
+	                    <th class="py-3 border-0 text-uppercase small fw-bold text-muted">Menu Name</th>
+	                    <th class="py-3 border-0 text-uppercase small fw-bold text-muted">Category</th>
 	                    <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center">Description</th>
 	                    <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center">Status</th>
 	                    <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center">Actions</th>
@@ -117,14 +117,14 @@
 	                   ${custmenu.OrderNumber}
 	               </td>
 
-	               <td class="text-muted text-center small">
+	               <td class="fw-semibold text-muted small">
 	                   ${custmenu.CustomCode || '—'}
 	               </td>
 
-	                <td class="text-muted text-center small">
+	                <td class="fw-semibold text-muted small">
 	                    ${custmenu.CustomMenuName || '—'}
 	                </td>
-	        		<td class="text-muted text-center small">
+	        		<td class="fw-semibold text-muted small">
 	        		    ${custmenu.FoodGroup || '—'}
 	        		</td>
 	        		<td class="text-muted text-center small">
@@ -148,7 +148,7 @@
 
 	                       <ul class="dropdown-menu dropdown-menu-end shadow-sm">
 	                            <li>
-	                                <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="mdlEditCustomM('${custmenu.Custom_id}')">  <i class="bi bi-pencil"></i>  Edit Package
+	                                <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="mdlEditCustomM('${custmenu.Custom_id}')">  <i class="bi bi-pencil"></i>  Edit Inclusion
 	                                </a>
 	                            </li>
 	                           <li>
@@ -161,12 +161,12 @@
 	                           </li>
 
 	                           <li>
-	                               <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="enableCustom('${custmenu.Custom_id}')">  <i class="bi bi-toggle-on text-success"></i>  Enable Package
+	                               <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="enableCustom('${custmenu.Custom_id}')">  <i class="bi bi-toggle-on text-success"></i>  Enable Inclusion
 	                               </a>
 	                           </li>
 
 	                           <li>
-	                               <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="disableCustom('${custmenu.Custom_id}')">  <i class="bi bi-toggle-off text-danger"></i>  Disable Package
+	                               <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="disableCustom('${custmenu.Custom_id}')">  <i class="bi bi-toggle-off text-danger"></i>  Disable Inclusion
 	                               </a>
 	                           </li>
 	                       </ul>

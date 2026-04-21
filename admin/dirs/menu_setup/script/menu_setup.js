@@ -21,12 +21,26 @@ function addAppetizer() {
     $("#btn-cancel-appetizer").click();
 }
 
+$("#frm-add-appetizer").on("keydown", function (e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        return false;
+    }
+});
+
 /*Function Create Beverage form*/
 function addBeverage() {
     $("#mdl-add-beverage").modal('show');
     $("#btn-submit-beverage").removeClass('d-none');
     $("#btn-cancel-beverage").click();
 }
+
+$("#frm-add-beverage").on("keydown", function (e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        return false;
+    }
+});
 
 
 /*Function Create Breakfast form*/
@@ -35,6 +49,13 @@ function addBreakFast() {
     $("#btn-submit-breakfast").removeClass('d-none');
     $("#btn-cancel-breakfast").click();
 }
+
+$("#frm-add-breakfast").on("keydown", function (e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        return false;
+    }
+});
 
 
 /*Function Create Dessert form*/
@@ -45,12 +66,27 @@ function addDessert() {
 
 }
 
+$("#frm-add-dessert").on("keydown", function (e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        return false;
+    }
+});
+
 /*Function Create Dessert form*/
 function adMaincourse() {
     $("#mdl-add-maincourse").modal('show');
     $("#btn-submit-maincourse").removeClass('d-none');
     $("#btn-cancel-maincourse").click();
 }
+
+$("#frm-add-maincourse").on("keydown", function (e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        return false;
+    }
+});
+
 
 /*Function Create Pasta form*/
 function addPasta() {
@@ -59,12 +95,27 @@ function addPasta() {
     $("#btn-cancel-pasta").click();
 }
 
+$("#frm-add-pasta").on("keydown", function (e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        return false;
+    }
+});
+
+
 /*Function Create Pastry form*/
 function addPastry() {
     $("#mdl-add-pastry").modal('show');
     $("#btn-submit-pastry").removeClass('d-none');
     $("#btn-cancel-pastry").click();
 }
+
+$("#frm-add-pastry").on("keydown", function (e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        return false;
+    }
+});
 
 /*Function Create Salad form*/
 function addSalads() {
@@ -73,12 +124,26 @@ function addSalads() {
     $("#btn-cancel-salad").click();
 }
 
+$("#frm-add-salad").on("keydown", function (e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        return false;
+    }
+});
+
 /*Function Create Snack form*/
 function addSnack() {
     $("#mdl-add-snack").modal('show');
     $("#btn-submit-snack").removeClass('d-none');
     $("#btn-cancel-snack").click();
 }
+
+$("#frm-add-snack").on("keydown", function (e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        return false;
+    }
+});
 
 /*Function Create Soup form*/
 function addSoup() {
@@ -87,12 +152,26 @@ function addSoup() {
     $("#btn-cancel-soup").click();
 }
 
+$("#frm-add-soup").on("keydown", function (e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        return false;
+    }
+});
+
 /*Function Create vegetable form*/
 function addVegetable() {
     $("#mdl-add-vegetables").modal('show');
     $("#btn-submit-vegetables").removeClass('d-none')
     $("#btn-cancel-vegetables").click();
 }
+
+$("#frm-add-vegetables").on("keydown", function (e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        return false;
+    }
+});
 
 
 function loadMenuPackage() {
