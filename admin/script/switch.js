@@ -38,7 +38,12 @@ $("#main-menu")
       $maintitle = "";
       $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
       $file = "dirs/inclusion/inclusion.php";
-      break;
+    break;
+    case "useraccounts":
+      $maintitle = "";
+      $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
+      $file = "dirs/useraccounts/useraccounts.php";
+    break;
     case "settings":
       $maintitle = "Account Settings";
       $mainbreadcrumb = `<li class="breadcrumb-item active">Settings</li>`;

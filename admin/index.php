@@ -92,9 +92,15 @@ try {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link active" name="menu" menucode="inclusion">
+                            <a href="#" class="nav-link" name="menu" menucode="inclusion">
                                 <i class="nav-icon bi bi-card-checklist"></i>
                                 <p>Inclusion Setup</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active" name="menu" menucode="useraccounts">
+                                <i class="nav-icon bi bi-people"></i>
+                                <p>Accounts</p>
                             </a>
                         </li>
                         <li class="nav-item">
