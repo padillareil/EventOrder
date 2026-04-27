@@ -20,7 +20,6 @@
                         <div>
                             <label class="form-label small fw-bold text-uppercase text-muted mb-1">Username</label>
                             <div class="input-group border rounded-3 overflow-hidden">
-                                <span class="input-group-text border-0 bg-light"><i class="bi bi-at text-muted"></i></span>
                                 <input type="text" class="form-control border-0 shadow-none py-2" name="user-name" id="user-name" required maxlength="100">
                             </div>
                         </div>
@@ -175,48 +174,49 @@
                 </div>
 
                 <div class="modal-body p-4">
-                    <input type="hidden" id="account-id">
+                    <div id="account-loading" class="text-center py-5 d-none">
+                            <div class="spinner-border text-dark" role="status"></div>
+                            <div class="mt-2 text-muted small">Loading account details...</div>
+                        </div>
 
+                    <input type="hidden" id="account-id">
                     <div class="row g-4">
                         <div class="col-md-6">
                             <div class="pe-md-3">
                                 <label class="section-label">General Information</label>
                                 
                                 <div class="mb-3">
-                                    <label class="input-label text-muted">Full name</label>
-                                    <input type="text" class="form-control minimal-input" id="sett-fullname"  required>
-                                </div>
-
-                                <div class="mb-3">
                                     <label class="input-label text-muted">Usercode</label>
-                                    <input type="text" class="form-control minimal-input fw-bold" id="sett-usercode" >
+                                    <input type="text" class="form-control minimal-input" id="sett-usercode" readonly>
                                 </div>
                                 <div class="mb-3">
                                     <label class="input-label text-muted">Username</label>
-                                    <input type="text" class="form-control minimal-input" id="sett-username" required>
+                                    <input type="text" class="form-control minimal-input" id="sett-username" readonly>
                                 </div>
-
+                                <div class="mb-3">
+                                    <label class="input-label text-muted">Full name</label>
+                                    <input type="text" class="form-control minimal-input" id="sett-fullname"  readonly>
+                                </div>
                                 <div class="mb-3">
                                     <label class="input-label text-muted">Position</label>
-                                    <input type="text" class="form-control minimal-input" id="sett-position">
+                                    <input type="text" class="form-control minimal-input" id="sett-position" readonly>
                                 </div>
 
-                                <button class="btn btn-link" type="button" id="btn-action-change">Edit</button>
+                                <button class="btn btn-sm" type="button" id="btn-action-change">Edit</button> 
+                                <button class="btn btn-sm text-secondary d-none" type="button" id="btn-cancel-changes">Cancel</button> 
+                                <button class="btn btn-sm text-success d-none" type="button" id="btn-save-changes">
+                                    <span class="btn-text">Save</span>
+                                    <span id="btn-spinner-save" class="spinner-border spinner-border-sm ms-2 d-none"></span>
+                                </button> 
+
                             </div>
                         </div>
 
                         <div class="col-md-6 border-start">
                             <div class="ps-md-3">
-                                <label class="section-label">Account Level</label>
+                                <label class="section-label">Account Control</label>
                                 
-                                <div class="access-scroll-zone">
-                                    <div class="access-item">
-                                        <div class="form-check custom-check">
-                                            <input class="form-check-input" type="checkbox" id="role-admin" value="Admin">
-                                            <label class="form-check-label ms-2" for="role-admin">System Administrator</label>
-                                        </div>
-                                    </div>
-
+                                <div class="access-controls">
                                     <div class="access-item">
                                         <div class="form-check custom-check">
                                             <input class="form-check-input" type="checkbox" id="role-audit" value="Audit">
@@ -226,39 +226,82 @@
 
                                     <div class="access-item">
                                         <div class="form-check custom-check">
-                                            <input class="form-check-input" type="checkbox" id="role-accounting" value="Accounting Admin">
+                                            <input class="form-check-input" type="checkbox" id="role-accounting" value="AccountingAdmin">
                                             <label class="form-check-label ms-2" for="role-accounting">Accounting Admin</label>
                                         </div>
                                     </div>
 
                                     <div class="access-item">
                                         <div class="form-check custom-check">
-                                            <input class="form-check-input" type="checkbox" id="role-sales" value="Sales Manager">
+                                            <input class="form-check-input" type="checkbox" id="role-accountingmanager" value="AccountingManager">
+                                            <label class="form-check-label ms-2" for="role-accountingmanager">Accounting Manager</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="access-item">
+                                        <div class="form-check custom-check">
+                                            <input class="form-check-input" type="checkbox" id="role-accountingstaff" value="AccountingStaff">
+                                            <label class="form-check-label ms-2" for="role-accountingstaff">Accounting Staff</label>
+                                        </div>
+                                    </div>
+                                    <div class="access-item">
+                                        <div class="form-check custom-check">
+                                            <input class="form-check-input" type="checkbox" id="role-banquet" value="BanquetCoordinator">
+                                            <label class="form-check-label ms-2" for="role-banquet">Banquet Coordinator</label>
+                                        </div>
+                                    </div>
+                                    <div class="access-item">
+                                        <div class="form-check custom-check">
+                                            <input class="form-check-input" type="checkbox" id="role-billingofficer" value="BillingOfficer">
+                                            <label class="form-check-label ms-2" for="role-billingofficer">Billing Officer</label>
+                                        </div>
+                                    </div>
+                                    <div class="access-item">
+                                        <div class="form-check custom-check">
+                                            <input class="form-check-input" type="checkbox" id="role-eventcoordinator" value="EventCoordinator">
+                                            <label class="form-check-label ms-2" for="role-eventcoordinator">Event Coordinator</label>
+                                        </div>
+                                    </div>
+                                    <div class="access-item">
+                                        <div class="form-check custom-check">
+                                            <input class="form-check-input" type="checkbox" id="role-housekeeping" value="Housekeeping">
+                                            <label class="form-check-label ms-2" for="role-housekeeping">Housekeeping</label>
+                                        </div>
+                                    </div>
+                                    <div class="access-item">
+                                        <div class="form-check custom-check">
+                                            <input class="form-check-input" type="checkbox" id="role-operationmanager" value="OperationManager">
+                                            <label class="form-check-label ms-2" for="role-operationmanager">Operation Manager</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="access-item">
+                                        <div class="form-check custom-check">
+                                            <input class="form-check-input" type="checkbox" id="role-sales" value="SalesManager">
                                             <label class="form-check-label ms-2" for="role-sales">Sales Manager</label>
                                         </div>
                                     </div>
 
                                     <div class="access-item">
                                         <div class="form-check custom-check">
-                                            <input class="form-check-input" type="checkbox" id="role-reservation" value="Reservation Officer">
-                                            <label class="form-check-label ms-2" for="role-reservation">Reservation Officer</label>
+                                            <input class="form-check-input" type="checkbox" id="role-salesexecutive" value="SalesExecutive">
+                                            <label class="form-check-label ms-2" for="role-salesexecutive">Sales Executive</label>
                                         </div>
                                     </div>
 
                                     <div class="access-item">
                                         <div class="form-check custom-check">
-                                            <input class="form-check-input" type="checkbox" id="role-event" value="Event Coordinator">
-                                            <label class="form-check-label ms-2" for="role-event">Event Coordinator</label>
+                                            <input class="form-check-input" type="checkbox" id="role-reservation" value="ReservationOfficer">
+                                            <label class="form-check-label ms-2" for="role-reservation">Reservation Officer</label>
                                         </div>
                                     </div>
-
                                     <div class="access-item">
                                         <div class="form-check custom-check">
                                             <input class="form-check-input" type="checkbox" id="role-production" value="Production">
                                             <label class="form-check-label ms-2" for="role-production">Production</label>
                                         </div>
                                     </div>
-                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -267,21 +310,15 @@
                                 <label class="section-label">System Access</label>
                                 
                                 <div class="access-scroll-zone">
-                                    <div class="access-item">
-                                        <div class="form-check custom-check">
-                                            <input class="form-check-input" type="checkbox" id="role-admin" value="Admin">
-                                            <label class="form-check-label ms-2" for="role-admin">Block</label>
-                                        </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sys-access" id="sys-block" value="0">
+                                        <label class="form-check-label" for="sys-block">Block Access</label>
                                     </div>
 
-                                    <div class="access-item">
-                                        <div class="form-check custom-check">
-                                            <input class="form-check-input" type="checkbox" id="role-audit" value="Audit">
-                                            <label class="form-check-label ms-2" for="role-audit">Unblock</label>
-                                        </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sys-access" id="sys-unblock" value="1">
+                                        <label class="form-check-label" for="sys-unblock">Enable Access</label>
                                     </div>
-
-                                    
                                 </div>
                             </div>
                         </div>
@@ -290,13 +327,304 @@
 
                 <div class="modal-footer border-0 p-4 bg-light bg-opacity-50">
                     <button class="btn btn-link text-muted text-decoration-none small me-auto" data-bs-dismiss="modal">Cancel</button>
-                    <button id="btn-update-account" class="btn btn-success px-4 py-2 rounded-3 shadow-sm" type="button">
-                        <span class="btn-text-account">Apply Changes</span>
-                        <span id="btn-spinner-account-upd" class="spinner-border spinner-border-sm ms-2 d-none"></span>
+                    <button id="btn-update-delete" class="btn btn-danger px-4 py-2 rounded-3 shadow-sm" type="button" onclick="deleteAccount()">
+                        <span class="btn-text-delete">Delete Account</span>
+                        <span id="btn-spinner-delete-upd" class="spinner-border spinner-border-sm ms-2 d-none"></span>
+                    </button>
+                    <button id="btn-update-password" class="btn btn-primary px-4 py-2 rounded-3 shadow-sm" type="button" onclick="mdlNewPassword()">
+                        <span class="btn-text-password">Change Password</span>
+                        <span id="btn-spinner-password-upd" class="spinner-border spinner-border-sm ms-2 d-none"></span>
                     </button>
                 </div>
             </div>
         </div>
     </div>
 </form>
+<script>
+    /*Fucntion to update user details only*/
+    $("#btn-save-changes").on("click", function (event) {
+        event.preventDefault();
+        let $btnSave = $("#btn-save-changes");
+        let $btnEdit = $("#btn-action-change");
+        let $btnCancel = $("#btn-cancel-changes");
+        let $spinner = $("#btn-spinner-save");
+        let $text = $btnSave.find(".btn-text");
+        var Uid = $("#account-id").val();
+        var Fullname = $("#sett-fullname").val().trim();
+        var Position = $("#sett-position").val().trim();
+        var Username = $("#sett-username").val().trim();
+        if (Fullname === "" || Position === "") {
+            if (Fullname === "") {
+                $("#sett-fullname").addClass("is-invalid");
+            } else {
+                $("#sett-fullname").removeClass("is-invalid");
+            }
 
+            if (Position === "") {
+                $("#sett-position").addClass("is-invalid");
+            } else {
+                $("#sett-position").removeClass("is-invalid");
+            }
+            return; // stop execution
+        }
+
+        // remove invalid state if correct
+        $("#sett-fullname, #sett-position").removeClass("is-invalid");
+
+        // 👉 loading state
+        $btnSave.prop("disabled", true);
+        $spinner.removeClass("d-none");
+        $text.text("Saving...");
+
+        $.post("dirs/useraccounts/actions/update_userdetails.php", {
+            Uid: Uid,
+            Fullname: Fullname,
+            Username: Username,
+            Position: Position
+        }, function (data) {
+
+            $btnSave.prop("disabled", false);
+            $spinner.addClass("d-none");
+            $text.text("Save");
+
+            if ($.trim(data) === "success") {
+
+                Swal.fire({
+                    toast: true,
+                    position: "top-end",
+                    icon: "success",
+                    title: "Update successful",
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+
+                // reset to view mode
+                $("#sett-fullname, #sett-username, #sett-position").prop("readonly", true);
+
+                $btnSave.addClass("d-none");
+                $btnCancel.addClass("d-none");
+                $btnEdit.removeClass("d-none");
+
+            } else {
+
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops!",
+                    text: data
+                });
+            }
+        });
+    });
+
+    /*Function Update user access*/
+    $("input[name='sys-access']").on("change", function () {
+        var Uid = $("#account-id").val();
+        var Status = $("input[name='sys-access']:checked").val();
+
+        $.post("dirs/useraccounts/actions/update_status.php", {
+            Uid: Uid,
+            Status: Status
+        }, function (data) {
+
+            if ($.trim(data) === "success") {
+                if (Status == "0") {
+
+                    Swal.fire({
+                        toast: true,
+                        position: "top-end",
+                        icon: "warning",
+                        title: "Access Blocked",
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true
+                    });
+
+                } else {
+
+                    Swal.fire({
+                        toast: true,
+                        position: "top-end",
+                        icon: "success",
+                        title: "Access Enabled",
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true
+                    });
+                }
+
+            } else {
+
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops!",
+                    text: data
+                });
+            }
+        });
+    });
+
+    /*Function open user access role*/
+    var roleTimeout;
+
+    $(".access-controls .form-check-input").on("change", function () {
+
+        clearTimeout(roleTimeout);
+        roleTimeout = setTimeout(function () {
+            var Usercode = $("#sett-usercode").val();
+            if (!Usercode) {
+                Swal.fire("Error", "Usercode is missing", "error");
+                return;
+            }
+            var roles = {};
+
+            $(".access-controls .form-check-input").each(function () {
+                roles[$(this).val()] = $(this).is(":checked") ? 1 : 0;
+            });
+
+            var Status = $("input[name='sys-access']:checked").val() || 1;
+
+            $.post("dirs/useraccounts/actions/update_roles.php", {
+                Usercode: Usercode,
+                Status: Status,
+                Roles: JSON.stringify(roles)
+            }, function (data) {
+
+                if ($.trim(data) === "success") {
+
+                    Swal.fire({
+                        toast: true,
+                        position: "top-end",
+                        icon: "success",
+                        title: "Access Updated",
+                        showConfirmButton: false,
+                        timer: 1200
+                    });
+
+                } else {
+                    Swal.fire("Error", data, "error");
+                }
+            });
+
+        }, 400);
+    });
+
+    var originalData = {};
+    $("#btn-action-change").on("click", function () {
+        originalData = {
+            fullname: $("#sett-fullname").val(),
+            position: $("#sett-position").val()
+        };
+        $("#sett-fullname, #sett-position").prop("readonly", false);
+        $("#btn-action-change").addClass("d-none");
+        $("#btn-save-changes, #btn-cancel-changes").removeClass("d-none");
+    });
+
+
+    $("#btn-cancel-changes").on("click", function () {
+        $("#sett-fullname").val(originalData.fullname);
+        $("#sett-position").val(originalData.position);
+        $("#sett-fullname, #sett-username, #sett-position").prop("readonly", true);
+        $("#btn-action-change").removeClass("d-none");
+        $("#btn-save-changes, #btn-cancel-changes").addClass("d-none");
+    });
+
+
+    /*$("#btn-save-changes").on("click", function () {
+        const data = {
+            fullname: $("#sett-fullname").val(),
+            username: $("#sett-username").val(),
+            position: $("#sett-position").val()
+        };
+        $("#sett-fullname, #sett-username, #sett-position").prop("readonly", true);
+
+        $("#btn-action-change").removeClass("d-none");
+        $("#btn-save-changes, #btn-cancel-changes").addClass("d-none");
+    });*/
+</script>
+
+
+
+
+<!-- Modal Change Password-->
+    <div class="modal fade" id="mdl-update-password" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header border-0 pt-4 px-4 pb-0">
+                    <div class="w-100">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <h5 class="modal-title fw-bolder text-dark">New Password</h5>
+                        </div>
+                        <p class="text-muted small">Change new account password.</p>
+                    </div>
+                </div>
+
+                <div class="modal-body p-4">
+
+                    <div class="mb-3">
+                        <label class="input-label text-muted">New Password</label>
+                        <input type="password" class="form-control minimal-input" id="new-accountpassword" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="input-label text-muted">Confirm Password</label>
+                        <input type="password" class="form-control minimal-input" id="confirm-accountpassword" required>
+                    </div>
+                    <div class="form-checks ml-4 mb-4">
+                      <input class="form-check-input" type="checkbox" id="show-newpassword">
+                      <label class="form-check-label text-muted" for="show-newpassword">Show Password</label>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 p-4 bg-light bg-opacity-50">
+                    <button class="btn btn-link text-muted text-decoration-none small me-auto" data-bs-dismiss="modal">Cancel</button>
+                    <button id="btn-update-newpassword" class="btn btn-success px-4 py-2 rounded-3 shadow-sm" type="button">
+                        <span class="btn-text-newpassword">Save</span>
+                        <span id="btn-spinner-newpassword-upd" class="spinner-border spinner-border-sm ms-2 d-none"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script>
+
+
+
+    $("#show-newpassword").on("change", function () {
+        const isChecked = $(this).is(":checked");
+
+        const type = isChecked ? "text" : "password";
+
+        $("#new-accountpassword").attr("type", type);
+        $("#confirm-accountpassword").attr("type", type);
+    });
+    function updatePassword() {
+        var Userid = $("#Userid").val();
+        var NewPassword = $("#new-accountpassword").val();
+        var ConfirmPassword = $("#confirm-accountpassword").val();
+
+        // ✅ Validation
+        if (NewPassword !== ConfirmPassword) {
+            alert("Passwords do not match!");
+            return; // stop execution
+        }
+
+        if (NewPassword === "") {
+            alert("Password cannot be empty!");
+            return;
+        }
+
+        // ✅ Proceed if valid
+        $.post("dirs/useraccounts/actions/update_password.php", {
+            Userid: Userid,
+            NewPassword: NewPassword
+        }, function(data) {
+            if ($.trim(data) === "success") {
+                $("#modal-update-password").modal('hide');
+                load_student_list(); 
+                alert('Update successful');
+            } else {
+                alert(data);
+            }
+        });
+    }
+</script>

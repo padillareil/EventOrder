@@ -16,13 +16,13 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link active rounded-pill py-2 px-4 fw-medium" 
                         id="in-progress-tab" data-bs-toggle="tab" data-bs-target="#active_accounts" type="button">
-                   <i class="bi bi-person-check me-2"></i>Active Accounts
+                   <i class="bi bi-person-check me-2"></i>Active
                 </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link rounded-pill py-2 px-4 fw-medium" 
                         id="approved-tab" data-bs-toggle="tab" data-bs-target="#inactive_accounts" type="button">
-                    <i class="bi bi-person-fill-slash me-2"></i>In-Active Accounts
+                    <i class="bi bi-person-fill-slash me-2"></i>In-Active
                 </button>
             </li>
         </ul>

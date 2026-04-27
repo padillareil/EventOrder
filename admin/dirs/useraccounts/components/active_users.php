@@ -139,7 +139,7 @@
                     </td>
 
                    <td class="text-center">
-                        <button class="btn btn-sm bi bi-gear" type="button" onclick="accountSettings()">
+                        <button class="btn btn-sm bi bi-gear" type="button" onclick="accountSettings(${acc.Uid})">
                         </button>
                    </td>
                </tr>

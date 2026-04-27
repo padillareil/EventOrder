@@ -49,9 +49,9 @@ try {
         $validate_entry = $conn->prepare("
             SELECT COUNT(*) 
             FROM SysAccount 
-            WHERE Username = ? AND Fullname = ?
+            WHERE Username = ? AND Fullname = ? OR (Username = ?)
         ");
-        $validate_entry->execute([$Username, $Fullname]);
+        $validate_entry->execute([$Username, $Fullname, $Username]);
 
         if ($validate_entry->fetchColumn() > 0) {
             $conn->rollBack();
