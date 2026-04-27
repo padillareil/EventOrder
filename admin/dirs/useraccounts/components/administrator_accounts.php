@@ -2,7 +2,6 @@
     <div class="card-header bg-white border-0 pt-4 px-4 pb-3">
         <div class="row g-3 align-items-center">
             <div class="col-12 col-md-6 d-flex align-items-center gap-3">
-                <h5 class="fw-bold mb-0">In-Active Accounts</h5>
             </div>
             <div class="col-12 col-md-6 d-flex justify-content-md-end">
                 <div class="input-group border mr-2 bg-light px-3 flex-grow-1" style="max-width: 300px;">

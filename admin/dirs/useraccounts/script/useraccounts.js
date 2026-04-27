@@ -83,24 +83,17 @@ function deleteAccount() {
     }).then((result) => {
 
         if (result.isConfirmed) {
-
-            // 🔥 SHOW SPINNER
             $("#btn-update-delete").prop("disabled", true);
             $("#btn-spinner-delete-upd").removeClass("d-none");
-
             $.post("dirs/useraccounts/actions/delete_account.php", {
                 Uid: Uid
             }, function(data) {
-
-                // 🔥 HIDE SPINNER
                 $("#btn-update-delete").prop("disabled", false);
                 $("#btn-spinner-delete-upd").addClass("d-none");
-
                 if ($.trim(data) === "success") {
                     loadUserAccounts();
                     $("#mdl-account-settings").modal('hide');
                     $("#frm-account-settings")[0].reset();
-
                     Swal.fire({
                         toast: true,
                         position: "top-end",
@@ -110,18 +103,14 @@ function deleteAccount() {
                         timer: 2000,
                         timerProgressBar: true
                     });
-
                 } else {
-
                     Swal.fire({
                         icon: "error",
                         title: "Delete Failed",
                         text: data
                     });
                 }
-
             });
-
         }
     });
 }

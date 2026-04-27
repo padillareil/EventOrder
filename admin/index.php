@@ -98,9 +98,21 @@ try {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link active" name="menu" menucode="useraccounts">
+                            <a href="#" class="nav-link" name="menu" menucode="useraccounts">
                                 <i class="nav-icon bi bi-people"></i>
                                 <p>Accounts</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" name="menu" menucode="amenities">
+                                <i class="nav-icon bi bi-gear"></i>
+                                <p>Amenities</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active" name="menu" menucode="hotel_room">
+                                <i class="nav-icon bi bi-card-checklist"></i>
+                                <p>Hotel Rooms</p>
                             </a>
                         </li>
                         <li class="nav-item">

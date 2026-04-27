@@ -44,6 +44,19 @@ $("#main-menu")
       $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
       $file = "dirs/useraccounts/useraccounts.php";
     break;
+    case "amenities":
+      $maintitle = "";
+      $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
+      $file = "dirs/amenities/amenities.php";
+    break;
+    case "hotel_room":
+      $maintitle = "";
+      $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
+      $file = "dirs/hotel_room/hotel_room.php";
+    break;
+
+
+
     case "settings":
       $maintitle = "Account Settings";
       $mainbreadcrumb = `<li class="breadcrumb-item active">Settings</li>`;

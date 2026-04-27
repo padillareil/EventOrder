@@ -6,7 +6,7 @@
                     <i class="bi bi-person-badge fs-5 text-custom-gold"></i>
                 </div>
                 <div>
-                    <h5 class="mb-0 fw-bold text-dark">User Account & Access Control</h5>
+                    <h5 class="mb-0 fw-bold text-dark">Account & Access Control</h5>
                     <p class="text-muted small mb-0">Create, organize, and manage system accounts.</p>
                 </div>
             </div>
@@ -15,14 +15,14 @@
         <ul class="nav nav-pills bg-light p-1 rounded-pill d-inline-flex border" id="accounts" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active rounded-pill py-2 px-4 fw-medium" 
-                        id="in-progress-tab" data-bs-toggle="tab" data-bs-target="#active_accounts" type="button">
-                   <i class="bi bi-person-check me-2"></i>Active
+                        id="in-progress-tab" data-bs-toggle="tab" data-bs-target="#operational_accounts" type="button">
+                   <i class="bi bi-people me-2"></i>Operational Accounts
                 </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link rounded-pill py-2 px-4 fw-medium" 
-                        id="approved-tab" data-bs-toggle="tab" data-bs-target="#inactive_accounts" type="button">
-                    <i class="bi bi-person-fill-slash me-2"></i>In-Active
+                        id="approved-tab" data-bs-toggle="tab" data-bs-target="#administrator_accounts" type="button">
+                    <i class="bi bi-person-lock me-2"></i>Administrator
                 </button>
             </li>
         </ul>
@@ -30,11 +30,11 @@
 
     <div class="card-body p-2">
         <div class="tab-content" id="accountsContent">
-            <div class="tab-pane fade show active" id="active_accounts" role="tabpanel">
-                <?php include 'active_users.php'; ?>
+            <div class="tab-pane fade show active" id="operational_accounts" role="tabpanel">
+                <?php include 'operational_accounts.php'; ?>
             </div>
-            <div class="tab-pane fade" id="inactive_accounts" role="tabpanel">
-                <?php include 'inactive_users.php'; ?>
+            <div class="tab-pane fade" id="administrator_accounts" role="tabpanel">
+                <?php include 'administrator_accounts.php'; ?>
             </div>
         </div>
     </div>
