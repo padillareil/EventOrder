@@ -20,7 +20,7 @@
            <div class="card-header bg-white border-0 pt-4 px-4 pb-3">
                <div class="row g-3 align-items-center">
                    <div class="col-12 col-md-6 d-flex align-items-center gap-3">
-                       <h5 class="fw-bold mb-0">Function Room List</h5>
+                       <h5 class="fw-bold mb-0">Hotel Function Rooms</h5>
                    </div>
                    <div class="col-12 col-md-6 d-flex justify-content-md-end">
                        <div class="input-group border mr-2 bg-light px-3 flex-grow-1" style="max-width: 300px;">
@@ -44,6 +44,7 @@
                                <th class="ps-4 py-3 border-0 text-uppercase small fw-bold text-muted" style="width: 80px;">#</th>
                                <th class="py-3 border-0 text-uppercase small fw-bold text-muted">Function Room</th>
                                <th class="py-3 border-0 text-uppercase small fw-bold text-muted">Wing</th>
+                               <th class="py-3 border-0 text-uppercase small fw-bold text-muted">Total Rooms</th>
                                <th class="py-3 border-0 text-uppercase small fw-bold text-muted">Floor</th>
                                <th class="py-3 border-0 text-uppercase small fw-bold text-muted">Capacity</th>
                                <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center pe-4">Actions</th>
@@ -142,12 +143,16 @@
                            ${acc.OrderNumber}
                        </td>
 
-                       <td class="fw-semibold text-muted small">
-                           ${acc.FunctioName || '—'}
+                       <td class="fw-semibold text-info">
+                           ${acc.FunctionName || '—'}
                        </td>
 
                         <td class="fw-semibold text-muted small">
                             ${acc.HotelWing || '—'}
+                        </td>
+
+                        <td class="fw-semibold text-muted small">
+                            ${acc.TotalRooms || '0'}
                         </td>
                         <td class="fw-semibold text-muted small">
                             ${acc.FloorLevel || '-'}
@@ -168,27 +173,13 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="mdlEditAmenties('${acc.Function_id}')">  <i class="bi bi-pencil"></i>  Edit Function Room
+                                    <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="mdlEditFunctionRoom('${acc.Function_id}')">  <i class="bi bi-pencil"></i>  Edit 
                                     </a>
                                 </li>
-                               <li>
-                                   <a class="dropdown-item d-flex align-items-center gap-2" href="#"onclick="removeAmmenities('${acc.Function_id}')"> <i class="bi bi-trash"></i> Remove
-                                   </a>
-                               </li>
-
-                               <li>
-                                   <hr class="dropdown-divider">
-                               </li>
-
-                               <li>
-                                   <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="enablerooms('${acc.Function_id}')">  <i class="bi bi-toggle-on text-success"></i>  Enable
-                                   </a>
-                               </li>
-
-                               <li>
-                                   <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="disablerooms('${acc.Function_id}')">  <i class="bi bi-toggle-off text-danger"></i>  Disable
-                                   </a>
-                               </li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="mdlDeleteFunction('${acc.Function_id}')">  <i class="bi bi-trash"></i>  Remove 
+                                    </a>
+                                </li>
                            </ul>
                        </div>
                    </td>
@@ -312,4 +303,49 @@
                   loadHotelRooms(CurrentPage + 1);
               }
           });
+
+
+
+          /*Function to remove this menu prompt*/
+          function mdlDeleteFunction(Function_id) {
+              Swal.fire({
+                  title: "Confirm Deletion",
+                  text: "This action cannot be undone. All associated partition rooms will also be permanently deleted.",
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#d33",
+                  cancelButtonColor: "#6c757d",
+                  confirmButtonText: "Remove",
+                  cancelButtonText: "Cancel"
+              }).then((result) => {
+                  if (result.isConfirmed) {
+                      removeFunctionRoom(Function_id);
+                  }
+              });
+          }
+
+          /*Function to remove script*/
+          function removeFunctionRoom(Function_id){
+              $.post("dirs/hotel_room/actions/delete_functionroom.php", {
+                  Function_id : Function_id
+              },function(data){
+                  if(jQuery.trim(data) == "success"){
+                    loadHotelRooms();
+                      Swal.fire({
+                          icon: "success",
+                          title: "Room Removed",
+                          text: "successfully.",
+                          showConfirmButton: false,
+                          timer: 2000,
+                          timerProgressBar: true
+                      });  
+                  }else{
+                       Swal.fire({
+                          icon: "error",
+                          title: "Oops!",
+                          text: data
+                      });
+                  }
+              });
+          }
 </script>

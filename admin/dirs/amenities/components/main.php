@@ -222,7 +222,7 @@
               <td colspan="8" class="p-5 text-center text-muted">
                   <i class="bi bi-card-list text-lg"></i> 
                   <br>
-                      No Accounts Available!
+                      No Ammenities Available!
             <div class="small opacity-75">${message}</div>
                   </td>
             </tr>
