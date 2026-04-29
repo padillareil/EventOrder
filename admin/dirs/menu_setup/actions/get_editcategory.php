@@ -1,7 +1,7 @@
 <?php
   require_once "../../../../config/connection_food.php";
 
-  $PackageCode     = $_POST['PackageCode'];
+  $FoodPkg_Code     = $_POST['FoodPkg_Code'];
 
 try {
   $conn->beginTransaction();
@@ -9,13 +9,13 @@ try {
     $fetch_categories = $conn->prepare("
       SELECT 
        LineNum,
-       VenPkg_Code,
+       FoodPkg_Code,
        FoodGroup,
        SetupQty
-      FROM VenuePackage_Food 
-      WHERE VenPkg_Code =?
+      FROM FoodPackage_Items 
+      WHERE FoodPkg_Code =?
     ");
-    $fetch_categories->execute([ $PackageCode ]);
+    $fetch_categories->execute([ $FoodPkg_Code ]);
     $get_categoriees = $fetch_categories->fetchAll(PDO::FETCH_ASSOC);
 
   $conn->commit();

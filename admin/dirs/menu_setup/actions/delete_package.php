@@ -8,8 +8,8 @@ try {
     $conn->beginTransaction();
 
     $fetch_package = $conn->prepare("
-        SELECT VenPkg_Code
-        FROM VenuePackage_H 
+        SELECT FoodPkg_Code
+        FROM FoodPackage_Header 
         WHERE DocEntry = ?
     ");
     $fetch_package->execute([$DocEntry]);
@@ -19,16 +19,16 @@ try {
         throw new Exception("Package not found.");
     }
 
-    $PackageNumber = $get_pckgcode['VenPkg_Code'];
+    $PackageNumber = $get_pckgcode['FoodPkg_Code'];
 
     $del_food = $conn->prepare("
-        DELETE FROM VenuePackage_Food 
-        WHERE VenPkg_Code = ?
+        DELETE FROM FoodPackage_Items 
+        WHERE FoodPkg_Code = ?
     ");
     $del_food->execute([$PackageNumber]);
 
     $del_header = $conn->prepare("
-        DELETE FROM VenuePackage_H 
+        DELETE FROM FoodPackage_Header 
         WHERE DocEntry = ?
     ");
     $del_header->execute([$DocEntry]);

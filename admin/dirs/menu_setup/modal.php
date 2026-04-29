@@ -1186,8 +1186,8 @@
             <div class="modal-content border-0 shadow-lg rounded-4">
                 <div class="modal-header border-0 pb-0 pt-4 px-4 d-flex align-items-center">
                     <div>
-                        <h5 class="modal-title fw-bold text-dark" id="package-title">New Venue Package</h5>
-                        <p class="text-muted small mb-0" id="package-description">Add package setup to package list.</p>
+                        <h5 class="modal-title fw-bold text-dark" id="package-title">New Food Package</h5>
+                        <p class="text-muted small mb-0" id="package-description">Add package setup to food package list.</p>
                     </div>
                 </div>
                 <div class="modal-body p-4">
@@ -1200,10 +1200,11 @@
                             </div>
                             <div class="mb-2">
                               <label class="form-label fw-semibold text-dark small">Package Name (Package-Alias)</label>
-                              <input type="text" class="form-control py-2 px-3 shadow-none" id="package-name" required maxlength="50">
+                              <input type="text" class="form-control py-2 px-3 shadow-none" id="package-name" required maxlength="50" autocomplete="off">
+                              <small class="form-label">50 Maximum Characters</small>
                             </div>
                             <div class="mb-2">
-                              <label class="form-label fw-semibold text-dark small">Package Category</label>
+                              <label class="form-label fw-semibold text-dark small">Event Type</label>
                               <select class="form-select py-2 px-3" id="event-category" required>
                                 <option selected value="">Select Category</option>
                                 <option value="Associations Event">Associations Event</option>
@@ -1217,11 +1218,48 @@
                               </select>
                             </div>
                             <div class="mb-2">
+                              <label class="form-label fw-semibold text-dark small">Package Tier</label>
+                              <select class="form-select py-2 px-3" id="event-packagetier" required>
+                                <option selected value="">Select Tier</option>
+                                <option value="Standard">Standard</option>
+                                <option value="Basic">Basic</option>
+                                <option value="Premium">Premium</option>
+                              </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-2">
+                                      <label class="form-label fw-semibold text-dark small">Maximum Pax</label>
+                                      <div class="input-group">
+                                        <span class="input-group-text text-muted">₱</span>
+                                        <input type="number" id="pax-maximum" class="form-control py-2 shadow-none" placeholder="0" required>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-2">
+                                      <label class="form-label fw-semibold text-dark small">Minimum Pax</label>
+                                      <div class="input-group">
+                                        <span class="input-group-text text-muted">₱</span>
+                                        <input type="number" id="pax-minimum" class="form-control py-2 shadow-none" placeholder="0" required>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="mb-2">
                               <label class="form-label fw-semibold text-dark small">Rate Per Pax</label>
                               <div class="input-group">
                                 <span class="input-group-text text-muted">₱</span>
-                                <input type="number" id="pax-amount" class="form-control py-2 shadow-none" placeholder="0.00" required>
+                                <input type="text" id="pax-amount" class="form-control py-2 shadow-none number-format" placeholder="" required>
                               </div>
+                            </div>
+                            <div class="mb-2">
+                              <label class="form-label fw-semibold text-dark small">Description</label>
+                              <textarea class="form-control" id="foodpackage-description" name="foodpackage-description" maxlength="100" autocomplete="off"></textarea>
+                              <small class="form-label">100 Maximum Characters</small>
                             </div>
                         </div>
                         <div class="col-md-6 overflow-auto" style="height: 50vh;">
@@ -1249,6 +1287,22 @@
 </form>
 
 <script>
+    /*Function formating input cannot enter text but number with comma only*/
+    function formatInputNumber(number) {
+        if (!number) return "";
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    var inputs = document.querySelectorAll(".number-format");
+    inputs.forEach(input => {
+        input.addEventListener("input", function (e) {
+            let value = e.target.value;
+            let numeric = value.replace(/\D/g, "");
+            e.target.value = formatInputNumber(numeric);
+        });
+    });
+
+
     $("#frm-add-venuepackage").on("keydown", function (e) {
         if (e.key === "Enter") {
             e.preventDefault();
@@ -1281,6 +1335,13 @@
         var EventName = $("#package-name").val();
         var Category = $("#event-category").val();
         var PaxAmount = $("#pax-amount").val();
+
+        var Tier = $("#event-packagetier").val();
+        var MaxPax = $("#pax-maximum").val();
+        var MinPax = $("#pax-minimum").val();
+        var Description = $("#foodpackage-description").val();
+
+
         var FoodCategory = [];
         $(".category-row").each(function () {
             let checkbox = $(this).find(".category-checkbox");
@@ -1311,6 +1372,10 @@
             EventName: EventName,
             Category: Category,
             PaxAmount: PaxAmount,
+            Tier: Tier,
+            MaxPax: MaxPax,
+            MinPax: MinPax,
+            Description: Description,
             FoodCategory: JSON.stringify(FoodCategory)
         }, function (data) {
             $btnSubmit.prop("disabled", false);
@@ -1325,7 +1390,7 @@
                     toast: true,
                     position: "top-end",
                     icon: "success",
-                    title: "New Venue Package",
+                    title: "New Food Package",
                     showConfirmButton: false,
                     timer: 2000,
                     timerProgressBar: true

@@ -25,9 +25,9 @@
                 <thead class="sticky-top bg-white border-bottom" style="z-index: 5;">
                     <tr>
                         <th class="ps-4 py-3 border-0 text-uppercase small fw-bold text-muted" style="width: 80px;">#</th>
-                        <th class="py-3 border-0 text-uppercase small fw-bold text-muted">Package Code</th>
+                        <th class="py-3 border-0 text-uppercase small fw-bold text-muted">Package Name</th>
                         <th class="py-3 border-0 text-uppercase small fw-bold text-muted">Event Type</th>
-                        <th class="py-3 border-0 text-uppercase small fw-bold text-muted">Category</th>
+                        <th class="py-3 border-0 text-uppercase small fw-bold text-muted">Package Tier</th>
                         <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center">Status</th>
                         <th class="py-3 border-0 text-uppercase small fw-bold text-muted text-center pe-4">Actions</th>
                     </tr>
@@ -119,16 +119,30 @@
                    </td>
 
                    <td class="fw-semibold text-muted small">
-                       ${bev.VenPkg_Code || '—'}
+                       ${bev.PackageName || '—'}
                    </td>
 
                     <td class="fw-semibold text-muted small">
-                        ${bev.PackageName || '—'}
+                        ${bev.EventType || '—'}
                     </td>
-
-                   <td class="fw-semibold text-muted small">
-                       ${bev.PackageCategory || '—'}
-                   </td>
+                    <td class="fw-semibold">
+                        <span class="badge px-3 py-2 rounded-pill toggle-status cursor-pointer
+                            ${
+                                bev.PackageTier === "Premium" ? "bg-info-subtle text-info" :
+                                bev.PackageTier === "Standard" ? "bg-success-subtle text-success" :
+                                "bg-primary-subtle text-primary"
+                            }"
+                            data-id="${bev.DocEntry}"
+                            data-status="${bev.PackageTier}">
+                            ${
+                                bev.PackageTier === "Premium"
+                                    ? '<i class="bi bi-gem me-1"></i> Premium'
+                                    : bev.PackageTier === "Standard"
+                                    ? '<i class="bi bi-check-circle-fill me-1"></i> Standard'
+                                    : '<i class="bi bi-box-fill me-1"></i> Basic'
+                            }
+                        </span>
+                    </td>
                     <td class="text-center">
                         <span class="badge px-3 py-2 rounded-pill toggle-status cursor-pointer
                             ${bev.PackageStatus === "Active" ? "bg-success-subtle text-success" : "bg-danger-subtle text-danger"}"
@@ -146,11 +160,11 @@
 
                            <ul class="dropdown-menu dropdown-menu-end shadow-sm">
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="mdlViewPackage('${bev.DocEntry}')"><i class="bi bi-file-earmark-text"></i> Review Package
+                                    <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="mdlViewPackage('${bev.DocEntry}')"><i class="bi bi-file-earmark-text"></i> Review
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="mdlEditPackage('${bev.DocEntry}')">  <i class="bi bi-pencil"></i>  Edit Package
+                                    <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="mdlEditPackage('${bev.DocEntry}')">  <i class="bi bi-pencil"></i>  Edit
                                     </a>
                                 </li>
                                <li>
@@ -163,12 +177,12 @@
                                </li>
 
                                <li>
-                                   <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="enablePackage('${bev.DocEntry}')">  <i class="bi bi-toggle-on text-success"></i>  Enable Package
+                                   <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="enablePackage('${bev.DocEntry}')">  <i class="bi bi-toggle-on text-success"></i>  Enable
                                    </a>
                                </li>
 
                                <li>
-                                   <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="disablePackage('${bev.DocEntry}')">  <i class="bi bi-toggle-off text-danger"></i>  Disable Package
+                                   <a class="dropdown-item d-flex align-items-center gap-2" href="#" onclick="disablePackage('${bev.DocEntry}')">  <i class="bi bi-toggle-off text-danger"></i>  Disable
                                    </a>
                                </li>
                            </ul>
@@ -300,9 +314,9 @@
         $("#mdl-add-package").modal('show');
         $("#btn-submit-package").addClass("d-none");
         $("#btn-update-package").removeClass("d-none");
-        $("#package-title").text('Update Venue Package');
+        $("#package-title").text('Update Food Package');
         $("#btn-submit-package").addClass('d-none');
-        $("#package-description").text('Update package setup to package list.');
+        $("#package-description").text('Update package setup.');
         const display = $("#food_categories_display");
         display.html(`
             <div class="text-center p-4 text-muted">
@@ -317,12 +331,17 @@
             if ($.trim(response.isSuccess) === "success") {
                 let header = response.Data;
                 $("#package_id").val(header.DocEntry);
-                $("#package-number").val(header.VenPkg_Code);
+                $("#package-number").val(header.FoodPkg_Code);
                 $("#package-name").val(header.PackageName);
-                $("#event-category").val(header.PackageCategory);
-                $("#pax-amount").val(header.PaxAmount);
+                $("#event-category").val(header.EventType);
+                $("#pax-amount").val(header.RatePer_Pax);
+
+                $("#event-packagetier").val(header.PackageTier);
+                $("#pax-maximum").val(header.MaximumPax);
+                $("#pax-minimum").val(header.MinimumPax);
+                $("#foodpackage-description").val(header.Description);
                 $.post("dirs/menu_setup/actions/get_editcategory.php", {
-                    PackageCode: header.VenPkg_Code
+                    FoodPkg_Code: header.FoodPkg_Code
                 }, function (foodData) {
                     let foodResponse = JSON.parse(foodData);
                     if ($.trim(foodResponse.isSuccess) === "success") {
@@ -412,6 +431,12 @@
        let PackageCategory = $("#event-category").val();
        let PaxAmount = $("#pax-amount").val();
 
+       let Tier = $("#event-packagetier").val();
+       let MaxPax = $("#pax-maximum").val();
+       let MinPax = $("#pax-minimum").val();
+       let Description = $("#foodpackage-description").val();
+
+
        let Menus = [];
 
        $(".editcategory-row").each(function () {
@@ -447,6 +472,10 @@
            EventName: EventName,
            PackageCategory: PackageCategory,
            PaxAmount: PaxAmount,
+           Tier: Tier,
+           MaxPax: MaxPax,
+           MinPax: MinPax,
+           Description: Description,
 
            // 🔥 IMPORTANT FIX
            FoodCategory: JSON.stringify(Menus)

@@ -207,7 +207,7 @@
 
 <!-- Modal Hotel Function Partition rooms -->
     <div class="modal fade" id="mdl-partition-rooms" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content border-0 shadow-lg rounded-4">
                 <div class="modal-header border-0 pb-0 pt-4 px-4 d-flex align-items-center">
                     <div>
@@ -300,7 +300,7 @@
 <!-- Modal to add partition for specific function room -->
 <form id="frm-add-parition">
     <div class="modal fade" id="mdl-partition-addrooms" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog">
             <div class="modal-content border-0 shadow-lg rounded-4">
                 <div class="modal-header border-0 pb-0 pt-4 px-4 d-flex align-items-center">
                     <div>

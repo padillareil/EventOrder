@@ -3,6 +3,13 @@ require_once "../../../../config/connection_food.php";
 
 $EventName = strtoupper($_POST['EventName']);
 $Category = $_POST['Category'];
+
+$Tier = $_POST['Tier'];
+$MaxPax = $_POST['MaxPax'];
+$MinPax = $_POST['MinPax'];
+$Description = $_POST['Description'];
+
+
 $PaxAmount = isset($_POST['PaxAmount']) ? trim($_POST['PaxAmount']) : 0;
 $FoodCategory = isset($_POST['FoodCategory']) 
     ? json_decode($_POST['FoodCategory'], true) 
@@ -15,7 +22,7 @@ try {
     /* ✅ 1. Validate Event Name */
     $validate_eventname = $conn->prepare("
         SELECT COUNT(DocEntry)
-        FROM VenuePackage_H 
+        FROM FoodPackage_Header 
         WHERE PackageName = ?
     ");
     $validate_eventname->execute([$EventName]);
@@ -30,12 +37,16 @@ try {
     $PKGNumber = $get_pkgnum['PKGNumber'];
 
 
-    $ins_header = $conn->prepare("EXEC dbo.[Create_Package] ?,?,?,?");
+    $ins_header = $conn->prepare("EXEC dbo.[Create_Package] ?,?,?,?,?,?,?,?");
     $ins_header->execute([
         $EventName,
         $PKGNumber,
         $Category,
-        $PaxAmount
+        $PaxAmount,
+        $Tier,
+        $MaxPax,
+        $MinPax,
+        $Description
     ]);
 
 

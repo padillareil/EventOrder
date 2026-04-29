@@ -1,0 +1,16 @@
+{
+    "UserId": "1",
+    "EventName": "",
+    "EngagerCategory": "",
+    "PaxAmount": "",
+    "Inclusion": "",
+    "PaymentArrangement": "",
+    "Note": "",
+    "Menus": [
+        "16",
+        "7",
+        "19",
+        "15"
+    ],
+    "CreatedAt": "2026-04-17 11:02:49"
+}

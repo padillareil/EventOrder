@@ -86,7 +86,13 @@ try {
                             <p class="text-muted">Menu</p>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="menu_setup">
+                            <a href="#" class="nav-link" name="menu" menucode="venue_package">
+                                <i class="nav-icon bi-box-seam"></i>
+                                <p>Event Package</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active" name="menu" menucode="menu_setup">
                                 <i class="nav-icon bi bi-menu-app"></i>
                                 <p>Menu Setup</p>
                             </a>
@@ -110,7 +116,7 @@ try {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link active" name="menu" menucode="hotel_room">
+                            <a href="#" class="nav-link" name="menu" menucode="hotel_room">
                                 <i class="nav-icon bi bi-card-checklist"></i>
                                 <p>Hotel Rooms</p>
                             </a>

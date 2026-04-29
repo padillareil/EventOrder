@@ -28,7 +28,7 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link rounded-pill py-2 px-4 fw-medium" 
                         id="approved-tab" data-bs-toggle="tab" data-bs-target="#food_package" type="button">
-                    <i class="bi bi-box-seam me-2"></i>Venue Package
+                    <i class="bi bi-box-seam me-2"></i>Food Package
                 </button>
             </li>
         </ul>

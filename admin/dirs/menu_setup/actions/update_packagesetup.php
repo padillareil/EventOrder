@@ -4,6 +4,10 @@ session_start();
 
 $PackageCode = $_POST['PackageCode'];
 $EventName = $_POST['EventName'];
+$Tier = $_POST['Tier'];
+$MaxPax = $_POST['MaxPax'];
+$MinPax = $_POST['MinPax'];
+$Description = $_POST['Description'];
 $PackageCategory = $_POST['PackageCategory'];
 $PaxAmount = isset($_POST['PaxAmount']) ? trim($_POST['PaxAmount']) : 0;
 $FoodCategory = json_decode($_POST['FoodCategory'], true);
@@ -17,19 +21,23 @@ try {
     $conn->beginTransaction();
 
     $upd_header = $conn->prepare("
-        EXEC dbo.[UpdateVenuePackage_Header] ?,?,?,?
+        EXEC dbo.[UpdateVenuePackage_Header] ?,?,?,?,?,?,?,?
     ");
 
     $upd_header->execute([
         $PackageCode,
         $EventName,
         $PackageCategory,
-        $PaxAmount
+        $PaxAmount,
+        $MaxPax,
+        $Tier,
+        $MinPax,
+        $Description
     ]);
 
     $del = $conn->prepare("
-        DELETE FROM VenuePackage_Food 
-        WHERE VenPkg_Code = ?
+        DELETE FROM FoodPackage_Items 
+        WHERE FoodPkg_Code = ?
     ");
     $del->execute([$PackageCode]);
 
@@ -38,8 +46,8 @@ try {
         $Qty = $itemmenu['Qty'] ?? 1;
         if (!$Category) continue;
         $ins = $conn->prepare("
-            INSERT INTO VenuePackage_Food (
-                VenPkg_Code,
+            INSERT INTO FoodPackage_Items (
+                FoodPkg_Code,
                 FoodGroup,
                 SetupQty
             )

@@ -9,12 +9,17 @@ try {
     $fetch_header = $conn->prepare("
       SELECT 
         DocEntry,
-        VenPkg_Code,
+        FoodPkg_Code,
         PackageName,
-        PackageCategory,
-        PaxAmount,
-        PackageStatus
-      FROM VenuePackage_H 
+        EventType,
+        PackageTier,
+        RatePer_Pax,
+        MaximumPax,
+        MinimumPax,
+        Description,
+        PackageStatus,
+        DocDate
+      FROM FoodPackage_Header 
       WHERE DocEntry =?
     ");
     $fetch_header->execute([ $DocEntry ]);

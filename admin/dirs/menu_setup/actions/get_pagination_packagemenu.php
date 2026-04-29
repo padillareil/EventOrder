@@ -7,7 +7,7 @@
 try {
   $conn->beginTransaction();
 
-    $fetch_packageList = $conn->prepare("EXEC dbo.[Venue_PackageList] ?,?,?");
+    $fetch_packageList = $conn->prepare("EXEC dbo.[Food_PackageList] ?,?,?");
     $fetch_packageList->execute([$CurrentPage,$PageSize,$Search]);
     $get_pkglist = $fetch_packageList->fetchAll(PDO::FETCH_ASSOC);
 

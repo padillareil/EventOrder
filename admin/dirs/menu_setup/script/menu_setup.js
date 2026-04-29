@@ -500,8 +500,8 @@ function mdleditAppetizer(LineNum){
               <div class="mt-2">Loading categories...</div>
           </div>
       `);
-      $("#package-title").text('New Venue Package');
-      $("#package-description").text('Add package setup to package list.');
+      $("#package-title").text('New Food Package');
+      $("#package-description").text('Add package setup to food package list.');
       $("#btn-submit-package").removeClass('d-none');
       $("#btn-update-package").addClass('d-none');
       $.post("dirs/menu_setup/actions/get_foodcategory.php", {}, function (data) {
