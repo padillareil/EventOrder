@@ -8,7 +8,7 @@ function loadAmenities() {
     $.post("dirs/amenities/components/main.php", {
     }, function (data){
         $("#load_Amenities").html(data);
-        loadAmenities();
+        loadAmenitiesPage();
     });
 }
 

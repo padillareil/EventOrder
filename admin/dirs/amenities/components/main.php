@@ -95,7 +95,7 @@
     var selectedItems = [];
 
 
-    function loadAmenities(page = 1) {
+    function loadAmenitiesPage(page = 1) {
         CurrentPage = page; 
         var display = $("#load_Amenities_content");
         display.html(`

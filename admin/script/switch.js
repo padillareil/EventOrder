@@ -54,6 +54,11 @@ $("#main-menu")
       $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
       $file = "dirs/hotel_room/hotel_room.php";
     break;
+    case "event_package":
+      $maintitle = "";
+      $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
+      $file = "dirs/event_package/event_package.php";
+    break;
 
 
 
