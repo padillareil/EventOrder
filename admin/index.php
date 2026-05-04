@@ -53,7 +53,7 @@ try {
   <link rel="icon" href="../assets/image/logo/favicon.png">
 
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand bg-light">
             <ul class="navbar-nav">

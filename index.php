@@ -27,26 +27,33 @@ try {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>OneService-Encoder</title>
+  <title>Event Order- Sales Team</title>
   <link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/adminlte.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/plugins/jquery-ui/jquery-ui.theme.css">
   <link rel="stylesheet" href="assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <link rel="stylesheet" href="assets/plugins/daterangepicker/daterangepicker.css">
   <link rel="stylesheet" href="assets/plugins/bootstrap-icons/font/bootstrap-icons.css">
   <link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/plugins/bs-stepper/css/bs-stepper.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/plugins/pace/themes/gold/pace-theme-minimal.css">
+  <link rel="stylesheet" type="text/css" href="assets/plugins/jsgrid/jsgrid-theme.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/plugins/jsgrid/jsgrid-theme.css">
+  <link rel="stylesheet" type="text/css" href="assets/plugins/fullcalendar/main.css">
+  <link rel="stylesheet" type="text/css" href="assets/plugins/driver.js/dist/driver.css">
   <link rel="stylesheet" href="assets/css/datatables.min.css">
   <link rel="stylesheet" href="assets/plugins/toastr/toastr.min.css">
   <link rel="stylesheet" href="assets/plugins/sweetalert2/sweetalert2.min.css">
   <link rel="stylesheet" href="assets/plugins/daterangepicker/daterangepicker.css">
   <link rel="stylesheet" href="assets/plugins/summernote/summernote-lite.min.css">
   <link rel="stylesheet" href="assets/plugins/datepicker/jquery-ui.structure.min.css">
-  <link rel="stylesheet" href="node_modules/uikit/dist/css/uikit.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/skeleton.css">
   <link rel="icon" href="assets/image/logo/favicon.png">
 
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand bg-light">
             <ul class="navbar-nav">
@@ -69,46 +76,80 @@ try {
                 <a href="index.php" style="text-decoration: none; color: inherit;">
                     <img src="assets/image/logo/favicon.png" alt="User Logo" id="profile-image"style="width: 100px; height: 100px; object-fit: cover;">
                     <br>
+                    Sales Team
                 </a>
                 <br>
             </p>
             <div class="sidebar">
                 <nav id="main-menu" class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" >
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        
+                        <!-- SECTION: OVERVIEW -->
+                        <li class="nav-header small fw-bold text-muted opacity-75">Menu</li>
                         <li class="nav-item">
-                            <p class="text-muted">Menu</p>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link active" name="menu" menucode="dashboard">
-                                <i class="nav-icon bi bi-grid"></i>
-                                <p>Work Queue</p>
+                            <a href="#" class="nav-link" name="menu" menucode="dashboard">
+                                <i class="nav-icon bi bi-speedometer2"></i>
+                                <p>Dashboard</p>
                             </a>
                         </li>
+
+                        <!-- SECTION: CORE OPERATIONS -->
+                        <li class="nav-header small fw-bold text-muted opacity-75 mt-1">Event Management</li>
+                        
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="apply_service">
-                                <i class="nav-icon bi bi-file-earmark-post"></i>
-                                <p>Services</p>
+                            <a href="#" class="nav-link" name="menu" menucode="bookings">
+                                <i class="nav-icon bi bi-calendar-event"></i>
+                                <p>Calendar Event</p>
                             </a>
                         </li>
+
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="settings" data-bs-toggle="tooltip" data-bs-title="Settings" data-bs-placement="right">
-                                <i class="nav-icon bi bi-gear"></i>
-                                <p>Settings</p>
+                            <a href="#" class="nav-link active" name="menu" menucode="event_order">
+                                <i class="nav-icon bi bi-file-earmark-text"></i>
+                                <p>Event Order</p>
                             </a>
                         </li>
-                        <hr>
+
                         <li class="nav-item">
-                            <a href="#" class="nav-link" onclick="logout()">
-                                <i class="nav-icon bi bi-box-arrow-right text-danger"></i>
-                                <p>Logout</p>
+                            <a href="#" class="nav-link" name="menu" menucode="event-orders">
+                                <i class="nav-icon bi bi-clipboard-check"></i>
+                                <p>Event Orders (BEO)</p>
                             </a>
                         </li>
-                       <!--  <li class="nav-item d-flex align-items-center ms-3 mt-2">
-                          <div class="form-check m-0 ml-1">
-                            <input class="form-check-input" type="checkbox" id="theme-mode" onclick="loadTheme()">
-                            <label class="form-check-label text-white ms-2" for="theme-mode" id="theme-label">Theme</label>
-                          </div>
-                        </li> -->
+
+                        <!-- SECTION: RELATIONSHIPS -->
+                        <li class="nav-header small fw-bold text-muted opacity-75 mt-1">CRM</li>
+                        
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" name="menu" menucode="clients">
+                                <i class="nav-icon bi bi-people"></i>
+                                <p>Engagers Account</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" name="menu" menucode="kpi">
+                                <i class="nav-icon bi bi-trophy"></i>
+                                <p>Sales Performance</p>
+                            </a>
+                        </li>
+
+                        <!-- SECTION: CONFIGURATION -->
+                        <hr class="my-3 mx-2 border-secondary opacity-25">
+                        
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" name="menu" menucode="settings">
+                                <i class="nav-icon bi bi-sliders"></i>
+                                <p>Room & Menu Setup</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link text-danger" onclick="logout()">
+                                <i class="nav-icon bi bi-box-arrow-right"></i>
+                                <p>Log Out</p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -131,7 +172,7 @@ try {
       </section>
     </div>
     <footer class="main-footer">
-        <small>Imperial Appliance Plaza. All rights reserved.</small>
+        <small>Grand Xing-Event Order v0.1.</small>
         <span id="current-year"></span>
         <div class="float-right d-none d-sm-inline-block">
         </div>
@@ -140,11 +181,16 @@ try {
 
 
 <script src="assets/js/jquery.min.js"></script>
+<script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
 <script src="assets/plugins/sweetalert2/sweetalert2.min.js"></script>
 <script src="assets/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="assets/plugins/toastr/toastr.min.js"></script>
 <script src="assets/plugins/chart.js/Chart.min.js"></script>
 <script src="assets/plugins/moment/moment.min.js"></script>
+<script src="assets/plugins/driver.js/dist/driver.js.iife.js"></script>
+<script src="assets/plugins/pace/pace.min.js"></script>
+<script src="assets/plugins/jsgrid/jsgrid.min.js"></script>
+<script src="assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>
 <script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
 <script src="assets/plugins/datatables/datatables.min.js"></script>
 <script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
@@ -155,8 +201,6 @@ try {
 <script src="assets/js/global-scripts.js"></script>
 <script src="assets/js/datatables.min.js"></script>
 <script src="assets/plugins/datepicker/jquery-ui.min.js"></script>
-<script src="node_modules/uikit/dist/js/uikit.min.js"></script>
-<script src="node_modules/xlsx/dist/xlsx.full.min.js"></script>
 <script src="assets/js/script.js"></script>
 <?php include 'modal.php';?>
 </body>

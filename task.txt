@@ -1,84 +1,12 @@
-$Actions = 'Change Account Password';
-date_default_timezone_set('Asia/Manila');
-$Date = date('Y-m-d');     
-$Time = date('H:i:s'); 
+To do 
+- Create a demo design only for EO contract
+- Create a Sales Team modeule design for crfeating pencil
+-Categorize the inclusions 
+-
 
 
-    $ins_activity = $conn->prepare("EXEC dbo.[AUTOGENERATE_ACVTYLOGS] @Username_= ?, @Actions_ = ?, @Date_ = ?, @Time_= ?");
-    $ins_activity->execute([$Username, $Actions, $Date, $Time]);
-    function selectBranch() {
-      $.post("dirs/dashboard/actions/get_branches.php", {}, function(data) {
-        var response = JSON.parse(data);
-        if ($.trim(response.isSuccess) === "success") {
-          var branches = response.Data;
-          $("#filter-branch").empty().append('<option value="">ALL BRANCH</option>');
-          branches.forEach(function(branch) {
-            $("#filter-branch").append('<option value="' + branch.Branch + '">' + branch.Branch + '</option>');
-          });
-        } else {
-          alert($.trim(response.Data));
-        }
-      });
-    }
 
-
-    . Guest / Company Details
-
-These identify who is requesting the event.
-
-Type: Guest / Company (dropdown)
-Full Name (for guest) / Company Name
-Contact Person (for company)
-Designation (if company)
-Email Address
-Phone Number / Mobile Number
-Address (street, city, zip, country)
-Company Tax ID / Registration Number (if applicable)
-VIP Status (optional)
-Preferred Communication Method (email, phone, WhatsApp, etc.)
-2. Event Details
-
-Information about the event itself.
-
-Event Name / Title
-Event Type (conference, seminar, party, wedding, workshop, etc.)
-Event Date (start and end date)
-Event Time (start and end time)
-Expected Number of Guests
-Event Duration (hours, days)
-Event Location / Venue (on-site, off-site)
-Event Theme / Setup (optional)
-Special Requirements (decor, AV equipment, catering, accessibility)
-3. Services / Packages
-
-What the client wants you to provide.
-
-Catering (Yes/No; type: buffet, plated, cocktail, etc.)
-Audio / Visual Equipment (projectors, microphones, sound system)
-Seating Arrangement (theater, classroom, round tables)
-Decoration / Floral Arrangements
-Photography / Videography
-Security / Parking
-Other Services (transport, accommodation, entertainment)
-4. Payment / Billing Information
-
-To handle invoicing and deposit.
-
-Billing Name / Company
-Billing Address
-Payment Terms (deposit %, due date)
-Preferred Payment Method (cash, check, credit card, bank transfer)
-Special Notes (if any discounts or promo codes apply)
-5. Approval / Notes
-
-Internal use or additional details.
-
-Event Coordinator / Account Manager
-Notes / Remarks
-Status (draft, pending approval, confirmed)
-Attachments (proposal, contracts, event layout, etc.)
-Optional Enhancements
-Use tooltips or info icons for fields like “Event Type” or “Special Requirements.”
-Include conditional fields: e.g., if Company → show Tax ID; if Catering → show menu selection.
-Add auto-save/draft feature for long forms.
-Include guest count validation and date pickers for convenience.
+Sales Staff (module)
+  -Event Order Form (Pencil Proposal/ Ammendment/ Charges/ )
+  -Calendar Event
+  -

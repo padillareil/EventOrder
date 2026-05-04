@@ -141,7 +141,7 @@
                                     <div id="collapseInclusion" class="accordion-collapse collapse">
                                         <div class="accordion-body"> 
                                             <div class="col-12 mb-3">
-                                                <div class="small-box bg-dark shadow-sm cursor-pointer">
+                                                <div class="small-box bg-dark shadow-sm cursor-pointer" onclick="openInclusionSetup()">
                                                     <div class="inner">
                                                         <h4 id="food_total_types">26</h4>
                                                         <p class="mb-0">Total Inclusion Package</p>
@@ -159,7 +159,7 @@
                                 <!-- Venue -->
                                 <div class="accordion-item">
                                     <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseVenue">
+                                        <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseVenue" >
                                              Venue Package
                                         </button>
                                     </h2>
@@ -168,7 +168,7 @@
                                     <div id="collapseVenue" class="accordion-collapse collapse">
                                         <div class="accordion-body"> <div class="overflow-auto" style="max-height: 40vh;">
                                             <div class="col-12 mb-3">
-                                                <div class="small-box bg-dark shadow-sm cursor-pointer">
+                                                <div class="small-box bg-dark shadow-sm cursor-pointer" onclick="openHotelRooms()">
                                                     <div class="inner">
                                                         <h4 id="food_total_types">26</h4>
                                                         <p class="mb-0">Total Venue Package</p>
@@ -333,6 +333,21 @@
         const offcanvas = new bootstrap.Offcanvas(el);
         offcanvas.show();
     }
+
+    function openInclusionSetup() {
+        const el = document.getElementById('offcanvas-inclusion-list');
+        const offcanvas = new bootstrap.Offcanvas(el);
+        offcanvas.show();
+    }
+
+    function openHotelRooms() {
+        const el = document.getElementById('offcanvas-hotel-list');
+        const offcanvas = new bootstrap.Offcanvas(el);
+        offcanvas.show();
+    }
+
+
+
 </script>
 
 

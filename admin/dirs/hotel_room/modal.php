@@ -14,6 +14,10 @@
                     <input type="hidden" id="functionroom-id">
                     <div class="row g-3">
                         <div class="mb-2">
+                          <label class="form-label fw-bold text-uppercase text-muted small">Hotel</label>
+                          <input type="text" class="form-control" name="functionroom-hotel" id="functionroom-hotel" required>
+                        </div>
+                        <div class="mb-2">
                           <label class="form-label fw-bold text-uppercase text-muted small">Function Room</label>
                           <input type="text" class="form-control" name="functionroom-name" id="functionroom-name" required>
                         </div>

@@ -2,3 +2,5 @@
 <script src="dirs/event_package/script/event_package.js"></script>
 
 <?php include 'modal.php';  ?>
+
+<?php include 'offcanvas.php';  ?>

@@ -36,6 +36,12 @@
 
     <div class="card-body p-2">
         <div class="tab-content" id="foodMenuContent">
+        <div class="input-group border ml-4 bg-light px-3 flex-grow-1" style="max-width: 490px;">
+            <span class="input-group-text bg-transparent border-0 p-0 me-2">
+                <i class="bi bi-search text-muted small"></i>
+            </span>
+            <input type="search" class="form-control bg-transparent border-0 small py-2 shadow-none" id="search-amenitieslist" placeholder="Search...">
+        </div>
             <div class="tab-pane fade show active" id="food_menus" role="tabpanel">
                 <?php include 'menus.php'; ?>
             </div>

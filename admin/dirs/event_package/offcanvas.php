@@ -77,7 +77,202 @@
 
 
 
+<!-- Inlcusion Offcanvas -->
+<div class="offcanvas offcanvas-end bg-dark" data-bs-scroll="true"  data-bs-backdrop="false"  tabindex="-1"  id="offcanvas-inclusion-list">
+    <div class="offcanvas-header border-bottom gold-border">
+        <div>
+            <h6 class="mb-0 fw-bold text-gold">Inclusions</h6>
+            <small class="text-light-50">Select and apply selection</small>
+        </div>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column p-3">
+        <div class="mb-3 px-2">
+            <input type="search" class="form-control gold-input" placeholder="Search...">
+        </div>
+        <div class="flex-grow-1 overflow-auto">
+            <div class="card gold-card mb-2">
+                <label class="card-body d-flex justify-content-between align-items-center m-0 cursor-pointer">
 
+                    <div class="d-flex align-items-center">
+                        <div class="form-check me-3">
+                            <input class="form-check-input gold-checkbox" type="checkbox">
+                        </div>
+
+                        <div>
+                            <div class="fw-semibold text-white">Free WiFi Access during the Event up to 100mbps</div>
+                        </div>
+                    </div>
+
+
+                </label>
+            </div>
+            <div class="card gold-card mb-2">
+                <label class="card-body d-flex justify-content-between align-items-center m-0 cursor-pointer">
+
+                    <div class="d-flex align-items-center">
+                        <div class="form-check me-3">
+                            <input class="form-check-input gold-checkbox" type="checkbox">
+                        </div>
+
+                        <div>
+                            <div class="fw-semibold text-white">Podium with (2) Wired Microphone</div>
+                        </div>
+                    </div>
+
+                    
+                </label>
+            </div>
+
+        </div>
+    </div>
+    <div class="border-top gold-border p-3 d-flex justify-content-center">
+        <nav>
+            <ul class="pagination" id="pagination-amenities">
+                <li class="page-item" id="li-prev-amenities">
+                    <a class="page-link" href="#" id="btn-preview-amenities">Previous</a>
+                </li>
+                <li class="page-item" id="li-next-amenities">
+                    <a class="page-link" href="#" id="btn-next-amenities">Next</a>
+                </li>
+            </ul>
+        </nav>
+        <div id="page-info-amenities" class="mt-3 small text-muted"></div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- Offcanvas Hotel rooms (Venue) -->
+<div class="offcanvas offcanvas-end bg-dark" data-bs-scroll="true"  data-bs-backdrop="false"  tabindex="-1"  id="offcanvas-hotel-list">
+    <div class="offcanvas-header border-bottom gold-border">
+        <div>
+            <h6 class="mb-0 fw-bold text-gold">Function Rooms</h6>
+            <small class="text-light-50">Select and apply selection</small>
+        </div>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column p-3">
+        <div class="mb-3 px-2">
+            <input type="search" class="form-control gold-input" placeholder="Search...">
+        </div>
+        <div class="flex-grow-1 overflow-auto">
+            <div class="card gold-card mb-2">
+                <label class="card-body d-flex justify-content-between align-items-center m-0 cursor-pointer">
+
+                    <div class="d-flex align-items-center">
+                        <div class="form-check me-3">
+                            <input class="form-check-input gold-checkbox" type="checkbox">
+                        </div>
+
+                        <div>
+                            <div class="fw-semibold text-white">Pearl</div>
+                        </div>
+                    </div>
+
+
+                </label>
+            </div>
+            <div class="card gold-card mb-2">
+                <label class="card-body d-flex justify-content-between align-items-center m-0 cursor-pointer">
+
+                    <div class="d-flex align-items-center">
+                        <div class="form-check me-3">
+                            <input class="form-check-input gold-checkbox" type="checkbox">
+                        </div>
+
+                        <div>
+                            <div class="fw-semibold text-white">Pearl A-1</div>
+                        </div>
+                    </div>
+
+
+                </label>
+            </div>
+            <div class="card gold-card mb-2">
+                <label class="card-body d-flex justify-content-between align-items-center m-0 cursor-pointer">
+
+                    <div class="d-flex align-items-center">
+                        <div class="form-check me-3">
+                            <input class="form-check-input gold-checkbox" type="checkbox">
+                        </div>
+
+                        <div>
+                            <div class="fw-semibold text-white">Pearl A-2</div>
+                        </div>
+                    </div>
+
+
+                </label>
+            </div>
+            <div class="card gold-card mb-2">
+                <label class="card-body d-flex justify-content-between align-items-center m-0 cursor-pointer">
+
+                    <div class="d-flex align-items-center">
+                        <div class="form-check me-3">
+                            <input class="form-check-input gold-checkbox" type="checkbox">
+                        </div>
+
+                        <div>
+                            <div class="fw-semibold text-white">Ruby</div>
+                        </div>
+                    </div>
+
+                    
+                </label>
+            </div>
+            <div class="card gold-card mb-2">
+                <label class="card-body d-flex justify-content-between align-items-center m-0 cursor-pointer">
+
+                    <div class="d-flex align-items-center">
+                        <div class="form-check me-3">
+                            <input class="form-check-input gold-checkbox" type="checkbox">
+                        </div>
+
+                        <div>
+                            <div class="fw-semibold text-white">Jade</div>
+                        </div>
+                    </div>
+
+                    
+                </label>
+            </div>
+            <div class="card gold-card mb-2">
+                <label class="card-body d-flex justify-content-between align-items-center m-0 cursor-pointer">
+
+                    <div class="d-flex align-items-center">
+                        <div class="form-check me-3">
+                            <input class="form-check-input gold-checkbox" type="checkbox">
+                        </div>
+
+                        <div>
+                            <div class="fw-semibold text-white">Coral</div>
+                        </div>
+                    </div>
+
+                    
+                </label>
+            </div>
+
+        </div>
+    </div>
+    <div class="border-top gold-border p-3 d-flex justify-content-center">
+        <nav>
+            <ul class="pagination" id="pagination-amenities">
+                <li class="page-item" id="li-prev-amenities">
+                    <a class="page-link" href="#" id="btn-preview-amenities">Previous</a>
+                </li>
+                <li class="page-item" id="li-next-amenities">
+                    <a class="page-link" href="#" id="btn-next-amenities">Next</a>
+                </li>
+            </ul>
+        </nav>
+        <div id="page-info-amenities" class="mt-3 small text-muted"></div>
+    </div>
+</div>
 
 
 
