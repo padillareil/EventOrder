@@ -34,10 +34,10 @@ $("#main-menu")
       $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
       $file = "dirs/event_order/event_order.php";
       break;
-    case "apply_service":
+    case "dashboard":
       $maintitle = "";
       $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
-      $file = "dirs/apply_service/apply_service.php";
+      $file = "dirs/dashboard/dashboard.php";
       break;
     case "settings":
       $maintitle = "Account Settings";
@@ -53,7 +53,7 @@ $("#main-menu")
       <img src="assets/image/logo/favicon.png" alt="Loading..." 
            style="width: 80px; height: 80px; object-fit: contain; opacity: 0.8;">
       <p class="mt-3 mb-2 text-secondary fw-semibold">Loading...</p>
-      <div class="spinner-border text-danger" role="status" style="width: 2rem; height: 2rem;">
+      <div class="spinner-border text-warning" role="status" style="width: 2rem; height: 2rem;">
         <span class="visually-hidden">Loading...</span>
       </div>
     </div>`;

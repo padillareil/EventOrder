@@ -87,7 +87,7 @@ try {
                         <!-- SECTION: OVERVIEW -->
                         <li class="nav-header small fw-bold text-muted opacity-75">Menu</li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="dashboard">
+                            <a href="#" class="nav-link active" name="menu" menucode="dashboard">
                                 <i class="nav-icon bi bi-speedometer2"></i>
                                 <p>Dashboard</p>
                             </a>
@@ -104,7 +104,7 @@ try {
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link active" name="menu" menucode="event_order">
+                            <a href="#" class="nav-link" name="menu" menucode="event_order">
                                 <i class="nav-icon bi bi-file-earmark-text"></i>
                                 <p>Event Order</p>
                             </a>
