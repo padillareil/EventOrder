@@ -43,7 +43,7 @@
          }
 
          var role = response.role;
-         if (role === 'FO') {
+         if (role === 'Sales Executive') {
            window.location.assign("manager/index.php");
          } else if (role === 'Sales Manager'){
            window.location.assign("index.php");
