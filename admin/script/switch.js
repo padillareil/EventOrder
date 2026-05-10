@@ -29,10 +29,10 @@ $("#main-menu")
   let $mainbreadcrumb = "";
 
   switch (menucode) {
-    case "menu_setup":
+    case "master_settings":
       $maintitle = "";
       $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
-      $file = "dirs/menu_setup/menu_setup.php";
+      $file = "dirs/master_settings/master_settings.php";
       break;
     case "inclusion":
       $maintitle = "";

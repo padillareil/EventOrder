@@ -10,3 +10,129 @@ Sales Staff (module)
   -Event Order Form (Pencil Proposal/ Ammendment/ Charges/ )
   -Calendar Event
   -
+
+
+  Food Package Creation Fields
+Package Information
+Package Code
+Package Name
+Package Category
+Package Tier
+Package Description
+Package Status
+Display Image / Cover Photo
+Tags / Keywords
+Event & Meal Details
+Meal Type
+AM Snack
+PM Snack
+Lunch
+Dinner
+Beverage
+Service Type
+Packed Meal
+Plated
+Buffet
+Assisted Buffet
+Full Service
+Table Service
+Food Station
+Cocktail Service
+Family Style
+Beverage Station
+Cuisine Type
+Theme / Style
+Suitable Event Type
+Wedding
+Birthday
+Corporate
+Seminar
+Meeting
+Debut
+Fiesta
+Pax & Pricing
+Minimum Pax
+Maximum Pax
+Recommended Pax
+Base Pax Count
+Additional Pax Rate
+Price Per Pax
+Total Package Amount
+Downpayment Required
+Blocking Fee
+Overtime Charge
+Corkage Fee
+Service Charge
+VAT Included (Y/N)
+Menu Composition
+Main Dish Count
+Dessert Count
+Beverage Count
+Appetizer Count
+Side Dish Count
+Rice / Pasta Inclusion
+Soup Inclusion
+Salad Inclusion
+Food Selection
+Selected Main Dishes
+Selected Snacks
+Selected Desserts
+Selected Beverages
+Add-ons Available
+Upgrade Options
+Venue & Setup
+Venue Type
+Indoor / Outdoor
+Table Setup
+Chair Setup
+Buffet Setup Type
+Tableware Included
+Utensils Included
+Mobile Kitchen Required
+Electrical Requirement
+Water Access Requirement
+Staffing & Service
+Number of Servers
+Coordinator Included
+Chef Included
+Bartender Included
+Setup Crew Included
+Cleanup Crew Included
+Time & Availability
+Preparation Time
+Serving Duration
+Package Availability
+Booking Lead Time
+Operating Hours
+Inclusions
+Sound System
+Basic Styling
+Flowers
+Balloon Setup
+LED Wall
+Host / Emcee
+Projector
+Photobooth
+Ice
+Mineral Water
+Delivery & Logistics
+Delivery Included
+Delivery Fee
+Delivery Radius
+Transportation Charge
+Setup Time
+Pullout Time
+Package Rules
+Cancellation Policy
+Refund Policy
+Reschedule Policy
+Leftover Policy
+Food Safety Notes
+Internal Monitoring
+Created By
+Approved By
+Last Updated
+Package Visibility
+Featured Package (Y/N)
+Seasonal Package (Y/N)
+Recommended Package (Y/N)

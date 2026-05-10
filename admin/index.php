@@ -85,10 +85,16 @@ try {
                         <li class="nav-item">
                             <p class="text-muted">Menu</p>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="#" class="nav-link active" name="menu" menucode="event_package">
                                 <i class="nav-icon bi-box-seam"></i>
                                 <p>Event Package</p>
+                            </a>
+                        </li> -->
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active" name="menu" menucode="master_settings">
+                                <i class="nav-icon bi bi-gear"></i>
+                                <p>Master Settings</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -143,8 +149,6 @@ try {
                     </ul>
                 </nav>
             </div>
-            <input type="hidden" value="<?php echo $user['Theme'];?>" id="theme-pref">
-            <input type="hidden" value="<?php echo $user['Username'];?>" id="session-user">
         </aside>
     </div>
     <div class="content-wrapper">
