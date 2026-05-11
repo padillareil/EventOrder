@@ -18,6 +18,7 @@ $Roomsize = $_POST['Roomsize'];
 try {
     $conn->beginTransaction();
 
+
     $upd_functioninfo = $conn->prepare("EXEC dbo.[FunctionUpdate_info] ?,?,?,?,?,?,?,?,?,?,?,?");
     $upd_functioninfo->execute([$DocEntry,$Property,$Tier,$Functionroom,$WingFloor,$HotelAddress,$VenueType,$Fee,$PaxCapacity,$ChairCapacity,$TableCapacity,$Roomsize]);
 

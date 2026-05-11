@@ -1,21 +1,22 @@
 <?php
   require_once "../../../../../../config/connection_config.php";
-  $premiumCurrentPage  = $_POST['premiumCurrentPage'] ?? 1;
-  $premiumPageSize     = $_POST['premiumPageSize'] ?? 20;
+  $BasicCurrentPage  = $_POST['BasicCurrentPage'] ?? 1;
+  $BasicPageSize     = $_POST['BasicPageSize'] ?? 20;
   $Search       = $_POST['Search'];
-  $Tier         = 'Premium';
+  $Tier = 'Basic';
+
 try {
   $conn->beginTransaction();
 
-    $fetch_premium = $conn->prepare("EXEC dbo.[BasicFunction_Pagination] ?,?,?,?");
-    $fetch_premium->execute([$premiumCurrentPage,$premiumPageSize,$Search,$Tier]);
-    $get_premiumfunction = $fetch_premium->fetchAll(PDO::FETCH_ASSOC);
+    $fetch_ = $conn->prepare("EXEC dbo.[FoodPackage_Pagination] ?,?,?,?");
+    $fetch_->execute([$BasicCurrentPage,$BasicPageSize,$Search, $Tier]);
+    $get_function = $fetch_->fetchAll(PDO::FETCH_ASSOC);
 
   $conn->commit();
 
   $response = array(
     "isSuccess" => 'success',
-    "Data" => $get_premiumfunction
+    "Data" => $get_function
   );
   echo json_encode($response);
 

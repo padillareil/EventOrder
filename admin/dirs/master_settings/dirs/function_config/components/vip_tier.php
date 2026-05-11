@@ -45,215 +45,323 @@
 
 
 <script>
+
     function formatComma(number) {
         if (number == null) return "";
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
 
-    var VipCurrentPage = 1;
-    var VipPageSize = 10;
-    var totalPages = 1;
-    var isPackageMode = false;
-    var selectedItems = [];
+    var vipCurrentPage = 1;
+    var vipPageSize = 20;
+    var vipTotalPages = 1;
 
 
     function VIP_tier(page = 1) {
-        VipCurrentPage = page; 
-        var display = $("#vip_tier_content");
-        display.html(`
-                <tr>
-                    <td colspan="6" class="p-5 text-center text-muted">
-                        <div class="spinner-border text-dark"></div>
-                        <div class="mt-2">Loading...</div>
-                    </td>
-                </tr>
-        `);
-        var Search = $("#search-general").val();
-        $.post("dirs/master_settings/dirs/function_config/actions/get_pagination_vip.php", {
-            VipCurrentPage,
-            VipPageSize,
-            Search
-        }, function (data) {
-            let response;
 
-            try {
-                response = JSON.parse(data);
-            } catch (e) {
-                display.html(`<div class="text-dark text-center py-4">Server Error</div>`);
-                return;
-            }
-            if ($.trim(response.isSuccess) === "success") {
-                vipContent(response.Data);
-                totalPages = (response.Data && response.Data.length > 0)
-                    ? parseInt(response.Data[0].TotalPages)
-                    : 1;
+        vipCurrentPage = page;
+
+        var display = $("#vip_tier_content");
+
+        display.html(`
+            <tr>
+                <td colspan="6" class="p-5 text-center text-muted">
+                    <div class="spinner-border text-dark"></div>
+                    <div class="mt-2">Loading...</div>
+                </td>
+            </tr>
+        `);
+
+        var Search = $("#search-general").val();
+
+        $.post(
+            "dirs/master_settings/dirs/function_config/actions/get_pagination_vip.php",
+            {
+                vipCurrentPage,
+                vipPageSize,
+                Search
+            },
+            function (data) {
+
+                let response;
+
+                try {
+
+                    response = JSON.parse(data);
+
+                } catch (e) {
+
+                    display.html(`
+                        <tr>
+                            <td colspan="6" class="text-center text-danger p-4">
+                                Server Error
+                            </td>
+                        </tr>
+                    `);
+
+                    return;
+                }
+
+                if ($.trim(response.isSuccess) === "success") {
+
+                    vipContent(response.Data);
+
+                    vipTotalPages =
+                        (response.Data && response.Data.length > 0)
+                            ? parseInt(response.Data[0].TotalPages)
+                            : 1;
 
                     vipPaginationUi();
                     vipPageNumber();
-            } else {
-                emptyStatevip("vip function was empty.");
+
+                } else {
+
+                    emptyStatevip("VIP function was empty.");
+
+                }
+
             }
-        });
+        );
+
     }
 
 
     function vipContent(data) {
+
         const display = $("#vip_tier_content");
+
         if (!data || data.length === 0) {
             showEmptyStateVip("No available.");
             return;
         }
+
         display.empty();
 
         data.forEach(vip => {
-            display.append(`
-               <tr class="align-middle" data-value="${vip.DocEntry}">
-                   <td class="text-muted fw-medium">
-                       ${vip.OrderNumber}
-                   </td>
 
-                   <td class="fw-semibold text-muted text-center">
-                       ${vip.RefNumber || '—'}
-                   </td>
+            display.append(`
+                <tr class="align-middle" data-value="${vip.DocEntry}">
+
+                    <td class="text-muted fw-medium">
+                        ${vip.OrderNumber}
+                    </td>
 
                     <td class="fw-semibold text-muted text-center">
-                       <a href="#" onclick="mdlReview('${vip.DocEntry}')"> ${vip.PropertyDisplay || '—'}</a>
-                    </td>
-                    <td class="fw-semibold text-muted  text-center">
-                        ${vip.FunctionDisplay  || '—'}
+                        ${vip.RefNumber || '—'}
                     </td>
 
-                    <td class="fw-semibold text-muted  text-center">
+                    <td class="fw-semibold text-muted text-center">
+                        <a href="#" onclick="mdlReview('${vip.DocEntry}')">
+                            ${vip.PropertyDisplay || '—'}
+                        </a>
+                    </td>
+
+                    <td class="fw-semibold text-muted text-center">
+                        ${vip.FunctionDisplay || '—'}
+                    </td>
+
+                    <td class="fw-semibold text-muted text-center">
                         ₱${formatComma(vip.RentalFee || '0')}
                     </td>
 
                     <td class="text-center">
-                        <span class="badge px-3 py-2 rounded-pill toggle-status cursor-pointer
-                            ${vip.SpaceStatus === "Available" ? "bg-success-subtle text-success" : "bg-danger-subtle text-danger"}"
-                            data-id="${vip.DocEntry}"
-                            data-status="${vip.SpaceStatus}">
+                        <span class="badge px-3 py-2 rounded-pill
+                            ${vip.SpaceStatus === "Available"
+                                ? "bg-success-subtle text-success"
+                                : "bg-danger-subtle text-danger"}">
+
                             ${vip.SpaceStatus}
+
                         </span>
                     </td>
-               </tr>
+
+                </tr>
             `);
+
         });
+
     }
 
 
-
-
-    /*Function for no record of beverages*/
     function emptyStatevip(message) {
+
         $("#vip_tier_content").html(`
             <tr>
-              <td colspan="6" class="p-5 text-center text-muted">
-                  <i class="bi bi-card-list text-lg"></i> 
-                  <br>
-                      No Function Available!
-            <div class="small opacity-75">${message}</div>
-                  </td>
+                <td colspan="6" class="p-5 text-center text-muted">
+                    <i class="bi bi-card-list"></i>
+                    <br>
+                    No Function Available!
+                    <div class="small opacity-75">${message}</div>
+                </td>
             </tr>
         `);
+
     }
 
-    /*Function for no record of beverages*/
     function showEmptyStateVip(message) {
+
         $("#vip_tier_content").html(`
             <tr>
-              <td colspan="6" class="p-5 text-center text-muted">
-                  <i class="bi bi-card-list text-lg"></i> 
-                  <br>
-                      No Record Found!
-            <div class="small opacity-75">${message}</div>
-                  </td>
+                <td colspan="6" class="p-5 text-center text-muted">
+                    <i class="bi bi-card-list"></i>
+                    <br>
+                    No Record Found!
+                    <div class="small opacity-75">${message}</div>
+                </td>
             </tr>
         `);
+
     }
 
 
-    /*Function to count page number page 1 of and so on*/
     function vipPaginationUi() {
-        $("#page-info-vip").text("Page " + VipCurrentPage + " of " + totalPages);
-        if (VipCurrentPage <= 1) {
-            $("#li-prev-vip").addClass("disabled");
-        } else {
-            $("#li-prev-vip").removeClass("disabled");
-        }
 
-        if (VipCurrentPage >= totalPages) {
-            $("#li-next-vip").addClass("disabled");
-        } else {
-            $("#li-next-vip").removeClass("disabled");
-        }
+        $("#page-info-vip").text(
+            "Page " + vipCurrentPage + " of " + vipTotalPages
+        );
+
+        $("#li-prev-vip").toggleClass(
+            "disabled",
+            vipCurrentPage <= 1
+        );
+
+        $("#li-next-vip").toggleClass(
+            "disabled",
+            vipCurrentPage >= vipTotalPages
+        );
+
     }
 
-    /*Function to build list of pagination*/
+    
+
     function vipPageNumber() {
+
         $("#pagination-vip li.page-number-vip").remove();
+
         let prevLi = $("#li-prev-vip");
+
         let maxVisible = 5;
-        let start = Math.max(1, VipCurrentPage - 2);
-        let end = Math.min(totalPages, start + maxVisible - 1);
+
+        let start = Math.max(
+            1,
+            vipCurrentPage - 2
+        );
+
+        let end = Math.min(
+            vipTotalPages,
+            start + maxVisible - 1
+        );
+
         if (end - start < maxVisible - 1) {
             start = Math.max(1, end - maxVisible + 1);
         }
+
         if (start > 1) {
-            insertPageBreakfast(1, prevLi);
+
+            insertPageVip(1, prevLi);
+
             prevLi = prevLi.next();
 
             if (start > 2) {
-                prevLi.after(`<li class="page-item page-number-vip disabled"><span class="page-link">...</span></li>`);
+
+                prevLi.after(`
+                    <li class="page-item page-number-vip disabled">
+                        <span class="page-link">...</span>
+                    </li>
+                `);
+
                 prevLi = prevLi.next();
+
             }
+
         }
+
         for (let i = start; i <= end; i++) {
-            insertPageBreakfast(i, prevLi);
+
+            insertPageVip(i, prevLi);
+
             prevLi = prevLi.next();
+
         }
-        if (end < totalPages) {
-            if (end < totalPages - 1) {
-                prevLi.after(`<li class="page-item page-number-vip disabled"><span class="page-link">...</span></li>`);
+
+        if (end < vipTotalPages) {
+
+            if (end < vipTotalPages - 1) {
+
+                prevLi.after(`
+                    <li class="page-item page-number-vip disabled">
+                        <span class="page-link">...</span>
+                    </li>
+                `);
+
                 prevLi = prevLi.next();
+
             }
-            insertPageBreakfast(totalPages, prevLi);
+
+            insertPageVip(vipTotalPages, prevLi);
+
         }
-        function insertPageBreakfast(i, ref) {
-            let activeClass = (i === VipCurrentPage) ? "active" : "";
+
+        function insertPageVip(i, ref) {
+
+            let activeClass =
+                (i === vipCurrentPage)
+                    ? "active"
+                    : "";
 
             let li = `
                 <li class="page-item page-number-vip ${activeClass}">
-                    <a class="page-link" href="#" data-page="${i}">${i}</a>
+                    <a class="page-link" href="#" data-page="${i}">
+                        ${i}
+                    </a>
                 </li>
             `;
 
             $(li).insertAfter(ref);
+
         }
+
     }
 
-    /*search-vip*/
-    $("#search-general").on("keydown", function(e) {
+
+    $("#search-general").on("keydown", function (e) {
+
         if (e.key === "Enter") {
-            VIP_tier();
+            VIP_tier(1);
         }
+
     });
 
-      /* Pagination + Fetch Blocked vipounts */
-      $("#btn-preview-vip").on("click", function(e) {
-          e.preventDefault();
+    $("#btn-preview-vip").on("click", function (e) {
 
-          if (VipCurrentPage > 1) {
-              VIP_tier(VipCurrentPage - 1);
-          }
-      });
+        e.preventDefault();
 
-    /*Function load all important tags tickets*/
-      $("#btn-next-vip").on("click", function(e) {
-          e.preventDefault();
+        if (vipCurrentPage > 1) {
+            VIP_tier(vipCurrentPage - 1);
+        }
 
-          if (VipCurrentPage < totalPages) {
-              VIP_tier(VipCurrentPage + 1);
-          }
-      });
-  </script>
+    });
+
+    $("#btn-next-vip").on("click", function (e) {
+
+        e.preventDefault();
+
+        if (vipCurrentPage < vipTotalPages) {
+            VIP_tier(vipCurrentPage + 1);
+        }
+
+    });
+
+    $(document).on(
+        "click",
+        "#pagination-vip .page-link[data-page]",
+        function (e) {
+
+            e.preventDefault();
+
+            VIP_tier($(this).data("page"));
+
+        }
+    );
+
+</script>

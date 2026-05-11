@@ -7,7 +7,7 @@
 try {
   $conn->beginTransaction();
 
-    $fetch_premium = $conn->prepare("EXEC dbo.[BasicFunction_Pagination] ?,?,?,?");
+    $fetch_premium = $conn->prepare("EXEC dbo.[FoodPackage_Pagination] ?,?,?,?");
     $fetch_premium->execute([$premiumCurrentPage,$premiumPageSize,$Search,$Tier]);
     $get_premiumfunction = $fetch_premium->fetchAll(PDO::FETCH_ASSOC);
 

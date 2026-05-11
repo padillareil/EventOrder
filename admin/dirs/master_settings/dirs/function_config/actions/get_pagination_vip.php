@@ -1,14 +1,14 @@
 <?php
   require_once "../../../../../../config/connection_config.php";
-  $VipCurrentPage  = $_POST['VipCurrentPage'] ?? 1;
-  $VipPageSize     = $_POST['VipPageSize'] ?? 20;
+  $vipCurrentPage  = $_POST['vipCurrentPage'] ?? 1;
+  $vipPageSize     = $_POST['vipPageSize'] ?? 20;
   $Search       = $_POST['Search'];
   $Tier         = 'VIP';
 try {
   $conn->beginTransaction();
 
     $fetch_premium = $conn->prepare("EXEC dbo.[BasicFunction_Pagination] ?,?,?,?");
-    $fetch_premium->execute([$VipCurrentPage,$VipPageSize,$Search,$Tier]);
+    $fetch_premium->execute([$vipCurrentPage,$vipPageSize,$Search,$Tier]);
     $get_premiumfunction = $fetch_premium->fetchAll(PDO::FETCH_ASSOC);
 
   $conn->commit();

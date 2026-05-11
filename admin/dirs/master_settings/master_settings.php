@@ -39,11 +39,6 @@
                                 Themes & Backdrop
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link small py-1 px-2 text-dark" href="#" name="master-nav" menucode="tablechairs_config">
-                                Amenities Setup
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -80,10 +75,6 @@
             case "backdrop_config":
                 file = "dirs/master_settings/dirs/backdrop_config/backdrop_config.php";
             break;
-            case "tablechairs_config":
-                file = "dirs/master_settings/dirs/tablechairs_config/tablechairs_config.php";
-            break;
-
             default:
             return;
         }

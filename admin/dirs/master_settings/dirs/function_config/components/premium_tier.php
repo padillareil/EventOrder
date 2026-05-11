@@ -50,17 +50,10 @@
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
-    /* =========================
-       PREMIUM STATE
-    ========================== */
 
     var premiumCurrentPage = 1;
-    var premiumPageSize = 10;
+    var premiumPageSize = 20;
     var premiumTotalPages = 1;
-
-    /* =========================
-       LOAD PREMIUM DATA
-    ========================== */
 
     function Premium_tier(page = 1) {
 
@@ -82,9 +75,9 @@
         $.post(
             "dirs/master_settings/dirs/function_config/actions/get_pagination_premium.php",
             {
-                CurrentPage: premiumCurrentPage,
-                PageSize: premiumPageSize,
-                Search: Search
+                premiumCurrentPage,
+                premiumPageSize,
+                Search
             },
             function (data) {
 
@@ -117,9 +110,6 @@
         );
     }
 
-    /* =========================
-       CONTENT
-    ========================== */
 
     function premiumContent(data) {
 
@@ -175,9 +165,6 @@
 
     }
 
-    /* =========================
-       EMPTY STATES
-    ========================== */
 
     function emptyStatepremium(message) {
 
@@ -209,9 +196,6 @@
 
     }
 
-    /* =========================
-       PAGINATION UI
-    ========================== */
 
     function premiumPaginationUi() {
 
@@ -231,9 +215,6 @@
 
     }
 
-    /* =========================
-       PAGE NUMBERS
-    ========================== */
 
     function premiumPageNumber() {
 
@@ -306,9 +287,6 @@
 
     }
 
-    /* =========================
-       EVENTS
-    ========================== */
 
     $("#search-general").on("keydown", function (e) {
         if (e.key === "Enter") {

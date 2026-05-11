@@ -1,8 +1,8 @@
 <!-- Header & Pagination Row -->
 <div class="d-flex justify-content-between align-items-center mb-2">
     <div>
-        <h6 class="fw-bold mb-0">Standard Function</h6>
-        <p class="text-muted small mb-0">Standard tier function room setup.</p>
+        <h6 class="fw-bold mb-0">Standard Food Setup</h6>
+        <p class="text-muted small mb-0">Standard tier package setup.</p>
     </div>
 
     <!-- Top-Right Small Pagination -->
@@ -30,11 +30,10 @@
             <tr>
                 <th class="ps-3 py-2 text-uppercase text-bold" style="width: 50px; font-size: 0.75rem;">#</th>
                 <th class="py-2 text-uppercase text-bold small text-center">Ref No.</th>
-                <th class="py-2 text-uppercase text-bold small text-center">Hotel</th>
-                <th class="py-2 text-uppercase text-bold small text-center">Function Detail</th>
-                <th class="py-2 text-uppercase text-bold small text-center">Rental Fee</th>
+                <th class="py-2 text-uppercase text-bold small text-center">Event Type</th>
+                <th class="py-2 text-uppercase text-bold small text-center">Minimum Pax</th>
+                <th class="py-2 text-uppercase text-bold small text-center">Maximum Pax</th>
                 <th class="py-2 text-uppercase text-bold small text-center">Status</th>
-            </tr>
         </thead>
         <tbody class="border-top-0 small" id="standard_tier_content">
             <!-- Dynamic Content -->
@@ -45,12 +44,6 @@
 
 
 <script>
-
-    function formatComma(number) {
-        if (number == null) return "";
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
     var StandardCurrentPage = 1;
     var StandardPageSize = 20;
     var standardTotalPages = 1;
@@ -70,7 +63,7 @@
         var Search = $("#search-general").val();
 
         $.post(
-            "dirs/master_settings/dirs/function_config/actions/get_pagination_standard.php",
+            "dirs/master_settings/dirs/food_config/actions/get_pagination_standard.php",
             {
                 StandardCurrentPage,
                 StandardPageSize,
@@ -136,25 +129,24 @@
 
                     <td class="fw-semibold text-muted text-center">
                         <a href="#" onclick="mdlReview('${standard.DocEntry}')">
-                            ${standard.PropertyDisplay || '—'}
+                            ${standard.EventType || '—'}
                         </a>
                     </td>
 
                     <td class="fw-semibold text-muted text-center">
-                        ${standard.FunctionDisplay || '—'}
+                        ${standard.MinPax || '0'}
                     </td>
-
                     <td class="fw-semibold text-muted text-center">
-                        ₱${formatComma(standard.RentalFee || '0')}
+                        ${standard.MaxPax || '0'}
                     </td>
 
                     <td class="text-center">
                         <span class="badge px-3 py-2 rounded-pill
-                            ${standard.SpaceStatus === "Available"
+                            ${standard.PackageStatus === "Available"
                                 ? "bg-success-subtle text-success"
                                 : "bg-danger-subtle text-danger"}">
 
-                            ${standard.SpaceStatus}
+                            ${standard.PackageStatus}
 
                         </span>
                     </td>

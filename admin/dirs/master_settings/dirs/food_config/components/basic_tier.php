@@ -1,8 +1,8 @@
 <!-- Header & Pagination Row -->
 <div class="d-flex justify-content-between align-items-center mb-2">
     <div>
-        <h6 class="fw-bold mb-0">Basic Function</h6>
-        <p class="text-muted small mb-0">Basic tier function room setup.</p>
+        <h6 class="fw-bold mb-0">Basic Food Setup</h6>
+        <p class="text-muted small mb-0">Basic tier food package setup.</p>
     </div>
 
     <!-- Top-Right Small Pagination -->
@@ -30,9 +30,9 @@
             <tr>
                 <th class="ps-3 py-2 text-uppercase text-bold" style="width: 50px; font-size: 0.75rem;">#</th>
                 <th class="py-2 text-uppercase text-bold small text-center">Ref No.</th>
-                <th class="py-2 text-uppercase text-bold small text-center">Hotel</th>
-                <th class="py-2 text-uppercase text-bold small text-center">Function Detail</th>
-                <th class="py-2 text-uppercase text-bold small text-center">Rental Fee</th>
+                <th class="py-2 text-uppercase text-bold small text-center">Event Type</th>
+                <th class="py-2 text-uppercase text-bold small text-center">Minimum Pax</th>
+                <th class="py-2 text-uppercase text-bold small text-center">Maximum Pax</th>
                 <th class="py-2 text-uppercase text-bold small text-center">Status</th>
             </tr>
         </thead>
@@ -45,12 +45,6 @@
 
 
 <script>
-    function formatComma(number) {
-        if (number == null) return "";
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
-
     var BasicCurrentPage = 1;
     var BasicPageSize = 20;
     var totalPages = 1;
@@ -70,7 +64,7 @@
                 </tr>
         `);
         var Search = $("#search-general").val();
-        $.post("dirs/master_settings/dirs/function_config/actions/get_pagination_basic.php", {
+        $.post("dirs/master_settings/dirs/food_config/actions/get_pagination_basic.php", {
             BasicCurrentPage,
             BasicPageSize,
             Search
@@ -92,7 +86,7 @@
                     BasicPaginationUi();
                     BasicPageNumber();
             } else {
-                emptyStatebasic("basic function was empty.");
+                emptyStatebasic("basic food package was empty.");
             }
         });
     }
@@ -118,22 +112,20 @@
                    </td>
 
                     <td class="fw-semibold text-muted text-center">
-                       <a href="#" onclick="mdlReview('${basic.DocEntry}')"> ${basic.PropertyDisplay || '—'}</a>
+                       <a href="#" onclick="mdlReview('${basic.DocEntry}')"> ${basic.EventType || '—'}</a>
                     </td>
                     <td class="fw-semibold text-muted  text-center">
-                        ${basic.FunctionDisplay  || '—'}
+                        ${basic.MinPax  || '0'}
                     </td>
-
                     <td class="fw-semibold text-muted  text-center">
-                        ₱${formatComma(basic.RentalFee || '0')}
+                        ${basic.MaxPax  || '0'}
                     </td>
-
                     <td class="text-center">
                         <span class="badge px-3 py-2 rounded-pill toggle-status cursor-pointer
-                            ${basic.SpaceStatus === "Available" ? "bg-success-subtle text-success" : "bg-danger-subtle text-danger"}"
+                            ${basic.PackageStatus === "Available" ? "bg-success-subtle text-success" : "bg-danger-subtle text-danger"}"
                             data-id="${basic.DocEntry}"
-                            data-status="${basic.SpaceStatus}">
-                            ${basic.SpaceStatus}
+                            data-status="${basic.PackageStatus}">
+                            ${basic.PackageStatus}
                         </span>
                     </td>
                </tr>
@@ -151,7 +143,7 @@
               <td colspan="6" class="p-5 text-center text-muted">
                   <i class="bi bi-card-list text-lg"></i> 
                   <br>
-                      No Function Available!
+                      No Package Available!
             <div class="small opacity-75">${message}</div>
                   </td>
             </tr>

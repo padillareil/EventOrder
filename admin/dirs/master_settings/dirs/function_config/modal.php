@@ -204,7 +204,7 @@
             $spinner.addClass("d-none");
             $text.text("Save");
             if($.trim(data) == "OK"){
-                $text.text("Create Account");
+                $text.text("Save");
                 $("#frm-add-function")[0].reset();
                 $("#mdl-add-function").modal('hide');
                 basicFunction_Tier();
@@ -557,7 +557,7 @@
             $btnSubmit.prop("disabled", false);
             $btnCancel.prop("disabled", false);
             $spinner.addClass("d-none");
-            $text.text("Save");
+            $text.text("Update");
             if($.trim(data) == "success"){
                 $text.text("Create Account");
                 $("#frm-reupdate-function")[0].reset();
@@ -587,3 +587,6 @@
         });
     });
 </script>
+
+
+
