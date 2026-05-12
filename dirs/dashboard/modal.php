@@ -115,7 +115,7 @@
                     </div>
                 </div>
                 <div class="modal-footer bg-light border-0 py-3">
-                    <button class="btn btn-dark px-4 shadow-lg" type="button" onclick="loadForm2()">Next</button>
+                    <button class="btn btn-dark px-4 shadow-lg" type="button" data-bs-target="#mdl-pencilbook-foods" data-bs-toggle="modal">Next</button>
                 </div>
             </div>
         </div>
@@ -123,7 +123,8 @@
 
 
     <script>
-       function loadForm2() {
+
+      /* function loadForm2() {
 
            let isValid = true;
 
@@ -227,7 +228,7 @@
            // SHOW NEXT MODAL
            $("#mdl-pencilbook-form").modal('hide');
            $("#mdl-pencilbook-foods").modal('show');
-       }
+       }*/
     </script>
 
 <!-- Modal Booking Food Setup -->
