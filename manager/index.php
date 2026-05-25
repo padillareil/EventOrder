@@ -37,7 +37,7 @@ try {
   <link rel="stylesheet" href="../assets/plugins/bootstrap-icons/font/bootstrap-icons.css">
   <link rel="stylesheet" href="../assets/plugins/datatables/datatables.min.css">
   <link rel="stylesheet" type="text/css" href="../assets/plugins/bs-stepper/css/bs-stepper.min.css">
-  <link rel="stylesheet" type="text/css" href="../assets/plugins/pace/themes/gold/pace-theme-minimal.css">
+  <link rel="stylesheet" type="text/css" href="../assets/plugins/pace/themes/blue/pace-theme-minimal.css">
   <link rel="stylesheet" type="text/css" href="../assets/plugins/jsgrid/jsgrid-theme.min.css">
   <link rel="stylesheet" type="text/css" href="../assets/plugins/jsgrid/jsgrid-theme.css">
   <link rel="stylesheet" type="text/css" href="../assets/plugins/fullcalendar/main.css">
@@ -191,6 +191,7 @@ try {
     <div class="content-wrapper">
       <div class="content-header">
         <div class="container-fluid">
+            <div class="top-bg"></div> <!-- Display background design -->
           <div class="row mb-2">
             <div class="col-sm-6">
               <h4 class="m-0 text-bold" id="main-title"></h4>

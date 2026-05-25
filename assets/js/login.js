@@ -45,10 +45,18 @@
          var role = response.role;
          if (role === 'Sales Executive') {
            window.location.assign("manager/index.php");
-         } else if (role === 'Sales Manager'){
+         } else if (role === 'Sales Employee'){
            window.location.assign("index.php");
-         } else if (role === 3){
-           window.location.assign("index.php");
+         } else if (role === 'Accounting'){
+           window.location.assign("accounting/index.php");
+         } else if (role === 'Audit'){
+           window.location.assign("audit/index.php");
+         } else if (role === 'Hotel Admin'){
+           window.location.assign("admin_hotel/index.php");
+         } else if (role === 'Restaurant'){
+           window.location.assign("restaurant/index.php");
+         } else if (role === 'Function'){
+           window.location.assign("employee/index.php");
          } else {
            window.location.assign("login.php");
          }

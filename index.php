@@ -27,7 +27,7 @@ try {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Event Order- Sales Team</title>
+  <title><?php echo $user['Role'];  ?></title>
   <link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/adminlte.min.css">
@@ -37,7 +37,7 @@ try {
   <link rel="stylesheet" href="assets/plugins/bootstrap-icons/font/bootstrap-icons.css">
   <link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
   <link rel="stylesheet" type="text/css" href="assets/plugins/bs-stepper/css/bs-stepper.min.css">
-  <link rel="stylesheet" type="text/css" href="assets/plugins/pace/themes/gold/pace-theme-minimal.css">
+  <link rel="stylesheet" type="text/css" href="assets/plugins/pace/themes/blue/pace-theme-minimal.css">
   <link rel="stylesheet" type="text/css" href="assets/plugins/jsgrid/jsgrid-theme.min.css">
   <link rel="stylesheet" type="text/css" href="assets/plugins/jsgrid/jsgrid-theme.css">
   <link rel="stylesheet" type="text/css" href="assets/plugins/fullcalendar/main.css">
@@ -53,7 +53,7 @@ try {
   <link rel="icon" href="assets/image/logo/favicon.png">
 
 </head>
-<body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
+<body class="layout-fixed sidebar-expand-lg sidebar-mini sidebar-collapse bg-body-tertiary">
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand bg-light">
             <ul class="navbar-nav">
@@ -74,9 +74,9 @@ try {
         <aside class="main-sidebar sidebar-dark-info elevation-5">
             <p class="text-center brand-link">
                 <a href="index.php" style="text-decoration: none; color: inherit;">
-                    <img src="assets/image/logo/favicon.png" alt="User Logo" id="profile-image"style="width: 100px; height: 100px; object-fit: cover;">
+                    <img src="assets/image/logo/favicon.png" alt="User Logo" id="profile-image"style="width: 50px; height: 50px; object-fit: cover;">
                     <br>
-                    Sales Team
+                    Katrina
                 </a>
                 <br>
             </p>
@@ -87,60 +87,24 @@ try {
                         <!-- SECTION: OVERVIEW -->
                         <li class="nav-header small fw-bold text-muted opacity-75">Menu</li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link active" name="menu" menucode="dashboard">
-                                <i class="nav-icon bi bi-speedometer2"></i>
-                                <p>Dashboard</p>
-                            </a>
-                        </li>
-
-                        <!-- SECTION: CORE OPERATIONS -->
-                        <li class="nav-header small fw-bold text-muted opacity-75 mt-1">Event Management</li>
-                        
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="bookings">
+                            <a href="#" class="nav-link active" name="menu" menucode="bookings">
                                 <i class="nav-icon bi bi-calendar-event"></i>
-                                <p>Calendar Event</p>
+                                <p>Booking</p>
                             </a>
                         </li>
-
+                       
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="event_order">
-                                <i class="nav-icon bi bi-file-earmark-text"></i>
-                                <p>Event Order</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="event-orders">
-                                <i class="nav-icon bi bi-clipboard-check"></i>
-                                <p>Event Orders (BEO)</p>
+                            <a href="#" class="nav-link" name="menu" menucode="eventorders">
+                                <i class="nav-icon bi bi-receipt"></i>
+                                <p>Event Orders</p>
                             </a>
                         </li>
 
                         <!-- SECTION: RELATIONSHIPS -->
-                        <li class="nav-header small fw-bold text-muted opacity-75 mt-1">CRM</li>
-                        
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="clients">
-                                <i class="nav-icon bi bi-people"></i>
-                                <p>Engagers Account</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="kpi">
-                                <i class="nav-icon bi bi-trophy"></i>
-                                <p>Sales Performance</p>
-                            </a>
-                        </li>
-
-                        <!-- SECTION: CONFIGURATION -->
-                        <hr class="my-3 mx-2 border-secondary opacity-25">
-                        
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="settings">
-                                <i class="nav-icon bi bi-sliders"></i>
-                                <p>Room & Menu Setup</p>
+                            <a href="#" class="nav-link" name="menu" menucode="settings" data-bs-toggle="tooltip" data-bs-title="Settings" data-bs-placement="right">
+                                <i class="nav-icon bi bi-gear"></i>
+                                <p>Settings</p>
                             </a>
                         </li>
 
@@ -153,13 +117,12 @@ try {
                     </ul>
                 </nav>
             </div>
-            <input type="hidden" value="<?php echo $user['Theme'];?>" id="theme-pref">
-            <input type="hidden" value="<?php echo $user['Username'];?>" id="session-user">
         </aside>
     </div>
     <div class="content-wrapper">
       <div class="content-header">
         <div class="container-fluid">
+        <div class="top-bg"></div> <!-- Display background design -->
           <div class="row mb-2">
             <div class="col-sm-6">
               <h4 class="m-0 text-bold" id="main-title"></h4>

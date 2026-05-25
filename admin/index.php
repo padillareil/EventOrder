@@ -37,7 +37,7 @@ try {
   <link rel="stylesheet" href="../assets/plugins/bootstrap-icons/font/bootstrap-icons.css">
   <link rel="stylesheet" href="../assets/plugins/datatables/datatables.min.css">
   <link rel="stylesheet" type="text/css" href="../assets/plugins/bs-stepper/css/bs-stepper.min.css">
-  <link rel="stylesheet" type="text/css" href="../assets/plugins/pace/themes/gold/pace-theme-minimal.css">
+  <link rel="stylesheet" type="text/css" href="../assets/plugins/pace/themes/blue/pace-theme-minimal.css">
   <link rel="stylesheet" type="text/css" href="../assets/plugins/jsgrid/jsgrid-theme.min.css">
   <link rel="stylesheet" type="text/css" href="../assets/plugins/jsgrid/jsgrid-theme.css">
   <link rel="stylesheet" type="text/css" href="../assets/plugins/fullcalendar/main.css">
@@ -85,46 +85,31 @@ try {
                         <li class="nav-item">
                             <p class="text-muted">Menu</p>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a href="#" class="nav-link active" name="menu" menucode="event_package">
-                                <i class="nav-icon bi-box-seam"></i>
-                                <p>Event Package</p>
-                            </a>
-                        </li> -->
                         <li class="nav-item">
-                            <a href="#" class="nav-link active" name="menu" menucode="master_settings">
-                                <i class="nav-icon bi bi-gear"></i>
-                                <p>Master Settings</p>
+                            <a href="#" class="nav-link active" name="menu" menucode="dashboard">
+                                <i class="nav-icon bi bi-grid"></i>
+                                <p>Dashboard</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="menu_setup">
-                                <i class="nav-icon bi bi-menu-app"></i>
-                                <p>Menu Setup</p>
+                            <a href="#" class="nav-link" name="menu" menucode="restaurant">
+                                <i class="nav-icon bi bi-cup-hot"></i>
+                                <p>Restaurant Operations</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="inclusion">
-                                <i class="nav-icon bi bi-card-checklist"></i>
-                                <p>Inclusion Setup</p>
-                            </a>
+                            <p class="text-muted">Administrator</p>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="useraccounts">
+                            <a href="#" class="nav-link" name="menu" menucode="user_account">
                                 <i class="nav-icon bi bi-people"></i>
-                                <p>Accounts</p>
+                                <p>User Control</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="amenities">
-                                <i class="nav-icon bi bi-gear"></i>
-                                <p>Amenities</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="hotel_room">
-                                <i class="nav-icon bi bi-card-checklist"></i>
-                                <p>Hotel Rooms</p>
+                            <a href="#" class="nav-link" name="menu" menucode="system_logs">
+                                <i class="nav-icon bi-journal-text"></i>
+                                <p>System Logs</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -140,12 +125,6 @@ try {
                                 <p>Logout</p>
                             </a>
                         </li>
-                       <!--  <li class="nav-item d-flex align-items-center ms-3 mt-2">
-                          <div class="form-check m-0 ml-1">
-                            <input class="form-check-input" type="checkbox" id="theme-mode" onclick="loadTheme()">
-                            <label class="form-check-label text-white ms-2" for="theme-mode" id="theme-label">Theme</label>
-                          </div>
-                        </li> -->
                     </ul>
                 </nav>
             </div>
@@ -154,6 +133,7 @@ try {
     <div class="content-wrapper">
       <div class="content-header">
         <div class="container-fluid">
+            <div class="top-bg"></div> <!-- Display background design -->
           <div class="row mb-2">
             <div class="col-sm-6">
               <h4 class="m-0 text-bold" id="main-title"></h4>
@@ -166,7 +146,7 @@ try {
       </section>
     </div>
     <footer class="main-footer">
-        <small>Grand Xing-Event Order v0.1.</small>
+        <small>Developed By: Reil P. Padilla Event Order v0.1.</small>
         <span id="current-year"></span>
         <div class="float-right d-none d-sm-inline-block">
         </div>
@@ -199,4 +179,3 @@ try {
 <?php include 'modal.php';?>
 </body>
 </html>
-

@@ -1,0 +1,47 @@
+Event Order System Role
+
+
+-System Admin
+	-Create Account for Hotel Admin
+	-Manage Users
+	-Manage System Update
+	-Manage Hotel Records and system controls
+	-Manage Restaurants and system controls
+	-Manage User Activity Logs
+-Hotel Admin
+	-Create Account by hotel function roles (eg. Accounting, Audit, Front Office, Kitchen)
+	-Manage Hotel user account accessibility
+	-Manage Hotel Staff login Activity Logs
+
+-Restaurant Account (eg. Flamnes, El Capitan)
+
+	-	Create guest order bill 
+	- 	Manage record of guest orders
+	
+-Accounting (of Hotel)
+
+	-Monitor receivable and closed guest bill
+	-Manage guest statement of account
+
+-Sales Employee (of Hotel)
+	- Create Pencil Booking
+	- Create Event Booking
+	- Create Contract Event Order
+	- Generate Event Order Summary
+
+-Function and Housekeeping Employee (of Hotel)
+	- Create Charge Information of Event
+	- Generate Summary of charges of Event
+
+- Audit Employee (of Hotel)
+
+	- Track and validation of Event Order Payments, Charges, Total Budget and so on.
+	- Generate Report of Event Order
+
+
+
+
+Version 2 Upgrade
+-Sales Leadboard
+-Owners Dashboard (Monitor hotels top performing, total revenue, net income and so on)
+

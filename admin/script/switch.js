@@ -29,45 +29,31 @@ $("#main-menu")
   let $mainbreadcrumb = "";
 
   switch (menucode) {
-    case "master_settings":
+    case "dashboard":
       $maintitle = "";
       $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
-      $file = "dirs/master_settings/master_settings.php";
+      $file = "dirs/dashboard/dashboard.php";
       break;
-    case "inclusion":
+    case "user_account":
       $maintitle = "";
       $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
-      $file = "dirs/inclusion/inclusion.php";
+      $file = "dirs/user_account/user_account.php";
     break;
-    case "useraccounts":
+    case "restaurant":
       $maintitle = "";
       $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
-      $file = "dirs/useraccounts/useraccounts.php";
+      $file = "dirs/restaurant/restaurant.php";
     break;
-    case "amenities":
+    case "system_logs":
       $maintitle = "";
       $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
-      $file = "dirs/amenities/amenities.php";
+      $file = "dirs/system_logs/system_logs.php";
     break;
-    case "hotel_room":
-      $maintitle = "";
-      $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
-      $file = "dirs/hotel_room/hotel_room.php";
-    break;
-    case "event_package":
-      $maintitle = "";
-      $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
-      $file = "dirs/event_package/event_package.php";
-    break;
-
-
-
     case "settings":
-      $maintitle = "Account Settings";
-      $mainbreadcrumb = `<li class="breadcrumb-item active">Settings</li>`;
+      $maintitle = "";
+      $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
       $file = "dirs/settings/settings.php";
-      break;
-    default:
+    break;
     return;
   }
 

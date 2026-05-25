@@ -1,0 +1,17 @@
+{
+    "UserId": "2",
+    "EventName": "asd",
+    "EngagerCategory": "Association & Organizations",
+    "PaxAmount": "123213",
+    "Inclusion": "dsadsad",
+    "PaymentArrangement": "asdsad",
+    "Note": "asdsad",
+    "Menus": [
+        "16",
+        "7",
+        "19",
+        "15",
+        "14"
+    ],
+    "CreatedAt": "2026-04-17 07:37:23"
+}

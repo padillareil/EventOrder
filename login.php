@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Grand Xing-Event Order</title>
+  <title>Event Order</title>
   <link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap/dist/css/bootstrap.min.css">
@@ -17,15 +17,15 @@
   <link rel="stylesheet" type="text/css" href="assets/css/login.css">
   <link rel="icon" href="assets/image/logo/favicon.png">
 </head>
-<body style="background-color: #363636;">
+<body>
   <div class="container vh-100 d-flex justify-content-center align-items-center">
     <div class="col-md-6 col-lg-4">
       <div class="container min-vh-100 d-flex flex-column justify-content-center align-items-center">
         <div class="d-flex justify-content-center">
-        <img src="assets/image/logo/GXingLogo.png" alt="Grand Xing Logo" style="border-radius: 50%; width: 300px; height: auto;">
+        <img src="assets/image/logo/GXingLogo.png" alt="Event Order Logo" style="border-radius: 50%; width: 200px; height: auto;">
         </div>
         <div class="text-center mb-4">
-          <h5 style="color: #bf9b30;">Event Order</h5>
+          <h5>Event Order</h5>
         </div>
         <form id="frm_login" style="max-width: 300px; width: 100%;">
           <div class="form-floating mb-3">
@@ -42,15 +42,15 @@
           </div>
           <div class="form-checks ml-4 mb-4">
             <input class="form-check-input" type="checkbox" id="save-login">
-            <label class="form-check-label text-light" for="save-login">Remember me</label>
+            <label class="form-check-label text-dark" for="save-login">Remember me</label>
           </div>
           <div class="d-grid">
-            <button type="submit" class="btn text-white py-3" style="background-color: #bf9b30;">Sign In</button>
+            <button type="submit" class="btn btn-info py-3">Sign In</button>
           </div>
           <div class="mt-3 text-center">
             <a href="#"><small>Need help?</small></a>
             <br>
-            <small class="text-light">V0.1</small>
+            <small class="text-dark">V0.1</small>
           </div>
         </form>
       </div>

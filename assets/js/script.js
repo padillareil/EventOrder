@@ -29,15 +29,15 @@ $("#main-menu")
   let $mainbreadcrumb = "";
 
   switch (menucode) {
-    case "event_order":
+    case "bookings":
       $maintitle = "";
       $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
-      $file = "dirs/event_order/event_order.php";
+      $file = "dirs/booking/booking.php";
       break;
-    case "dashboard":
+    case "eventorders":
       $maintitle = "";
       $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
-      $file = "dirs/dashboard/dashboard.php";
+      $file = "dirs/eventorders/eventorders.php";
       break;
     case "settings":
       $maintitle = "Account Settings";
@@ -53,7 +53,7 @@ $("#main-menu")
       <img src="assets/image/logo/favicon.png" alt="Loading..." 
            style="width: 80px; height: 80px; object-fit: contain; opacity: 0.8;">
       <p class="mt-3 mb-2 text-secondary fw-semibold">Loading...</p>
-      <div class="spinner-border text-warning" role="status" style="width: 2rem; height: 2rem;">
+      <div class="spinner-border text-dark" role="status" style="width: 2rem; height: 2rem;">
         <span class="visually-hidden">Loading...</span>
       </div>
     </div>`;
