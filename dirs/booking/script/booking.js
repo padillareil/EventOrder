@@ -28,12 +28,17 @@ function loadBookingDetails() {
 
 
 /*Function show booking form*/
-
-function mdlBookForm(selectedDate) {
-    $.post("dirs/booking/form/bookingform.php", { 
+function loadForm2(selectedDate) {
+    $("#form-title").text('Pencil Booking Form');
+    $.post("dirs/booking/form2/main.php", { 
         target_date: selectedDate 
     }, function (data) {
         $("#main-content").html(data);
+        setTimeout(function() {
+            $("#nav-arrangement-tab").prop('disabled', true);
+            $("#nav-food-tab").prop('disabled', true);
+            $("#nav-summary-tab").prop('disabled', true);
+        }, 50);
         if (selectedDate) {
             $("#start_date").val(selectedDate);
             $("#end_date").val(selectedDate);
@@ -114,8 +119,51 @@ function modalPayment() {
 
 /*Function form 2 of pencil booking*/
 function mdlBookForm2() {
-    $.post("dirs/booking/form2/main.php", {
-    }, function (data){
+    $.post("dirs/booking/form2/main.php", {}, function (data){
         $("#main-content").html(data); 
+        $("#form-title").text('Pencil Booking Form');
+        setTimeout(function() {
+            $("#nav-arrangement-tab").prop('disabled', true);
+            $("#nav-food-tab").prop('disabled', true);
+            $("#nav-summary-tab").prop('disabled', true);
+        }, 50); 
     });
 }
+
+/*Function show modal confirmation */
+function savePencilModal() {
+    $("#mdl-confirm-pencil").modal('show');
+}
+
+/*Function form 2 of pencil booking*/
+function loadBookingInbox() {
+    $.post("dirs/booking/form2/inbox/inbox.php", {
+    }, function (data){
+        $("#main-content").html(data); 
+    loadInbox();
+    });
+}
+
+/*Function Draft Bookings*/
+function loadBookingDraft() {
+    $.post("dirs/booking/form2/draft/draft.php", {
+    }, function (data){
+        $("#main-content").html(data); 
+    loadDrafts();
+    });
+}
+
+
+/*Function to show modal custom equipment*/
+function addCustomEquipment() {
+    $("#mdl-custom-equipment").modal('show');
+}
+
+/*Function show modal food custom*/
+function addCustomFood() {
+    $("#mdl-custom-food").modal('show');
+}
+
+
+
+

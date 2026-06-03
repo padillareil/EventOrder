@@ -1,129 +1,49 @@
 <div class="row">
-    <div class="col-md-3">
-        <!-- Custom Filters and tools  -->
-        <div class="card border-0 shadow-lg rounded-4 bg-white overflow-hidden">
-            <div class="card-header bg-white border-bottom border-light p-3">
-                <div class="row">
-                    <div class="col-md-12 mb-2">
-                        <div class="btn-group shadow-sm flex-shrink-0">
-                          <button class="btn btn-primary px-3 py-2 rounded-start-3" type="button"  onclick="mdlBookForm()">
-                            <i class="bi bi-plus-circle me-1"></i> New Event
-                          </button>
-                          
-                          <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split px-2 rounded-end-3" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="visually-hidden">Toggle Dropdown</span>
-                          </button>
-                          
-                          <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg p-2 mt-2" style="border-radius: 12px; min-width: 210px;">
-                            <li>
-                              <a class="dropdown-item py-2 px-3 rounded-2 text-dark d-flex align-items-center mb-1" href="javascript:void(0);" onclick="mdlBookForm()">
-                                <i class="bi bi-file-earmark-text text-secondary me-2 fs-5"></i>
-                                <div>
-                                  <span class="fw-bold d-block small">Form 1 Booking</span>
-                                  <small class="text-muted" style="font-size: 11px;">Standard/Quick setup</small>
-                                </div>
-                              </a>
-                            </li>
-                            <li>
-                              <a class="dropdown-item py-2 px-3 rounded-2 text-dark d-flex align-items-center" href="javascript:void(0);" onclick="mdlBookForm2()">
-                                <i class="bi bi-file-earmark-text text-secondary me-2 fs-5"></i>
-                                <div>
-                                  <span class="fw-bold d-block small">Form 2 Booking</span>
-                                  <small class="text-muted" style="font-size: 11px;">Detailed/Custom installment</small>
-                                </div>
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <!-- Search Control Element -->
-                        <div class="input-group border rounded-3 bg-white px-2 py-1 shadow-sm w-100">
-                            <span class="input-group-text bg-transparent border-0 py-0 pe-2">
-                                <i class="bi bi-search text-muted"></i>
+    <!-- Modern Row Menu Tools & Text Widgets (Unified Header) -->
+    <div class="col-12">
+        <div class="card border-0 shadow-sm rounded-4 bg-white">
+            <div class="card-body p-3">
+                <div class="row align-items-center g-3">
+                    
+                    <!-- 1. Search Control Element (Expanded to 6 columns on medium+ screens) -->
+                    <div class="col-12 col-sm-6 col-md-6">
+                        <div class="input-group border rounded-3 bg-light px-2 py-1 align-items-center" style="max-width: 400px;">
+                            <span class="input-group-text bg-transparent border-0 p-0 pe-2">
+                                <i class="bi bi-search text-muted fs-7"></i>
                             </span>
-                            <input type="search" class="form-control bg-transparent border-0 shadow-none py-0 small" id="search-event-order" placeholder="Search...">
+                            <input type="search" class="form-control bg-transparent border-0 shadow-none py-1 fs-7" id="search-event-order" placeholder="Quick search events...">
                         </div>
+                    </div>
 
+                    <!-- 2. Action Tools Menu (Expanded to 6 columns, pushes buttons to the far right edge) -->
+                    <div class="col-12 col-sm-6 col-md-6 d-flex justify-content-sm-end gap-2">
+                        <button type="button" class="btn btn-light border btn-sm rounded-3 px-3 fw-medium text-secondary d-inline-flex align-items-center fs-7 hover-shadow-sm" onclick="loadBookingList();">
+                            <i class="bi bi-list me-2 text-primary"></i> List All Events
+                        </button>
+                        <button class="btn btn-primary btn-sm py-2 px-3 rounded-3 d-inline-flex align-items-center fw-medium fs-7 shadow-sm" type="button" onclick="mdlBookForm2()">
+                             New Event
+                        </button>
                     </div>
 
                 </div>
-
-
-                <div class="row align-items-center">
-                    <div class="col-12 d-flex justify-content-md-end align-items-center gap-2">
-                        
-                        
-                       
-
-                        
-
-                    </div>
-                </div>
-            </div>
-            <div class="card-body p-3 d-flex flex-column gap-3.5">
-                <div class="row g-2">
-                    <div class="col-12 col-sm-6 col-md-12">
-                        <div class="card border-0 shadow rounded-4 bg-white p-3">
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="bg-primary-subtle text-primary rounded-3 d-flex align-items-center justify-content-center" style="width: 42px; height: 42px;">
-                                    <i class="bi bi-calendar-event-fill fs-5"></i>
-                                </div>
-                                <div>
-                                    <div class="text-secondary small fw-medium">Total Bookings</div>
-                                    <h4 class="fw-bold text-dark mb-0" id="total-bookings"></h4>
-                                    <small class="text-primary">
-                                        This Month
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-12">
-                        <div class="card border-0 shadow rounded-4 bg-white p-3">
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="bg-success-subtle text-success rounded-3 d-flex align-items-center justify-content-center" style="width: 42px; height: 42px;">
-                                    <i class="bi bi-check-circle-fill fs-5"></i>
-                                </div>
-                                <div>
-                                    <div class="text-secondary small fw-medium">Confirmed</div>
-                                    <h4 class="fw-bold text-dark mb-0" id="confirmed-bookings"></h4>
-                                    <small class="text-success">
-                                        This Month
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body p-4 d-flex flex-column gap-2">
-                <button type="button" class="btn btn-light text-start p-3 border rounded-3 fw-medium d-flex align-items-center justify-content-between text-secondary bg-white hover-shadow" onclick="loadBookingList();">
-                    <span><i class="bi bi-list me-2 text-primary"></i> List All Events</span>
-                    <i class="bi bi-chevron-right fs-7 text-muted"></i>
-                </button>
-               
             </div>
         </div>
-
-
     </div>
 
-    <div class="col-md-9">
+    <!-- Calendar Layout Container -->
+    <div class="col-12">
         <div class="card border-0 shadow-lg rounded-4 bg-white overflow-hidden">
             
-            <!-- High-Density Unified Control Header Component -->
+            <!-- Unified Calendar Navigation Control Header -->
             <div class="card-header bg-white border-bottom border-light p-3">
                 <div class="row align-items-center g-2">
-                    
-                    <!-- 1. Month Label & Pagination Controls Column -->
-                    <div class="col-12 col-xl-3 d-flex align-items-center justify-content-between justify-content-xl-start gap-3">
+                    <div class="col-12 d-flex align-items-center gap-3">
                         <div>
                             <h5 class="fw-bold mb-0 text-dark font-monospace text-uppercase" id="lbl-calendar-month" style="letter-spacing: -0.5px; min-width: 130px;">
                                 <!-- Managed via JavaScript -->
                             </h5>
                         </div>
-                        <!-- Custom Pagination Controls Block matching user schema requirements -->
+                        <!-- Custom Pagination Controls -->
                         <ul class="pagination pagination-sm mb-0" id="pagination-calendar">
                             <li class="page-item" id="li-prev-calendar">
                                 <a class="page-link shadow-none border rounded-start-3 px-2.5 py-1.5" href="javascript:void(0);" id="btn-prev-calendar">
@@ -136,24 +56,22 @@
                                 </a>
                             </li>
                         </ul>
-                        <div id="page-info-amenities" class="mt-3 small text-muted"></div>
+                        <div id="page-info-amenities" class="small text-muted ms-auto"></div>
                     </div>
                 </div>
             </div>
 
-
-
             <!-- Calendar View Canvas Engine -->
             <div class="card-body p-3">
                 <!-- Weekday Labels -->
-                <div class="calendar-days-heading-grid mb-1 bg-light">
-                    <div class="text-center fs-7 d-block mb-1 py-1.5">Sunday</div>
-                    <div class="text-center fs-7 d-block mb-1 py-1.5">Monday</div>
-                    <div class="text-center fs-7 d-block mb-1 py-1.5">Tuesday</div>
-                    <div class="text-center fs-7 d-block mb-1 py-1.5">Wednesday</div>
-                    <div class="text-center fs-7 d-block mb-1 py-1.5">Thursday</div>
-                    <div class="text-center fs-7 d-block mb-1 py-1.5">Friday</div>
-                    <div class="text-center fs-7 d-block mb-1 py-1.5">Saturday</div>
+                <div class="calendar-days-heading-grid mb-1 bg-light rounded-2">
+                    <div class="text-center fs-7 fw-medium d-block mb-1 py-1.5 text-secondary">Sunday</div>
+                    <div class="text-center fs-7 fw-medium d-block mb-1 py-1.5 text-secondary">Monday</div>
+                    <div class="text-center fs-7 fw-medium d-block mb-1 py-1.5 text-secondary">Tuesday</div>
+                    <div class="text-center fs-7 fw-medium d-block mb-1 py-1.5 text-secondary">Wednesday</div>
+                    <div class="text-center fs-7 fw-medium d-block mb-1 py-1.5 text-secondary">Thursday</div>
+                    <div class="text-center fs-7 fw-medium d-block mb-1 py-1.5 text-secondary">Friday</div>
+                    <div class="text-center fs-7 fw-medium d-block mb-1 py-1.5 text-secondary">Saturday</div>
                 </div>
 
                 <!-- 7-Column Grid Target Container Insertion Point -->
@@ -162,14 +80,91 @@
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>
 
 
-
 <style>
+    /* ==========================================================================
+       Responsive Calendar Dashboard Adjustments
+       ========================================================================== */
+
+    /* 1. Desktop & Large Screens Sticky Behaviors */
+    @media (min-width: 992px) {
+      .col-md-3 .card {
+        position: sticky;
+        top: 1.5rem;
+        z-index: 10;
+      }
+    }
+
+    /* 2. Tablet & Medium Screen Layout Optimization (Breakpoint Match) */
+    @media (min-width: 768px) and (max-width: 991.98px) {
+      
+      /* Forces the split action container to span beautifully in a row on tablets */
+      .col-md-3 .card-header .row {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center;
+        gap: 1rem;
+      }
+      
+      .col-md-3 .card-header .row > div {
+        flex: 1;
+        margin-bottom: 0 !important;
+      }
+
+      /* Arranges the metric summary cards side-by-side to preserve vertical space */
+      .col-md-3 .card-body .row {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 0.5rem;
+      }
+      
+      .col-md-3 .card-body .row > div {
+        flex: 1;
+        width: 50%;
+      }
+
+      /* Scales down calendar text labels to prevent clipping on narrow grids */
+      .calendar-days-heading-grid div {
+        font-size: 11px !important;
+        padding: 6px 2px !important;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+    }
+
+    /* ==========================================================================
+       Standard Calendar CSS Grid Framework Rules
+       ========================================================================== */
+
+    /* Defines the 7-Column Layout Structure for Week Headings */
+    .calendar-days-heading-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      border-radius: 8px;
+      font-weight: 600;
+      color: #495057;
+    }
+
+    /* Defines the 7-Column Layout Structure for Calendar Cells */
+    .calendar-cells-matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 4px;
+    }
+
+    /* Smooth scaling transitions for control metrics buttons */
+    .hover-shadow {
+      transition: all 0.2s ease-in-out;
+    }
+    .hover-shadow:hover {
+      background-color: #f8f9fa !important;
+      transform: translateY(-1px);
+      box-shadow: 0 .5rem 1rem rgba(0,0,0,.08)!important;
+    }
     /* Sizing structure helper overrides for high-density components */
     .fs-7 {
         font-size: 0.8rem !important;
@@ -1365,7 +1360,7 @@
                     
                     <div class="event-widget-container" id="widget-tray-idx-${totalCellsRendered}"></div>
                     
-                    <div class="calendar-empty-trigger-box" onclick="mdlBookForm('${stringISOTrackingDate}')">
+                    <div class="calendar-empty-trigger-box" onclick="loadForm2('${stringISOTrackingDate}')">
                         <i class="bi bi-plus text-primary fs-5"></i>
                         <span class="font-monospace text-uppercase">Add Event</span>
                     </div>

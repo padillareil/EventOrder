@@ -45,7 +45,7 @@
             <label class="form-check-label text-dark" for="save-login">Remember me</label>
           </div>
           <div class="d-grid">
-            <button type="submit" class="btn btn-info py-3">Sign In</button>
+            <button type="submit" class="btn btn-info py-3" id="btn-login">Sign In</button>
           </div>
           <div class="mt-3 text-center">
             <a href="#"><small>Need help?</small></a>

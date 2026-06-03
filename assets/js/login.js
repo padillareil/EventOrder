@@ -26,14 +26,26 @@
      event.preventDefault();
 
      var $frm = $(this);
+     var $btn = $("#btn-login");
      var Username = $frm.find("input[name='Username']").val().trim();
      var Password = $frm.find("input[name='Password']").val().trim();
+
+     /* Disable Button + Show Spinner */
+     $btn.prop("disabled", true);
+     $btn.html(`
+         <span class="spinner-border spinner-border-sm me-2"></span>
+         Signing In...
+     `);
 
      $.post("actions/login.php", { 
        Username: Username, 
        Password: Password 
      }, function (data) {
        var response = JSON.parse(data);
+
+       /* Restore Button */
+       $btn.prop("disabled", false);
+       $btn.html("Sign In");
 
        if (response.response === "OK") {
          $frm[0].reset();

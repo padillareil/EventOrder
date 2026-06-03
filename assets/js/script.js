@@ -40,7 +40,7 @@ $("#main-menu")
       $file = "dirs/eventorders/eventorders.php";
       break;
     case "settings":
-      $maintitle = "Account Settings";
+      $maintitle = "";
       $mainbreadcrumb = `<li class="breadcrumb-item active">Settings</li>`;
       $file = "dirs/settings/settings.php";
       break;

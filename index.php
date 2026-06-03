@@ -48,6 +48,7 @@ try {
   <link rel="stylesheet" href="assets/plugins/daterangepicker/daterangepicker.css">
   <link rel="stylesheet" href="assets/plugins/summernote/summernote-lite.min.css">
   <link rel="stylesheet" href="assets/plugins/datepicker/jquery-ui.structure.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" type="text/css" href="assets/css/skeleton.css">
   <link rel="icon" href="assets/image/logo/favicon.png">
@@ -151,6 +152,7 @@ try {
 <script src="assets/plugins/chart.js/Chart.min.js"></script>
 <script src="assets/plugins/moment/moment.min.js"></script>
 <script src="assets/plugins/driver.js/dist/driver.js.iife.js"></script>
+<script src="assets/plugins/select2/js/select2.min.js"></script>
 <script src="assets/plugins/pace/pace.min.js"></script>
 <script src="assets/plugins/jsgrid/jsgrid.min.js"></script>
 <script src="assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>

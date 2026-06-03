@@ -1,3 +1,226 @@
+<form id="form-custom-equipment" onsubmit="return false;">
+  <div class="modal fade" id="mdl-custom-equipment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg rounded-4">
+        
+        <div class="modal-header border-0 pt-4 px-4 pb-2">
+          <h5 class="modal-title fw-bold text-dark">Add Custom Equipment</h5>
+          <button type="button" class="btn-close shadow-none small" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body px-4 py-2">
+          <div class="row g-3">
+            <div class="col-12">
+              <label class="form-label small text-muted fw-bold mb-1" for="custom_equipment_title">Equipment Name</label>
+              <input type="text" class="form-control shadow-none py-1 small" id="custom_equipment_title" autocomplete="off" required>
+            </div>
+            <div class="col-12">
+              <label class="form-label small text-muted fw-bold mb-1" for="equipment_description">Equipment Description</label>
+              <textarea class="form-control border rounded-3 shadow-sm p-3 small text-muted bg-white" id="equipment_description" rows="3" maxlength="100" placeholder="Describe the specs..."></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer border-0 px-4 pb-4 pt-3 d-flex justify-content-end gap-2">
+          <button type="button" id="add-custom-equipment" class="btn btn-success text-white px-4 py-2 rounded-3 small fw-medium shadow-sm">
+            Done
+          </button>
+          <button type="button" class="btn btn-light text-muted border px-4 py-2 rounded-3 small fw-medium" data-bs-dismiss="modal">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<script>
+  $(document).ready(function () {
+      $('#add-custom-equipment').on('click', function (e) {
+        e.preventDefault(); 
+        const $titleInput = $('#custom_equipment_title');
+        const $descInput = $('#equipment_description');
+        const $equipmentForm = $('#form-custom-equipment');
+        const $displayContainer = $('#arrangement_list_group');
+        const $modalElement = $('#mdl-custom-equipment');
+        const titleValue = $.trim($titleInput.val());
+        const descValue = $.trim($descInput.val());
+        if (titleValue === "") {
+          $titleInput.addClass('is-invalid');
+          $titleInput.focus();
+          return;
+        } else {
+          $titleInput.removeClass('is-invalid');
+        }
+        const uniqueId = 'custom_eq_' + Date.now();
+        const newItemHTML = `
+          <label class="list-group-item px-4 py-3 border border-success selection-row position-relative d-block mb-2 rounded-3 shadow-sm" id="container_${uniqueId}" for="${uniqueId}">
+              <div class="form-check custom-check-success mb-0 d-flex align-items-start gap-3 pe-4">
+                  <input class="form-check-input mt-1 shadow-none border-success" type="checkbox" id="${uniqueId}" value="${titleValue.replace(/\s+/g, '_').toLowerCase()}" checked style="width: 20px; height: 20px;">
+                  <div class="flex-grow-1">
+                      <div class="fw-semibold text-dark lh-1 py-1 equip_name">
+                          ${titleValue}
+                      </div>
+                      ${descValue !== "" ? `<div class="small text-muted mt-1 equip_description">${descValue}</div>` : ''}
+                  </div>
+                      <input type="hidden" class="equip_category" value="Solid">
+              </div>
+              <div class="position-absolute top-0 end-0 p-3">
+                <button type="button" class="btn btn-lg btn-link text-danger p-0 border-0 shadow-none remove-custom-item-btn" data-target="${uniqueId}" title="Delete entry">
+                  <i class="bi bi-trash3-fill fs-6"></i>
+                </button>
+              </div>
+          </label>
+        `;
+        $displayContainer.prepend(newItemHTML);
+        updateArrangementSummary(); 
+        if ($equipmentForm.length) {
+          $equipmentForm[0].reset(); 
+        }
+        $modalElement.modal('hide');
+      });
+      $('#arrangement_list_group').on('click', '.remove-custom-item-btn', function (e) {
+        e.preventDefault(); // Prevents checkbox state from toggling on row click
+        const targetId = $(this).attr('data-target');
+        const $itemRow = $('#container_' + targetId);
+        if ($itemRow.length) {
+          $itemRow.css({
+            'opacity': '0',
+            'transform': 'scale(0.95)',
+            'transition': 'all 0.2s ease'
+          });
+          setTimeout(function() {
+            $itemRow.remove();
+            updateArrangementSummary();
+          }, 200);
+        }
+      });
+  });
+</script>
+
+
+<!-- food modal -->
+<form id="form-custom-food" onsubmit="return false;">
+  <div class="modal fade" id="mdl-custom-food" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg rounded-4">
+        
+        <div class="modal-header border-0 pt-4 px-4 pb-2">
+          <h5 class="modal-title fw-bold text-dark">Add Custom Menu</h5>
+          <button type="button" class="btn-close shadow-none small" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body px-4 py-2">
+          <div class="row g-3">
+            <div class="col-12">
+              <label class="form-label small text-muted fw-bold mb-1" for="custom_food_title">Menu Name</label>
+              <input type="text" class="form-control shadow-none py-1 small" id="custom_food_title" autocomplete="off" required>
+            </div>
+            <div class="col-12">
+              <label class="form-label small text-muted fw-bold mb-1" for="food_description">Menu Description</label>
+              <textarea class="form-control border rounded-3 shadow-sm p-3 small text-muted bg-white" id="food_description" rows="3" maxlength="100" placeholder="Describe food menu..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer border-0 px-4 pb-4 pt-3 d-flex justify-content-end gap-2">
+          <button type="button" id="add-custom-food" class="btn btn-success text-white px-4 py-2 rounded-3 small fw-medium shadow-sm">
+            Done
+          </button>
+          <button type="button" class="btn btn-light text-muted border px-4 py-2 rounded-3 small fw-medium" data-bs-dismiss="modal">
+            Cancel
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>
+
+<script>
+  $(document).ready(function () {
+      $('#add-custom-food').on('click', function (e) {
+        e.preventDefault(); 
+        
+        const $titleInput = $('#custom_food_title');
+        const $descInput = $('#food_description');
+        const $foodForm = $('#form-custom-food');
+        const $displayContainer = $('#food_list_group');
+        const $modalElement = $('#mdl-custom-food');
+        
+        const titleValue = $.trim($titleInput.val());
+        const descValue = $.trim($descInput.val());
+        
+        // Validation Check
+        if (titleValue === "") {
+          $titleInput.addClass('is-invalid');
+          $titleInput.focus();
+          return;
+        } else {
+          $titleInput.removeClass('is-invalid');
+        }
+        
+        // FIXED: Changed identity tag from custom_eq_ to custom_food_
+        const uniqueId = 'custom_food_' + Date.now();
+        
+        const newItemHTML = `
+          <label class="list-group-item px-4 py-3 border border-success selection-food position-relative d-block mb-2 rounded-3 shadow-sm" id="container_${uniqueId}" for="${uniqueId}">
+              <div class="form-check custom-check-success mb-0 d-flex align-items-start gap-3 pe-4">
+                  <input class="form-check-input mt-1 shadow-none border-success" type="checkbox" id="${uniqueId}" value="${titleValue.replace(/\s+/g, '_').toLowerCase()}" checked style="width: 20px; height: 20px;">
+                  <div class="flex-grow-1">
+                      <div class="fw-semibold text-dark lh-1 py-1 food_name">
+                          ${titleValue}
+                      </div>
+                      ${descValue !== "" ? `<div class="small text-muted mt-1 food_description">${descValue}</div>` : ''}
+                  </div>
+                      <input type="hidden" class="food_category" value="Solid">
+              </div>
+              <div class="position-absolute top-0 end-0 p-3">
+                <button type="button" class="btn btn-lg btn-link text-danger p-0 border-0 shadow-none remove-custom-food-btn" data-target="${uniqueId}" title="Delete entry">
+                  <i class="bi bi-trash3-fill fs-6"></i>
+                </button>
+              </div>
+          </label>
+        `;
+        
+        // Prepend to top of container nicely
+        $displayContainer.prepend(newItemHTML);
+        applyFoodSetupSummary();
+        
+        // FIXED: Swapped out undefined '$equipmentForm' referencing with correct '$foodForm' hook
+        if ($foodForm.length) {
+          $foodForm[0].reset(); 
+        }
+        
+        // Cleanly dismiss the modal
+        $modalElement.modal('hide');
+      });
+
+      // Event Delegation for Deletion 
+      $('#food_list_group').on('click', '.remove-custom-food-btn', function (e) {
+        e.preventDefault(); 
+        
+        const targetId = $(this).attr('data-target');
+        const $itemRow = $('#container_' + targetId);
+        
+        if ($itemRow.length) {
+          $itemRow.css({
+            'opacity': '0',
+            'transform': 'scale(0.95)',
+            'transition': 'all 0.2s ease'
+          });
+          setTimeout(function() {
+            $itemRow.remove();
+            applyFoodSetupSummary();
+          }, 200);
+        }
+      });
+  });
+</script>
+
+
+
+
+
+
 <style>
   /* VISUAL PAYMENT METHOD SELECTION CARDS */
   .payment-method-card {
@@ -195,8 +418,8 @@
   }
 </style>
 
-<form id="frm-confirmation-booking" autocomplete="off" class="needs-validation" novalidate>
-  <div class="modal" id="mdl-confirmazzztion-booking" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+<form id="frm-payment-booking" autocomplete="off" class="needs-validation" novalidate>
+  <div class="modal" id="mdl-payment-booking" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
       <div class="modal-content border-0 shadow-lg rounded-4">
         
@@ -205,23 +428,13 @@
             <h5 class="modal-title fs-5 fw-bold text-dark">Blocking Payment</h5>
             <p class="text-muted small mb-0">Choose one or more payment options to settle the amount.</p>
           </div>
-          <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
         <div class="modal-body p-4 position-relative">
           
           <div class="sticky-top bg-white pt-2 pb-3 mb-3 border-bottom" style="top: -24px; z-index: 1020; margin-left: -24px; margin-right: -24px; padding-left: 24px; padding-right: 24px;">
             <div class="row g-3 align-items-end">
-              
-              <div class="col-12 col-md-4">
-                <label class="form-label small text-muted fw-bold mb-1" for="gross-total-paid">Gross Total Paid</label>
-                <div class="input-group">
-                  <span class="input-group-text bg-light border-end-0 fw-bold text-muted">₱</span>
-                  <input type="text" class="form-control border-start-0 fw-semibold text-muted bg-light with-comma" id="gross-total-paid" name="gross-total-paid" value="0.00" readonly>
-                </div>
-              </div>
-
-              <div class="col-12 col-md-4">
+              <div class="col-12 col-md-6">
                 <label class="form-label small text-muted fw-bold mb-1" for="blocking_fee">Blocking Fee</label>
                 <div class="input-group">
                   <span class="input-group-text bg-light border-end-0 fw-bold text-muted">₱</span>
@@ -229,7 +442,7 @@
                 </div>
               </div>
 
-              <div class="col-12 col-md-4">
+              <div class="col-12 col-md-6">
                 <label class="form-label small text-muted fw-bold mb-1" for="payment_date">Received Date</label>
                 <input type="date" class="form-control text-muted fw-medium" id="payment_date" name="payment_date" required>
               </div>
@@ -280,13 +493,7 @@
                   </label>
                 </div>
 
-                <div class="col-4 col-md-2">
-                  <input type="checkbox" name="payment_method" id="pay-other" value="Other Payment" class="payment-check-input">
-                  <label for="pay-other" class="payment-method-card mb-0">
-                    <i class="bi bi-bank2"></i>
-                    <span>Others</span>
-                  </label>
-                </div>
+                
 
               </div>
             </div>
@@ -412,7 +619,7 @@
                     <div class="row g-2">
                       <div class="col">
                         <label class="position-relative w-100 m-0">
-                          <input type="radio" name="online_platform" value="GCash" class="provider-radio">
+                          <input type="radio" name="online_platform" value="GCash" class="provider-radio" value="GCash">
                           <div class="provider-card">
                             <img src="assets/image/logo/digital_banks_logo/gcash.jpeg" class="provider-micro-logo" alt="GCash">
                             <span class="fw-semibold text-dark" style="font-size: 11px;">GCash</span>
@@ -421,7 +628,7 @@
                       </div>
                       <div class="col">
                         <label class="position-relative w-100 m-0">
-                          <input type="radio" name="online_platform" value="Atome" class="provider-radio">
+                          <input type="radio" name="online_platform" value="Atome" class="provider-radio" value="Atome">
                           <div class="provider-card">
                             <img src="assets/image/logo/digital_banks_logo/atome.jpeg" class="provider-micro-logo" alt="Atome">
                             <span class="fw-semibold text-dark" style="font-size: 11px;">Atome</span>
@@ -430,7 +637,7 @@
                       </div>
                       <div class="col">
                         <label class="position-relative w-100 m-0">
-                          <input type="radio" name="online_platform" value="Maya" class="provider-radio">
+                          <input type="radio" name="online_platform" value="Maya" class="provider-radio" value="Maya">
                           <div class="provider-card">
                             <img src="assets/image/logo/digital_banks_logo/maya.jpeg" class="provider-micro-logo" alt="Maya">
                             <span class="fw-semibold text-dark" style="font-size: 11px;">Maya</span>
@@ -439,7 +646,7 @@
                       </div>
                       <div class="col">
                         <label class="position-relative w-100 m-0">
-                          <input type="radio" name="online_platform" value="MariBank" class="provider-radio">
+                          <input type="radio" name="online_platform" value="MariBank" class="provider-radio" value="MariBank">
                           <div class="provider-card">
                             <img src="assets/image/logo/digital_banks_logo/maribank.jpeg" class="provider-micro-logo" alt="MariBank">
                             <span class="fw-semibold text-dark" style="font-size: 11px;">MariBank</span>
@@ -448,7 +655,7 @@
                       </div>
                       <div class="col">
                         <label class="position-relative w-100 m-0">
-                          <input type="radio" name="online_platform" value="PayPal" class="provider-radio">
+                          <input type="radio" name="online_platform" value="PayPal" class="provider-radio" value="PayPal">
                           <div class="provider-card">
                             <img src="assets/image/logo/digital_banks_logo/paypal.svg" class="provider-micro-logo" alt="PayPal">
                             <span class="fw-semibold text-dark" style="font-size: 11px;">PayPal</span>
@@ -519,36 +726,18 @@
                 </div>
               </div>
 
-              <div id="sub-form-other" class="payment-sub-form-section d-none position-relative card p-3 border mb-3 shadow-sm">
-                <button type="button" class="btn-close position-absolute top-0 end-0 m-2 remove-payment-section" data-target="#pay-other" aria-label="Close"></button>
-                <div class="text-dark fw-bold text-uppercase small font-monospace mb-2"><i class="bi bi-bank2 text-dark me-1"></i> Other Payment Methods</div>
-                <div class="row g-3">
-                  <div class="col-12 col-md-12">
-                    <label class="form-label small text-muted fw-bold mb-1" for="tinnumber">Tax Identification Number</label>
-                    <input type="text" class="form-control py-2 fw-semibold payment-amount-input with-comma" id="tinnumber" name="tinnumber">
-                  </div>
-                  <div class="col-12 col-md-12">
-                    <label class="form-label small text-muted fw-bold mb-1" for="payees_name">Payee's Name</label>
-                    <input type="text" class="form-control py-2" id="payees_name" name="payees_name">
-                  </div>
-                  <div class="col-12 col-md-12">
-                    <label class="form-label small text-muted fw-bold mb-1" for="taxwithheld">Tax withheld for quarter</label>
-                    <input type="text" class="form-control py-2 fw-semibold" id="taxwithheld" name="taxwithheld">
-                  </div>
-                  
-                </div>
-              </div>
+              
 
             </div>
           </div>
           
         </div> 
         <div class="modal-footer border-top px-4 py-3 bg-light rounded-bottom-4">
-          <button type="submit" id="btn-submit-booking" class="btn btn-success px-4 py-2 fw-semibold rounded-3 shadow-sm d-inline-flex align-items-center gap-2">
+          <button type="button" id="btn-submit-booking" class="btn btn-success px-4 py-2 fw-semibold rounded-3 shadow-sm d-inline-flex align-items-center gap-2" onclick="saveBlockingPayment()">
             <span class="spinner-border spinner-border-sm d-none" id="btn-spinner-booking" role="status"></span>
             <span class="btn-text-booking">Commit</span>
           </button>
-          <button type="button" class="btn btn-light border px-3 py-2 small fw-medium rounded-3 text-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="reset" id="btn-cancel-booking" class="btn btn-light border px-3 py-2 small fw-medium rounded-3 text-secondary" data-bs-dismiss="modal">Cancel</button>
         </div>
 
 
@@ -557,7 +746,31 @@
   </div>
 </form>
 
+
+
+
 <script>
+
+  /*Function to apply with comma*/
+  $(document).on("input", ".with-comma", function () {
+      var valuenum = $(this).val();
+      valuenum = valuenum.replace(/[^\d.]/g, '');
+      let parts = valuenum.split('.');
+      if (parts.length > 2) {
+          valuenum = parts[0] + '.' + parts.slice(1).join('');
+      }
+      if (valuenum !== '') {
+          let decimal = '';
+          if (valuenum.includes('.')) {
+              let split = valuenum.split('.');
+              valuenum = split[0];
+              decimal = '.' + split[1];
+          }
+          valuenum = Number(valuenum || 0).toLocaleString('en-US') + decimal;
+      }
+      $(this).val(valuenum);
+  });
+
   $(document).ready(function() {
       // Set default payment date timestamp values
       $('#payment_date').val(new Date().toISOString().slice(0, 10));
@@ -570,6 +783,13 @@
               checkboxElement.prop('checked', false).trigger('change');
           }
       });
+
+      // Helper function to handle structured resetting
+      function resetSpecificPaymentSection($section) {
+          $section.addClass('d-none');
+          $section.find('input').val('').removeAttr('required');
+          $section.find('input[type="radio"]').prop('checked', false);
+      }
 
       // Handle interactive multi-select combinations engine
       $('input[name="payment_method"]').on('change', function() {
@@ -584,13 +804,6 @@
               return;
           }
 
-          // Show configuration notice helper box if user targets multiple streams
-          if (checkedMethods.length > 1) {
-              $('#split-payment-alert').removeClass('d-none');
-          } else {
-              $('#split-payment-alert').addClass('d-none');
-          }
-
           // --- CASH SECTION ---
           if (checkedMethods.includes('Cash')) {
               $('#sub-form-cash').removeClass('d-none');
@@ -599,10 +812,10 @@
               resetSpecificPaymentSection($('#sub-form-cash'));
           }
 
-          // --- OTHERS SECTION (FIXED evaluation string to match HTML input value attribute) ---
+          // --- OTHERS SECTION ---
           if (checkedMethods.includes('Other Payment')) {
               $('#sub-form-other').removeClass('d-none');
-              $('#other_amount').attr('required', 'required');
+              $('#tinnumber, #payees_name').attr('required', 'required');
           } else {
               resetSpecificPaymentSection($('#sub-form-other'));
           }
@@ -616,7 +829,7 @@
               $('#receipt-preview-box').removeClass('has-file').find('.pdf-attached-layout').remove();
               $('#bank_attachment_preview').addClass('d-none').attr('src', '');
               $('#receipt-preview-box').find('.preview-placeholder-text').removeClass('d-none');
-              $('#attachment-filename-log').html('<i class="bi bi-paperclip me-1"></i>No file attached yet.').removeClass('text-success text-danger');
+              $('#attachment-filename-log').html('<i class="bi bi-paperclip me-1"></i>No file attached yet.').removeClass('text-success');
           }
 
           // --- DEBIT/CREDIT CARD SECTION ---
@@ -627,23 +840,16 @@
               resetSpecificPaymentSection($('#sub-form-card'));
           }
 
-          // --- ONLINE BANKING (E-WALLETS) ---
+          // --- ONLINE E-WALLET SECTION ---
           if (checkedMethods.includes('Online Banking')) {
               $('#sub-form-online').removeClass('d-none');
-              $('#online_amount, #online_account_name, #online_account_number').attr('required', 'required');
-              
-              const activeRadio = $('.provider-radio:checked');
-              if (activeRadio.length) {
-                  activeRadio.trigger('change');
-              }
           } else {
               resetSpecificPaymentSection($('#sub-form-online'));
+              $('#conditional-input-fields').addClass('d-none');
               $('#display-digitalbank-logos').addClass('d-none').attr('src', '');
-              $('#conditional-input-fields').removeClass('d-flex').addClass('d-none');
-              $('.provider-radio').prop('checked', false);
           }
-
-          // --- CHECK SECTION ---
+          
+          // --- CHECK DETAILS SECTION ---
           if (checkedMethods.includes('Check')) {
               $('#sub-form-check').removeClass('d-none');
               $('#check_amount, #check_issuing_bank, #check_number, #check_maturity_date').attr('required', 'required');
@@ -652,120 +858,408 @@
               $('#check-preview-box').removeClass('has-file').find('.pdf-attached-layout').remove();
               $('#check_attachment_preview').addClass('d-none').attr('src', '');
               $('#check-preview-box').find('.preview-placeholder-text').removeClass('d-none');
-              $('#check-filename-log').html('<i class="bi bi-paperclip me-1"></i>No file attached yet.').removeClass('text-success text-danger');
+              $('#check-filename-log').html('<i class="bi bi-paperclip me-1"></i>No file attached yet.').removeClass('text-success');
           }
-
-          // Trigger running balance calculations
-          $('.payment-amount-input').first().trigger('input');
       });
 
-      // REUSABLE SEGMENT CLEANER UTILITY FUNCTION
-      function resetSpecificPaymentSection(sectionElement) {
-          sectionElement.addClass('d-none');
-          sectionElement.find('input, select, textarea').removeAttr('required');
-          sectionElement.find('input:not([type="file"]):not(.provider-radio), select, textarea').val('');
-          sectionElement.find('input[type="file"]').val('');
+      // Show sub-form details when choosing e-wallet vendors
+      $('input[name="online_platform"]').on('change', function() {
+          const selectedVendor = $(this).val();
+          $('#conditional-input-fields').removeClass('d-none');
+          $('#online_amount, #online_account_name, #online_transaction_number').attr('required', 'required');
+          
+          // Mimic modern visual feedback engine using your standard image containers
+          let logoSrc = "";
+          if(selectedVendor === "GCash") logoSrc = "assets/image/logo/digital_banks_logo/gcash.jpeg";
+          if(selectedVendor === "Atome") logoSrc = "assets/image/logo/digital_banks_logo/atome.jpeg";
+          if(selectedVendor === "Maya") logoSrc = "assets/image/logo/digital_banks_logo/maya.jpeg";
+          if(selectedVendor === "MariBank") logoSrc = "assets/image/logo/digital_banks_logo/maribank.jpeg";
+          if(selectedVendor === "PayPal") logoSrc = "assets/image/logo/digital_banks_logo/paypal.svg";
+          
+          if(logoSrc !== "") {
+              $('#display-digitalbank-logos').attr('src', logoSrc).removeClass('d-none');
+          }
+      });
+
+      // --- THE FILE ATTACHMENT & LIVE IMAGE PREVIEW ENGINE ---
+      function handleFileAttachment(inputElement, previewBoxId, previewImgId, logTrayId) {
+          const file = inputElement.files[0];
+          const $previewBox = $(previewBoxId);
+          const $previewImg = $(previewImgId);
+          const $logTray = $(logTrayId);
+
+          // Clear any customized legacy layout styles if re-uploaded
+          $previewBox.removeClass('has-file').find('.pdf-attached-layout').remove();
+          $previewImg.addClass('d-none').attr('src', '');
+          $previewBox.find('.preview-placeholder-text').removeClass('d-none');
+
+          if (!file) {
+              $logTray.html('<i class="bi bi-paperclip me-1"></i>No file attached yet.').removeClass('text-success');
+              return;
+          }
+
+          // Write File Meta Info
+          $logTray.html(`<i class="bi bi-check-circle-fill me-1"></i>${file.name} (${(file.size / 1024).toFixed(1)} KB)`).addClass('text-success');
+          $previewBox.addClass('has-file');
+          $previewBox.find('.preview-placeholder-text').addClass('d-none');
+
+          // Process Image Preview Render Engine
+          if (file.type.startsWith('image/')) {
+              const reader = new FileReader();
+              reader.onload = function(e) {
+                  $previewImg.attr('src', e.target.value || e.target.result).removeClass('d-none');
+              };
+              reader.readAsDataURL(file);
+          } 
+          // Structural layout support if the file uploaded is a PDF document
+          else if (file.type === 'application/pdf') {
+              $previewBox.append(`
+                  <div class="pdf-attached-layout text-center p-3">
+                      <i class="bi bi-file-earmark-pdf-fill text-danger fs-1 d-block mb-1"></i>
+                      <span class="small fw-semibold text-muted d-block text-truncate" style="max-width: 200px;">${file.name}</span>
+                  </div>
+              `);
+          }
       }
-      
-      // Form structural submit handle validation intercept sequence
-      $('#frm-confirmation-booking').on('submit', function(e) {
-          let form = this;
-          if (!form.checkValidity()) {
-              e.preventDefault();
-              e.stopPropagation();
-          }
-          $(form).addClass('was-validated');
+
+      // Wire up target action listeners to file input elements
+      $('#bank_attachment_file').on('change', function() {
+          handleFileAttachment(this, '#receipt-preview-box', '#bank_attachment_preview', '#attachment-filename-log');
       });
 
-      // UNIFIED CARD RADIO LISTENER
-      $(document).on('change', '.provider-radio', function() {
-          var selectedProvider = this.value;
-          var logoImage = document.getElementById('display-digitalbank-logos');
-          var inputFieldsBlock = document.getElementById('conditional-input-fields');
-
-          if ($(this).is(':checked')) {
-              document.getElementById('online_amount').value = '';
-              document.getElementById('online_account_name').value = '';
-              document.getElementById('online_account_number').value = '';
-              document.getElementById('online_transaction_number').value = '';
-          }
-
-          var logoDirectories = {
-              'GCash': 'assets/image/logo/digital_banks_logo/gcash.jpeg',
-              'Atome': 'assets/image/logo/digital_banks_logo/atome.jpeg',
-              'Maya': 'assets/image/logo/digital_banks_logo/maya.jpeg',
-              'MariBank': 'assets/image/logo/digital_banks_logo/maribank.jpeg',
-              'PayPal': 'assets/image/logo/digital_banks_logo/paypal.svg'
-          };
-
-          if (selectedProvider && logoDirectories[selectedProvider]) {
-              logoImage.src = logoDirectories[selectedProvider];
-              logoImage.classList.remove('d-none');
-              logoImage.classList.add('d-block');
-
-              inputFieldsBlock.classList.remove('d-none');
-              inputFieldsBlock.classList.add('d-flex');
-          } else {
-              logoImage.classList.remove('d-block');
-              logoImage.classList.add('d-none');
-              logoImage.src = '';
-
-              inputFieldsBlock.classList.remove('d-flex');
-              inputFieldsBlock.classList.add('d-none');
-          }
+      $('#check_attachment_file').on('change', function() {
+          handleFileAttachment(this, '#check-preview-box', '#check_attachment_preview', '#check-filename-log');
       });
   });
 
-  /* Script that inputs comma format patterns */
-  $(document).on("input", ".with-comma", function () {
-      let input = this;
-      let oldValue = input.value;
-      let oldCursor = input.selectionStart;
 
-      let digitsBeforeCursor = oldValue.slice(0, oldCursor).replace(/[^0-9]/g, '').length;
-      let raw = oldValue.replace(/[^0-9.]/g, '');
-      let parts = raw.split('.');
 
-      let intPart = parts[0] || "";
-      let formattedInt = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-      let newValue = parts.length > 1 ? formattedInt + "." + parts[1] : formattedInt;
-      input.value = newValue;
+/*Funcion create pencil booking with blocking fee*/
+function saveBlockingPayment() {
+    let $btnSubmit = $("#btn-submit-booking");
+    let $btnCancel = $("#btn-cancel-booking");
+    let $spinner = $("#btn-spinner");
+    let $text = $btnSubmit.find(".btn-text-booking");
 
-      let newCursor = 0;
-      let digitCount = 0;
+    function showLoading() {
+        $btnSubmit.prop("disabled", true);
+        $btnCancel.prop("disabled", true);
+        $spinner.removeClass("d-none");
+        $text.text("Saving...");
+    }
 
-      while (newCursor < newValue.length && digitCount < digitsBeforeCursor) {
-          if (/\d/.test(newValue[newCursor])) {
-              digitCount++;
-          }
-          newCursor++;
-      }
-      input.setSelectionRange(newCursor, newCursor);
-  });
+    function hideLoading() {
+        $btnSubmit.prop("disabled", false);
+        $btnCancel.prop("disabled", false);
+        $spinner.addClass("d-none");
+        $text.text("Commit");
+    }
 
-  /* Running gross-total aggregation block */
-  $(document).on('input', '.payment-amount-input', function() {
-      let grossTotalSum = 0;
+    // =========================
+    // REQUIRED FIELDS CHECK
+    // =========================
+    var requiredFields = [
+        { value: $("#event_title").val(), label: "Event Title" },
+        { value: $("#blocking_fee").val(), label: "Blocking Fee" },
+        { value: $("#start_date").val(), label: "Start Date" },
+        { value: $("#end_date").val(), label: "End Date" },
+        { value: $("#start_time").val(), label: "Start Time" },
+        { value: $("#end_time").val(), label: "End Time" },
+        { value: $("#choose_hotel").val(), label: "Hotel" },
+        { value: $("#choose_functionrooms").val(), label: "Function Room" },
+        { value: $("#expecte_pax").val(), label: "Expected Pax" },
+        { value: $("#guaranteed_pax").val(), label: "Guaranteed Pax" },
+        { value: $("#guest-name").val(), label: "Guest Name" },
+        { value: $("#guest_company").val(), label: "Company" },
+        { value: $("#mobile-number").val(), label: "Mobile Number" },
+        { value: $("#guest_email").val(), label: "Email" },
+        { value: $("#guest_address").val(), label: "Address" },
+        { value: $("#engager_category").val(), label: "Client Type" }
 
-      $('.payment-sub-form-section:not(.d-none)').find('.payment-amount-input').each(function() {
-          let rawValue = $(this).val();
-          rawValue = rawValue.replace(/,/g, '');
-          let inputVal = parseFloat(rawValue);
+    ];
 
-          if (!isNaN(inputVal)) {
-              grossTotalSum += inputVal;
-          }
-      });
+    for (let f of requiredFields) {
+        if ($.trim(f.value) === "") {
+            Swal.fire({
+                icon: "warning",
+                title: "Missing Field",
+                text: f.label + " is required."
+            });
+            return;
+        }
+    }
 
-      let formattedTotal = grossTotalSum.toLocaleString('en-US', {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-      });
+    showLoading();
 
-      $('#gross-total-paid').val(formattedTotal);
-  });
+    var blockingFee = parseFloat($("#blocking_fee").val().replace(/,/g, '')) || 0;
+    var totalPayment = 0;
+
+    if (
+        !$("#pay-cash").is(":checked") &&
+        !$("#pay-bank").is(":checked") &&
+        !$("#pay-check").is(":checked") &&
+        !$("#pay-card").is(":checked") &&
+        !$("#pay-online").is(":checked")
+    ) {
+        hideLoading();
+        Swal.fire({
+            icon: "warning",
+            title: "Payment Required",
+            text: "Please select at least one payment method."
+        });
+        return;
+    }
+
+    var payments = [];
+    var formData = new FormData();
+
+    // =========================
+    // CASH
+    // =========================
+    if ($("#pay-cash").is(":checked")) {
+
+        if (
+            $("#cash_amount").val() === "" ||
+            $("#cash_received_by").val() === "" ||
+            $("#or_date").val() === "" ||
+            $("#or_number").val() === ""
+        ) {
+            hideLoading();
+            Swal.fire({
+                icon: "warning",
+                title: "Cash Payment",
+                text: "Complete all cash payment details."
+            });
+            return;
+        }
+
+        let amount = parseFloat($("#cash_amount").val().replace(/,/g, '')) || 0;
+        totalPayment += amount;
+
+        payments.push({
+            type: "Cash",
+            amount: amount,
+            cashier: $("#cash_received_by").val(),
+            or_date: $("#or_date").val(),
+            or_number: $("#or_number").val()
+        });
+    }
+
+    // =========================
+    // BANK
+    // =========================
+    if ($("#pay-bank").is(":checked")) {
+
+        if (
+            $("#bank_amount").val() === "" ||
+            $("#bank_destination_name").val() === "" ||
+            $("#bank_account_name").val() === "" ||
+            $("#bank_account_number").val() === "" ||
+            $("#bank_reference_no").val() === ""
+        ) {
+            hideLoading();
+            Swal.fire({
+                icon: "warning",
+                title: "Bank Transfer",
+                text: "Complete all bank transfer details."
+            });
+            return;
+        }
+
+        let amount = parseFloat($("#bank_amount").val().replace(/,/g, '')) || 0;
+        totalPayment += amount;
+
+        payments.push({
+            type: "Bank Transfer",
+            amount: amount,
+            bank: $("#bank_destination_name").val(),
+            account_name: $("#bank_account_name").val(),
+            account_number: $("#bank_account_number").val(),
+            reference_no: $("#bank_reference_no").val()
+        });
+
+        if ($("#bank_attachment_file")[0].files.length > 0) {
+            formData.append("bank_attachment_file", $("#bank_attachment_file")[0].files[0]);
+        }
+    }
+
+    // =========================
+    // CHECK
+    // =========================
+    if ($("#pay-check").is(":checked")) {
+
+        if (
+            $("#check_amount").val() === "" ||
+            $("#check_issuing_bank").val() === "" ||
+            $("#check_number").val() === "" ||
+            $("#check_maturity_date").val() === ""
+        ) {
+            hideLoading();
+            Swal.fire({
+                icon: "warning",
+                title: "Check Payment",
+                text: "Complete all check details."
+            });
+            return;
+        }
+
+        let amount = parseFloat($("#check_amount").val().replace(/,/g, '')) || 0;
+        totalPayment += amount;
+
+        payments.push({
+            type: "Check",
+            amount: amount,
+            bank: $("#check_issuing_bank").val(),
+            check_number: $("#check_number").val(),
+            maturity_date: $("#check_maturity_date").val()
+        });
+
+        if ($("#check_attachment_file")[0].files.length > 0) {
+            formData.append("check_attachment_file", $("#check_attachment_file")[0].files[0]);
+        }
+    }
+
+    // =========================
+    // CARD
+    // =========================
+    if ($("#pay-card").is(":checked")) {
+
+        if (
+            $("#card_amount").val() === "" ||
+            $("#card_bank").val() === "" ||
+            $("#card_account_name").val() === "" ||
+            $("#card_number").val() === "" ||
+            $("#card_reference_no").val() === ""
+        ) {
+            hideLoading();
+            Swal.fire({
+                icon: "warning",
+                title: "Card Payment",
+                text: "Complete all card details."
+            });
+            return;
+        }
+
+        let amount = parseFloat($("#card_amount").val().replace(/,/g, '')) || 0;
+        totalPayment += amount;
+
+        payments.push({
+            type: "Card",
+            amount: amount,
+            bank: $("#card_bank").val(),
+            account_name: $("#card_account_name").val(),
+            card_number: $("#card_number").val(),
+            reference_no: $("#card_reference_no").val()
+        });
+    }
+
+   // =========================
+   // ONLINE (FIXED)
+   // =========================
+   if ($("#pay-online").is(":checked")) {
+
+       let platform = $("input[name='online_platform']:checked").val() || "";
+
+       let amountVal = $("#online_amount").val().replace(/,/g, '');
+       let amount = parseFloat(amountVal) || 0;
+
+       if (
+           amountVal === "" ||
+           $("#online_account_name").val().trim() === "" ||
+           $("#online_account_number").val().trim() === "" ||
+           $("#online_transaction_number").val().trim() === "" ||
+           platform === ""
+       ) {
+           hideLoading();
+           Swal.fire({
+               icon: "warning",
+               title: "Online Payment",
+               text: "Complete all online payment details."
+           });
+           return;
+       }
+
+       totalPayment += amount;
+
+       payments.push({
+           type: 'Online', // ✅ GCASH / MAYA / PAYPAL becomes the TYPE
+           amount: amount,
+           bank: platform,
+           platform: platform,
+           account_name: $("#online_account_name").val(),
+           account_number: $("#online_account_number").val(),
+           reference_no: $("#online_transaction_number").val()
+       });
+   }
+
+
+    if (totalPayment != blockingFee) {
+        hideLoading();
+        Swal.fire({
+            icon: "error",
+            title: "Payment Mismatch",
+            text: "Total payment must equal blocking fee."
+        });
+        return;
+    }
+
+    formData.append("EventTitle", $("#event_title").val());
+    formData.append("BlockingFee", $("#blocking_fee").val());
+    formData.append("StartDate", $("#start_date").val());
+    formData.append("EndDate", $("#end_date").val());
+    formData.append("StartTime", $("#start_time").val());
+    formData.append("EndTime", $("#end_time").val());
+    formData.append("Hotel", $("#choose_hotel").val());
+    formData.append("Functions", $("#choose_functionrooms").val());
+    formData.append("ExpectedPax", $("#expecte_pax").val());
+    formData.append("GuaranteedPax", $("#guaranteed_pax").val());
+    formData.append("GuestName", $("#guest-name").val());
+    formData.append("Company", $("#guest_company").val());
+    formData.append("MobileNumber", $("#mobile-number").val());
+    formData.append("Email", $("#guest_email").val());
+    formData.append("CompanyAddress", $("#guest_address").val());
+    formData.append("Position", $("#job_position").val());
+    formData.append("EngagerCategory", $("#engager_category").val());
+    formData.append("Draftid", $("#draft-documentid").val());
+    formData.append("payments", JSON.stringify(payments));
+
+    $.ajax({
+        url: "dirs/booking/actions/save_pencilbooking.php",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+
+        success: function (data) {
+            hideLoading();
+
+            if ($.trim(data) === "OK") {
+                $("#mdl-payment-booking").modal("hide");
+                mdlBookForm2();
+
+                Swal.fire({
+                    toast: true,
+                    position: "top-end",
+                    icon: "success",
+                    title: "Successfully Reserved",
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: data
+                });
+            }
+        },
+
+        error: function (xhr) {
+            hideLoading();
+            console.log(xhr.responseText);
+        }
+    });
+}
 </script>
-
-
-

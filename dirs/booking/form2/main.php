@@ -1,435 +1,340 @@
-<div class="container my-2">
-  <div class="card border-0 shadow-sm rounded-4 mb-3 overflow-hidden">
-    <div class="card-body p-0">
-      <div class="d-flex align-items-stretch justify-content-between">
-        
-        <div id="booking-stepper" class="bs-stepper flowchart-stepper w-100">
-          <div class="bs-stepper-header" role="tablist" class="d-flex p-0 m-0 border-0">
-            
-            <!-- <div class="step flowchart-step" data-target="#basic-info-part">
-              <button type="button" class="step-trigger bg-primary" role="tab" aria-controls="basic-info-part" id="basic-info-part-trigger">
-                <span class="flowchart-label">Basic Info</span>
-              </button>
-            </div> --> <!-- Default Basic Info -->
-
-            <div class="step flowchart-step" data-target="#basic-info-part">
-              <button type="button" class="step-trigger bg-primary d-flex align-items-center justify-content-center" role="tab" aria-controls="basic-info-part" id="basic-info-part-trigger">
-                
-                <span class="flowchart-label">Basic Info</span>
-                
-                <span class="badge bg-danger rounded-pill ms-2 d-inline-flex align-items-center gap-1 font-monospace" style="font-size: 10px; letter-spacing: 0.5px; text-transform: uppercase; padding: 3px 6px;">
-                Locked
-                </span>
-
-              </button>
-            </div>
-
-            <div class="step flowchart-step" data-target="#arrangement-part">
-              <button type="button" class="step-trigger bg-info" role="tab" aria-controls="arrangement-part" id="arrangement-part-trigger">
-                <span class="flowchart-label">Arrangement</span>
-              </button>
-            </div>
-
-            <div class="step flowchart-step" data-target="#foods-part">
-              <button type="button" class="step-trigger bg-success" role="tab" aria-controls="foods-part" id="foods-part-trigger">
-                <span class="flowchart-label">Foods</span>
-              </button>
-            </div>
-
-            <div class="step flowchart-step" data-target="#summary-part">
-              <button type="button" class="step-trigger bg-orange" role="tab" aria-controls="summary-part" id="summary-part-trigger">
-                <span class="flowchart-label">Summary</span>
-              </button>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="d-flex align-items-center bg-white px-3 border-left">
-          <button type="button" class="btn btn-light text-secondary border rounded-3 p-2.5 position-relative" id="btn-inbox-archive" title="View Inbox" style="height: 44px; width: 44px;">
-            <i class="fas fa-archive fa-lg"></i>
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 10px; margin-top: 4px; margin-left: -4px;">
-              3
-            </span>
-          </button>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
+<div class="container-fluid my-3 px-md-4">
   <form id="frm-add-booking">
-    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-      <div class="card-body p-4 pt-3 overflow-auto" style="height: 80vh;">
-        <div class="bs-stepper-content p-0">
+    <div class="row g-3">
+      
+      <div class="col-12 col-md-3 col-lg-2">
+        <div class="card border-0 shadow-sm rounded-4 p-3 h-100 bg-white">
           
-          <div id="basic-info-part" class="content" role="tabpanel" aria-labelledby="basic-info-part-trigger">
-            <div class="row g-2">
-              <div class="col-12 mt-2 mb-1">
-                <span class="text-uppercase font-monospace  tracking-wider text-muted fw-bold" style="font-size: 11px;">Basic Details</span>
-              </div>
-
-              <div class="col-12">
-                <label class="form-label small text-muted fw-bold mb-1" for="event_title">Event Title</label>
-                <div class="input-group border rounded-0 bg-white px-2 py-1 shadow-sm w-100">
-                  <textarea class="form-control bg-transparent border-0 shadow-none py-0 small" id="event_title" rows="2" autocomplete="off" required></textarea>
-                </div>
-              </div>
-
-              <div class="col-6">
-                <label class="form-label small text-muted fw-bold mb-1" for="start_date">Date Function Start</label>
-                <div class="input-group border rounded-0 bg-white px-2 py-1 shadow-sm w-100">
-                  <span class="input-group-text bg-transparent border-0 py-0 pe-2 text-muted"><i class="bi bi-calendar-event"></i></span>
-                  <input type="date" class="form-control bg-transparent border-0 shadow-none py-0 small" id="start_date" required>
-                </div>
-              </div>
-
-              <div class="col-6">
-                <label class="form-label small text-muted fw-bold mb-1" for="end_date">Date Function End</label>
-                <div class="input-group border rounded-0 bg-white px-2 py-1 shadow-sm w-100">
-                  <span class="input-group-text bg-transparent border-0 py-0 pe-2 text-muted"><i class="bi bi-calendar-check"></i></span>
-                  <input type="date" class="form-control bg-transparent border-0 shadow-none py-0 small" id="end_date" required>
-                </div>
-              </div>
-
-              <div class="col-12 mt-4 mb-1 border-top pt-3">
-                <span class="text-uppercase font-monospace tracking-wider text-muted fw-bold" style="font-size: 11px;">Engager Info</span>
-              </div>
-
-              <div class="col-6">
-                <label class="form-label small text-muted fw-bold mb-1" for="engager_category">Engager Category</label>
-                <select class="form-select bg-transparent shadow-none py-2 small" id="engager_category" required>
-                  <option value="" disabled selected hidden>Choose...</option>
-                  <option value="Corporate Government">Corporate Government</option>
-                  <option value="Government">Government</option>
-                  <option value="Corporate Private">Corporate Private</option>
-                  <option value="Private">Private</option>
-                  <option value="Personal">Personal</option>
-                </select>
-              </div>
-              
-              <div class="col-6">
-                <label class="form-label small text-muted fw-bold mb-1" for="guest-name">Guest (Fullname)</label>
-                <div class="input-group border rounded-0 bg-white px-2 py-1 shadow-sm w-100">
-                  <input type="text" class="form-control bg-transparent border-0 shadow-none py-0 small" id="guest-name" autocomplete="off" required>
-                </div>
-              </div>
-
-              <div class="col-12">
-                <label class="form-label small text-muted fw-bold mb-1" for="job_position">Job Position</label>
-                <div class="input-group border rounded-0 bg-white px-2 py-1 shadow-sm w-100">
-                  <input type="text" class="form-control bg-transparent border-0 shadow-none py-0 small" id="job_position" autocomplete="off" required>
-                </div>
-              </div>
-              
-              <div class="col-12">
-                <label class="form-label small text-muted fw-bold mb-1" for="guest_company">Company</label>
-                <div class="input-group border rounded-0 bg-white px-2 py-1 shadow-sm w-100">
-                  <input type="text" class="form-control bg-transparent border-0 shadow-none py-0 small" id="guest_company" autocomplete="off" required>
-                </div>
-              </div>
-
-              <div class="col-12">
-                <label class="form-label small text-muted fw-bold mb-1" for="mobile-number">Mobile Number</label>
-                <div class="input-group border rounded-0 bg-white px-2 py-1 shadow-sm w-100">
-                  <input type="text" class="form-control bg-transparent border-0 shadow-none py-0 small" id="mobile-number" placeholder="09XXXXXXXXX" autocomplete="off" required>
-                </div>
-              </div>
-              
-              <div class="col-12">
-                <label class="form-label small text-muted fw-bold mb-1" for="guest_email">Email</label>
-                <div class="input-group border rounded-0 bg-white px-2 py-1 shadow-sm w-100">
-                  <input type="email" class="form-control bg-transparent border-0 shadow-none py-0 small" id="guest_email" autocomplete="off" required>
-                </div>
-              </div>
-
-              <div class="col-12">
-                <label class="form-label small text-muted fw-bold mb-1" for="guest_address">Address</label>
-                <div class="input-group border rounded-0 bg-white px-2 py-1 shadow-sm w-100">
-                  <textarea class="form-control bg-transparent border-0 shadow-none py-0 small" id="guest_address" rows="2" autocomplete="off" required></textarea>
-                </div>
-              </div>
-              
-              <div class="col-6">
-                <label class="form-label small text-muted fw-bold mb-1" for="guatanteed_pax">Guaranteed Pax</label>
-                <div class="input-group border rounded-0 bg-white px-2 py-1 shadow-sm w-100">
-                  <input type="text" class="form-control bg-transparent border-0 shadow-none py-0 small" id="guatanteed_pax" autocomplete="off" required>
-                </div>
-              </div>
-              <div class="col-6">
-                <label class="form-label small text-muted fw-bold mb-1" for="expected_pax">Expected Pax</label>
-                <div class="input-group border rounded-0 bg-white px-2 py-1 shadow-sm w-100">
-                  <input type="text" class="form-control bg-transparent border-0 shadow-none py-0 small" id="expected_pax" autocomplete="off" required>
-                </div>
-              </div>
-            </div>
-
-            <div class="d-flex justify-content-end gap-2 mt-3">
-              <button type="submit" id="btn-submit-booking" class="btn btn-success px-3 py-1.5 rounded-3 small">
-                <span class="spinner-border spinner-border-sm d-none" id="btn-spinner-booking" role="status"></span>
-                <span class="btn-text-booking">Save</span>
+          <div class="mb-3 ps-2 d-none d-md-block">
+            <small class="fw-bold text-dark mb-0">Menu Forms</small>
+          </div>
+          
+          <div class="list-group list-group-flush d-flex flex-row flex-md-column justify-content-between gap-1 border-0 overflow-auto" id="form-pages-menu" role="tablist">
+                      
+              <button class="list-group-item list-group-item-action active border-0 rounded-3 small py-2 px-1 px-md-3 d-flex flex-column flex-md-row align-items-center justify-content-center justify-content-md-start text-center text-md-start w-100" id="nav-basic-tab" data-bs-toggle="list" data-bs-target="#page-basic" type="button" role="tab" aria-selected="true">
+                <i class="bi bi-grid mb-1 mb-md-0 me-md-2 fs-5 fs-md-6"></i>
+                <span style="font-size: 11px; font-weight: 500;" class="text-nowrap">Basic Info</span>
               </button>
-              <button class="btn btn-light text-secondary border px-3 py-1.5 rounded-3 small" type="button" id="btn-cancel-booking" onclick="loadHome()">
-                Cancel
+              
+              <button class="list-group-item list-group-item-action border-0 rounded-3 small py-2 px-1 px-md-3 d-flex flex-column flex-md-row align-items-center justify-content-center justify-content-md-start text-center text-md-start w-100 d-none" id="nav-arrangement-tab" data-bs-toggle="list" data-bs-target="#page-arrangement" type="button" role="tab" aria-selected="false">
+                <i class="bi bi-grid mb-1 mb-md-0 me-md-2 fs-5 fs-md-6"></i>
+                <span style="font-size: 11px; font-weight: 500;" class="text-nowrap">Arrangement</span>
               </button>
-            </div>
+              
+              <button class="list-group-item list-group-item-action border-0 rounded-3 small py-2 px-1 px-md-3 d-flex flex-column flex-md-row align-items-center justify-content-center justify-content-md-start text-center text-md-start w-100 d-none" id="nav-food-tab" data-bs-toggle="list" data-bs-target="#page-food" type="button" role="tab" aria-selected="false">
+                <i class="bi bi-grid mb-1 mb-md-0 me-md-2 fs-5 fs-md-6"></i>
+                <span style="font-size: 11px; font-weight: 500;" class="text-nowrap">Food</span>
+              </button>
+              
+              <button class="list-group-item list-group-item-action border-0 rounded-3 small py-2 px-1 px-md-3 d-flex flex-column flex-md-row align-items-center justify-content-center justify-content-md-start text-center text-md-start w-100 d-none" id="nav-summary-tab" data-bs-toggle="list" data-bs-target="#page-summary" type="button" role="tab" aria-selected="false">
+                <i class="bi bi-grid mb-1 mb-md-0 me-md-2 fs-5 fs-md-6"></i>
+                <span style="font-size: 11px; font-weight: 500;" class="text-nowrap">Summary</span>
+              </button>
+              
+              <hr class="text-dark fw-bold">
+              
+              <button class="list-group-item list-group-item-action border-0 rounded-3 small py-2 px-1 px-md-3 d-flex flex-column flex-md-row align-items-center justify-content-center justify-content-md-start text-center text-md-start w-100" type="button" onclick="loadBookingInbox()">
+                <i class="bi bi-archive mb-1 mb-md-0 me-md-2 fs-5 fs-md-6"></i>
+                <span style="font-size: 11px; font-weight: 500;" class="text-nowrap">Inbox</span>
+              </button>
+
+              <button class="list-group-item list-group-item-action border-0 rounded-3 small py-2 px-1 px-md-3 d-flex flex-column flex-md-row align-items-center justify-content-center justify-content-md-start text-center text-md-start w-100" type="button" onclick="loadBookingDraft()">
+                <i class="bi bi-archive mb-1 mb-md-0 me-md-2 fs-5 fs-md-6"></i>
+                <span style="font-size: 11px; font-weight: 500;" class="text-nowrap">Draft</span>
+              </button>
+
+              <button class="list-group-item list-group-item-action border-0 rounded-3 small py-2 px-1 px-md-3 d-flex flex-column flex-md-row align-items-center justify-content-center justify-content-md-start text-center text-md-start w-100" type="button" onclick="loadHome()">
+                <i class="bi bi-arrow-left mb-1 mb-md-0 me-md-2 fs-5 fs-md-6"></i>
+                <span style="font-size: 11px; font-weight: 500;" class="text-nowrap">Back</span>
+              </button>
+                          
           </div>
-
-          <!-- <div id="arrangement-part" class="content" role="tabpanel" aria-labelledby="arrangement-part-trigger">
-            <div class="row g-2">
-              <div class="col-12 mt-2 mb-1">
-                <span class="text-uppercase font-monospace tracking-wider text-muted fw-bold" style="font-size: 11px;">Venue & Seating Arrangements</span>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label small text-muted fw-bold mb-1" for="venue_select">Select Venue</label>
-                <select class="form-select bg-transparent shadow-none py-2 small" id="venue_select">
-                  <option value="" selected disabled>Select a room...</option>
-                  <option value="Grand Ballroom">Grand Ballroom</option>
-                  <option value="Conference Hall A">Conference Hall A</option>
-                  <option value="Executive Boardroom">Executive Boardroom</option>
-                </select>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label small text-muted fw-bold mb-1" for="stage_setup">Stage/Theme Setup Style</label>
-                <input type="text" class="form-control small py-2 shadow-sm" id="stage_setup" placeholder="e.g., Minimalist Modern, Rustic">
-              </div>
-            </div>
-
-            <div class="d-flex justify-content-between mt-4 pt-2 border-top">
-              <button type="button" class="btn btn-light border px-4 rounded-3 small" onclick="window.stepper.previous()">Previous</button>
-              <button type="button" class="btn btn-info text-white px-4 rounded-3 small" onclick="window.stepper.next()">Next Step</button>
-            </div>
-          </div>
-
-          <div id="foods-part" class="content" role="tabpanel" aria-labelledby="foods-part-trigger">
-            <div class="row g-2">
-              <div class="col-12 mt-2 mb-1">
-                <span class="text-uppercase font-monospace tracking-wider text-muted fw-bold" style="font-size: 11px;">Catering Details</span>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label small text-muted fw-bold mb-1" for="menu_package">Menu Package</label>
-                <select class="form-select bg-transparent shadow-none py-2 small" id="menu_package">
-                  <option value="" selected disabled>Select Menu Tier...</option>
-                  <option value="Premium Buffet">Premium Buffet Pack</option>
-                  <option value="Standard Plated">Standard Plated Set</option>
-                  <option value="Cocktail / Hors d'oeuvres">Cocktail Options</option>
-                </select>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label small text-muted fw-bold mb-1" for="dietary_restrictions">Dietary Restrictions / Notes</label>
-                <input type="text" class="form-control small py-2 shadow-sm" id="dietary_restrictions" placeholder="e.g., No seafood, Vegetarian option required">
-              </div>
-            </div>
-
-            <div class="d-flex justify-content-between mt-4 pt-2 border-top">
-              <button type="button" class="btn btn-light border px-4 rounded-3 small" onclick="window.stepper.previous()">Previous</button>
-              <button type="button" class="btn bg-purple text-white px-4 rounded-3 small" onclick="window.stepper.next()">Next Step</button>
-            </div>
-          </div>
-
-          <div id="summary-part" class="content" role="tabpanel" aria-labelledby="summary-part-trigger">
-            <div class="row g-2">
-              <div class="col-12 mt-2 mb-1">
-                <span class="text-uppercase font-monospace tracking-wider text-muted fw-bold" style="font-size: 11px;">Final Validation Review</span>
-              </div>
-              <div class="col-12">
-                <div class="p-3 bg-light rounded border text-muted small">
-                  <i class="fas fa-info-circle mr-2 text-success"></i> Please cross-examine all step details above before completing validation. You can toggle through layout nodes to correct properties instantly.
-                </div>
-              </div>
-            </div>
-
-            <div class="d-flex justify-content-between mt-4 pt-2 border-top">
-              <button type="button" class="btn btn-light border px-4 rounded-3 small" onclick="window.stepper.previous()">Previous</button>
-              <span class="text-muted small align-self-center">Ready! Click <strong>Save</strong> at the top header to finalize.</span>
-            </div>
-          </div> -->
-
         </div>
       </div>
 
+      <div class="col-12 col-md-8 col-lg-10">
+        <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
+          
+          <div class="card-header border-0 bg-white p-4 pb-0">
+            <div class="d-flex align-items-center justify-content-between gap-2">
+              <h5 class="fw-bold text-dark mb-0" id="form-title"></h5>
+              <div class="d-flex align-items-center gap-2" id="form-button-action">
+                <div class="dropdown">
+                  <button type="button" class="btn btn-light d-flex align-items-center justify-content-center fs-5 no-caret" id="fabDropdownMenu" data-bs-toggle="dropdown" aria-expanded="false" title="Actions Menu">
+                    <i class="bi bi-list id-fab-icon"></i>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end shadow border-0 p-2 rounded-3 mt-2" aria-labelledby="fabDropdownMenu">
+                    <li>
+                      <button class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" type="button" onclick="savePencilbooking()">
+                        <i class="bi bi-check2-circle text-muted fs-6"></i> Save Pencil
+                      </button>
+                    </li>
+                    <li>
+                      <button class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" type="button" onclick="savePencilDraft()">
+                        <i class="bi bi-check2-circle text-muted fs-6"></i> Save Draft
+                      </button>
+                    </li>
+                    <li><hr class="dropdown-divider my-1"></li>
+                    <li>
+                      <button class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" type="reset">
+                        <i class="bi bi-trash3 text-danger fs-6"></i> Cancel
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>     
+          
+          <div class="card-body p-4 pt-3 tab-content overflow-auto" style="height: 70vh;">
+            
+            <div class="tab-pane fade show active" id="page-basic" role="tabpanel" aria-labelledby="nav-basic-tab">
+             <?php include 'basic_info.php';  ?>
+            </div>
+
+            <div class="tab-pane fade" id="page-arrangement" role="tabpanel" aria-labelledby="nav-arrangement-tab">
+              <?php include 'arrangement.php';  ?>
+            </div>
+
+            <div class="tab-pane fade" id="page-food" role="tabpanel" aria-labelledby="nav-food-tab">
+              <?php include 'food_package.php';  ?>
+            </div>
+
+            <div class="tab-pane fade" id="page-summary" role="tabpanel" aria-labelledby="nav-summary-tab">
+              <?php include 'summary.php';  ?>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
   </form>
 </div>
 
 <style>
-  /* Container configurations for layout */
-  .flowchart-stepper .bs-stepper-header {
-    display: flex !important;
-    width: 100%;
-  }
-
-  /* Clear default bs-stepper graphic configurations */
-  .flowchart-stepper .line, 
-  .flowchart-stepper .bs-stepper-circle {
+  /* Dropdown arrow normalization marker configuration */
+  .dropdown-toggle.no-caret::after {
     display: none !important;
   }
 
-  /* Structural block for individual flow items */
-  .flowchart-step {
-    flex: 1;
-    margin: 0 !important;
+  /* Micro-interaction transition animation layout */
+  .id-fab-icon {
+    transition: transform 0.2s ease-in-out;
+  }
+  .dropdown-toggle.show .id-fab-icon {
+    transform: rotate(45deg);
+    display: inline-block;
   }
 
-  .flowchart-step .step-trigger {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    width: 100% !important;
-    height: 54px !important; 
-    padding: 0 10px 0 25px !important;
-    border: none !important;
-    border-radius: 0 !important;
-    margin: 0 !important;
-    transition: all 0.22s ease-in-out;
-    
-    /* Geometric clip-path creating standard interlocking chevron styles */
-    clip-path: polygon(0% 0%, calc(100% - 10px) 0%, 100% 50%, calc(100% - 10px) 100%, 0% 100%, 10px 50%);
-  }
-
-  /* Left boundary adjustments */
-  .flowchart-step:first-child .step-trigger {
-    padding-left: 10px !important;
-    clip-path: polygon(0% 0%, calc(100% - 10px) 0%, 100% 50%, calc(100% - 10px) 100%, 0% 100%);
-  }
-
-  /* Right boundary adjustments */
-  .flowchart-step:last-child .step-trigger {
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 10px 50%);
-  }
-
-  /* Elevated configuration styling for active steps */
-  .flowchart-step.active .step-trigger {
-    opacity: 1 !important;
-    font-weight: bold;
-  }
-
-  /* Font presentation properties */
-  .flowchart-label {
-    color: #ffffff !important;
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
-
-  .flowchart-step .step-trigger:focus {
-    background-color: inherit;
+  @media (min-width: 768px) {
+    /* Keeps layout locked alongside scrollable inputs on Tablet Landscape displays */
+    #form-pages-menu, 
+    .custom-action-panel {
+      position: sticky;
+      top: 1.5rem;
+    }
   }
 </style>
 
 <script>
-  $(document).ready(function() {
-      // 1. Initialize BS Stepper Instance
-      window.stepper = new Stepper(document.querySelector('#booking-stepper'), {
-        linear: false, // Allows flexible manual clicking between pages during validation tests
-        animation: true
-      });
-
-      // 2. Original Form Validation & Input Sanitization
-      $('#mobile-number').on('input keydown paste', function(e) {
-          let $input = $(this);
-          if (e.type === 'keydown') {
-              const allowedKeys = ['Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight'];
-              if (!allowedKeys.includes(e.key) && isNaN(Number(e.key))) {
-                  e.preventDefault();
-                  return;
-              }
+  $('#mobile-number').on('input keydown paste', function(e) {
+      let $input = $(this);
+      if (e.type === 'keydown') {
+          const allowedKeys = ['Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight'];
+          if (!allowedKeys.includes(e.key) && isNaN(Number(e.key))) {
+              e.preventDefault();
+              return;
           }
-          let val = $input.val().replace(/\D/g, '');
-          if (val.length > 0) {
-              if (val.charAt(0) !== '0') {
-                  val = '0' + val; 
-              }
+      }
+      let val = $input.val().replace(/\D/g, '');
+      if (val.length > 0) {
+          if (val.charAt(0) !== '0') {
+              val = '0' + val; 
           }
-          if (val.length > 1) {
-              if (val.charAt(1) !== '9') {
-                  val = '09'; 
-              }
+      }
+      if (val.length > 1) {
+          if (val.charAt(1) !== '9') {
+              val = '09'; 
           }
-          if (val.length > 11) {
-              val = val.substring(0, 11);
-          }
-          $input.val(val);
-      });
-
-      $('#mobile-number').on('blur', function() {
-          let val = $(this).val();
-          if (val.length > 0 && val.length < 11) {
-              Swal.fire({
-                  icon: "info",
-                  text: "Please enter a valid 11-digit mobile number.",
-                  showConfirmButton: false,
-                  timer: 2000,
-                  timerProgressBar: true
-              });
-              $(this).focus();
-          }
-      });
-
-      // 3. Form Submission Handling
-      $("#frm-add-booking").submit(function(event){
-          event.preventDefault();
-          let $btnSubmit = $("#btn-submit-booking");
-          let $btnCancel = $("#btn-cancel-booking");
-          let $spinner = $("#btn-spinner-booking"); // Corrected to match element ID up top
-          let $text = $btnSubmit.find(".btn-text-booking");
-          
-          $btnSubmit.prop("disabled", true);
-          $btnCancel.prop("disabled", true);
-          $spinner.removeClass("d-none");
-          $text.text("Saving...");
-
-          // Package attributes
-          var payload = {
-              Guest: $("#guest-name").val(),
-              Position: $("#job_position").val(),
-              Company: $("#guest_company").val(),
-              MobileNumber: $("#mobile-number").val(),
-              Email: $("#guest_email").val(),
-              Address: $("#guest_address").val(),
-              Otherinfo: $("#other_info").val(),
-              Title: $("#event_title").val(),
-              DateStart: $("#start_date").val(),
-              DateEnd: $("#end_date").val(),
-              Category: $("#engager_category").val(),
-              Venue: $("#venue_select").val(),
-              Setup: $("#stage_setup").val(),
-              MenuPackage: $("#menu_package").val(),
-              Dietary: $("#dietary_restrictions").val()
-          };
-
-          $.post("dirs/booking/actions/save_booking.php", payload, function(data){
-              $btnSubmit.prop("disabled", false);
-              $btnCancel.prop("disabled", false);
-              $spinner.addClass("d-none");
-              $text.text("Save");
-              
-              if($.trim(data) == "OK"){
-                  loadHome();
-                  if(typeof generateMockCalendarPayloadData === "function") {
-                      generateMockCalendarPayloadData();
-                  }
-                  $("#frm-add-booking")[0].reset();
-                  window.stepper.to(1); // Return wizard back to page 1 automatically
-                  Swal.fire({
-                      toast: true,
-                      position: "top-end",
-                      icon: "success",
-                      title: "Pencil Booking success.",
-                      showConfirmButton: false,
-                      timer: 2000,
-                      timerProgressBar: true
-                  });
-              } else {
-                 Swal.fire({
-                     icon: "error",
-                     title: "Oops!",
-                     text: data,
-                     confirmButtonText: "OK"
-                 });
-              }
-          });
-      });
+      }
+      if (val.length > 11) {
+          val = val.substring(0, 11);
+      }
+      $input.val(val);
   });
+
+  $('#mobile-number').on('blur', function() {
+      let val = $(this).val();
+      if (val.length > 0 && val.length < 11) {
+          $(this).focus();
+      }
+  });
+
+
+  function savePencilbooking() {
+      var EventTitle       = $("#event_title").val();
+      var StartDate        = $("#start_date").val();
+      var EndDate          = $("#end_date").val();
+      var StartTime        = $("#start_time").val();
+      var EndTime          = $("#end_time").val();
+      var Hotel            = $("#choose_hotel").val();
+      var Functions        = $("#choose_functionrooms").val();
+      var ExpectedPax      = $("#expecte_pax").val();
+      var GuaranteedPax    = $("#guaranteed_pax").val();
+      var GuestName        = $("#guest-name").val();
+      var Company          = $("#guest_company").val();
+      var MobileNumber     = $("#mobile-number").val();
+      var Email            = $("#guest_email").val();
+      var CompanyAddress   = $("#guest_address").val();
+      const requiredFields = [
+          EventTitle,
+          StartDate,
+          EndDate,
+          StartTime,
+          EndTime,
+          Hotel,
+          Functions,
+          ExpectedPax,
+          GuaranteedPax,
+          GuestName,
+          MobileNumber,
+          Email
+      ];
+
+      const hasEmptyField = requiredFields.some(
+          field => !field || field.toString().trim() === ''
+      );
+
+      if (hasEmptyField) {
+          Swal.fire({
+              icon: 'warning',
+              title: 'Incomplete Form',
+              text: 'Please complete the form before proceeding.',
+              confirmButtonText: 'OK'
+          });
+          return;
+      }
+
+      // Open modal if validation passed
+      var modalElement = $("#mdl-payment-booking");
+
+      modalElement.css({
+          display: 'block',
+          opacity: '0',
+          transform: 'scale(0.92)',
+          filter: 'blur(4px)',
+          transition: 'none'
+      });
+
+      modalElement.outerWidth();
+
+      modalElement.modal({
+          backdrop: 'static',
+          keyboard: false
+      }).modal('show');
+
+      modalElement.css({
+          transition: 'all 400ms cubic-bezier(0.34, 1.56, 0.64, 1)',
+          opacity: '1',
+          transform: 'scale(1)',
+          filter: 'blur(0px)'
+      });
+  }
+
+  function paymenMdlClose(argument) {
+      var modalElement = $("#mdl-payment-booking");
+      modalElement.css({
+          'transition': 'all 300ms cubic-bezier(0.25, 1, 0.5, 1)',
+          'opacity': '0',
+          'transform': 'scale(0.92)',
+          'filter': 'blur(4px)'
+      });
+      setTimeout(function() {
+          modalElement.modal('hide');
+          modalElement.css({
+              'display': 'none',
+              'transition': 'none'
+          });
+      }, 300); 
+  }
+
+
+  function savePencilDraft() {
+
+      var DraftId          = $("#draft-documentid").val();
+      var EventTitle       = $("#event_title").val();
+      var StartDate        = $("#start_date").val();
+      var EndDate          = $("#end_date").val();
+      var StartTime        = $("#start_time").val();
+      var EndTime          = $("#end_time").val();
+      var Hotel            = $("#choose_hotel").val();
+      var Functions        = $("#choose_functionrooms").val();
+      var ExpectedPax      = $("#expecte_pax").val();
+      var GuaranteedPax    = $("#guaranteed_pax").val();
+      var GuestName        = $("#guest-name").val();
+      var Company          = $("#guest_company").val();
+      var MobileNumber     = $("#mobile-number").val();
+      var Email            = $("#guest_email").val();
+      var CompanyAddress   = $("#guest_address").val();
+      var Position         = $("#job_position").val();
+      var EngagerCategory  = $("#engager_category").val();
+
+      if (
+          !EventTitle
+      ) {
+        Swal.fire({
+            toast: true,
+            position: "top-end",
+            icon: "info",
+            title: "Empty content.",
+            showConfirmButton: false,
+            timer: 1500
+        });
+          return;
+      }
+
+      $.post("dirs/booking/actions/save_pencildraft.php", {
+          DraftId,
+          EventTitle,
+          StartDate,
+          EndDate,
+          StartTime,
+          EndTime,
+          Hotel,
+          Functions,
+          ExpectedPax,
+          GuaranteedPax,
+          GuestName,
+          Company,
+          MobileNumber,
+          Email,
+          CompanyAddress,
+          Position,
+          EngagerCategory
+      }, function(data){
+
+          if($.trim(data) === "OK"){
+              mdlBookForm2();
+
+              Swal.fire({
+                  toast: true,
+                  position: "top-end",
+                  icon: "success",
+                  title: "Saved Draft",
+                  showConfirmButton: false,
+                  timer: 2000
+              });
+
+          } else {
+              console.log("Error: " + data);
+          }
+      });
+  }
+
+
+
+  
+ 
 </script>
+
+<?php include 'modal.php';  ?>
