@@ -13,13 +13,22 @@ try {
 
     $fetch_details = $conn->prepare("EXEC dbo.[Retrieved_Booking] ?,?,?,?,?");
     $fetch_details->execute([$User, $DocId, $DeviceName, $IPAddress, $Browser]);
+
     $get_draft = $fetch_details->fetch(PDO::FETCH_ASSOC);
+
+    $fetch_details->nextRowset();
+    $equipment = $fetch_details->fetchAll(PDO::FETCH_ASSOC);
+
+    $fetch_details->nextRowset();
+    $food = $fetch_details->fetchAll(PDO::FETCH_ASSOC);
 
   $conn->commit();
 
   $response = array(
-    "isSuccess" => 'success',
-    "Data" => $get_draft
+      "isSuccess" => "success",
+      "Data" => $get_draft,
+      "Equipment" => $equipment,
+      "Food" => $food
   );
   echo json_encode($response);
 

@@ -118,19 +118,224 @@
     }
 
     /*Function to set status base on the value of DocStatus*/
-    function DocumentStatusBadge(status) {
-        switch (parseInt(status)) {
-            case 1:
-                return '<span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill fw-semibold">New</span>';
+   function DocumentStatusBadge(status) {
 
-            case 2:
-                return '<span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill fw-semibold">For Approval</span>';
+       switch (parseInt(status)) {
 
-            default:
-                return '<span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle rounded-pill fw-semibold">Unknown</span>';
-        }
-    }
+           // New
+           case 1:
+               return `
+                   <div class="w-100">
+                       <div class="d-flex justify-content-between mb-1">
+                           <small class="fw-semibold text-primary">New</small>
+                           <small class="text-muted">20%</small>
+                       </div>
+                       <div class="progress" style="height:8px;">
+                           <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
+                                role="progressbar"
+                                style="width:20%">
+                           </div>
+                       </div>
+                   </div>
+               `;
 
+           // Processing / For Approval
+           case 2:
+               return `
+                   <div class="w-100">
+                       <div class="d-flex justify-content-between mb-1">
+                           <small class="fw-semibold text-info">Processing</small>
+                           <small class="text-muted">60%</small>
+                       </div>
+                       <div class="progress" style="height:8px;">
+                           <div class="progress-bar progress-bar-striped progress-bar-animated bg-info"
+                                role="progressbar"
+                                style="width:60%">
+                           </div>
+                       </div>
+                   </div>
+               `;
+
+           // Complete
+           case 3:
+               return `
+                   <div class="w-100">
+                       <div class="d-flex justify-content-between mb-1">
+                           <small class="fw-semibold text-success">Completed</small>
+                           <small class="text-muted">100%</small>
+                       </div>
+                       <div class="progress" style="height:8px;">
+                           <div class="progress-bar bg-success"
+                                role="progressbar"
+                                style="width:100%">
+                           </div>
+                       </div>
+                   </div>
+               `;
+
+           default:
+               return `
+                   <div class="w-100">
+                       <div class="d-flex justify-content-between mb-1">
+                           <small class="fw-semibold text-secondary">Unknown</small>
+                           <small class="text-muted">0%</small>
+                       </div>
+                       <div class="progress" style="height:8px;">
+                           <div class="progress-bar bg-secondary"
+                                role="progressbar"
+                                style="width:0%">
+                           </div>
+                       </div>
+                   </div>
+               `;
+       }
+   }
+
+   /*Function for event actions*/
+   function EventActionDropdown(DocId, status) {
+
+       let items = '';
+
+       status = parseInt(status);
+
+       // =========================
+       // STATUS 1 = NEW
+       // =========================
+       if (status === 1) {
+
+           items += `
+               <li>
+                 <button class="dropdown-item py-2 small d-flex align-items-center gap-2"
+                         onclick="setupEventPackage('${DocId}')">
+                   <i class="bi bi-file-earmark-text text-muted fs-6"></i> Setup Event
+                 </button>
+               </li>
+           `;
+       }
+
+       // =========================
+       // STATUS 2 = FOR APPROVAL
+       // =========================
+       else if (status === 2) {
+
+           items += `
+               <li>
+                 <button class="dropdown-item py-2 small d-flex align-items-center gap-2">
+                   <i class="bi bi-eye text-muted fs-6"></i> View Contract
+                 </button>
+               </li>
+
+               <li>
+                 <button class="dropdown-item py-2 small d-flex align-items-center gap-2">
+                   <i class="bi bi-pencil-square text-muted fs-6"></i> Add Amendment
+                 </button>
+               </li>
+
+               <li>
+                 <button class="dropdown-item py-2 small d-flex align-items-center gap-2">
+                   <i class="bi bi-calendar-week text-muted fs-6"></i> Re-schedule
+                 </button>
+               </li>
+
+               <li><hr class="dropdown-divider my-1"></li>
+
+               <li>
+                 <button class="dropdown-item py-2 small d-flex align-items-center gap-2">
+                   <i class="bi bi-printer text-muted fs-6"></i> Print
+                 </button>
+               </li>
+
+               <li>
+                 <button class="dropdown-item py-2 small d-flex align-items-center gap-2">
+                   <i class="bi bi-download text-muted fs-6"></i> Download PDF
+                 </button>
+               </li>
+
+               <li>
+                 <button class="dropdown-item py-2 small d-flex align-items-center gap-2">
+                   <i class="bi bi-upload text-muted fs-6"></i> Upload Contract
+                 </button>
+               </li>
+
+               <li><hr class="dropdown-divider my-1"></li>
+
+               <li>
+                 <button class="dropdown-item py-2 small d-flex align-items-center gap-2 text-danger">
+                   <i class="bi bi-trash3 fs-6"></i> Cancel Contract
+                 </button>
+               </li>
+           `;
+       }
+
+       // =========================
+       // STATUS 3 = COMPLETED
+       // =========================
+       else if (status === 3) {
+
+           items += `
+               <li>
+                 <button class="dropdown-item py-2 small d-flex align-items-center gap-2">
+                   <i class="bi bi-eye text-muted fs-6"></i> View Contract
+                 </button>
+               </li>
+
+               <li>
+                 <button class="dropdown-item py-2 small d-flex align-items-center gap-2">
+                   <i class="bi bi-pencil-square text-muted fs-6"></i> Add Amendment
+                 </button>
+               </li>
+
+               <li>
+                 <button class="dropdown-item py-2 small d-flex align-items-center gap-2">
+                   <i class="bi bi-cash-coin text-muted fs-6"></i> Add Charges
+                 </button>
+               </li>
+
+               <li>
+                 <button class="dropdown-item py-2 small d-flex align-items-center gap-2">
+                   <i class="bi bi-calendar-check text-muted fs-6"></i> End Event
+                 </button>
+               </li>
+
+               <li><hr class="dropdown-divider my-1"></li>
+
+               <li>
+                 <button class="dropdown-item py-2 small d-flex align-items-center gap-2">
+                   <i class="bi bi-download text-muted fs-6"></i> Download PDF
+                 </button>
+               </li>
+
+               <li>
+                 <button class="dropdown-item py-2 small d-flex align-items-center gap-2">
+                   <i class="bi bi-printer text-muted fs-6"></i> Print
+                 </button>
+               </li>
+           `;
+       }
+
+       // =========================
+       // DEFAULT
+       // =========================
+       else {
+           items += `
+               <li>
+                 <span class="dropdown-item text-muted small">No actions available</span>
+               </li>
+           `;
+       }
+
+       return `
+           <div class="dropdown">
+               <button class="btn btn-link text-secondary p-0 border-0" type="button" data-bs-toggle="dropdown">
+                   <i class="bi bi-three-dots-vertical fs-6"></i>
+               </button>
+
+               <ul class="dropdown-menu dropdown-menu-end shadow-sm" style="font-size: 13px;">
+                   ${items}
+               </ul>
+           </div>
+       `;
+   }
 
 
     function ServiceContent(data) {
@@ -154,69 +359,7 @@
                         ${DocumentStatusBadge(srv.DocStatus)}
                     </td>
                     <td class="pe-4 text-center">
-                        <div class="dropdown">
-                            <button class="btn btn-link text-secondary p-0 border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-three-dots-vertical fs-6"></i>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end shadow-sm" style="font-size: 13px;">
-                                <li>
-                                  <button class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" type="button" onclick="setupEventPackage('${srv.DocId}')">
-                                    <i class="bi bi-file-earmark-text text-muted fs-6"></i> Setup Event
-                                  </button>
-                                </li>
-                                <li>
-                                  <button class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" type="button">
-                                    <i class="bi bi-printer text-muted fs-6"></i> Print
-                                  </button>
-                                </li>
-                                <li>
-                                  <button class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" type="button">
-                                    <i class="bi bi-download text-muted fs-6"></i> Download PDF
-                                  </button>
-                                </li>
-                                <li>
-                                  <button class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" type="button">
-                                    <i class="bi bi-upload text-muted fs-6"></i> Upload Contract
-                                  </button>
-                                </li>
-                                <li><hr class="dropdown-divider my-1"></li>
-                                <li>
-                                  <button class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" type="button">
-                                    <i class="bi bi-eye text-muted fs-6"></i> View Contract
-                                  </button>
-                                </li>
-                                <li>
-                                  <button class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" type="button">
-                                    <i class="bi bi-check2-circle text-muted fs-6"></i> Confirm Booking
-                                  </button>
-                                </li>
-                                <li>
-                                  <button class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" type="button">
-                                    <i class="bi bi-calendar-check text-muted fs-6"></i> End Event
-                                  </button>
-                                </li>
-                                <li>
-                                  <button class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" type="button">
-                                    <i class="bi bi-plus text-muted fs-6"></i> Add Ammendment
-                                  </button>
-                                </li>
-                                <li>
-                                  <button class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" type="button">
-                                    <i class="bi bi-plus text-muted fs-6"></i> Add Charges
-                                  </button>
-                                </li>
-                                <li>
-                                  <button class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" type="button">
-                                    <i class="bi bi-calendar-week text-muted fs-6"></i> Re-schedule
-                                  </button>
-                                </li>
-                                <li>
-                                  <button class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" type="button">
-                                    <i class="bi bi-trash3 text-danger fs-6"></i> Cancel Contract
-                                  </button>
-                                </li>
-                            </ul>
-                        </div>
+                        ${EventActionDropdown(srv.DocId, srv.DocStatus)}
                     </td>
                 </tr>
             `);
@@ -492,6 +635,90 @@
                          </div>
                      `);
 
+               // ===========================
+               // FOOD SETUP
+               // ===========================
+               let foodHtml = '';
+
+               if (Array.isArray(response.Food) && response.Food.length > 0) {
+
+                   response.Food.forEach(food => {
+                       foodHtml += `
+                           <label class="list-group-item px-4 py-3 border border-success selection-row selection-food position-relative d-block mb-2 rounded-3 shadow-sm">
+                               <div class="form-check custom-check-success mb-0 d-flex align-items-start gap-3 pe-4">
+                                   <input class="form-check-input mt-1 shadow-none border-success" type="checkbox" checked>
+                                   <div class="flex-grow-1">
+                                       <div class="fw-semibold text-dark lh-1 py-1 food_name">
+                                           ${food.MenuName || '--'}
+                                       </div>
+                                       <div class="small text-muted mt-1 food_description">
+                                           ${food.MenuDescription || '--'}
+                                       </div>
+                                       <input type="hidden"
+                                              class="food_category"
+                                              value="${food.MenuCategory || ''}">
+                                   </div>
+                               </div>
+                           </label>
+                       `;
+                   });
+
+                   $("#display-pre-setupfood").html(foodHtml).show();
+
+                   // Hide default food options
+                   $("#food_list_group > label").hide();
+
+               } else {
+
+                   $("#display-pre-setupfood").empty().hide();
+
+                   // Show default food options
+                   $("#food_list_group > label").show();
+               }
+
+
+               // ===========================
+               // EQUIPMENT SETUP
+               // ===========================
+               let equipmentHtml = '';
+
+               if (Array.isArray(response.Equipment) && response.Equipment.length > 0) {
+
+                   response.Equipment.forEach(eq => {
+                       equipmentHtml += `
+                           <label class="list-group-item px-4 py-3 border border-success selection-row">
+                               <div class="form-check custom-check-success mb-0 d-flex align-items-start gap-3">
+                                   <input class="form-check-input mt-1" type="checkbox" checked>
+                                   <div class="flex-grow-1">
+                                       <div class="fw-semibold text-dark lh-1 py-1 equip_name">
+                                           ${eq.EqpmentName || '--'}
+                                       </div>
+                                       <div class="small text-muted mt-1 equip_description">
+                                           ${eq.EqpmentDescription || '--'}
+                                       </div>
+                                       <input type="hidden"
+                                              class="equip_category"
+                                              value="${eq.EqpmentCategory || ''}">
+                                   </div>
+                               </div>
+                           </label>
+                       `;
+                   });
+
+                   $("#display-pre-setuparrangment").html(equipmentHtml).show();
+
+                   // Hide default equipment options
+                   $("#arrangement_list_group > label").hide();
+
+               } else {
+
+                   $("#display-pre-setuparrangment").empty().hide();
+
+                   // Show default equipment options
+                   $("#arrangement_list_group > label").show();
+               }
+
+
                       
                   });
               } else {
@@ -519,7 +746,7 @@
                           </button>
                           <ul class="dropdown-menu dropdown-menu-end shadow border-0 p-2 rounded-3 mt-2">
                               <li>
-                                  <button class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" type="button">
+                                  <button class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" type="button" onclick="updateConfirmBooking()">
                                       <i class="bi bi-check2-circle text-muted fs-6"></i>
                                       Confirm
                                   </button>
@@ -761,4 +988,40 @@
             }
         });
     }
+
+
+
+/*Function to save booking and confirmed ready for actual evaluation*/    
+    function updateConfirmBooking(){
+        var Documentid = $("#draft-documentid").val();
+        var RatePax = $("#rate_perpax").val();
+        var PackageCost = $("#package_cost").val();
+        var Instruction = $("#instructions").val();
+        $.post("dirs/booking/actions/update_confirmbooking.php", {
+            Documentid : Documentid,
+            RatePax: RatePax,
+            PackageCost: PackageCost,
+            Instruction: Instruction
+        }, function(data){
+            if($.trim(data) == "success"){
+                mdlBookForm2();
+                Swal.fire({
+                    toast: true,
+                    position: "top-end",
+                    icon: "success",
+                    title: "Booking confirmed",
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }else{
+                Swal.fire({
+                    icon: "error",
+                    title: "Error: " + data,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }
+        });
+    }
+
 </script>

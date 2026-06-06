@@ -24,24 +24,24 @@
 
     <div class="col-md-6">
       <label class="form-label small text-muted fw-bold mb-1" for="rate_perpax">Rate per Pax</label>
-      <div class="input-group border rounded-0 bg-white px-2 py-1 shadow-sm w-100">
-        <span class="input-group-text bg-transparent border-0 py-0 small"> PHP </span>
-        <input type="text" class="form-control bg-transparent border-0 shadow-none py-0 small text-end" id="rate_perpax" autocomplete="off">
+      <div class="input-group shadow-sm w-100">
+        <span class="input-group-text py-0 small"> PHP </span>
+        <input type="text" class="form-control border-dark shadow-none with-comma py-0 small" id="rate_perpax" autocomplete="off">
       </div>
     </div>
-    
+
     <div class="col-md-6">
       <label class="form-label small text-muted fw-bold mb-1" for="package_cost">Total Package Cost</label>
-      <div class="input-group border rounded-0 bg-light px-2 py-1 shadow-sm w-100">
-        <span class="input-group-text bg-transparent border-0 py-0 small  fw-bold">PHP</span>
-        <input type="text" class="form-control bg-transparent border-0 shadow-none py-0 small fw-bold text-end " id="package_cost" autocomplete="off">
+      <div class="input-group shadow-sm w-100">
+        <span class="input-group-text py-0 small"> PHP </span>
+        <input type="text" class="form-control border-dark shadow-none with-comma py-0 small" id="package_cost" autocomplete="off">
       </div>
     </div>
 
     <div class="col-12">
       <label class="form-label small text-muted fw-bold mb-1" for="instructions">Special Instructions</label>
-      <div class="input-group border rounded-0 bg-white px-2 py-1 shadow-sm w-100">
-        <textarea class="form-control bg-transparent border-0 shadow-none py-0 small" id="instructions" rows="3" autocomplete="off"></textarea>
+      <div class="input-group shadow-sm w-100">
+        <textarea class="form-control bg-transparent border-dark shadow-none py-0 small" id="instructions" rows="3" autocomplete="off"></textarea>
       </div>
       <small class="text-muted d-block mt-1">This field serves as Internal guidelines for event setup (Guidelines).</small>
     </div>

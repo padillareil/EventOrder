@@ -20,17 +20,20 @@
 
       <!-- Arrangements List Container -->
       <div class="list-group list-group-flush" id="arrangement_list_group">
+
+        <div class="list-group list-group-flush" id="display-pre-setuparrangment"></div>
           <!-- Item 1 -->
           <label class="list-group-item px-4 py-3 border border-success selection-row" for="wired-mic">
               <div class="form-check custom-check-success mb-0 d-flex align-items-start gap-3">
                   <input class="form-check-input mt-1" type="checkbox" id="wired-mic">
                   <div class="flex-grow-1">
-                      <div class="fw-semibold text-dark lh-1 py-1">
+                      <div class="fw-semibold text-dark lh-1 py-1 equip_name">
                           Wired Microphone (2 Units)
                       </div>
-                      <div class="small text-muted mt-1">
+                      <div class="small text-muted mt-1 equip_description">
                           Standard dual wired microphone setup suited for stationary podium platforms or panel seating arrangements.
                       </div>
+                      <input type="hidden" class="equip_category">
                   </div>
               </div>
           </label>

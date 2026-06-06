@@ -8,7 +8,7 @@
       </div>
 
       <div style="min-width: 240px;">
-          <label class="form-label small text-muted fw-bold mb-1" for="serving_type">Serving Type</label>
+          <label class="form-label small text-muted fw-bold mb-1" for="serving_type">Serving Type (Under Development)</label>
           <select class="form-select bg-transparent shadow-none py-2 px-3 small text-muted rounded-3" id="serving_type" >
               <option value="" disabled selected hidden>Choose...</option>
               <option value="Snacks">Snacks</option>
@@ -32,6 +32,9 @@
     </div>
 
     <div class="list-group list-group-flush" id="food_list_group">
+
+        <div class="list-group list-group-flush" id="display-pre-setupfood"></div>
+
         
         <label class="list-group-item px-4 py-3 border border-success selection-row selection-food  position-relative d-block mb-2 rounded-3 shadow-sm" for="food-pastries">
             <div class="form-check custom-check-success mb-0 d-flex align-items-start gap-3 pe-4">

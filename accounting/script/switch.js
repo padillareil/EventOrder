@@ -39,10 +39,10 @@ $("#main-menu")
       $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
       $file = "dirs/soa/soa.php";
     break;
-    case "ar":
+    case "costing_menu":
       $maintitle = "";
       $mainbreadcrumb = `<li class="breadcrumb-item active"></li>`;
-      $file = "dirs/ar/ar.php";
+      $file = "dirs/costing_menu/costing_menu.php";
     break;
   case "ap":
       $maintitle = "";

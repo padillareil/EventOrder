@@ -86,9 +86,15 @@ try {
                             <p class="text-muted">Menu</p>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link active" name="menu" menucode="approvals">
+                            <a href="#" class="nav-link" name="menu" menucode="approvals">
                                 <i class="nav-icon bi bi-check2-square"></i>
                                 <p>Approvals</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active" name="menu" menucode="costing_menu">
+                                <i class="nav-icon bi bi-receipt"></i>
+                                <p>Costing Menu</p>
                             </a>
                         </li>
                         <li class="nav-item">

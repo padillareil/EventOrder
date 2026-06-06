@@ -4,10 +4,10 @@
 
 	$User = $_SESSION['Uid'];
 
-	$DocumentId   = $_POST['DocumentId'];
-	$RatePax      = $_POST['RatePax'] ?? 0;
-	$PackageCost  = $_POST['PackageCost'] ?? 0;
-	$Instruction  = !empty($_POST['Instruction']) ? $_POST['Instruction'] : null;
+	$DocumentId   	= $_POST['DocumentId'];
+	$RatePax = !empty($_POST['RatePax']) ? (float) str_replace(',', '', $_POST['RatePax']) : 0;
+	$PackageCost = !empty($_POST['PackageCost']) ? (float) str_replace(',', '', $_POST['PackageCost']) : 0;
+	$Instruction  	= !empty($_POST['Instruction']) ? $_POST['Instruction'] : null;
 
 	$Equipment = isset($_POST['Equipment'])
 	    ? json_decode($_POST['Equipment'], true)
@@ -32,6 +32,14 @@
 	        $PackageCost,
 	        $Instruction
 	    ]);
+
+
+	    $clean_record = $conn->prepare("EXEC dbo.[CleanDraft_Setup] ?");
+	    $clean_record->execute([
+	        $DocumentId
+	    ]);
+
+
 
 	    // =========================
 	    // EQUIPMENT LOOP

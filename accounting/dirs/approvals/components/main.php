@@ -1,4 +1,4 @@
-<div class="container my-5">
+<div class="container my-1">
     
     <!-- Header Block -->
     <div class="mb-4">
@@ -70,128 +70,133 @@
     </div>
 
     <!-- Section 2: Main Split Workspace -->
-    <div class="row g-4">
-        
-        <!-- Left Side: Clean Ticket Row Queue -->
-        <div class="col-12 col-lg-8">
-            <div class="card border-0 shadow-sm rounded-4 bg-white h-100">
-                
-                <!-- Inner Layout Controls Header -->
-                <div class="card-body p-4 border-bottom d-flex align-items-center justify-content-between">
-                    <div class="d-flex align-items-center gap-3 flex-grow-1 flex-md-grow-0">
-                        <div class="input-group border rounded-3 bg-white  shadow-sm" style="max-width: 240px;">
-                            <span class="input-group-text bg-transparent border-0 py-0 pe-2">
-                                <i class="bi bi-search text-muted" style="font-size: 13px;"></i>
-                            </span>
-                            <input type="search" class="form-control bg-transparent border-0 shadow-none py-0 small" id="search-approvals" placeholder="Search...">
+        <div class="row g-4">
+            <div class="col-12 col-lg-8">
+                <div class="card border-0 shadow-sm rounded-4 bg-white h-100">
+                    <div class="card-body bg-light-subtle">
+                        <div class="border rounded-3 bg-white shadow-sm w-100 mb-2">
+                            <input type="search" class="form-control form-control-lg bg-transparent border-0 shadow-none " id="search-approvals" placeholder="Search...">
                         </div>
+                        <div class="mb-1 justify-content-end d-flex">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination pagination-sm mb-0" id="pagination-approval">
+                                    <li class="page-item" id="li-prev-approval">
+                                        <a class="page-link shadow-none" href="#" id="btn-preview-approval">
+                                            <i class="bi bi-chevron-left small"></i>
+                                        </a>
+                                    </li>
+                                    <li class="page-item" id="li-next-approval">
+                                        <a class="page-link shadow-none" href="#" id="btn-next-approval">
+                                            <i class="bi bi-chevron-right small"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="justify-content-end d-flex">
+                            <div id="page-info-approval" class="mt-1 small text-muted"></div>
+                        </div>
+                        <div class="d-flex flex-column gap-2" id="load_EventApprovalList">
+                            </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Pure Compact Row List Content -->
-                <div class="card-body p-3 bg-light-subtle">
-                    <div class="d-flex flex-column gap-2" id="load_EventApprovalList">
+            <div class="col-12 col-lg-4">
+                <div class="card border-0 shadow-sm rounded-4 bg-white h-100">
+                    
+                    <div class="card-body p-4 border-bottom">
+                        <h6 class="fw-bold text-dark mb-1">Menus</h6>
+                        <p class="text-muted small mb-0">Reconcile property accounts, audit signed files, and track canceled asset values.</p>
+                    </div>
+                    
+                    <div class="card-body p-4 d-flex flex-column gap-2">
                         
-                        <!-- Contract Row Item 1 -->
-                        <div class="d-flex align-items-center gap-3 bg-white p-3 rounded-3 border shadow-xs">
-                            <!-- Ticket/BEO Unique Code -->
-                            <div class="bg-light border text-secondary font-monospace fw-bold rounded-3 px-3 py-2 text-center" style="min-width: 95px; font-size: 12px;" title="Event Order Number">
-                                #EO-9024
-                            </div>
-                            
-                            <!-- Middle Summary Content -->
-                            <div class="flex-grow-1">
-                                <div class="small fw-semibold text-dark mb-0.5">Tech Summit Keynote & Gala Dinner</div>
-                                <div class="text-muted fs-7">Grand Plaza Resort &bull; 250 Pax Banquet Contract submitted by Sales Executive Michael Chang.</div>
-                            </div>
-                            
-                            <!-- Context Direct Actions -->
-                            <div class="d-flex gap-1.5 align-items-center">
-                                <button type="button" class="btn btn-white border shadow-xs btn-sm rounded-2 fw-medium text-dark px-3" onclick="viewContractDetails(9024)">
-                                    View
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Contract Row Item 2 -->
-                        <div class="d-flex align-items-center gap-3 bg-white p-3 rounded-3 border shadow-xs">
-                            <!-- Ticket/BEO Unique Code -->
-                            <div class="bg-light border text-secondary font-monospace fw-bold rounded-3 px-3 py-2 text-center" style="min-width: 95px; font-size: 12px;" title="Event Order Number">
-                                #EO-8971
-                            </div>
-                            
-                            <!-- Middle Summary Content -->
-                            <div class="flex-grow-1">
-                                <div class="small fw-semibold text-dark mb-0.5">Goldman Wedding Reception Dinner</div>
-                                <div class="text-muted fs-7">Oceanview Pavilion &bull; Premium Beverage Package & Catering Order logged by Sarah Jenkins.</div>
-                            </div>
-                            
-                            <!-- Context Direct Actions -->
-                            <div class="d-flex gap-1.5 align-items-center">
-                                <button type="button" class="btn btn-white border shadow-xs btn-sm rounded-2 fw-medium text-dark px-3" onclick="viewContractDetails(8971)">
-                                    View
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Contract Row Item 3 -->
-                        <div class="d-flex align-items-center gap-3 bg-white p-3 rounded-3 border shadow-xs">
-                            <!-- Ticket/BEO Unique Code -->
-                            <div class="bg-light border text-secondary font-monospace fw-bold rounded-3 px-3 py-2 text-center" style="min-width: 95px; font-size: 12px;" title="Event Order Number">
-                                #EO-8955
-                            </div>
-                            
-                            <!-- Middle Summary Content -->
-                            <div class="flex-grow-1">
-                                <div class="small fw-semibold text-dark mb-0.5">Medical Conference Luncheon</div>
-                                <div class="text-muted fs-7">Summit Alpine Lodge &bull; Custom Dietary / Halal and Vegan Menu parameters pending audit.</div>
-                            </div>
-                            
-                            <!-- Context Direct Actions -->
-                            <div class="d-flex gap-1.5 align-items-center">
-                                <button type="button" class="btn btn-white border shadow-xs btn-sm rounded-2 fw-medium text-dark px-3" onclick="viewContractDetails(8955)">
-                                    View
-                                </button>
-                            </div>
-                        </div>
-
+                        <button type="button" class="btn btn-light text-start p-3 border rounded-3 fw-medium d-flex align-items-center justify-content-between text-secondary bg-white hover-shadow" onclick="loadCalendarEvents()">
+                            <span><i class="bi bi-calendar3 me-2 text-primary"></i> Calendar of Events</span>
+                            <i class="bi bi-chevron-right fs-7 text-muted"></i>
+                        </button>
+                        
+                        <button type="button" class="btn btn-light text-start p-3 border rounded-3 fw-medium d-flex align-items-center justify-content-between text-secondary bg-white hover-shadow" onclick="viewAllContracts()">
+                            <span><i class="bi bi-file-earmark-text me-2 text-dark"></i> View All Contracts</span>
+                            <i class="bi bi-chevron-right fs-7 text-muted"></i>
+                        </button>
+                        
+                        <button class="btn btn-dark text-center p-3 rounded-3 fw-medium mt-2 shadow-sm" type="button" onclick="exportAccountingLedger()">
+                            <i class="bi bi-download me-1.5"></i> Export Financial Ledger
+                        </button>
+                        
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Right Side: Filter Scope & Management Shortcuts -->
-        <div class="col-12 col-lg-4">
-            <div class="card border-0 shadow-sm rounded-4 bg-white h-100">
-                
-                <!-- Module Header -->
-                <div class="card-body p-4 border-bottom">
-                    <h6 class="fw-bold text-dark mb-1">Menus</h6>
-                    <p class="text-muted small mb-0">Reconcile property accounts, audit signed files, and track canceled asset values.</p>
-                </div>
-                
-                <!-- Management Actions Body -->
-                <div class="card-body p-4 d-flex flex-column gap-2">
-                    
-                    <!-- Shortcut 1: Calendar of Events -->
-                    <button type="button" class="btn btn-light text-start p-3 border rounded-3 fw-medium d-flex align-items-center justify-content-between text-secondary bg-white hover-shadow" onclick="loadCalendarEvents()">
-                        <span><i class="bi bi-calendar3 me-2 text-primary"></i> Calendar of Events</span>
-                        <i class="bi bi-chevron-right fs-7 text-muted"></i>
-                    </button>
-                    
-                    <!-- Shortcut 2: View All Contracts -->
-                    <button type="button" class="btn btn-light text-start p-3 border rounded-3 fw-medium d-flex align-items-center justify-content-between text-secondary bg-white hover-shadow" onclick="viewAllContracts()">
-                        <span><i class="bi bi-file-earmark-text me-2 text-dark"></i> View All Contracts</span>
-                        <i class="bi bi-chevron-right fs-7 text-muted"></i>
-                    </button>
-                    <!-- Primary Accounting Action: Revenue Recognition / Audit Export -->
-                    <button class="btn btn-dark text-center p-3 rounded-3 fw-medium mt-2 shadow-sm" type="button" onclick="exportAccountingLedger()">
-                        <i class="bi bi-download me-1.5"></i> Export Financial Ledger
-                    </button>
-                    
-                </div>
-            </div>
-        </div>
-        
-    </div>
 </div>
+
+
+
+<script>
+    /*search-srv*/
+    $("#search-approvals").on("keydown", function(e) {
+        if (e.key === "Enter") {
+            loadApproval();
+        }
+    });
+
+      /* Pagination + Fetch Blocked srvounts */
+      $("#btn-preview-approval").on("click", function(e) {
+          e.preventDefault();
+
+          if (CurrentPage > 1) {
+              loadApproval(CurrentPage - 1);
+          }
+      });
+
+    /*Function load all important tags tickets*/
+      $("#btn-next-approval").on("click", function(e) {
+          e.preventDefault();
+
+          if (CurrentPage < totalPages) {
+              loadApproval(CurrentPage + 1);
+          }
+      });
+
+      $(document).on("click", "#pagination-approval .page-link[data-page]", function (e) {
+          e.preventDefault();
+
+          loadApproval($(this).data("page"));
+      });
+</script>
+
+<!-- Style design for badge of pencil code -->
+<style>
+@keyframes neonMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+}
+
+.neon-border {
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.neon-border::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 12px;
+    background: linear-gradient(90deg,#0d6efd,#6610f2,#0dcaf0,#0d6efd);
+    background-size: 300% 300%;
+    animation: neonMove 3s linear infinite;
+    z-index: -1;
+}
+
+.neon-border::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #f8f9fa;
+    border-radius: 10px;
+    z-index: -1;
+}
+</style>
