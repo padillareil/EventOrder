@@ -125,7 +125,7 @@
           <button type="button" id="add-custom-food" class="btn btn-success text-white px-4 py-2 rounded-3 small fw-medium shadow-sm">
             Done
           </button>
-          <button type="button" class="btn btn-light text-muted border px-4 py-2 rounded-3 small fw-medium" data-bs-dismiss="modal">
+          <button type="button" class="btn btn-light px-4 py-2 rounded-3 text-secondary border fw-medium shadow" data-bs-dismiss="modal">
             Cancel
           </button>
         </div>
@@ -737,7 +737,7 @@
             <span class="spinner-border spinner-border-sm d-none" id="btn-spinner-booking" role="status"></span>
             <span class="btn-text-booking">Commit</span>
           </button>
-          <button type="reset" id="btn-cancel-booking" class="btn btn-light border px-3 py-2 small fw-medium rounded-3 text-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="reset" id="btn-cancel-booking" class="btn btn-light px-4 py-2 rounded-3 text-secondary border fw-medium shadow" data-bs-dismiss="modal">Cancel</button>
         </div>
 
 
@@ -1250,7 +1250,7 @@ function saveBlockingPayment() {
             } else {
                 Swal.fire({
                     icon: "error",
-                    title: "Error",
+                    title: "Oops!",
                     text: data
                 });
             }

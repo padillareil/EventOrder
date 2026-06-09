@@ -736,35 +736,15 @@
                   $("#nav-food-tab").prop('disabled', false);
                   $("#nav-summary-tab").prop('disabled', false);
                   $("#form-button-action").html(`
-                      <div class="dropdown">
-                          <button type="button"
-                              class="btn btn-light d-flex align-items-center justify-content-center fs-5 no-caret"
-                              id="fabDropdownMenu"
-                              data-bs-toggle="dropdown"
-                              aria-expanded="false">
-                              <i class="bi bi-list"></i>
-                          </button>
-                          <ul class="dropdown-menu dropdown-menu-end shadow border-0 p-2 rounded-3 mt-2">
-                              <li>
-                                  <button class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" type="button" onclick="updateConfirmBooking()">
-                                      <i class="bi bi-check2-circle text-muted fs-6"></i>
-                                      Confirm
-                                  </button>
-                              </li>
-                              <li>
-                                <button class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" type="button" onclick="saveSetupDraft()">
-                                    <i class="bi bi-check2-circle text-muted fs-6"></i>
-                                    Save Setup
-                                </button>
-                              </li>
-                              <li>
-                                  <button class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" type="button" onclick="loadBookingInbox()">
-                                      <i class="bi bi-x-circle text-danger fs-6"></i>
-                                      Cancel Setup
-                                  </button>
-                              </li>
-                          </ul>
-                      </div>
+                        <button class="btn btn-sm btn-success shadow px-4 py-2 rounded-3 fw-medium" type="button" onclick="updateConfirmBooking()">
+                          Confirm
+                        </button>
+                        <button class="btn btn-sm btn-primary shadow px-4 py-2 rounded-3 fw-medium" type="button" onclick="saveSetupDraft()">
+                          Save Setup
+                        </button>
+                        <button class="btn btn-light px-4 py-2 rounded-3 text-secondary border fw-medium shadow" type="reset" onclick="loadBookingInbox()">
+                          Cancel Setup
+                        </button>
                   `);
 
                   if (typeof callback === "function") {
@@ -774,7 +754,35 @@
               }, 50);
           });
       }
-
+     /* <div class="dropdown">
+          <button type="button"
+              class="btn btn-light d-flex align-items-center justify-content-center fs-5 no-caret"
+              id="fabDropdownMenu"
+              data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <i class="bi bi-list"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end shadow border-0 p-2 rounded-3 mt-2">
+              <li>
+                  <button class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" type="button" onclick="updateConfirmBooking()">
+                      <i class="bi bi-check2-circle text-muted fs-6"></i>
+                      Confirm
+                  </button>
+              </li>
+              <li>
+                <button class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" type="button" onclick="saveSetupDraft()">
+                    <i class="bi bi-check2-circle text-muted fs-6"></i>
+                    Save Setup
+                </button>
+              </li>
+              <li>
+                  <button class="dropdown-item rounded-2 py-2 small d-flex align-items-center gap-2" type="button" onclick="loadBookingInbox()">
+                      <i class="bi bi-x-circle text-danger fs-6"></i>
+                      Cancel Setup
+                  </button>
+              </li>
+          </ul>
+      </div>*/
    
 /*--------------------------------------------------------------------------------------------------------------------*/
 /*Function to auto summary at the summary page to show the total summary of event*/

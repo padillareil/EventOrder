@@ -420,7 +420,7 @@
                 <span class="spinner-border spinner-border-sm d-none" id="btn-spinner-account"></span>
                 <span class="btn-text-account">Reject</span>
               </button>
-              <button class="btn btn-light px-4 py-2 rounded-3" type="button" data-bs-dismiss="modal" id="btn-cancel-account">
+              <button class="btn btn-sm shadow px-4 py-2 rounded-3 fw-medium" type="button" data-bs-dismiss="modal" id="btn-cancel-account">
                 Cancel
               </button>
             </div>

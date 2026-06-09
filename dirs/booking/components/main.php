@@ -21,7 +21,7 @@
                             <i class="bi bi-list me-2 text-primary"></i> List All Events
                         </button>
                         <button class="btn btn-primary btn-sm py-2 px-3 rounded-3 d-inline-flex align-items-center fw-medium fs-7 shadow-sm" type="button" onclick="mdlBookForm2()">
-                             New Event
+                             Add Event
                         </button>
                     </div>
 

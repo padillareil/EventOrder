@@ -59,7 +59,16 @@
             <div class="d-flex align-items-center justify-content-between gap-2">
               <h5 class="fw-bold text-dark mb-0" id="form-title"></h5>
               <div class="d-flex align-items-center gap-2" id="form-button-action">
-                <div class="dropdown">
+                <button class="btn btn-sm btn-success shadow px-4 py-2 rounded-3 fw-medium" type="button" onclick="savePencilbooking()" title="Save Pencil Booking">
+                  Save
+                </button>
+                <button class="btn btn-sm btn-primary shadow px-4 py-2 rounded-3 fw-medium" type="button" onclick="savePencilDraft()" title="Save Draft Booking">
+                  Draft
+                </button>
+                <button class="btn btn-light px-4 py-2 rounded-3 text-secondary border fw-medium shadow" type="reset">
+                  Cancel
+                </button>
+                <!-- <div class="dropdown">
                   <button type="button" class="btn btn-light d-flex align-items-center justify-content-center fs-5 no-caret" id="fabDropdownMenu" data-bs-toggle="dropdown" aria-expanded="false" title="Actions Menu">
                     <i class="bi bi-list id-fab-icon"></i>
                   </button>
@@ -81,7 +90,7 @@
                       </button>
                     </li>
                   </ul>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>     
@@ -170,8 +179,25 @@
       }
   });
 
+  /*Function Validators*/
+  function markInvalid(selector) {
+      $(selector).addClass("is-invalid");
+  }
+
+  function markValid(selector) {
+      $(selector).removeClass("is-invalid");
+  }
 
   function savePencilbooking() {
+
+      // ================================
+      // CLEAR OLD ERRORS
+      // ================================
+      $(".is-invalid").removeClass("is-invalid");
+
+      // ================================
+      // GET VALUES
+      // ================================
       var EventTitle       = $("#event_title").val();
       var StartDate        = $("#start_date").val();
       var EndDate          = $("#end_date").val();
@@ -186,36 +212,136 @@
       var MobileNumber     = $("#mobile-number").val();
       var Email            = $("#guest_email").val();
       var CompanyAddress   = $("#guest_address").val();
-      const requiredFields = [
-          EventTitle,
-          StartDate,
-          EndDate,
-          StartTime,
-          EndTime,
-          Hotel,
-          Functions,
-          ExpectedPax,
-          GuaranteedPax,
-          GuestName,
-          MobileNumber,
-          Email
+      var EngagerCategory  = $("#engager_category").val();
+
+      // ================================
+      // REQUIRED FIELD VALIDATION
+      // ================================
+      const fieldMap = [
+          { value: EventTitle, selector: "#event_title" },
+          { value: StartDate, selector: "#start_date" },
+          { value: EndDate, selector: "#end_date" },
+          { value: StartTime, selector: "#start_time" },
+          { value: EndTime, selector: "#end_time" },
+          { value: Hotel, selector: "#choose_hotel" },
+          { value: Functions, selector: "#choose_functionrooms" },
+          { value: ExpectedPax, selector: "#expecte_pax" },
+          { value: GuaranteedPax, selector: "#guaranteed_pax" },
+          { value: GuestName, selector: "#guest-name" },
+          { value: MobileNumber, selector: "#mobile-number" },
+          { value: Email, selector: "#guest_email" }
       ];
 
-      const hasEmptyField = requiredFields.some(
-          field => !field || field.toString().trim() === ''
-      );
+      let hasEmptyField = false;
+
+      fieldMap.forEach(field => {
+          if (!field.value || field.value.toString().trim() === '') {
+              markInvalid(field.selector);
+              hasEmptyField = true;
+          } else {
+              markValid(field.selector);
+          }
+      });
 
       if (hasEmptyField) {
           Swal.fire({
               icon: 'warning',
               title: 'Incomplete Form',
-              text: 'Please complete the form before proceeding.',
-              confirmButtonText: 'OK'
+              text: 'Please complete the highlighted fields.'
           });
           return;
       }
 
-      // Open modal if validation passed
+      // ================================
+      // DATE + TIME VALIDATION
+      // ================================
+      var startDateTime = new Date(StartDate + " " + StartTime);
+      var endDateTime   = new Date(EndDate + " " + EndTime);
+
+      if (endDateTime <= startDateTime) {
+          markInvalid("#start_date");
+          markInvalid("#end_date");
+          markInvalid("#start_time");
+          markInvalid("#end_time");
+
+          Swal.fire({
+              icon: "error",
+              title: "Invalid Schedule",
+              text: "End date/time must be later than start date/time."
+          });
+          return;
+      }
+
+      if (StartDate === EndDate && EndTime <= StartTime) {
+          markInvalid("#start_time");
+          markInvalid("#end_time");
+
+          Swal.fire({
+              icon: "error",
+              title: "Invalid Time",
+              text: "For same-day events, end time must be later than start time."
+          });
+          return;
+      }
+
+      // ================================
+      // SWITCH CASE CLIENT VALIDATION
+      // ================================
+      switch (EngagerCategory) {
+
+          case "Regular":
+          case "Private":
+
+              if (!GuestName) markInvalid("#guest-name");
+              if (!MobileNumber) markInvalid("#mobile-number");
+              if (!Email) markInvalid("#guest_email");
+              if (!CompanyAddress) markInvalid("#guest_address");
+
+              if (!GuestName || !MobileNumber || !Email || !CompanyAddress) {
+                  Swal.fire({
+                      icon: "warning",
+                      title: "Incomplete Client Info"
+                  });
+                  return;
+              }
+
+              break;
+
+          case "Corporate Government":
+          case "Government":
+          case "Corporate Private":
+
+              var Position = $("#guest_position").val();
+
+              if (!GuestName) markInvalid("#guest-name");
+              if (!Position) markInvalid("#guest_position");
+              if (!Company) markInvalid("#guest_company");
+              if (!MobileNumber) markInvalid("#mobile-number");
+              if (!Email) markInvalid("#guest_email");
+              if (!CompanyAddress) markInvalid("#guest_address");
+
+              if (!GuestName || !Position || !Company || !MobileNumber || !Email || !CompanyAddress) {
+                  Swal.fire({
+                      icon: "warning",
+                      title: "Incomplete Client Info"
+                  });
+                  return;
+              }
+
+              break;
+
+          default:
+              Swal.fire({
+                  icon: "error",
+                  title: "Invalid Category",
+                  text: "Please select a valid engager category."
+              });
+              return;
+      }
+
+      // ================================
+      // OPEN PAYMENT MODAL
+      // ================================
       var modalElement = $("#mdl-payment-booking");
 
       modalElement.css({

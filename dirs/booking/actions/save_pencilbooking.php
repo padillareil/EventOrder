@@ -37,9 +37,27 @@ try {
 
     $conn->beginTransaction();
 
+
+    /*Validate Record of event*/
+    $validation = $conn->prepare("EXEC Validate_BookingEntry ?,?,?,?,?,?");
+    $validation->execute([
+        $EventTitle,
+        $StartDate,
+        $EndDate,
+        $StartTime,
+        $EndTime,
+        $Hotel
+    ]);
+
+    $val = $validation->fetch(PDO::FETCH_ASSOC);
+
+    if ($val) {
+        exit('Sorry, this event already exists.');
+    }
+
     // =========================
     // GENERATE CODE
-    // =========================
+    // =========================    
     $stmtCode = $conn->prepare("EXEC PencilBooking_Code");
     $stmtCode->execute();
     $row = $stmtCode->fetch(PDO::FETCH_ASSOC);

@@ -68,6 +68,8 @@ function openReviewBooking(docId){
             $("#event_title_edit").val(response.Data.EventTitle);
             $("#start_date_edit").val(response.Data.EventStartDate);
             $("#end_date_edit").val(response.Data.EventEndDate);
+
+
             $("#engager_category_edit").val(response.Data.GuestType);
             $("#guest-name_edit").val(response.Data.GuestName);
             $("#job_position_edit").val(response.Data.JobPosition);
@@ -75,9 +77,16 @@ function openReviewBooking(docId){
             $("#guest_address_edit").val(response.Data.Address);
             $("#mobile-number_edit").val(response.Data.MobileNumber);
             $("#guest_email_edit").val(response.Data.Customer_Email);
-            $("#booking-id").val(response.Data.Booked_Hotel);
-            $("#other_info_edit").val(response.Data.OtherInfo);
+            $("#choose_hotel_edit").val(response.Data.Booked_Hotel).prop('disabled', true);;
             $("#booking-id").val(response.Data.DocId);
+
+
+            $("#start_time_edit").val(response.Data.TimeStart);
+            $("#end_time_edit").val(response.Data.TimeEnd);
+            $("#choose_functionrooms_edit").val(response.Data.FunctionRoom).prop('disabled', true);;
+            $("#expecte_pax_edit").val(response.Data.ExpectedPax);
+            $("#guaranteed_pax_edit").val(response.Data.GuaranteedPax);
+
 
 
             if (response.Data.DocStatus == 2) { 
