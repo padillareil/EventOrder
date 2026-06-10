@@ -1,78 +1,98 @@
 <?php
 require_once "../../../../config/connection.php";
+require_once "../../../../config/functions.php";
+
 session_start();
 
 $User = $_SESSION['Uid'];
 
-/* =========================
-   HEADER VALUES
-========================= */
-$Menucode      = $_POST['Menucode'];
-$Menuname      = $_POST['Menuname'];
-$Category      = $_POST['Category'];
-$SubCat        = $_POST['SubCat'];
-$Yield         = $_POST['Yield'];
-$SellingPrice  = $_POST['SellingPrice'];
-$Description   = $_POST['Description'];
-$TotalCost     = $_POST['TotalCost'];
-$CostServing   = $_POST['CostServing'];
-$GrossProfit   = $_POST['GrossProfit'];
-$FoodCost      = $_POST['FoodCost'];
+$Menucode    = trim($_POST['Menucode']);
+$Menuname    = trim($_POST['Menuname']);
+$Category    = trim($_POST['Category']);
+$SubCat      = trim($_POST['SubCat']);
+$Description = trim($_POST['Description']);
 
-/* =========================
-   INGREDIENTS (JSON)
-========================= */
+$Yield        = cleanDecimal($_POST['Yield']);
+$SellingPrice = cleanDecimal($_POST['SellingPrice']);
+$TotalCost    = cleanDecimal($_POST['TotalCost']);
+$CostServing  = cleanDecimal($_POST['CostServing']);
+$GrossProfit  = cleanDecimal($_POST['GrossProfit']);
+$FoodCost     = cleanDecimal($_POST['FoodCost']);
+
 $Ingredients = json_decode($_POST['Ingredients'], true);
 
 try {
 
     $conn->beginTransaction();
 
-    /* =========================
-       1. INSERT MENU HEADER
-    ========================= */
-    // $ins_menu = $conn->prepare("
-    //     EXEC dbo.[Menu_Registration] 
-    //     ?,?,?,?,?,?,?,?,?,?,?,?
-    // ");
 
-    // $ins_menu->execute([
-    //     $User,
-    //     $Menucode,
-    //     $Menuname,
-    //     $Category,
-    //     $SubCat,
-    //     $Yield,
-    //     $SellingPrice,
-    //     $Description,
-    //     $TotalCost,
-    //     $CostServing,
-    //     $GrossProfit,
-    //     $FoodCost
-    // ]);
+    /*Validate Record of menu entry*/
+    $validation = $conn->prepare("
+        EXEC dbo.ValidateMenu_Entry ?,?,?,?
+    ");
 
-    /* =========================
-       2. INSERT INGREDIENTS
-    ========================= */
-    if (!empty($Ingredients)) {
+    $validation->execute([
+        $User,
+        $Menuname,
+        $Category,
+        $SubCat
+    ]);
+
+    $val = $validation->fetch(PDO::FETCH_ASSOC);
+
+    $validation->closeCursor(); // IMPORTANT
+
+    if ($val) {
+        exit('This menu already exists. Please check your costing records if you need to make any modifications.');
+    }
+
+
+
+    $sql = "
+        EXEC dbo.Menu_Registration
+            ?,?,?,?,?,?,?,?,?,?,?,?
+    ";
+
+    $stmt = $conn->prepare($sql);
+
+    $stmt->execute([
+        $User,
+        $Menucode,
+        $Menuname,
+        $Category,
+        $SubCat,
+        $Yield,
+        $SellingPrice,
+        $Description,
+        $TotalCost,
+        $CostServing,
+        $GrossProfit,
+        $FoodCost
+    ]);
+
+    if (!empty($Ingredients) && is_array($Ingredients)) {
+
+        $sqlIngredient = "
+            EXEC dbo.Menu_Ingredients
+                ?,?,?,?,?,?
+        ";
+
+        $stmtIngredient = $conn->prepare($sqlIngredient);
 
         foreach ($Ingredients as $row) {
 
-            $Ingredient = $row['item'] ?? '';
-            $Qty        = $row['qty'] ?? 0;
-            $Unit       = $row['unit'] ?? '';
-            $UnitCost   = $row['cost'] ?? 0;
-            $UnitAmount = $row['amount'] ?? 0;
+            $Ingredient = trim($row['item'] ?? '');
 
             if ($Ingredient == '') {
-                continue; // skip empty rows
+                continue;
             }
 
-            $ins_costing = $conn->prepare("
-                EXEC dbo.[Menu_Ingredients] ?,?,?,?,?,?
-            ");
+            $Qty        = cleanDecimal($row['qty'] ?? 0);
+            $Unit       = trim($row['unit'] ?? '');
+            $UnitCost   = cleanDecimal($row['cost'] ?? 0);
+            $UnitAmount = cleanDecimal($row['amount'] ?? 0);
 
-            $ins_costing->execute([
+            $stmtIngredient->execute([
                 $Menucode,
                 $Ingredient,
                 $Qty,
@@ -85,12 +105,12 @@ try {
 
     $conn->commit();
 
-    echo "OK";
+        echo "OK";
 
-} catch (PDOException $e) {
+    } catch (PDOException $e) {
 
-    $conn->rollback();
+        $conn->rollback();
 
-    echo "Error: " . $e->getMessage();
-}
+        echo "Error: " . $e->getMessage();
+    }
 ?>

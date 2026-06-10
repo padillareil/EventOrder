@@ -1362,7 +1362,6 @@
                     
                     <div class="calendar-empty-trigger-box" onclick="loadForm2('${stringISOTrackingDate}')">
                         <i class="bi bi-plus text-primary fs-5"></i>
-                        <span class="font-monospace text-uppercase">Add Event</span>
                     </div>
                 </div>`;
                 

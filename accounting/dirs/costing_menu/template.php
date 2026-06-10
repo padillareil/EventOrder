@@ -1,15 +1,15 @@
 <template id="ingredient-template">
     <tr>
         <td>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control border border-primary">
         </td>
 
         <td>
-            <input type="number" class="form-control ingredient-qty">
+            <input type="number" class="form-control border border-primary ingredient-qty">
         </td>
 
         <td>
-            <select class="form-select ingredient-unit">
+            <select class="form-select border border-primary ingredient-unit">
                 <option value="kg">kg</option>
                 <option value="g">g</option>
                 <option value="ml">ml</option>
@@ -21,11 +21,11 @@
         </td>
 
         <td>
-            <input type="text" class="form-control ingredient-cost with-comma">
+            <input type="text" class="form-control border border-primary ingredient-cost with-comma">
         </td>
 
         <td>
-            <input type="text" class="form-control ingredient-amount with-comma" readonly>
+            <input type="text" class="form-control border border-secondary ingredient-amount with-comma" readonly>
         </td>
 
         <td class="text-center">

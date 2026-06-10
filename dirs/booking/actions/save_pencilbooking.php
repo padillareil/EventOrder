@@ -111,11 +111,8 @@ try {
         // -------------------------
         // UNIFIED REFERENCE NUMBER
         // -------------------------
-        $TransactionNumber =
-            $payment['reference_no']
-            ?? $payment['check_number']
-            ?? $payment['online_transaction_number']
-            ?? '';
+        $TransactionNumber = $payment['reference_no'] ?? '';
+        $Remarks = $payment['remarks'] ?? '';
 
         // -------------------------
         // FILE HANDLING
@@ -145,7 +142,7 @@ try {
         // -------------------------
         $savePayment = $conn->prepare("
             EXEC Create_Payment
-            ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+            ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
         ");
 
         $savePayment->execute([
@@ -174,7 +171,8 @@ try {
 
             $Hotel,
             $payment['cashier'] ?? '',
-            $payment['or_date'] ?? null
+            $payment['or_date'] ?? null,
+            $Remarks ?? null
         ]);
     }
 

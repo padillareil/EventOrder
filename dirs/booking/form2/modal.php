@@ -524,6 +524,12 @@
                     <label class="form-label small text-muted fw-bold mb-1" for="or_number">OR Number</label>
                     <input type="number" class="form-control py-2 fw-semibold" id="or_number" name="or_number">
                   </div>
+                  <div class="col-12">
+                    <label class="form-label small text-muted fw-bold mb-1" for="cash_remarks">
+                        Remarks
+                    </label>
+                    <textarea class="form-control bg-transparent shadow-none py-0 small" name="payment_remarks" id="cash_remarks" placeholder="Remarks..." rows="2" autocomplete="off"></textarea>
+                  </div>
                 </div>
               </div>
 
@@ -578,6 +584,12 @@
                       <i class="bi bi-paperclip me-1"></i>No file attached yet.
                     </div>
                   </div>
+                  <div class="col-12">
+                    <label class="form-label small text-muted fw-bold mb-1" for="banktransfer_remarks">
+                        Remarks
+                    </label>
+                    <textarea class="form-control bg-transparent shadow-none py-0 small" name="payment_remarks" id="banktransfer_remarks" placeholder="Remarks..." rows="2" autocomplete="off"></textarea>
+                  </div>
                 </div>
               </div>
 
@@ -604,6 +616,12 @@
                   <div class="col-12 col-md-12">
                     <label class="form-label small text-muted fw-bold mb-1" for="card_reference_no">Reference No.</label>
                     <input type="text" class="form-control py-2 font-monospace text-uppercase" id="card_reference_no" name="card_reference_no">
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label small text-muted fw-bold mb-1" for="card_remarks">
+                        Remarks
+                    </label>
+                    <textarea class="form-control bg-transparent shadow-none py-0 small" name="payment_remarks" id="card_remarks" placeholder="Remarks..." rows="2" autocomplete="off"></textarea>
                   </div>
                 </div>
               </div>
@@ -686,6 +704,12 @@
                     <label class="form-label small text-muted fw-bold mb-1" for="online_transaction_number">Reference Number</label>
                     <input type="text" class="form-control py-2 font-monospace" id="online_transaction_number" name="online_transaction_number">
                   </div>
+                  <div class="col-12">
+                    <label class="form-label small text-muted fw-bold mb-1" for="online_remarks">
+                        Remarks
+                    </label>
+                    <textarea class="form-control bg-transparent shadow-none py-0 small" name="payment_remarks" id="online_remarks" placeholder="Remarks..." rows="2" autocomplete="off"></textarea>
+                  </div>
                 </div>
               </div>
 
@@ -722,6 +746,12 @@
                     <div class="filename-metadata-tray small text-muted font-monospace text-truncate mt-1 px-1" id="check-filename-log">
                       <i class="bi bi-paperclip me-1"></i>No file attached yet.
                     </div>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label small text-muted fw-bold mb-1" for="check_remarks">
+                        Remarks
+                    </label>
+                    <textarea class="form-control bg-transparent shadow-none py-0 small" name="payment_remarks" id="check_remarks" placeholder="Remarks..." rows="2" autocomplete="off"></textarea>
                   </div>
                 </div>
               </div>
@@ -1011,6 +1041,7 @@ function saveBlockingPayment() {
         return;
     }
 
+    
     var payments = [];
     var formData = new FormData();
 
@@ -1023,7 +1054,8 @@ function saveBlockingPayment() {
             $("#cash_amount").val() === "" ||
             $("#cash_received_by").val() === "" ||
             $("#or_date").val() === "" ||
-            $("#or_number").val() === ""
+            $("#or_number").val() === "" ||
+            $("#cash_remarks").val() === ""
         ) {
             hideLoading();
             Swal.fire({
@@ -1042,7 +1074,8 @@ function saveBlockingPayment() {
             amount: amount,
             cashier: $("#cash_received_by").val(),
             or_date: $("#or_date").val(),
-            or_number: $("#or_number").val()
+            or_number: $("#or_number").val(),
+            remarks: $("#cash_remarks").val()
         });
     }
 
@@ -1056,7 +1089,8 @@ function saveBlockingPayment() {
             $("#bank_destination_name").val() === "" ||
             $("#bank_account_name").val() === "" ||
             $("#bank_account_number").val() === "" ||
-            $("#bank_reference_no").val() === ""
+            $("#bank_reference_no").val() === "" ||
+            $("#banktransfer_remarks").val() === ""
         ) {
             hideLoading();
             Swal.fire({
@@ -1076,7 +1110,8 @@ function saveBlockingPayment() {
             bank: $("#bank_destination_name").val(),
             account_name: $("#bank_account_name").val(),
             account_number: $("#bank_account_number").val(),
-            reference_no: $("#bank_reference_no").val()
+            reference_no: $("#bank_reference_no").val(),
+            remarks: $("#banktransfer_remarks").val()
         });
 
         if ($("#bank_attachment_file")[0].files.length > 0) {
@@ -1093,7 +1128,8 @@ function saveBlockingPayment() {
             $("#check_amount").val() === "" ||
             $("#check_issuing_bank").val() === "" ||
             $("#check_number").val() === "" ||
-            $("#check_maturity_date").val() === ""
+            $("#check_maturity_date").val() === "" ||
+            $("#check_remarks").val() === ""
         ) {
             hideLoading();
             Swal.fire({
@@ -1112,7 +1148,9 @@ function saveBlockingPayment() {
             amount: amount,
             bank: $("#check_issuing_bank").val(),
             check_number: $("#check_number").val(),
-            maturity_date: $("#check_maturity_date").val()
+            maturity_date: $("#check_maturity_date").val(),
+            reference_no: $("#check_number").val(),
+            remarks: $("#check_remarks").val()
         });
 
         if ($("#check_attachment_file")[0].files.length > 0) {
@@ -1130,7 +1168,8 @@ function saveBlockingPayment() {
             $("#card_bank").val() === "" ||
             $("#card_account_name").val() === "" ||
             $("#card_number").val() === "" ||
-            $("#card_reference_no").val() === ""
+            $("#card_reference_no").val() === "" ||
+            $("#card_remarks").val() === ""
         ) {
             hideLoading();
             Swal.fire({
@@ -1150,58 +1189,50 @@ function saveBlockingPayment() {
             bank: $("#card_bank").val(),
             account_name: $("#card_account_name").val(),
             card_number: $("#card_number").val(),
-            reference_no: $("#card_reference_no").val()
+            reference_no: $("#card_reference_no").val(),
+            remarks: $("#card_remarks").val()
         });
     }
 
-   // =========================
-   // ONLINE (FIXED)
-   // =========================
-   if ($("#pay-online").is(":checked")) {
+    // =========================
+    // ONLINE
+    // =========================
+    if ($("#pay-online").is(":checked")) {
 
-       let platform = $("input[name='online_platform']:checked").val() || "";
+        let platform = $("input[name='online_platform']:checked").val() || "";
 
-       let amountVal = $("#online_amount").val().replace(/,/g, '');
-       let amount = parseFloat(amountVal) || 0;
+        let amountVal = $("#online_amount").val().replace(/,/g, '');
+        let amount = parseFloat(amountVal) || 0;
 
-       if (
-           amountVal === "" ||
-           $("#online_account_name").val().trim() === "" ||
-           $("#online_account_number").val().trim() === "" ||
-           $("#online_transaction_number").val().trim() === "" ||
-           platform === ""
-       ) {
-           hideLoading();
-           Swal.fire({
-               icon: "warning",
-               title: "Online Payment",
-               text: "Complete all online payment details."
-           });
-           return;
-       }
+        if (
+            amountVal === "" ||
+            $("#online_account_name").val().trim() === "" ||
+            $("#online_account_number").val().trim() === "" ||
+            $("#online_transaction_number").val().trim() === "" ||
+            $("#online_remarks").val().trim() === "" ||
+            platform === ""
+        ) {
+            hideLoading();
+            Swal.fire({
+                icon: "warning",
+                title: "Online Payment",
+                text: "Complete all online payment details."
+            });
+            return;
+        }
 
-       totalPayment += amount;
+        totalPayment += amount;
 
-       payments.push({
-           type: 'Online', // ✅ GCASH / MAYA / PAYPAL becomes the TYPE
-           amount: amount,
-           bank: platform,
-           platform: platform,
-           account_name: $("#online_account_name").val(),
-           account_number: $("#online_account_number").val(),
-           reference_no: $("#online_transaction_number").val()
-       });
-   }
-
-
-    if (totalPayment != blockingFee) {
-        hideLoading();
-        Swal.fire({
-            icon: "error",
-            title: "Payment Mismatch",
-            text: "Total payment must equal blocking fee."
+        payments.push({
+            type: "Online",
+            amount: amount,
+            bank: platform,
+            platform: platform,
+            account_name: $("#online_account_name").val(),
+            account_number: $("#online_account_number").val(),
+            reference_no: $("#online_transaction_number").val(),
+            remarks: $("#online_remarks").val()
         });
-        return;
     }
 
     formData.append("EventTitle", $("#event_title").val());
@@ -1236,6 +1267,139 @@ function saveBlockingPayment() {
 
             if ($.trim(data) === "OK") {
                 $("#mdl-payment-booking").modal("hide");
+                mdlBookForm2();
+
+                Swal.fire({
+                    toast: true,
+                    position: "top-end",
+                    icon: "success",
+                    title: "Successfully Reserved",
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops!",
+                    text: data
+                });
+            }
+        },
+
+        error: function (xhr) {
+            hideLoading();
+            console.log(xhr.responseText);
+        }
+    });
+}
+
+
+
+
+
+
+function saveBooking2() {
+
+    // =========================
+    // UI LOADING (optional but recommended)
+    // =========================
+    var $btnSubmit = $("#btn-submit-booking");
+    var $btnCancel = $("#btn-cancel-booking");
+    var $spinner = $("#btn-spinner");
+    var $text = $btnSubmit.find(".btn-text-booking");
+
+    function showLoading() {
+        $btnSubmit.prop("disabled", true);
+        $btnCancel.prop("disabled", true);
+        $spinner.removeClass("d-none");
+        $text.text("Saving...");
+    }
+
+    function hideLoading() {
+        $btnSubmit.prop("disabled", false);
+        $btnCancel.prop("disabled", false);
+        $spinner.addClass("d-none");
+        $text.text("Commit");
+    }
+
+    showLoading();
+
+    // =========================
+    // REQUIRED FIELDS
+    // =========================
+    const fields = [
+        { value: $("#event_title").val(), label: "Event Title" },
+        { value: $("#start_date").val(), label: "Start Date" },
+        { value: $("#end_date").val(), label: "End Date" },
+        { value: $("#start_time").val(), label: "Start Time" },
+        { value: $("#end_time").val(), label: "End Time" },
+        { value: $("#choose_hotel").val(), label: "Hotel" },
+        { value: $("#choose_functionrooms").val(), label: "Function Room" },
+        { value: $("#expecte_pax").val(), label: "Expected Pax" },
+        { value: $("#guaranteed_pax").val(), label: "Guaranteed Pax" },
+        { value: $("#guest-name").val(), label: "Guest Name" },
+        { value: $("#mobile-number").val(), label: "Mobile Number" },
+        { value: $("#guest_email").val(), label: "Email" },
+        { value: $("#guest_address").val(), label: "Address" },
+        { value: $("#engager_category").val(), label: "Client Type" }
+    ];
+
+    for (let f of fields) {
+        if (!f.value || $.trim(f.value) === "") {
+            hideLoading();
+            Swal.fire({
+                icon: "warning",
+                title: "Missing Field",
+                text: f.label + " is required."
+            });
+            return;
+        }
+    }
+
+    // =========================
+    // FORM DATA INIT
+    // =========================
+    var formData = new FormData();
+    var payments = []; // IMPORTANT FIX
+
+    // =========================
+    // APPEND DATA
+    // =========================
+    formData.append("EventTitle", $("#event_title").val());
+    formData.append("BlockingFee", $("#blocking_fee").val());
+    formData.append("StartDate", $("#start_date").val());
+    formData.append("EndDate", $("#end_date").val());
+    formData.append("StartTime", $("#start_time").val());
+    formData.append("EndTime", $("#end_time").val());
+    formData.append("Hotel", $("#choose_hotel").val());
+    formData.append("Functions", $("#choose_functionrooms").val());
+    formData.append("ExpectedPax", $("#expecte_pax").val());
+    formData.append("GuaranteedPax", $("#guaranteed_pax").val());
+    formData.append("GuestName", $("#guest-name").val());
+    formData.append("Company", $("#guest_company").val());
+    formData.append("MobileNumber", $("#mobile-number").val());
+    formData.append("Email", $("#guest_email").val());
+    formData.append("CompanyAddress", $("#guest_address").val());
+    formData.append("Position", $("#job_position").val());
+    formData.append("EngagerCategory", $("#engager_category").val());
+    formData.append("Draftid", $("#draft-documentid").val());
+    formData.append("payments", JSON.stringify(payments));
+
+    // =========================
+    // AJAX SUBMIT
+    // =========================
+    $.ajax({
+        url: "dirs/booking/actions/save_pencilbooking.php",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+
+        success: function (data) {
+            hideLoading();
+
+            if ($.trim(data) === "OK") {
                 mdlBookForm2();
 
                 Swal.fire({

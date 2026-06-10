@@ -65,7 +65,7 @@
                 <button class="btn btn-sm btn-primary shadow px-4 py-2 rounded-3 fw-medium" type="button" onclick="savePencilDraft()" title="Save Draft Booking">
                   Draft
                 </button>
-                <button class="btn btn-light px-4 py-2 rounded-3 text-secondary border fw-medium shadow" type="reset">
+                <button class="btn btn-light px-4 py-2 rounded-3 text-secondary border fw-medium shadow" type="reset" onclick="clearValidation()">
                   Cancel
                 </button>
                 <!-- <div class="dropdown">
@@ -180,192 +180,212 @@
   });
 
   /*Function Validators*/
-  function markInvalid(selector) {
-      $(selector).addClass("is-invalid");
-  }
+  /* ================================
+     VALIDATORS
+  ================================ */
+  
+  /* ================================
+     VALIDATORS
+  =============================== */
+ 
+ function markInvalid(selector) {
+     $(selector).addClass("border border-danger");
+ }
 
-  function markValid(selector) {
-      $(selector).removeClass("is-invalid");
-  }
+ function markValid(selector) {
+     $(selector).removeClass("border border-danger");
+ }
 
-  function savePencilbooking() {
+ function clearValidation() {
+     $(".border-danger").removeClass("border border-danger");
+ }
 
-      // ================================
-      // CLEAR OLD ERRORS
-      // ================================
-      $(".is-invalid").removeClass("is-invalid");
 
-      // ================================
-      // GET VALUES
-      // ================================
-      var EventTitle       = $("#event_title").val();
-      var StartDate        = $("#start_date").val();
-      var EndDate          = $("#end_date").val();
-      var StartTime        = $("#start_time").val();
-      var EndTime          = $("#end_time").val();
-      var Hotel            = $("#choose_hotel").val();
-      var Functions        = $("#choose_functionrooms").val();
-      var ExpectedPax      = $("#expecte_pax").val();
-      var GuaranteedPax    = $("#guaranteed_pax").val();
-      var GuestName        = $("#guest-name").val();
-      var Company          = $("#guest_company").val();
-      var MobileNumber     = $("#mobile-number").val();
-      var Email            = $("#guest_email").val();
-      var CompanyAddress   = $("#guest_address").val();
-      var EngagerCategory  = $("#engager_category").val();
+ // ================================
+ // MODAL ERROR HANDLER (REUSABLE)
+ // ================================
+ function showModalError(message) {
 
-      // ================================
-      // REQUIRED FIELD VALIDATION
-      // ================================
-      const fieldMap = [
-          { value: EventTitle, selector: "#event_title" },
-          { value: StartDate, selector: "#start_date" },
-          { value: EndDate, selector: "#end_date" },
-          { value: StartTime, selector: "#start_time" },
-          { value: EndTime, selector: "#end_time" },
-          { value: Hotel, selector: "#choose_hotel" },
-          { value: Functions, selector: "#choose_functionrooms" },
-          { value: ExpectedPax, selector: "#expecte_pax" },
-          { value: GuaranteedPax, selector: "#guaranteed_pax" },
-          { value: GuestName, selector: "#guest-name" },
-          { value: MobileNumber, selector: "#mobile-number" },
-          { value: Email, selector: "#guest_email" }
-      ];
+     $("#payment-modal-message").html(
+         `<div class="alert alert-danger mb-0">${message}</div>`
+     );
 
-      let hasEmptyField = false;
+     const modalElement = $("#mdl-payment-booking");
 
-      fieldMap.forEach(field => {
-          if (!field.value || field.value.toString().trim() === '') {
-              markInvalid(field.selector);
-              hasEmptyField = true;
-          } else {
-              markValid(field.selector);
-          }
-      });
+     modalElement.css({
+         display: "block",
+         opacity: "0",
+         transform: "scale(0.92)",
+         filter: "blur(4px)",
+         transition: "none"
+     });
 
-      if (hasEmptyField) {
-          Swal.fire({
-              icon: 'warning',
-              title: 'Incomplete Form',
-              text: 'Please complete the highlighted fields.'
-          });
-          return;
-      }
+     modalElement.outerWidth();
 
-      // ================================
-      // DATE + TIME VALIDATION
-      // ================================
-      var startDateTime = new Date(StartDate + " " + StartTime);
-      var endDateTime   = new Date(EndDate + " " + EndTime);
+     modalElement.modal({
+         backdrop: "static",
+         keyboard: false
+     }).modal("show");
 
-      if (endDateTime <= startDateTime) {
-          markInvalid("#start_date");
-          markInvalid("#end_date");
-          markInvalid("#start_time");
-          markInvalid("#end_time");
+     modalElement.css({
+         transition: "all 400ms cubic-bezier(0.34, 1.56, 0.64, 1)",
+         opacity: "1",
+         transform: "scale(1)",
+         filter: "blur(0px)"
+     });
+ }
 
-          Swal.fire({
-              icon: "error",
-              title: "Invalid Schedule",
-              text: "End date/time must be later than start date/time."
-          });
-          return;
-      }
 
-      if (StartDate === EndDate && EndTime <= StartTime) {
-          markInvalid("#start_time");
-          markInvalid("#end_time");
+ // ================================
+ // MAIN FUNCTION
+ // ================================
+ function savePencilbooking() {
 
-          Swal.fire({
-              icon: "error",
-              title: "Invalid Time",
-              text: "For same-day events, end time must be later than start time."
-          });
-          return;
-      }
+     clearValidation();
 
-      // ================================
-      // SWITCH CASE CLIENT VALIDATION
-      // ================================
-      switch (EngagerCategory) {
+     // ================================
+     // GET VALUES
+     // ================================
+     const EventTitle      = $("#event_title").val()?.trim();
+     const StartDate       = $("#start_date").val();
+     const EndDate         = $("#end_date").val();
+     const StartTime       = $("#start_time").val();
+     const EndTime         = $("#end_time").val();
+     const Hotel           = $("#choose_hotel").val();
+     const Functions       = $("#choose_functionrooms").val();
+     const ExpectedPax     = $("#expecte_pax").val();
+     const GuaranteedPax   = $("#guaranteed_pax").val();
+     const GuestName       = $("#guest-name").val()?.trim();
+     const Company         = $("#guest_company").val()?.trim();
+     const MobileNumber    = $("#mobile-number").val()?.trim();
+     const Email           = $("#guest_email").val()?.trim();
+     const CompanyAddress  = $("#guest_address").val()?.trim();
+     const EngagerCategory = $("#engager_category").val()?.trim();
 
-          case "Regular":
-          case "Private":
+     // ================================
+     // REQUIRED FIELD VALIDATION
+     // ================================
+     const fieldMap = [
+         { value: EventTitle, selector: "#event_title" },
+         { value: StartDate, selector: "#start_date" },
+         { value: EndDate, selector: "#end_date" },
+         { value: StartTime, selector: "#start_time" },
+         { value: EndTime, selector: "#end_time" },
+         { value: Hotel, selector: "#choose_hotel" },
+         { value: Functions, selector: "#choose_functionrooms" },
+         { value: ExpectedPax, selector: "#expecte_pax" },
+         { value: GuaranteedPax, selector: "#guaranteed_pax" },
+         { value: GuestName, selector: "#guest-name" },
+         { value: MobileNumber, selector: "#mobile-number" },
+         { value: Email, selector: "#guest_email" }
+     ];
 
-              if (!GuestName) markInvalid("#guest-name");
-              if (!MobileNumber) markInvalid("#mobile-number");
-              if (!Email) markInvalid("#guest_email");
-              if (!CompanyAddress) markInvalid("#guest_address");
+     let hasError = false;
 
-              if (!GuestName || !MobileNumber || !Email || !CompanyAddress) {
-                  Swal.fire({
-                      icon: "warning",
-                      title: "Incomplete Client Info"
-                  });
-                  return;
-              }
+     fieldMap.forEach(f => {
+         if (!f.value) {
+             markInvalid(f.selector);
+             hasError = true;
+         } else {
+             markValid(f.selector);
+         }
+     });
 
-              break;
+     if (hasError) {
+         showModalError("Please complete the highlighted fields.");
+         return;
+     }
 
-          case "Corporate Government":
-          case "Government":
-          case "Corporate Private":
+     // ================================
+     // DATE / TIME VALIDATION
+     // ================================
+     const startDateTime = new Date(`${StartDate}T${StartTime}`);
+     const endDateTime   = new Date(`${EndDate}T${EndTime}`);
 
-              var Position = $("#guest_position").val();
+     if (endDateTime <= startDateTime) {
 
-              if (!GuestName) markInvalid("#guest-name");
-              if (!Position) markInvalid("#guest_position");
-              if (!Company) markInvalid("#guest_company");
-              if (!MobileNumber) markInvalid("#mobile-number");
-              if (!Email) markInvalid("#guest_email");
-              if (!CompanyAddress) markInvalid("#guest_address");
+         markInvalid("#start_date");
+         markInvalid("#end_date");
+         markInvalid("#start_time");
+         markInvalid("#end_time");
 
-              if (!GuestName || !Position || !Company || !MobileNumber || !Email || !CompanyAddress) {
-                  Swal.fire({
-                      icon: "warning",
-                      title: "Incomplete Client Info"
-                  });
-                  return;
-              }
+         showModalError("Invalid schedule. Please check date and time setup.");
+         return;
+     }
 
-              break;
+     // ================================
+     // CLIENT RULES
+     // ================================
+     const rules = {
+         "Regular":   ["#guest-name", "#mobile-number", "#guest_email", "#guest_address"],
+         "Private":   ["#guest-name", "#mobile-number", "#guest_email", "#guest_address"],
+         "Corporate": ["#guest-name", "#guest_position", "#guest_company", "#mobile-number", "#guest_email", "#guest_address"],
+         "Government":["#guest-name", "#guest_position", "#guest_company", "#mobile-number", "#guest_email", "#guest_address"]
+     };
 
-          default:
-              Swal.fire({
-                  icon: "error",
-                  title: "Invalid Category",
-                  text: "Please select a valid engager category."
-              });
-              return;
-      }
+     if (!EngagerCategory) {
+         showModalError("Please select engager category.");
+         return;
+     }
 
-      // ================================
-      // OPEN PAYMENT MODAL
-      // ================================
-      var modalElement = $("#mdl-payment-booking");
+     const fieldsToValidate = rules[EngagerCategory] || [];
 
-      modalElement.css({
-          display: 'block',
-          opacity: '0',
-          transform: 'scale(0.92)',
-          filter: 'blur(4px)',
-          transition: 'none'
-      });
+     let clientError = false;
 
-      modalElement.outerWidth();
+     fieldsToValidate.forEach(selector => {
 
-      modalElement.modal({
-          backdrop: 'static',
-          keyboard: false
-      }).modal('show');
+         const value = $(selector).val();
 
-      modalElement.css({
-          transition: 'all 400ms cubic-bezier(0.34, 1.56, 0.64, 1)',
-          opacity: '1',
-          transform: 'scale(1)',
-          filter: 'blur(0px)'
-      });
-  }
+         if (!value || value.toString().trim() === "") {
+             markInvalid(selector);
+             clientError = true;
+         } else {
+             markValid(selector);
+         }
+
+     });
+
+     if (clientError) {
+         showModalError("Please complete highlighted client information.");
+         return;
+     }
+
+     // ================================
+     // FREE BOOKING FLOW
+     // ================================
+     if (EngagerCategory === "Government" || EngagerCategory === "Regular") {
+         $("#blocking_fee").val("0.00");
+         saveBooking2();
+         return;
+     }
+
+     // ================================
+     // OPEN PAYMENT MODAL
+     // ================================
+     const modalElement = $("#mdl-payment-booking");
+
+     modalElement.css({
+         display: "block",
+         opacity: "0",
+         transform: "scale(0.92)",
+         filter: "blur(4px)",
+         transition: "none"
+     });
+
+     modalElement.outerWidth();
+
+     modalElement.modal({
+         backdrop: "static",
+         keyboard: false
+     }).modal("show");
+
+     modalElement.css({
+         transition: "all 400ms cubic-bezier(0.34, 1.56, 0.64, 1)",
+         opacity: "1",
+         transform: "scale(1)",
+         filter: "blur(0px)"
+     });
+ }
 
   function paymenMdlClose(argument) {
       var modalElement = $("#mdl-payment-booking");

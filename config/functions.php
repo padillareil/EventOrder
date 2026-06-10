@@ -36,6 +36,18 @@ function secure_session_start(): void {
     }
 }
 
+/*Function to clean data with symbols*/
+function cleanDecimal($value)
+{
+    $value = trim($value);
+    $value = str_replace(',', '', $value);
+    $value = str_replace('%', '', $value);
+    $value = str_replace('₱', '', $value);
+
+    return ($value === '') ? 0 : $value;
+}
+
+
 // --- PASSWORDS ---
 function hash_password(string $plain): string {
     return password_hash($plain, PASSWORD_DEFAULT);

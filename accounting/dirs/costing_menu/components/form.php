@@ -1,195 +1,274 @@
 <form id="frm-registry">
-    <div class="row g-3">
-
-        <!-- Menu Information -->
-        <div class="col-md-3">
+    <div class="row g-3 bg-secondary shadow-sm">
+        <div class="col-md-2">
             <div class="card shadow-sm">
-                <div class="card-header fw-bold">
-                    Menu Basic Info
+                <div class="card-header bg-secondary-subtle fw-bold">
+                    <h6>Item Identity</h6>
                 </div>
 
                 <div class="card-body">
 
                     <div class="mb-2">
-                        <label class="form-label small text-muted fw-medium mb-1" class="form-label">Menu Code</label>
-                        <input type="text" class="form-control" id="itemmenu_code">
+                        <label class="form-label small text-muted fw-medium mb-1" class="form-label">Item SKU</label>
+                        <input type="text" class="form-control form-control-sm border border-secondary" id="itemmenu_code" required>
                     </div>
 
                     <div class="mb-2">
-                        <label class="form-label small text-muted fw-medium mb-1" class="form-label">Menu Name</label>
-                        <input type="text" class="form-control" id="menu_name">
+                        <label class="form-label small text-muted fw-medium mb-1" class="form-label">Item Name</label>
+                        <input type="text" class="form-control form-control-sm border border-primary" id="menu_name" required>
                     </div>
 
                     <div class="mb-2">
                         <label class="form-label small text-muted fw-medium mb-1">
-                            Category
+                            Menu Category
                         </label>
 
-                        <select class="form-select" id="menu_category">
+                        <select class="form-select form-select-sm border border-primary" id="menu_category" required>
                             <option value="">Choose...</option>
 
-                            <option value="appetizer">Appetizer</option>
-                            <option value="soup">Soup</option>
-                            <option value="salad">Salad</option>
-                            <option value="main_course">Main Course</option>
-                            <option value="side_dish">Side Dish</option>
-                            <option value="dessert">Dessert</option>
-                            <option value="beverage">Beverage</option>
-                            <option value="snack">Snack</option>
-                            <option value="breakfast">Breakfast</option>
-                            <option value="buffet">Buffet Item</option>
-                            <option value="package">Package Menu</option>
+                            <option value="Appetizer">Appetizer</option>
+                            <option value="Soup">Soup</option>
+                            <option value="Salad">Salad</option>
+                            <option value="Main_course">Main Course</option>
+                            <option value="Side_dish">Side Dish</option>
+                            <option value="Dessert">Dessert</option>
+                            <option value="Beverage">Beverage</option>
+                            <option value="Snack">Snack</option>
+                            <option value="Breakfast">Breakfast</option>
+                            <option value="Buffet">Buffet Item</option>
+                            <option value="Package">Package Menu</option>
                         </select>
                     </div>
 
                     <div class="mb-2">
                         <label class="form-label small text-muted fw-medium mb-1">
-                            Sub Category
+                            Sub-category
                         </label>
 
-                        <select class="form-select" id="menu_subcategory">
+                        <select class="form-select form-select-sm border border-primary" id="menu_subcategory" required>
                             <option value="">Choose...</option>
                         </select>
                     </div>
 
                     <div class="mb-2">
                         <label class="form-label small text-muted fw-medium mb-1" class="form-label">Yield (Servings)</label>
-                        <input type="number" class="form-control" id="yield_qty">
+                        <input type="number" class="form-control form-control-sm border border-primary" id="yield_qty" required>
                     </div>
 
                     <div class="mb-2">
                         <label class="form-label small text-muted fw-medium mb-1" class="form-label">Selling Price</label>
-                        <input type="text" class="form-control with-comma" id="selling_price">
+                        <input type="text" class="form-control form-control-sm with-comma border border-primary" id="selling_price" required>
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label small text-muted fw-medium mb-1" class="form-label">Labor Cost per Dish (Optional)</label>
+                        <input type="text" class="form-control form-control-sm with-comma border border-primary" id="labor_cost">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label small text-muted fw-medium mb-1" class="form-label">Overhead Allocation</label>
+                        <input type="text" class="form-control form-control-sm with-comma border border-primary" id="overhead_allocation">
                     </div>
 
                     <div>
-                        <label class="form-label small text-muted fw-medium mb-1" class="form-label" id="description">Description</label>
-                        <textarea class="form-control"></textarea>
+                        <label class="form-label small text-muted fw-medium mb-1" class="form-label">Description</label>
+                        <textarea class="form-control form-control-sm border border-primary" id="description"></textarea>
                     </div>
 
                 </div>
             </div>
         </div>
-
-        <!-- Recipe Formula -->
-        <div class="col-md-6">
-            <div class="card shadow-sm overflow-auto" style="height: 50vh;">
-                <div class="card-header">
-                    <button type="button" class="btn btn-sm btn-primary" id="btn-add-ingredient" title="Add Ingredient" onclick="addIngredientForm()">
-                        <i class="bi bi-plus-lg"></i>
-                    </button>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered align-middle mb-0" style="font-size: 14px;">
-                            <thead class="table-secondary text-muted small">
-                                <tr>
-                                    <th colspan="6">
-                                        <input type="text" class="form-control form-control-sm" id="ingredient-search" placeholder="Search...">
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="col" class="text-center">Ingredient</th>
-                                    <th scope="col" class="text-center">Qty</th>
-                                    <th scope="col" class="text-center">Unit</th>
-                                    <th scope="col" class="text-center">Unit Cost</th>
-                                    <th scope="col" class="text-center">Amount</th>
-                                    <th scope="col" class="text-center"></th>
-                                </tr>
-                            </thead>
-
-                            <tbody id="ingredient-body">
-
-                                <tr>
-                                    <td>
-                                        <input type="text" class="form-control">
-                                    </td>
-
-                                    <td>
-                                        <input type="number" class="form-control ingredient-qty">
-                                    </td>
-
-                                    <td>
-                                        <select class="form-select  ingredient-unit">
-                                            <option value="kg">kg</option>
-                                            <option value="g">g</option>
-                                            <option value="ml">ml</option>
-                                            <option value="ltr">ltr</option>
-                                            <option value="tbsp">tbsp</option>
-                                            <option value="tsp">tsp</option>
-                                            <option value="pcs">pcs</option>
-                                        </select>
-                                    </td>
-
-                                    <td>
-                                        <input type="text" class="form-control ingredient-cost with-comma">
-                                    </td>
-
-                                    <td>
-                                        <input type="text" class="form-control ingredient-amount with-comma" readonly>
-                                    </td>
-
-                                    <td class="text-center">
-                                        <a href="#" class="text-danger btn-remove-ingredient">
-                                            <i class="bi bi-trash3"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                            </tbody>
-
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Cost Analysis -->
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="card shadow-sm">
-                <div class="card-header fw-bold">
-                    System Costing
+                <div class="card-header bg-secondary-subtle fw-bold">
+                   <h6>Costing</h6>
                 </div>
 
                 <div class="card-body">
                     <div class="mb-3">
                         <label class="form-label small text-muted fw-medium mb-1">Total Recipe Cost</label>
-                        <input type="text"
-                               class="form-control"  id="total-recipe-cost"
-                               readonly>
+                        <input type="text" class="form-control form-control-sm border border-secondary"  id="total-recipe-cost" readonly required >
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label small text-muted fw-medium mb-1">Cost Per Serving</label>
-                        <input type="text"
-                               class="form-control" id="cost-per-serving"
-                               readonly>
+                        <input type="text" class="form-control form-control-sm border border-secondary" id="cost-per-serving" readonly required>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label small text-muted fw-medium mb-1">Gross Profit</label>
-                        <input type="text"
-                               class="form-control" id="gross-profit"
-                               readonly>
+                        <label class="form-label small text-muted fw-medium mb-1">Final Price (incl. tax)</label>
+                        <input type="text" class="form-control form-control-sm border border-secondary"  id="final_price" readonly >
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small text-muted fw-medium mb-1">Gross Profit per Dish</label>
+                        <input type="text" class="form-control form-control-sm border border-secondary" id="gross-profit" readonly required>
                     </div>
 
                     <div>
                         <label class="form-label small text-muted fw-medium mb-1">Food Cost %</label>
-                        <input type="text"
-                               class="form-control"  id="food-cost-percent"
-                               readonly>
+                        <input type="text" class="form-control form-control-sm border border-secondary"  id="food-cost-percent" readonly required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small text-muted fw-medium mb-1">Discounted %</label>
+                        <input type="text" class="form-control form-control-sm border border-secondary"  id="discounted_percentage" readonly >
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small text-muted fw-medium mb-1">Discounted Price</label>
+                        <input type="text" class="form-control form-control-sm border border-secondary"  id="discounted_price" readonly >
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small text-muted fw-medium mb-1">VAT Rate</label>
+                        <input type="text" class="form-control form-control-sm border border-secondary"  id="valueadded_tax" readonly >
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Recipe Formula -->
+        <div class="col-md-8">
+            <div class="row">
+               <div class="col-md-12">
+                   <div class="card shadow-sm overflow-auto" style="height: 60vh;">
+                       <div class="card-header bg-secondary-subtle">
+                           <div class="justify-content-end d-flex">
+                               <button type="button" class="btn btn-sm btn-primary shadow px-4 py-2 rounded-3 fw-medium" id="btn-add-ingredient" title="Add Ingredient" onclick="addIngredientForm()">
+                                   <i class="bi bi-plus fs-5"></i>Add Item
+                               </button>
+                           </div>
+                       </div>
+                       <div class="card-body">
+                           <h6>Ingredients Recipe (BOM)</h6>
+                           <div class="table-responsive">
+                               <table class="table table-sm table-bordered align-middle mb-0">
+                                   <thead class="table-secondary text-muted small">
+                                       <tr>
+                                           <th colspan="6">
+                                               <input type="text" class="form-control border-primary border" id="ingredient-search" placeholder="Search...">
+                                           </th>
+                                       </tr>
+                                       <tr>
+                                           <th scope="col" class="text-center">Ingredient</th>
+                                           <th scope="col" class="text-center">Qty</th>
+                                           <th scope="col" class="text-center" title="Unit of Measurement">UOM</th>
+                                           <th scope="col" class="text-center">Unit Cost</th>
+                                           <th scope="col" class="text-center">Amount</th>
+                                           <th scope="col" class="text-center"></th>
+                                       </tr>
+                                   </thead>
 
+                                   <tbody id="ingredient-body">
 
-        <div class="justify-content-end d-flex mt-2 mb-3">
+                                       <tr>
+                                           <td>
+                                               <input type="text" class="form-control border border-primary">
+                                           </td>
+
+                                           <td>
+                                               <input type="number" class="form-control border border-primary ingredient-qty">
+                                           </td>
+
+                                           <td>
+                                               <select class="form-select border border-primary  ingredient-unit">
+                                                   <option value="kg">kg</option>
+                                                   <option value="g">g</option>
+                                                   <option value="ml">ml</option>
+                                                   <option value="ltr">ltr</option>
+                                                   <option value="tbsp">tbsp</option>
+                                                   <option value="tsp">tsp</option>
+                                                   <option value="pcs">pcs</option>
+                                               </select>
+                                           </td>
+
+                                           <td>
+                                               <input type="text" class="form-control border border-primary ingredient-cost with-comma">
+                                           </td>
+
+                                           <td>
+                                               <input type="text" class="form-control border border-secondary ingredient-amount with-comma" readonly>
+                                           </td>
+
+                                           <td class="text-center">
+                                               <a href="#" class="text-danger btn-remove-ingredient">
+                                                   <i class="bi bi-trash3"></i>
+                                               </a>
+                                           </td>
+                                       </tr>
+
+                                   </tbody>
+
+                               </table>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="col-md-12">
+                   <div class="card shadow-sm">
+                       <div class="card-header bg-secondary-subtle">
+                           <h6>Preparation & Setup</h6>
+                       </div>
+                       <div class="card-body">
+                           <div class="row">
+                               <div class="col-md-3">
+                                   <label class="form-label small text-muted fw-medium mb-1" class="form-label">Serving Size</label>
+                                   <input type="text" class="form-control form-control-sm with-comma border border-primary" id="serving_size">
+                               </div>
+                              <div class="col-md-3">
+                                  <label class="form-label small text-muted fw-medium mb-1">
+                                      Prep Time
+                                  </label>
+                                  <div class="input-group input-group-sm">
+                                      <select class="form-select border border-primary time-hours" id="prep_hours">
+                                          <option value="0">0</option>
+                                      </select>
+                                      <span class="input-group-text">Hour(s)</span>
+
+                                      <select class="form-select border border-primary time-minutes" id="prep_minutes">
+                                          <option value="0">0</option>
+                                      </select>
+                                      <span class="input-group-text">Min(s)</span>
+                                  </div>
+                              </div>
+                               <div class="col-md-3">
+                                   <label class="form-label small text-muted fw-medium mb-1" class="form-label">Cook Time</label>
+                                   <div class="input-group input-group-sm">
+                                       <select class="form-select border border-primary time-hours" id="cooking_hours">
+                                           <option value="0">0</option>
+                                       </select>
+                                       <span class="input-group-text">Hour(s)</span>
+
+                                       <select class="form-select border border-primary time-minutes" id="cooking_minutes">
+                                           <option value="0">0</option>
+                                       </select>
+                                       <span class="input-group-text">Min(s)</span>
+                                   </div>
+                               </div>
+                               <div class="col-md-3">
+                                   <label class="form-label small text-muted fw-medium mb-1" class="form-label">Total Preparation Time</label>
+                                   <div class="input-group input-group-sm">
+                                       <input type="text" class="form-control form-control-sm with-comma" id="total_hour" readonly>
+                                       <span class="input-group-text">Hour(s)</span>
+                                       <input type="text" class="form-control form-control-sm with-comma" id="total_minutes" readonly>
+                                       <span class="input-group-text">Min(s)</span>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+        </div>
+        <div class="justify-content-end d-flex mt-2 mb-3 gap-2">
             <button type="submit" id="btn-submit-account" class="btn btn-success shadow px-4 py-2 rounded-3 fw-medium">
                 <span class="spinner-border spinner-border-sm d-none me-1" id="btn-spinner-account" role="status" aria-hidden="true"></span>
                 <span class="btn-text-account">Save</span>
             </button>
-            <button type="reset" class="btn btn-light px-4 py-2 rounded-3 fw-medium" id="btn-cancel-account">
+            <button type="reset" class="btn btn-danger px-4 py-2 rounded-3 fw-medium" id="btn-cancel-account">
+                Reset
+            </button>
+            <button type="reset" class="btn btn-light px-4 py-2 rounded-3 fw-medium" onclick="loadCosting()">
                 Cancel
             </button>
         </div>
@@ -198,6 +277,25 @@
 
 
 <script>
+    $(function () {
+        $(".time-hours").each(function () {
+            for (let i = 1; i <= 12; i++) {
+                $(this).append(
+                    `<option value="${i}">${i}</option>`
+                );
+            }
+        });
+        $(".time-minutes").each(function () {
+            for (let i = 1; i <= 59; i++) {
+                $(this).append(
+                    `<option value="${i}">${i}</option>`
+                );
+            }
+        });
+
+    });
+
+
     $("#frm-registry").submit(function (event) {
         event.preventDefault();
 
@@ -232,6 +330,17 @@
                 });
             }
         });
+
+        /*Validate entry*/
+        if (ingredients.length === 0) {
+            Swal.fire({
+                icon: "warning",
+                title: "No Ingredients Added",
+                text: "Please setup your ingredient before saving the menu.",
+                confirmButtonColor: "#3085d6"
+            });
+            return false;
+        }
 
         $.post("dirs/costing_menu/actions/save_menuregistry.php", {
 
@@ -269,7 +378,7 @@
                     toast: true,
                     position: "top-end",
                     icon: "error",
-                    title: "Error " + data,
+                    title: data,
                     showConfirmButton: false,
                     timer: 2000
                 });
@@ -307,16 +416,16 @@
 
 /*Choose sub categories*/
     var subCategories = {
-        appetizer: ['Finger Foods', 'Canapés', 'Cold Appetizers', 'Hot Appetizers'],
-        soup: ['Clear Soup', 'Cream Soup', 'Broth Soup'],
-        salad: ['Green Salad', 'Fruit Salad', 'Pasta Salad'],
-        main_course: ['Pork', 'Beef', 'Chicken', 'Seafood', 'Vegetarian', 'Pasta', 'Rice Meal'],
-        side_dish: ['Vegetables', 'Rice', 'Bread'],
-        dessert: ['Cake', 'Pastry', 'Ice Cream', 'Native Dessert'],
-        beverage: ['Coffee', 'Tea', 'Juice', 'Soft Drink', 'Smoothie', 'Milkshake', 'Mocktail', 'Cocktail'],
-        breakfast: ['Filipino', 'American', 'Continental'],
-        buffet: ['Main Dish', 'Side Dish', 'Dessert', 'Beverage'],
-        package: ['Wedding', 'Corporate', 'Birthday', 'Debut']
+        Appetizer: ['Finger Foods', 'Canapés', 'Cold Appetizers', 'Hot Appetizers'],
+        Soup: ['Clear Soup', 'Cream Soup', 'Broth Soup'],
+        Salad: ['Green Salad', 'Fruit Salad', 'Pasta Salad'],
+        Main_course: ['Pork', 'Beef', 'Chicken', 'Seafood', 'Vegetarian', 'Pasta', 'Rice Meal'],
+        Side_dish: ['Vegetables', 'Rice', 'Bread'],
+        Dessert: ['Cake', 'Pastry', 'Ice Cream', 'Native Dessert'],
+        Beverage: ['Coffee', 'Tea', 'Juice', 'Soft Drink', 'Smoothie', 'Milkshake', 'Mocktail', 'Cocktail'],
+        Breakfast: ['Filipino', 'American', 'Continental'],
+        Buffet: ['Main Dish', 'Side Dish', 'Dessert', 'Beverage'],
+        Package: ['Wedding', 'Corporate', 'Birthday', 'Debut']
     };
 
     document.getElementById('menu_category').addEventListener('change', function () {
