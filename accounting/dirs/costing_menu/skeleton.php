@@ -41,7 +41,7 @@
 
 <!-- template for food menu form -->
 <template id="skeleton-food-form">
-    <div class="row g-3 bg-secondary shadow-sm">
+    <div class="row g-3 shadow-sm">
         <div class="col-md-2">
             <div class="card shadow-sm skeleton-loader">
                 <div class="card-header bg-secondary-subtle fw-bold">
@@ -160,7 +160,7 @@
                    <div class="card shadow-sm overflow-auto" style="height: 60vh;">
                        <div class="card-header bg-secondary-subtle">
                            <div class="justify-content-end d-flex">
-                               <button type="button" class="btn btn-sm skeleton-loader" id="btn-add-ingredient" title="Add Ingredient">
+                               <button type="button" class="btn btn-sm skeleton-loader" title="Add Ingredient">
                                    <i class="bi bi-plus fs-5"></i>Add Item
                                </button>
                            </div>
@@ -271,14 +271,14 @@
            </div>
         </div>
         <div class="justify-content-end d-flex mt-2 mb-3 gap-2">
-            <button type="button" id="btn-submit-account" class="skeleton-loader btn btn-success shadow px-4 py-2 rounded-3 fw-medium">
+            <button type="button" id="btn-submit-account" class="skeleton-loader btn  rounded-3 fw-medium">
                 <span class="spinner-border spinner-border-sm d-none me-1" id="btn-spinner-account" role="status" aria-hidden="true"></span>
                 <span class="btn-text-account">Save</span>
             </button>
-            <button type="reset" class="btn btn-danger px-4 py-2 rounded-3 fw-medium skeleton-loader" >
+            <button type="reset" class="btn  rounded-3 fw-medium skeleton-loader" >
                 Reset
             </button>
-            <button type="reset" class="btn btn-light px-4 py-2 rounded-3 fw-medium skeleton-loader">
+            <button type="reset" class="btn  rounded-3 fw-medium skeleton-loader">
                 Cancel
             </button>
         </div>
