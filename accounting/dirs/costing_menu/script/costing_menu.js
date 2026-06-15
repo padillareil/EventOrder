@@ -45,8 +45,8 @@ function loadMenuSetup() {
                 .html(result)
                 .fadeIn(500);
     loadItemSKU();
+    loadMenus();
     loadIngredients();
-
         }, 500);
 
     }).fail(function () {
@@ -73,196 +73,149 @@ function loadItemSKU(){
 
 
 
-/*Function dipslay proposal for ingredient*/
- var CurrentPageIng = 1;
- var PageSizeing = 20;
- var totalPagesing = 1;
- var isPackageModeing = false;
- var selectedItemsing = [];
-
-
- function loadIngredients(page = 1) {
-     CurrentPageIng = page; 
-     var srvdisplay = $("#load_IngredientsLists");
-     srvdisplay.html(`
-             <tr>
-                 <td colspan="5" class="p-5 text-center text-muted">
-                     <div class="spinner-border text-dark"></div>
-                     <div class="mt-2">Loading...</div>
-                 </td>
-             </tr>
-     `);
-     var Searching = $("#search-ingredients").val();
-     $.post("dirs/costing_menu/actions/get_ingredients.php", {
-         CurrentPageIng,
-         PageSizeing,
-         Searching
-     }, function (data) {
-         let response;
-
-         try {
-             response = JSON.parse(data);
-         } catch (e) {
-             srvdisplay.html(`<div class="text-dark text-center py-4">Server Error</div>`);
-             return;
-         }
-         if ($.trim(response.isSuccess) === "success") {
-             IngredientContent(response.Data);
-             totalPagesing = (response.Data && response.Data.length > 0)
-                 ? parseInt(response.Data[0].TotalPagesing)
-                 : 1;
-
-                 IngredientsPaginationUi();
-                 IngredientspageNumber();
-         } else {
-             emptyStateIngredient("No Record Found.");
-         }
-     });
- }
-
-
- function IngredientContent(data) {
-     const srvdisplay = $("#load_IngredientsLists");
-
-     if (!data || data.length === 0) {
-         showEmptyStateIngredient("No available.");
-         return;
-     }
-
-     srvdisplay.empty();
-
-     data.forEach((srv, index) => {
-
-         srvdisplay.append(`
-             <tr data-index="${index}">
-
-                 <td class="ps-4 font-monospace fw-semibold text-dark">
-                     ${srv.OrderNumber || '--'}
-                 </td>
-
-                 <td class="fw-bold text-dark">
-                     ${srv.Ingredient || '--'}
-                 </td>
-
-                 <td class="text-dark fw-medium">
-                     ${srv.Item_Uom || '--'}
-                 </td>
-
-                 <!-- UNIT COST (EDITABLE) -->
-                 <td>
-                     <input type="number"
-                            class="form-control form-control-sm unit-cost text-end"
-                            value="${srv.Unit_Cost || 0}" disabled>
-                 </td>
-
-                 <!-- AMOUNT (AUTO CALCULATED BUT EDITABLE IF YOU WANT) -->
-                 <td>
-                     <input type="number"
-                            class="form-control form-control-sm amount text-end"
-                            value="${srv.Unit_Amnt || 0}" disabled>
-                 </td>
-
-                 <!-- ACTIONS -->
-                 <td class="text-end pe-4">
-
-                     <button class="btn btn-sm btn-outline-primary btn-edit">
-                         <i class="bi bi-pencil"></i>
-                     </button>
-
-                     <button class="btn btn-sm btn-outline-danger btn-delete">
-                         <i class="bi bi-trash"></i>
-                     </button>
-
-                 </td>
-
-             </tr>
-         `);
-     });
- }
 
 
 
+/*Function load edit form*/
+function modifyMenu(DocEntry) {
 
- /*Function for no record of beverages*/
- function showEmptyStateIngredient(message = "No pending ingredients found") {
-     $("#load_IngredientsLists").html(`
-     <tr>
-         <td colspan="6" class="text-center p-4">
-             <div class="fw-semibold text-dark">${message}</div>
-             <div class="text-muted small">There are no records to display.</div>
-         </td>
-     </tr>
-     `);
- }
+    showSkeletonFood();
 
- /*Function for no record of beverages*/
- function showEmptyStateIngredient(message = "No pending ingredients found") {
-     $("#load_IngredientsLists").html(`
-     <tr>
-         <td colspan="6" class="text-center p-4">
-             <div class="fw-semibold text-dark">${message}</div>
-             <div class="text-muted small">There are no records to display.</div>
-         </td>
-     </tr>
-     `);
- }
+    $.post("dirs/costing_menu/components/form_ingredient_edit.php", {}, function (data) {
+
+        let result = $.trim(data);
+
+        setTimeout(function () {
+
+            if (!result) return;
+
+            $("#loadCosting_content")
+                .hide()
+                .html(result)
+                .fadeIn(500);
+
+            // Pass DocEntry here
+            loadMenuEdit(DocEntry);
+
+        }, 500);
+
+    }).fail(function () {
+        showSkeletonFood();
+    });
+
+}
+
+/*Function to clean display decimal*/
+function cleanDecimal(value) {
+    let num = parseFloat(value || 0);
+    return Number.isInteger(num) ? num : num.toFixed(2);
+}
 
 
- /*Function to count page number page 1 of and so on*/
- function IngredientsPaginationUi() {
-     $("#page-info-ingredients").text("Page " + CurrentPageIng + " of " + totalPagesing);
-     if (CurrentPageIng <= 1) {
-         $("#li-prev-ingredients").addClass("disabled");
-     } else {
-         $("#li-prev-ingredients").removeClass("disabled");
-     }
+/*Function retrive menu details*/
+function loadMenuEdit(DocEntry){
+    $.post("dirs/costing_menu/actions/get_menurecipe.php",{
+        DocEntry : DocEntry
+    },function(data){
+        response = JSON.parse(data);
+        if(jQuery.trim(response.isSuccess) == "success"){
+            $("#itemmenu_code_edt").val(response.Data.ItemSKU).prop("disabled", true);
+            $("#menu-id").val(response.Data.DocId);
+            $("#menu_name_edt").val(response.Data.Recipe_Name);
+            $("#menu_category_edt").val(response.Data.Category);
+            $("#menu_subcategory_edt").val(response.Data.Sub_Category);
+            $("#yield_qty_edt").val(response.Data.Serving_Yield);
+            $("#description_edt").val(response.Data.Description);
+            $("#selling_price_edt").val(cleanDecimal(response.Data.SRP));
+            $("#labor_cost_edt").val(cleanDecimal(response.Data.Labor_Cost));
+            $("#cost-per-serving_edt").val(response.Data.CostPer_Serving);
+            $("#valueadded_tax_edt").val(cleanDecimal(response.Data.Vat_Rate));
+            $("#discounted_percentage_edt").val(response.Data.Status);
+            $("#discounted_price_edt").val(cleanDecimal(response.Data.Discounted_Amnt));
+            $("#final_price_edt").val(response.Data.Price_wTax);
+            $("#gross-profit_edt").val(response.Data.GrossProfit_perDish);
+            $("#food-cost-percent_edt").val(response.Data.FoodCost);
+            $("#total-recipe-cost_edt").val(response.Data.TotalCost);
+            $("#prep_hours_edt").val(response.Data.PrepTime_Hrs);
+            $("#prep_minutes_edt").val(response.Data.PrepTime_Mins);
+            $("#cooking_hours_edt").val(response.Data.CookTime_Hrs);
+            $("#cooking_minutes_edt").val(response.Data.CookTime_Mins);
+            $("#ingredient-body_edt").empty();
+            $.each(response.Ingredients, function(index, item){
+                $("#ingredient-body_edt").append(`
+                    <tr>
+                        <td>
+                            <input type="hidden" class="ingredient-id" value="${item.DocEntry || 0}">
+                            <input type="text"
+                                class="form-control border border-primary ingredient-name_edt"
+                                value="${item.Ingredient || ''}">
+                        </td>
+                        <td>
+                            <input type="number"
+                                class="form-control border border-primary ingredient-qty_edt"
+                                value="${item.Item_Quantiy || 0}">
+                        </td>
+                        <td>
+                            <select class="form-select border border-primary ingredient-unit_edt">
+                                <option value="kg" ${item.Item_Uom == 'kg' ? 'selected' : ''}>kg</option>
+                                <option value="g" ${item.Item_Uom == 'g' ? 'selected' : ''}>g</option>
+                                <option value="ml" ${item.Item_Uom == 'ml' ? 'selected' : ''}>ml</option>
+                                <option value="ltr" ${item.Item_Uom == 'ltr' ? 'selected' : ''}>ltr</option>
+                                <option value="tbsp" ${item.Item_Uom == 'tbsp' ? 'selected' : ''}>tbsp</option>
+                                <option value="tsp" ${item.Item_Uom == 'tsp' ? 'selected' : ''}>tsp</option>
+                                <option value="pcs" ${item.Item_Uom == 'pcs' ? 'selected' : ''}>pcs</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-text bg-light">
+                                    PHP
+                                </span>
+                                <input type="text" class="form-control with-comma border border-primary ingredient-cost_edt" value="${cleanDecimal(item.Unit_Cost || 0)}">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-text bg-light">
+                                    PHP
+                                </span>
+                                <input type="text" class="form-control with-comma border border-primary ingredient-amount_edt" value="${cleanDecimal(item.Unit_Amnt || 0)}">
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <a href="#" class="text-danger btn-remove-ingredient_edt" onclick="removeIngredient('${item.DocEntry}')">
+                                <i class="bi bi-trash3"></i>
+                            </a>
+                        </td>
+                    </tr>
+                `);
+            });
 
-     if (CurrentPageIng >= totalPagesing) {
-         $("#li-next-ingredients").addClass("disabled");
-     } else {
-         $("#li-next-ingredients").removeClass("disabled");
-     }
- }
+        }else{
+            console.log(jQuery.trim(response.Data));
+        }
+    });
+}
 
- /*Function to build list of pagination*/
- function IngredientspageNumber() {
-     $("#pagination-ingredients li.page-number-ingredients").remove();
-     let prevLi = $("#li-prev-ingredients");
-     let maxVisible = 5;
-     let start = Math.max(1, CurrentPageIng - 2);
-     let end = Math.min(totalPagesing, start + maxVisible - 1);
-     if (end - start < maxVisible - 1) {
-         start = Math.max(1, end - maxVisible + 1);
-     }
-     if (start > 1) {
-         insertPageIngredient(1, prevLi);
-         prevLi = prevLi.next();
 
-         if (start > 2) {
-             prevLi.after(`<li class="page-item page-number-ingredients disabled"><span class="page-link">...</span></li>`);
-             prevLi = prevLi.next();
-         }
-     }
-     for (let i = start; i <= end; i++) {
-         insertPageIngredient(i, prevLi);
-         prevLi = prevLi.next();
-     }
-     if (end < totalPagesing) {
-         if (end < totalPagesing - 1) {
-             prevLi.after(`<li class="page-item page-number-ingredients disabled"><span class="page-link">...</span></li>`);
-             prevLi = prevLi.next();
-         }
-         insertPageIngredient(totalPagesing, prevLi);
-     }
-     function insertPageIngredient(i, ref) {
-         let activeClass = (i === CurrentPageIng) ? "active" : "";
 
-         let li = `
-             <li class="page-item page-number-ingredients ${activeClass}">
-                 <a class="page-link" href="#" data-page="${i}">${i}</a>
-             </li>
-         `;
 
-         $(li).insertAfter(ref);
-     }
- }
+
+/*Function cancel return to menu tables*/
+function returnForm1() {
+    loadMenuSetup();
+}
+
+
+/*Function to remove ingredient item*/
+function removeIngredient(DocEntry) {
+    $.post("dirs/costing_menu/actions/update_ingredientstatus.php", {
+        DocEntry   : DocEntry
+    }, function(data) {
+        if(jQuery.trim(data) === "success") {
+        } else {
+            console.log(data);
+        }
+    });
+}
+

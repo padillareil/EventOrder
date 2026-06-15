@@ -3,7 +3,7 @@
         <div class="col-md-2">
             <div class="card shadow-sm">
                 <div class="card-header bg-secondary-subtle fw-bold">
-                    <h6>Item Identity</h6>
+                    <h6>Menu Identity</h6>
                 </div>
 
                 <div class="card-body">
@@ -75,19 +75,35 @@
 
                     <div class="mb-2">
                         <label class="form-label small text-muted fw-medium mb-1" class="form-label">Selling Price</label>
-                        <input type="text" class="form-control form-control-sm with-comma border border-primary" id="selling_price" required>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text bg-light">
+                                PHP
+                            </span>
+                            <input type="text" class="form-control form-control-sm with-comma border border-primary" id="selling_price" required>
+                        </div>
                     </div>
 
                     <div class="mb-2">
                         <label class="form-label small text-muted fw-medium mb-1" class="form-label">Labor Cost per Dish (Optional)</label>
-                        <input type="text" class="form-control form-control-sm with-comma border border-primary" id="labor_cost">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text bg-light">
+                                PHP
+                            </span>
+                            <input type="text" class="form-control form-control-sm with-comma border border-primary" id="labor_cost">
+                        </div>
                     </div>
 
                     <!-- 2. COST PER SERVING -->
                     <div class="mb-3">
                         <label class="form-label small text-muted fw-medium mb-1">Cost Per Serving</label>
-                        <input type="text" class="form-control form-control-sm border border-secondary with-comma"
-                               id="cost-per-serving" readonly>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text bg-light">
+                                PHP
+                            </span>
+                            <input type="text" class="form-control form-control-sm border border-secondary with-comma"
+                                   id="cost-per-serving" readonly>
+                        </div>
+                        
                     </div>
 
                     <!-- 3. VAT -->
@@ -104,28 +120,52 @@
                     <!-- 4. DISCOUNT -->
                     <div class="mb-3">
                         <label class="form-label small text-muted fw-medium mb-1">Discounted %</label>
-                        <input type="text" class="form-control form-control-sm border with-comma border-secondary"
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text bg-light">
+                                PHP
+                            </span>
+                            <input type="text" class="form-control form-control-sm border with-comma border-secondary"
                                id="discounted_percentage">
+                        </div>
+                   
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label small text-muted fw-medium mb-1">Discounted Price</label>
-                        <input type="text" class="form-control form-control-sm border border-secondary"
-                               id="discounted_price" readonly>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text bg-light">
+                                PHP
+                            </span>
+                            <input type="text" class="form-control form-control-sm border border-secondary"
+                                   id="discounted_price" readonly>
+                        </div>
+                       
                     </div>
 
                     <!-- 5. FINAL PRICE -->
                     <div class="mb-3">
                         <label class="form-label small text-muted fw-medium mb-1">Final Price (incl. tax)</label>
-                        <input type="text" class="form-control form-control-sm border border-secondary"
-                               id="final_price" readonly>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text bg-light">
+                                PHP
+                            </span>
+                            <input type="text" class="form-control form-control-sm border border-secondary"
+                                   id="final_price" readonly>
+                        </div>
+                        
                     </div>
 
                     <!-- 6. PROFITABILITY -->
                     <div class="mb-3">
                         <label class="form-label small text-muted fw-medium mb-1">Gross Profit per Dish</label>
-                        <input type="text" class="form-control form-control-sm border border-secondary"
-                               id="gross-profit" readonly required>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text bg-light">
+                                PHP
+                            </span>
+                            <input type="text" class="form-control form-control-sm border border-secondary"
+                                   id="gross-profit" readonly required>
+                        </div>
+                        
                     </div>
 
                     <div>
@@ -189,11 +229,21 @@
                                            </td>
 
                                            <td>
-                                               <input type="text" class="form-control border border-primary ingredient-cost with-comma">
+                                               <div class="input-group input-group-sm">
+                                                   <span class="input-group-text bg-light">
+                                                       PHP
+                                                   </span>
+                                                    <input type="text" class="form-control border border-primary ingredient-cost with-comma">
+                                               </div>
                                            </td>
 
                                            <td>
-                                               <input type="text" class="form-control border border-secondary ingredient-amount with-comma" readonly>
+                                               <div class="input-group input-group-sm">
+                                                   <span class="input-group-text bg-light">
+                                                       PHP
+                                                   </span>
+                                                  <input type="text" class="form-control border border-secondary ingredient-amount with-comma" readonly>
+                                               </div>
                                            </td>
 
                                            <td class="text-center">
@@ -215,7 +265,13 @@
                            <div class="row">
                                <div class="col-md-12">
                                <label class="form-label small text-muted fw-medium mb-1">Total Recipe Cost</label>
-                               <input type="text" class="form-control form-control-sm border border-secondary" id="total-recipe-cost" readonly required>
+                               <div class="input-group input-group-sm">
+                                   <span class="input-group-text bg-light">
+                                       PHP
+                                   </span>
+                                 <input type="text" class="form-control form-control-sm border border-secondary" id="total-recipe-cost" readonly required>
+                               </div>
+
                            </div>
                            <div class="col-md-6">
                                <label class="form-label small text-muted fw-medium mb-1">
@@ -433,7 +489,7 @@
         var clone = template.content.cloneNode(true);
         document
             .getElementById('ingredient-body')
-            .appendChild(clone);
+            .prepend(clone);
     }
 
 /*Script to delete selected row*/
@@ -511,6 +567,17 @@
        ) {
            calculatePricing();
        }
+   });
+
+
+   $(document).on("click", ".btn-remove-ingredient", function () {
+
+       $(this).closest("tr").remove();
+
+       // IMPORTANT: recalculate after DOM change
+       calculateRecipeTotals();
+       calculatePricing();
+
    });
 
    function calculateRowAmount(row) {

@@ -2,22 +2,22 @@
   require_once "../../../../config/connection.php";
   session_start();
   $User = $_SESSION['Uid'];
-  $CurrentPage  = $_POST['CurrentPage'] ?? 1;
-  $PageSize     = $_POST['PageSize'] ?? 20;
-  $Search       = $_POST['Search'];
+  $CurrentPageMenu  = $_POST['CurrentPageMenu'] ?? 1;
+  $PageSizeMenu     = $_POST['PageSizeMenu'] ?? 20;
+  $SearchMenu       = $_POST['SearchMenu'];
   
 try {
   $conn->beginTransaction();
 
-    $fetch_ingredeitns = $conn->prepare("EXEC dbo.[Ingredients_List] ?,?,?,?");
-    $fetch_ingredeitns->execute([$User,$CurrentPage,$PageSize,$Search]);
-    $get_ingredients = $fetch_ingredeitns->fetchAll(PDO::FETCH_ASSOC);
+    $fetch_menus = $conn->prepare("EXEC MenuRecipe_List ?,?,?,?");
+    $fetch_menus->execute([$User,$CurrentPageMenu,$PageSizeMenu,$SearchMenu]);
+    $get_menus = $fetch_menus->fetchAll(PDO::FETCH_ASSOC);
 
   $conn->commit();
 
   $response = array(
     "isSuccess" => 'success',
-    "Data" => $get_ingredients
+    "Data" => $get_menus
   );
   echo json_encode($response);
 
