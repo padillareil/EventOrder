@@ -1248,6 +1248,8 @@ function saveBlockingPayment() {
     formData.append("GuestName", $("#guest-name").val());
     formData.append("Company", $("#guest_company").val());
     formData.append("MobileNumber", $("#mobile-number").val());
+    formData.append("MobileNumber2", $("#mobile-number2").val());
+    formData.append("MobileNumber3", $("#mobile-number3").val());
     formData.append("Email", $("#guest_email").val());
     formData.append("CompanyAddress", $("#guest_address").val());
     formData.append("Position", $("#job_position").val());
@@ -1379,6 +1381,8 @@ function saveBooking2() {
     formData.append("GuestName", $("#guest-name").val());
     formData.append("Company", $("#guest_company").val());
     formData.append("MobileNumber", $("#mobile-number").val());
+    formData.append("MobileNumber2", $("#mobile-number2").val());
+    formData.append("MobileNumber3", $("#mobile-number3").val());
     formData.append("Email", $("#guest_email").val());
     formData.append("CompanyAddress", $("#guest_address").val());
     formData.append("Position", $("#job_position").val());

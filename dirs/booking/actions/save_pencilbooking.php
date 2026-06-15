@@ -22,6 +22,8 @@ $GuaranteedPax   = $_POST['GuaranteedPax'] ?? '';
 $GuestName       = strtoupper($_POST['GuestName'] ?? '');
 $Company         = strtoupper($_POST['Company'] ?? '');
 $MobileNumber    = $_POST['MobileNumber'] ?? '';
+$MobileNumber2    = $_POST['MobileNumber2'] ?? '';
+$MobileNumber3    = $_POST['MobileNumber3'] ?? '';
 $Email           = $_POST['Email'] ?? '';
 $CompanyAddress  = $_POST['CompanyAddress'] ?? '';
 $Position        = $_POST['Position'] ?? '';
@@ -72,7 +74,7 @@ try {
     // SAVE BOOKING
     // =========================
     $saveBooking = $conn->prepare("
-        EXEC PencilBooking ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+        EXEC PencilBooking ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
     ");
 
     $saveBooking->execute([
@@ -90,6 +92,8 @@ try {
         $GuestName,
         $Company,
         $MobileNumber,
+        $MobileNumber2,
+        $MobileNumber3,
         $Email,
         $CompanyAddress,
         $Position,

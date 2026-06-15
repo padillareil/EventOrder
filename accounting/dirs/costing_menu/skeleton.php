@@ -86,14 +86,7 @@
                             <div class="skeleton-loader rounded-3" style="height: 38px;"></div>
                     </div>
 
-                    <div class="mb-2">
-                        <label class="form-label skeleton-loader small text-muted fw-medium mb-1" class="form-label">Labor Cost per Dish (Optional)</label>
-                            <div class="skeleton-loader rounded-3" style="height: 38px;"></div>
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-label skeleton-loader small text-muted fw-medium mb-1" class="form-label">Overhead Allocation</label>
-                            <div class="skeleton-loader rounded-3" style="height: 38px;"></div>
-                    </div>
+                    
 
                     <div>
                         <label class="form-label skeleton-loader small text-muted fw-medium mb-1" class="form-label">Description</label>
@@ -111,6 +104,10 @@
                 </div>
 
                 <div class="card-body">
+                    <div class="mb-2">
+                        <label class="form-label skeleton-loader small text-muted fw-medium mb-1" class="form-label">Overhead Allocation</label>
+                            <div class="skeleton-loader rounded-3" style="height: 38px;"></div>
+                    </div>
                     <div class="mb-3">
                         <label class="form-label skeleton-loader small text-muted fw-medium mb-1">Total Recipe Cost</label>
                             <div class="skeleton-loader rounded-3" style="height: 38px;"></div>
@@ -167,7 +164,6 @@
                        </div>
                        <div class="card-body">
                            <h6 class="skeleton-loader">Ingredients Recipe (BOM)</h6>
-                           <div class="table-responsive">
                                <table class="table table-sm table-bordered align-middle mb-0">
                                    <thead class="table-secondary text-muted small">
                                        <tr>
@@ -218,49 +214,32 @@
                                    </tbody>
 
                                </table>
-                           </div>
                        </div>
-                   </div>
-               </div>
-               <div class="col-md-12">
-                   <div class="card shadow-sm skeleton-loader">
-                       <div class="card-header bg-secondary-subtle">
-                           <h6 class="skeleton-loader">Preparation & Setup</h6>
-                       </div>
-                       <div class="card-body">
+                       <div class="card-footer">
                            <div class="row">
-                               <div class="col-md-3">
+                               <div class="col-md-12">
                                    <label class="form-label skeleton-loader small text-muted fw-medium mb-1" class="form-label">Serving Size</label>
-                            <div class="skeleton-loader rounded-3" style="height: 38px;"></div>
+                                    <div class="skeleton-loader rounded-3" style="height: 38px;"></div>
                                </div>
-                              <div class="col-md-3">
+                              <div class="col-md-6">
                                   <label class="form-label skeleton-loader small text-muted fw-medium mb-1">
                                       Prep Time
                                   </label>
                                   <div class="input-group input-group-sm">
                                       <div class="skeleton-loader rounded-3" style="height: 38px;"></div>
-                                      <span class="input-group-text">Hour(s)</span>
+                                      <span class="input-group-text skeleton-loader">Hour(s)</span>
 
                                       <div class="skeleton-loader rounded-3" style="height: 38px;"></div>
-                                      <span class="input-group-text">Min(s)</span>
+                                      <span class="input-group-text skeleton-loader">Min(s)</span>
                                   </div>
                               </div>
-                               <div class="col-md-3">
+                               <div class="col-md-6">
                                    <label class="form-label skeleton-loader small text-muted fw-medium mb-1" class="form-label">Cook Time</label>
                                    <div class="input-group input-group-sm">
                                        <div class="skeleton-loader rounded-3" style="height: 38px;"></div>
                                        <span class="input-group-text skeleton-loader">Hour(s)</span>
 
                                        <div class="skeleton-loader rounded-3" style="height: 38px;"></div>
-                                       <span class="input-group-text skeleton-loader">Min(s)</span>
-                                   </div>
-                               </div>
-                               <div class="col-md-3">
-                                   <label class="form-label skeleton-loader small text-muted fw-medium mb-1" class="form-label">Total Preparation Time</label>
-                                   <div class="input-group input-group-sm">
-                                        <div class="skeleton-loader rounded-3" style="height: 38px;"></div>
-                                       <span class="input-group-text skeleton-loader">Hour(s)</span>
-                                        <div class="skeleton-loader rounded-3" style="height: 38px;"></div>
                                        <span class="input-group-text skeleton-loader">Min(s)</span>
                                    </div>
                                </div>

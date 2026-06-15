@@ -9,12 +9,12 @@
                 <div class="card-body">
 
                     <div class="mb-2">
-                        <label class="form-label small text-muted fw-medium mb-1" class="form-label">Item SKU</label>
+                        <label class="form-label small text-muted fw-medium mb-1" class="form-label">Menu SKU</label>
                         <input type="text" class="form-control form-control-sm border border-secondary" id="itemmenu_code" required>
                     </div>
 
                     <div class="mb-2">
-                        <label class="form-label small text-muted fw-medium mb-1" class="form-label">Item Name</label>
+                        <label class="form-label small text-muted fw-medium mb-1" class="form-label">Menu Name</label>
                         <input type="text" class="form-control form-control-sm border border-primary" id="menu_name" required>
                     </div>
 
@@ -55,20 +55,6 @@
                         <input type="number" class="form-control form-control-sm border border-primary" id="yield_qty" required>
                     </div>
 
-                    <div class="mb-2">
-                        <label class="form-label small text-muted fw-medium mb-1" class="form-label">Selling Price</label>
-                        <input type="text" class="form-control form-control-sm with-comma border border-primary" id="selling_price" required>
-                    </div>
-
-                    <div class="mb-2">
-                        <label class="form-label small text-muted fw-medium mb-1" class="form-label">Labor Cost per Dish (Optional)</label>
-                        <input type="text" class="form-control form-control-sm with-comma border border-primary" id="labor_cost">
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-label small text-muted fw-medium mb-1" class="form-label">Overhead Allocation</label>
-                        <input type="text" class="form-control form-control-sm with-comma border border-primary" id="overhead_allocation">
-                    </div>
-
                     <div>
                         <label class="form-label small text-muted fw-medium mb-1" class="form-label">Description</label>
                         <textarea class="form-control form-control-sm border border-primary" id="description"></textarea>
@@ -80,51 +66,76 @@
         <!-- Cost Analysis -->
         <div class="col-md-2">
             <div class="card shadow-sm">
+
                 <div class="card-header bg-secondary-subtle fw-bold">
-                   <h6>Costing</h6>
+                    <h6>Costing</h6>
                 </div>
 
                 <div class="card-body">
-                    <div class="mb-3">
-                        <label class="form-label small text-muted fw-medium mb-1">Total Recipe Cost</label>
-                        <input type="text" class="form-control form-control-sm border border-secondary"  id="total-recipe-cost" readonly required >
+
+                    <div class="mb-2">
+                        <label class="form-label small text-muted fw-medium mb-1" class="form-label">Selling Price</label>
+                        <input type="text" class="form-control form-control-sm with-comma border border-primary" id="selling_price" required>
                     </div>
 
+                    <div class="mb-2">
+                        <label class="form-label small text-muted fw-medium mb-1" class="form-label">Labor Cost per Dish (Optional)</label>
+                        <input type="text" class="form-control form-control-sm with-comma border border-primary" id="labor_cost">
+                    </div>
+
+                    <!-- 2. COST PER SERVING -->
                     <div class="mb-3">
                         <label class="form-label small text-muted fw-medium mb-1">Cost Per Serving</label>
-                        <input type="text" class="form-control form-control-sm border border-secondary" id="cost-per-serving" readonly required>
+                        <input type="text" class="form-control form-control-sm border border-secondary with-comma"
+                               id="cost-per-serving" readonly>
                     </div>
 
+                    <!-- 3. VAT -->
                     <div class="mb-3">
-                        <label class="form-label small text-muted fw-medium mb-1">Final Price (incl. tax)</label>
-                        <input type="text" class="form-control form-control-sm border border-secondary"  id="final_price" readonly >
+                        <label class="form-label small text-muted fw-medium mb-1">
+                            VAT Rate %
+                        </label>
+
+                        <input type="text"
+                               class="form-control form-control-sm border border-primary with-comma"
+                               id="valueadded_tax">
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label small text-muted fw-medium mb-1">Gross Profit per Dish</label>
-                        <input type="text" class="form-control form-control-sm border border-secondary" id="gross-profit" readonly required>
-                    </div>
-
-                    <div>
-                        <label class="form-label small text-muted fw-medium mb-1">Food Cost %</label>
-                        <input type="text" class="form-control form-control-sm border border-secondary"  id="food-cost-percent" readonly required>
-                    </div>
-
+                    <!-- 4. DISCOUNT -->
                     <div class="mb-3">
                         <label class="form-label small text-muted fw-medium mb-1">Discounted %</label>
-                        <input type="text" class="form-control form-control-sm border border-secondary"  id="discounted_percentage" readonly >
+                        <input type="text" class="form-control form-control-sm border with-comma border-secondary"
+                               id="discounted_percentage">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label small text-muted fw-medium mb-1">Discounted Price</label>
-                        <input type="text" class="form-control form-control-sm border border-secondary"  id="discounted_price" readonly >
+                        <input type="text" class="form-control form-control-sm border border-secondary"
+                               id="discounted_price" readonly>
                     </div>
 
+                    <!-- 5. FINAL PRICE -->
                     <div class="mb-3">
-                        <label class="form-label small text-muted fw-medium mb-1">VAT Rate</label>
-                        <input type="text" class="form-control form-control-sm border border-secondary"  id="valueadded_tax" readonly >
+                        <label class="form-label small text-muted fw-medium mb-1">Final Price (incl. tax)</label>
+                        <input type="text" class="form-control form-control-sm border border-secondary"
+                               id="final_price" readonly>
                     </div>
+
+                    <!-- 6. PROFITABILITY -->
+                    <div class="mb-3">
+                        <label class="form-label small text-muted fw-medium mb-1">Gross Profit per Dish</label>
+                        <input type="text" class="form-control form-control-sm border border-secondary"
+                               id="gross-profit" readonly required>
+                    </div>
+
+                    <div>
+                        <label class="form-label small text-muted fw-medium mb-1">Food Cost %</label>
+                        <input type="text" class="form-control form-control-sm border border-secondary"
+                               id="food-cost-percent" readonly>
+                    </div>
+
                 </div>
+
             </div>
         </div>
         <!-- Recipe Formula -->
@@ -144,11 +155,6 @@
                            <div class="table-responsive">
                                <table class="table table-sm table-bordered align-middle mb-0">
                                    <thead class="table-secondary text-muted small">
-                                       <tr>
-                                           <th colspan="6">
-                                               <input type="text" class="form-control border-primary border" id="ingredient-search" placeholder="Search...">
-                                           </th>
-                                       </tr>
                                        <tr>
                                            <th scope="col" class="text-center">Ingredient</th>
                                            <th scope="col" class="text-center">Qty</th>
@@ -202,62 +208,51 @@
                                </table>
                            </div>
                        </div>
+                       
                    </div>
-               </div>
-               <div class="col-md-12">
-                   <div class="card shadow-sm">
-                       <div class="card-header bg-secondary-subtle">
-                           <h6>Preparation & Setup</h6>
-                       </div>
+                   <div class="card shadow-sm mt-2">
                        <div class="card-body">
                            <div class="row">
-                               <div class="col-md-3">
-                                   <label class="form-label small text-muted fw-medium mb-1" class="form-label">Serving Size</label>
-                                   <input type="text" class="form-control form-control-sm with-comma border border-primary" id="serving_size">
-                               </div>
-                              <div class="col-md-3">
-                                  <label class="form-label small text-muted fw-medium mb-1">
-                                      Prep Time
-                                  </label>
-                                  <div class="input-group input-group-sm">
-                                      <select class="form-select border border-primary time-hours" id="prep_hours">
-                                          <option value="0">0</option>
-                                      </select>
-                                      <span class="input-group-text">Hour(s)</span>
+                               <div class="col-md-12">
+                               <label class="form-label small text-muted fw-medium mb-1">Total Recipe Cost</label>
+                               <input type="text" class="form-control form-control-sm border border-secondary" id="total-recipe-cost" readonly required>
+                           </div>
+                           <div class="col-md-6">
+                               <label class="form-label small text-muted fw-medium mb-1">
+                                   Prep Time
+                               </label>
+                               <div class="input-group input-group-sm">
+                                   <select class="form-select border border-primary time-hours" id="prep_hours">
+                                       <option value="0">0</option>
+                                   </select>
+                                   <span class="input-group-text">Hour(s)</span>
 
-                                      <select class="form-select border border-primary time-minutes" id="prep_minutes">
-                                          <option value="0">0</option>
-                                      </select>
-                                      <span class="input-group-text">Min(s)</span>
-                                  </div>
-                              </div>
-                               <div class="col-md-3">
-                                   <label class="form-label small text-muted fw-medium mb-1" class="form-label">Cook Time</label>
-                                   <div class="input-group input-group-sm">
-                                       <select class="form-select border border-primary time-hours" id="cooking_hours">
-                                           <option value="0">0</option>
-                                       </select>
-                                       <span class="input-group-text">Hour(s)</span>
-
-                                       <select class="form-select border border-primary time-minutes" id="cooking_minutes">
-                                           <option value="0">0</option>
-                                       </select>
-                                       <span class="input-group-text">Min(s)</span>
-                                   </div>
+                                   <select class="form-select border border-primary time-minutes" id="prep_minutes">
+                                       <option value="0">0</option>
+                                   </select>
+                                   <span class="input-group-text">Min(s)</span>
                                </div>
-                               <div class="col-md-3">
-                                   <label class="form-label small text-muted fw-medium mb-1" class="form-label">Total Preparation Time</label>
-                                   <div class="input-group input-group-sm">
-                                       <input type="text" class="form-control form-control-sm with-comma" id="total_hour" readonly>
-                                       <span class="input-group-text">Hour(s)</span>
-                                       <input type="text" class="form-control form-control-sm with-comma" id="total_minutes" readonly>
-                                       <span class="input-group-text">Min(s)</span>
-                                   </div>
+                           </div>
+                           <div class="col-md-6">
+                               <label class="form-label small text-muted fw-medium mb-1" class="form-label">Cook Time</label>
+                               <div class="input-group input-group-sm">
+                                   <select class="form-select border border-primary time-hours" id="cooking_hours">
+                                       <option value="0">0</option>
+                                   </select>
+                                   <span class="input-group-text">Hour(s)</span>
+
+                                   <select class="form-select border border-primary time-minutes" id="cooking_minutes">
+                                       <option value="0">0</option>
+                                   </select>
+                                   <span class="input-group-text">Min(s)</span>
                                </div>
                            </div>
                        </div>
+                    </div>
+
                    </div>
                </div>
+              
            </div>
         </div>
         <div class="justify-content-end d-flex mt-2 mb-3 gap-2">
@@ -265,7 +260,7 @@
                 <span class="spinner-border spinner-border-sm d-none me-1" id="btn-spinner-account" role="status" aria-hidden="true"></span>
                 <span class="btn-text-account">Save</span>
             </button>
-            <button type="reset" class="btn btn-danger px-4 py-2 rounded-3 fw-medium" id="btn-cancel-account">
+            <button type="button" class="btn btn-danger px-4 py-2 rounded-3 fw-medium" id="btn-cancel-account" onclick="loadMenuSetup();">
                 Reset
             </button>
             <button type="reset" class="btn btn-light px-4 py-2 rounded-3 fw-medium" onclick="loadCosting()">
@@ -277,6 +272,22 @@
 
 
 <script>
+
+    $('#valueadded_tax').on('input', function () {
+
+        var value = parseFloat(this.value) || 0;
+
+        if (value > 100) {
+            this.value = 100;
+        }
+
+        if (value < 0) {
+            this.value = 0;
+        }
+
+    });
+
+
     $(function () {
         $(".time-hours").each(function () {
             for (let i = 1; i <= 12; i++) {
@@ -296,7 +307,7 @@
     });
 
 
-    $("#frm-registry").submit(function (event) {
+  $("#frm-registry").submit(function (event) {
         event.preventDefault();
 
         var Menucode = $("#itemmenu_code").val();
@@ -304,10 +315,22 @@
         var Category = $("#menu_category").val();
         var SubCat = $("#menu_subcategory").val();
         var Yield = $("#yield_qty").val();
-        var SellingPrice = $("#selling_price").val();
         var Description = $("#description").val();
-        var TotalCost = $("#total-recipe-cost").val();
+        var SellingPrice = $("#selling_price").val();
+
+        var LaborCost = $("#labor_cost").val();
         var CostServing = $("#cost-per-serving").val();
+        var VAT = $("#valueadded_tax").val();
+        var Discounted = $("#discounted_percentage").val();
+        var DiscountedPrice = $("#discounted_price").val();
+        var FinalPrice = $("#final_price").val();
+        var PrepHrs = $("#prep_hours").val();
+        var PrepMins = $("#prep_minutes").val();
+        var CookHrs = $("#cooking_hours").val();
+        var CookMins = $("#cooking_minutes").val();
+
+
+        var TotalCost = $("#total-recipe-cost").val();
         var GrossProfit = $("#gross-profit").val();
         var FoodCost = $("#food-cost-percent").val();
         let ingredients = [];
@@ -354,6 +377,18 @@
             TotalCost: TotalCost,
             CostServing: CostServing,
             GrossProfit: GrossProfit,
+
+            LaborCost: LaborCost,
+            CostServing: CostServing,
+            VAT: VAT,
+            Discounted: Discounted,
+            PrepMins: PrepMins,
+            FinalPrice: FinalPrice,
+            PrepHrs: PrepHrs,
+            DiscountedPrice: DiscountedPrice,
+            CookHrs: CookHrs,
+            CookMins: CookMins,
+
             FoodCost: FoodCost,
             Ingredients: JSON.stringify(ingredients)
 
@@ -361,7 +396,7 @@
 
             if ($.trim(data) == "OK") {
 
-                loadCosting();
+                loadMenuSetup();
 
                 Swal.fire({
                     toast: true,
@@ -386,10 +421,6 @@
             }
         });
     });
-
-
-
-
 
 
 
@@ -445,68 +476,147 @@
     });
 
 
-    document.addEventListener('input', function (e) {
+   function getNumber(id) {
+       return parseFloat(
+           String(document.getElementById(id)?.value || '0')
+               .replace(/,/g, '')
+       ) || 0;
+   }
 
-        var row = e.target.closest('tr');
+   document.addEventListener('input', function (e) {
 
-        // =========================
-        // 1. ROW COMPUTATION
-        // =========================
-        if (row && (e.target.classList.contains('ingredient-qty') ||
-                    e.target.classList.contains('ingredient-cost'))) {
+       const row = e.target.closest('tr');
 
-            var qty = parseFloat(row.querySelector('.ingredient-qty')?.value || 0);
-            var cost = parseFloat(row.querySelector('.ingredient-cost')?.value || 0);
+       // Ingredient row computation
+       if (
+           row &&
+           (
+               e.target.classList.contains('ingredient-qty') ||
+               e.target.classList.contains('ingredient-cost')
+           )
+       ) {
 
-            var amount = qty * cost;
+           calculateRowAmount(row);
+           calculateRecipeTotals();
+           calculatePricing();
+       }
 
-            row.querySelector('.ingredient-amount').value =
-                amount ? amount.toFixed(2) : '';
-        }
+       // Recompute costing section
+       if (
+           e.target.id === 'yield_qty' ||
+           e.target.id === 'selling_price' ||
+           e.target.id === 'labor_cost' ||
+           e.target.id === 'discounted_percentage' ||
+           e.target.id === 'valueadded_tax'
+       ) {
+           calculatePricing();
+       }
+   });
 
-        // =========================
-        // 2. TOTAL RECIPE COST
-        // =========================
-        let total = 0;
+   function calculateRowAmount(row) {
 
-        document.querySelectorAll('.ingredient-amount').forEach(input => {
-            total += parseFloat(input.value || 0);
-        });
+       let qty = parseFloat(
+           row.querySelector('.ingredient-qty')?.value || 0
+       );
 
-        document.getElementById('total-recipe-cost').value =
-            total.toFixed(2);
+       let cost = parseFloat(
+           String(
+               row.querySelector('.ingredient-cost')?.value || 0
+           ).replace(/,/g, '')
+       );
 
-        // =========================
-        // 3. COST PER SERVING
-        // =========================
-        var yieldQty = parseFloat(document.getElementById('yield_qty')?.value || 0);
+       let amount = qty * cost;
 
-        var costPerServing = yieldQty > 0 ? (total / yieldQty) : 0;
+       row.querySelector('.ingredient-amount').value =
+           amount.toFixed(2);
+   }
 
-        document.getElementById('cost-per-serving').value =
-            costPerServing.toFixed(2);
+   function calculateRecipeTotals() {
 
-        // =========================
-        // 4. PROFIT CALCULATION
-        // =========================
-        var sellingPrice = parseFloat(document.getElementById('selling_price')?.value || 0);
+       let total = 0;
 
-        var grossProfit = sellingPrice - costPerServing;
+       document.querySelectorAll('.ingredient-amount').forEach(function (el) {
 
-        document.getElementById('gross-profit').value =
-            grossProfit.toFixed(2);
+           total += parseFloat(
+               String(el.value || 0).replace(/,/g, '')
+           ) || 0;
 
-        // =========================
-        // 5. FOOD COST %
-        // =========================
-        var foodCostPercent =
-            sellingPrice > 0 ? (costPerServing / sellingPrice) * 100 : 0;
+       });
 
-        document.getElementById('food-cost-percent').value =
-            foodCostPercent.toFixed(2) + '%';
+       document.getElementById('total-recipe-cost').value =
+           total.toFixed(2);
 
-    });
+       return total;
+   }
 
+   function calculatePricing() {
+
+       let totalRecipeCost = calculateRecipeTotals();
+
+       let yieldQty = getNumber('yield_qty');
+       let sellingPrice = getNumber('selling_price');
+       let laborCost = getNumber('labor_cost');
+       let vatRate = getNumber('valueadded_tax');
+       let discountPercent = getNumber('discounted_percentage');
+
+       // =========================
+       // COST PER SERVING
+       // =========================
+       let costPerServing =
+           yieldQty > 0
+               ? totalRecipeCost / yieldQty
+               : 0;
+
+       document.getElementById('cost-per-serving').value =
+           costPerServing.toFixed(2);
+
+       // =========================
+       // ACTUAL COST PER SERVING
+       // (Ingredient + Labor)
+       // =========================
+       let actualCost =
+           costPerServing + laborCost;
+
+       // =========================
+       // DISCOUNT
+       // =========================
+       let discountedPrice =
+           sellingPrice -
+           (sellingPrice * discountPercent / 100);
+
+       document.getElementById('discounted_price').value =
+           discountedPrice.toFixed(2);
+
+       // =========================
+       // VAT
+       // =========================
+       let finalPrice =
+           discountedPrice +
+           (discountedPrice * vatRate / 100);
+
+       document.getElementById('final_price').value =
+           finalPrice.toFixed(2);
+
+       // =========================
+       // GROSS PROFIT
+       // =========================
+       let grossProfit =
+           finalPrice - actualCost;
+
+       document.getElementById('gross-profit').value =
+           grossProfit.toFixed(2);
+
+       // =========================
+       // FOOD COST %
+       // =========================
+       let foodCostPercent =
+           finalPrice > 0
+               ? (actualCost / finalPrice) * 100
+               : 0;
+
+       document.getElementById('food-cost-percent').value =
+           foodCostPercent.toFixed(2) + '%';
+   }
 
     /*Function to apply with comma*/
     $(document).on("input", ".with-comma", function () {

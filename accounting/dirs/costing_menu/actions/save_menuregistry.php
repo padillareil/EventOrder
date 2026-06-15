@@ -12,12 +12,25 @@ $Category    = trim($_POST['Category']);
 $SubCat      = trim($_POST['SubCat']);
 $Description = trim($_POST['Description']);
 
-$Yield        = cleanDecimal($_POST['Yield']);
-$SellingPrice = cleanDecimal($_POST['SellingPrice']);
-$TotalCost    = cleanDecimal($_POST['TotalCost']);
-$CostServing  = cleanDecimal($_POST['CostServing']);
-$GrossProfit  = cleanDecimal($_POST['GrossProfit']);
-$FoodCost     = cleanDecimal($_POST['FoodCost']);
+
+$LaborCost    = cleanDecimal($_POST['LaborCost'] ?? 0);
+$CostServing    = cleanDecimal($_POST['CostServing'] ?? 0);
+$VAT    = $_POST['VAT'] ?? 0;
+$Discounted      = cleanDecimal($_POST['Discounted'] ?? 0);
+$DiscountedPrice = cleanDecimal($_POST['DiscountedPrice'] ?? 0);
+$FinalPrice = cleanDecimal($_POST['FinalPrice'] ?? 0);
+$PrepHrs = $_POST['PrepHrs'] ?? 0;
+$PrepMins = $_POST['PrepMins'] ?? 0;
+$CookHrs = $_POST['CookHrs'] ?? 0;
+$CookMins = $_POST['CookMins'] ?? 0;
+
+
+$Yield        = cleanDecimal($_POST['Yield'] ?? 0);
+$SellingPrice = cleanDecimal($_POST['SellingPrice'] ?? 0);
+$TotalCost    = cleanDecimal($_POST['TotalCost'] ?? 0);
+$CostServing  = cleanDecimal($_POST['CostServing'] ?? 0);
+$GrossProfit  = cleanDecimal($_POST['GrossProfit'] ?? 0);
+$FoodCost     = cleanDecimal($_POST['FoodCost'] ?? 0);
 
 $Ingredients = json_decode($_POST['Ingredients'], true);
 
@@ -49,8 +62,8 @@ try {
 
 
     $sql = "
-        EXEC dbo.Menu_Registration
-            ?,?,?,?,?,?,?,?,?,?,?,?
+        EXEC Menu_Registration
+            ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
     ";
 
     $stmt = $conn->prepare($sql);
@@ -62,12 +75,20 @@ try {
         $Category,
         $SubCat,
         $Yield,
-        $SellingPrice,
         $Description,
         $TotalCost,
         $CostServing,
         $GrossProfit,
-        $FoodCost
+        $FoodCost,
+        $PrepHrs,
+        $PrepMins,
+        $CookHrs,
+        $CookMins,
+        $SellingPrice,
+        $LaborCost,
+        $VAT,
+        $Discounted,
+        $FinalPrice
     ]);
 
     if (!empty($Ingredients) && is_array($Ingredients)) {

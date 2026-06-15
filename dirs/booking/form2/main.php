@@ -146,7 +146,7 @@
 </style>
 
 <script>
-  $('#mobile-number').on('input keydown paste', function(e) {
+  $('.mobile-number').on('input keydown paste', function(e) {
       let $input = $(this);
       if (e.type === 'keydown') {
           const allowedKeys = ['Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight'];
@@ -172,7 +172,7 @@
       $input.val(val);
   });
 
-  $('#mobile-number').on('blur', function() {
+  $('.mobile-number').on('blur', function() {
       let val = $(this).val();
       if (val.length > 0 && val.length < 11) {
           $(this).focus();
@@ -258,6 +258,8 @@
      const GuestName       = $("#guest-name").val()?.trim();
      const Company         = $("#guest_company").val()?.trim();
      const MobileNumber    = $("#mobile-number").val()?.trim();
+     const MobileNumber2    = $("#mobile-number2").val()?.trim();
+     const MobileNumber3    = $("#mobile-number3").val()?.trim();
      const Email           = $("#guest_email").val()?.trim();
      const CompanyAddress  = $("#guest_address").val()?.trim();
      const EngagerCategory = $("#engager_category").val()?.trim();
@@ -420,6 +422,8 @@
       var GuestName        = $("#guest-name").val();
       var Company          = $("#guest_company").val();
       var MobileNumber     = $("#mobile-number").val();
+      var MobileNumber2    = $("#mobile-number2").val();
+      var MobileNumber3    = $("#mobile-number3").val();
       var Email            = $("#guest_email").val();
       var CompanyAddress   = $("#guest_address").val();
       var Position         = $("#job_position").val();
@@ -453,6 +457,8 @@
           GuestName,
           Company,
           MobileNumber,
+          MobileNumber2,
+          MobileNumber3,
           Email,
           CompanyAddress,
           Position,

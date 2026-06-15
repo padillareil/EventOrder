@@ -21,6 +21,8 @@ $GuestName          = $_POST['GuestName'] ?? '';
 $JobPosition        = $_POST['JobPosition'] ?? '';
 $Company            = $_POST['Company'] ?? '';
 $MobileNumber       = $_POST['MobileNumber'] ?? '';
+$MobileNumber2       = $_POST['MobileNumber2'] ?? '';
+$MobileNumber3       = $_POST['MobileNumber3'] ?? '';
 $Email              = $_POST['Email'] ?? '';
 $CompanyAddress     = $_POST['CompanyAddress'] ?? '';
 $DraftId            = $_POST['DraftId'] ?? ' ';
@@ -31,7 +33,7 @@ try {
 
     $stmt = $conn->prepare("
         EXEC dbo.[PencilBooking_Draft]
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?
     ");
 
     $stmt->execute([
@@ -49,6 +51,8 @@ try {
         $GuestName,
         $Company,
         $MobileNumber,
+        $MobileNumber2,
+        $MobileNumber3,
         $Email,
         $CompanyAddress,
         $JobPosition,

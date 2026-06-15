@@ -114,10 +114,24 @@
     </div>
   </div>
 
-  <div class="col-12">
-    <label class="form-label small text-muted fw-bold mb-1" for="mobile-number">Mobile Number</label>
+  <div class="col-4">
+    <label class="form-label small text-muted fw-bold mb-1" for="mobile-number">Mobile Number 1</label>
     <div class="input-group rounded-0 bg-white px-2 py-1 shadow-sm w-100">
-      <input type="text" class="form-control bg-transparent  shadow-none py-0 small" id="mobile-number" placeholder="09XXXXXXXXX" autocomplete="off" required>
+      <input type="text" class="form-control bg-transparent  shadow-none py-0 small mobile-number" id="mobile-number" placeholder="09XXXXXXXXX" autocomplete="off" required>
+    </div>
+  </div>
+
+  <div class="col-4">
+    <label class="form-label small text-muted fw-bold mb-1" for="mobile-number2">Mobile Number 2</label>
+    <div class="input-group rounded-0 bg-white px-2 py-1 shadow-sm w-100">
+      <input type="text" class="form-control bg-transparent  shadow-none py-0 small mobile-number" id="mobile-number2" placeholder="09XXXXXXXXX" autocomplete="off">
+    </div>
+  </div>
+
+  <div class="col-4">
+    <label class="form-label small text-muted fw-bold mb-1" for="mobile-number3">Mobile Number 3</label>
+    <div class="input-group rounded-0 bg-white px-2 py-1 shadow-sm w-100">
+      <input type="text" class="form-control bg-transparent  shadow-none py-0 small mobile-number" id="mobile-number3" placeholder="09XXXXXXXXX" autocomplete="off">
     </div>
   </div>
                 

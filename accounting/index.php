@@ -93,8 +93,8 @@ try {
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link active" name="menu" menucode="costing_menu">
-                                <i class="nav-icon bi bi-receipt"></i>
-                                <p>Costing Menu</p>
+                                <i class="nav-icon bi bi-gear"></i>
+                                <p>Costing Management</p>
                             </a>
                         </li>
                         <li class="nav-item">
