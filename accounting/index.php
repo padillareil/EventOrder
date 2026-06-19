@@ -3,22 +3,25 @@ require_once "../config/connection.php";
 require_once "../config/functions.php";
 session_start();
 
-
 if (!isset($_SESSION['Uid'])) {
     header('Location: ../login.php');
     exit();
 }
+
 $User = $_SESSION['Uid'];
 
 try {
+
     $ua = $conn->prepare("EXEC dbo.[Session_User_Account] ?");
     $ua->execute([$User]);
+
     $user = $ua->fetch(PDO::FETCH_ASSOC);
 
-
 } catch (PDOException $e) {
-    echo "<b>Database Error:</b> " . htmlspecialchars($e->getMessage());
-    exit(); 
+
+    header("Location: ../system-offline.html");
+    exit();
+
 }
 ?>
 
@@ -86,13 +89,13 @@ try {
                             <p class="text-muted">Menu</p>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" name="menu" menucode="approvals">
-                                <i class="nav-icon bi bi-check2-square"></i>
-                                <p>Approvals</p>
+                            <a href="#" class="nav-link active" name="menu" menucode="dashboard">
+                                <i class="nav-icon bi bi-grid"></i>
+                                <p>Dashboard</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link active" name="menu" menucode="costing_menu">
+                            <a href="#" class="nav-link" name="menu" menucode="costing_menu">
                                 <i class="nav-icon bi bi-gear"></i>
                                 <p>Cost Control</p>
                             </a>
