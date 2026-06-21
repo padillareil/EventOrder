@@ -416,6 +416,83 @@ function viewAllCharges() {
 
 
 
+// ================================
+// Load Event Charges Breakdown
+// ================================
+function breakdownCharges(BookingNum) {
+    $.post("dirs/dashboard/components/charges_breakdown/charges_breakdown.php", {
+    }, function (html) {
+        $("#dashboard-display-content").html(html);
+        loadEventCharges_header(BookingNum);
+
+    });
+
+}
+
+
+
+// ================================
+// Fetch Event Header Data
+// ================================
+function loadEventCharges_header(BookingNum) {
+    $.post("dirs/dashboard/actions/get_eventcharges_header.php", {
+        BookingNum: BookingNum
+    }, function(data) {
+        let response = JSON.parse(data);
+        if ($.trim(response.isSuccess) == "success") {
+            $("#event-titles").text(response.Data.EventTitle);
+            $("#gfunction").text(response.Data.FunctionRoom);
+            let eventDate = formatEventDate(
+                response.Data.EventStartDate,
+                response.Data.EventEndDate
+            );
+            $("#eventdate").text(eventDate);
+            $("#personincharge").text(response.Data.GuestName);
+            $("#documentnumber").text(response.Data.DocumentNumber);
+            $("#docs_numberesad").val(response.Data.DocumentNumber);
+            $("#guestcompany").text(response.Data.GuestCompany);
+        loadEvent_Charges();
+            
+        } else {
+            console.log(response.Data);
+
+        }
+
+    });
+}
+
+
+/*Function to format date*/
+function formatEventDate(startDate, endDate) {
+    if (!startDate || !endDate) {
+        return "";
+    }
+    let start = new Date(startDate);
+    let end = new Date(endDate);
+    let options = {
+        month: "short",
+        day: "numeric",
+        year: "numeric"
+    };
+    let startFormatted = start.toLocaleDateString("en-US", options);
+    let endFormatted = end.toLocaleDateString("en-US", options);
+    // Same date
+    if (startDate === endDate || start.getTime() === end.getTime()) {
+        return startFormatted;
+    }
+    // Different dates
+    let startMonth = start.toLocaleDateString("en-US", { month: "short" });
+    let endMonth = end.toLocaleDateString("en-US", { month: "short" });
+
+    // Same month
+    if (start.getMonth() === end.getMonth() &&
+        start.getFullYear() === end.getFullYear()) {
+
+        return `${startMonth} ${start.getDate()} - ${end.getDate()}, ${end.getFullYear()}`;
+    }
+    // Different month/year
+    return `${startFormatted} - ${endFormatted}`;
+}
 
 
 

@@ -153,7 +153,7 @@
         srvdisplay.empty();
         data.forEach(charges => {
             srvdisplay.append(`
-                <div class="d-flex align-items-center gap-3 bg-white p-3 rounded-3 border shadow-sm">
+                <div class="d-flex align-items-center gap-3 bg-white p-3 rounded-3 border shadow-sm" onclick="breakdownCharges('${charges.BookingNum}')">
                     <div class="text-center" style="min-width:60px;">
                         ${getChargeStatusIcon(charges.ActiveCharges)}
                     </div>

@@ -118,9 +118,9 @@
 	                    <th class="fw-bold bg-secondary text-center">Customer</th>
 	                    <th class="fw-bold bg-secondary text-center">Transaction Type</th>
 	                    <th class="fw-bold bg-secondary text-center" style="width: 200px;">Payment Method</th>
-	                    <th class="fw-bold bg-secondary text-center" style="width: 200px;">Debit</th>
+	                    <th class="fw-bold bg-secondary text-center" style="width: 200px;">Bill. Amnt</th>
 	                    <th class="fw-bold bg-secondary text-center" style="width: 200px;">Credit</th>
-	                    <th class="fw-bold bg-secondary text-center" style="width: 200px;">Amount</th>
+	                    <th class="fw-bold bg-secondary text-center" style="width: 200px;">Debit /Bal. Payable</th>
 	                </tr>
 	            </thead>
 	            <tbody id="load_PaymentsTransactions">
@@ -251,24 +251,26 @@
             	    <td class="text-center">
             			${srv.PaymentMethod || '--'}
             	    </td>
+            		<td class="text-end ${!srv.Bal_Amnt || srv.Bal_Amnt == 0 ? '' : 'text-dark'}">
+            		    ${!srv.Bal_Amnt || srv.Bal_Amnt == 0 
+            		        ? '--' 
+            		        : 'PHP ' + cleanDecimal(srv.Bal_Amnt)
+            		    }
+            		</td>
+            		<td class="text-end ${!srv.Credit || srv.Credit == 0 ? '' : 'text-success'}">
+            		    ${!srv.Credit || srv.Credit == 0 
+            		        ? '--' 
+            		        : 'PHP ' + cleanDecimal(srv.Credit)
+            		    }
+            		</td>
 	            	<td class="text-end ${!srv.Debit || srv.Debit == 0 ? '' : 'text-danger'}">
 	            	    ${!srv.Debit || srv.Debit == 0 
 	            	        ? '--' 
 	            	        : 'PHP ' + cleanDecimal(srv.Debit)
 	            	    }
 	            	</td>
-	            	<td class="text-end ${!srv.Credit || srv.Credit == 0 ? '' : 'text-success'}">
-	            	    ${!srv.Credit || srv.Credit == 0 
-	            	        ? '--' 
-	            	        : 'PHP ' + cleanDecimal(srv.Credit)
-	            	    }
-	            	</td>
-	            	<td class="text-end ${!srv.Bal_Amnt || srv.Bal_Amnt == 0 ? '' : 'text-dark'}">
-	            	    ${!srv.Bal_Amnt || srv.Bal_Amnt == 0 
-	            	        ? '--' 
-	            	        : 'PHP ' + cleanDecimal(srv.Bal_Amnt)
-	            	    }
-	            	</td>
+	            	
+	            	
             	</tr>
             `);
         });

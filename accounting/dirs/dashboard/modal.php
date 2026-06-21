@@ -947,6 +947,7 @@
            function(data){
                if($.trim(data) === "OK"){
                    $("#frm-charge-slip")[0].reset();
+                   loadEventCharges();
                    resetPhotoCapture();
                    $("#mld-charge-slip").modal("hide");
                    Swal.fire({
