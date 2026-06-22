@@ -1,6 +1,7 @@
 <?php
 require_once "../../../../config/connection.php";
 session_start();
+
 $User = $_SESSION['Uid'];
 
 $SlipNum       = $_POST['SlipNum']; 
@@ -16,35 +17,67 @@ $Description   = $_POST['Description'];
 $UnitCost = str_replace(',', '', $_POST['UnitCost']);
 $ChargeAmount = str_replace(',', '', $_POST['ChargeAmount']);
 
+
+// default no image
 $EvidencePath = null;
+
 
 
 try {
 
     $conn->beginTransaction();
 
-    if(isset($_FILES['Evidence']) && $_FILES['Evidence']['error'] === 0){
+
+
+    // upload evidence
+    if(
+        isset($_FILES['Evidence']) && 
+        $_FILES['Evidence']['error'] === UPLOAD_ERR_OK
+    ){
+
+
         $folder = "../../../../assets/image/evidence/";
+
+
         if(!is_dir($folder)){
             mkdir($folder,0777,true);
         }
-        $extension = pathinfo(
-            $_FILES['Evidence']['name'],
-            PATHINFO_EXTENSION
+
+
+
+        $extension = strtolower(
+            pathinfo(
+                $_FILES['Evidence']['name'],
+                PATHINFO_EXTENSION
+            )
         );
+
+
 
         $FileName = 
             $SlipNum . "_" . time() . "." . $extension;
+
+
+
         $target = $folder . $FileName;
+
+
+
         if(move_uploaded_file(
             $_FILES['Evidence']['tmp_name'],
             $target
         )){
+
+
+            // database path
             $EvidencePath =
                 "assets/image/evidence/" . $FileName;
+
         }
 
+
     }
+
 
 
 
@@ -54,7 +87,9 @@ try {
     ");
 
 
+
     $ins_charges->execute([
+
         $User,
         $SlipNum,
         $BookigNum,
@@ -68,19 +103,26 @@ try {
         $UnitCost,
         $ChargeAmount,
         $EvidencePath
+
     ]);
 
 
 
+
     $conn->commit();
+
     echo "OK";
 
 
 }
 catch(PDOException $e){
+
+
     if($conn->inTransaction()){
         $conn->rollback();
     }
+
+
     echo "Error: ".$e->getMessage();
 
 }

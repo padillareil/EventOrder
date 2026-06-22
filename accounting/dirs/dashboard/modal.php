@@ -691,8 +691,10 @@
                                            <small class="text-muted d-block mt-1">
                                                Take a picture of the damage or incident
                                            </small>
+
                                        </div>
                                    </div>
+                                    <input type="file" id="evidence_proof" name="evidence_proof" class="d-none">
                                    <canvas id="photo-canvas" class="d-none"></canvas>
                                    <div id="photo-actions" class="d-none mt-2 text-center">
                                        <button type="button" class="btn btn-warning" id="btn-recapture">
@@ -942,12 +944,25 @@
     var stream;
 
 
+    // create FileList from file
+    function createFileList(file){
+
+        let dataTransfer = new DataTransfer();
+
+        dataTransfer.items.add(file);
+
+        return dataTransfer.files;
+
+    }
+
+
+
     // Open camera
     function openCamera(){
 
         navigator.mediaDevices.getUserMedia({
-            video: {
-                facingMode: "environment"
+            video:{
+                facingMode:"environment"
             }
         })
         .then(function(mediaStream){
@@ -958,14 +973,21 @@
                 .prop("srcObject", stream)
                 .removeClass("d-none");
 
-            $("#photo-preview").addClass("d-none");
+
+            $("#photo-preview")
+                .addClass("d-none");
+
 
             $("#photo-placeholder").hide();
 
-            // show only capture button
+
             $("#photo-actions").removeClass("d-none");
+
             $("#btn-capture").removeClass("d-none");
-            $("#btn-recapture, #btn-remove-photo").addClass("d-none");
+
+            $("#btn-recapture,#btn-remove-photo")
+                .addClass("d-none");
+
 
         })
         .catch(function(error){
@@ -974,7 +996,9 @@
             console.log(error);
 
         });
+
     }
+
 
 
     // open camera
@@ -985,14 +1009,28 @@
     });
 
 
+
+
+
     // Capture
     $("#btn-capture").click(function(e){
+
         e.stopPropagation();
+
+
         let video = document.getElementById("camera-preview");
+
         let canvas = document.getElementById("photo-canvas");
-        canvas.width = video.videoWidth;
+
+
+        canvas.width  = video.videoWidth;
+
         canvas.height = video.videoHeight;
+
+
         let ctx = canvas.getContext("2d");
+
+
         ctx.drawImage(
             video,
             0,
@@ -1000,58 +1038,148 @@
             canvas.width,
             canvas.height
         );
-        let image = canvas.toDataURL("image/png");
-        $("#photo-preview")
-            .attr("src", image)
-            .removeClass("d-none");
+
+
+
+        // convert canvas to real file
+        canvas.toBlob(function(blob){
+
+
+            let filename = "evidence_" + Date.now() + ".png";
+
+
+            let file = new File(
+                [blob],
+                filename,
+                {
+                    type:"image/png"
+                }
+            );
+
+
+
+            // preview
+            let previewURL = URL.createObjectURL(file);
+
+
+            $("#photo-preview")
+                .attr("src",previewURL)
+                .removeClass("d-none");
+
+
+
+            // store file into input
+            $("#evidence_proof")[0].files = createFileList(file);
+
+
+
+        },"image/png");
+
+
+
+
+
         $("#camera-preview")
             .addClass("d-none");
+
+
+
         if(stream){
+
             stream.getTracks().forEach(track=>{
                 track.stop();
             });
 
         }
 
-        $("#btn-capture").addClass("d-none");
-        $("#btn-recapture, #btn-remove-photo").removeClass("d-none");
+
+
+        $("#btn-capture")
+            .addClass("d-none");
+
+
+        $("#btn-recapture,#btn-remove-photo")
+            .removeClass("d-none");
+
 
     });
+
+
+
+
 
 
     // Recapture
     $("#btn-recapture").click(function(){
+
+
+        // clear old file
+        $("#evidence_proof").val("");
+
+
         openCamera();
+
+
     });
+
+
+
+
 
 
     // Remove
     $("#btn-remove-photo").click(function(){
 
+
         $("#photo-preview")
             .attr("src","")
             .addClass("d-none");
+
+
+
+        // clear uploaded file
+        $("#evidence_proof").val("");
+
+
+
         $("#photo-placeholder").show();
-        $("#photo-actions").addClass("d-none");
-        $("#btn-capture").removeClass("d-none");
-        $("#btn-recapture, #btn-remove-photo").addClass("d-none");
+
+
+        $("#photo-actions")
+            .addClass("d-none");
+
+
+        $("#btn-capture")
+            .removeClass("d-none");
+
+
+        $("#btn-recapture,#btn-remove-photo")
+            .addClass("d-none");
+
+
+
         if(stream){
+
             stream.getTracks().forEach(track=>{
                 track.stop();
             });
-        }
-    });
 
+        }
+
+
+    });
 
 /*Submit Application form for damage and evidence*/
    $("#frm-charge-slip").submit(function(event){
 
        event.preventDefault();
 
+
        let $btnSubmit = $("#btn-submit-slip");
        let $btnCancel = $("#btn-cancel-slip");
        let $spinner = $("#btn-spinner-slip");
        let $text = $btnSubmit.find(".btn-text-slip");
+
 
        function showLoading() {
            $btnSubmit.prop("disabled", true);
@@ -1060,6 +1188,7 @@
            $text.text("Saving...");
        }
 
+
        function hideLoading() {
            $btnSubmit.prop("disabled", false);
            $btnCancel.prop("disabled", false);
@@ -1067,61 +1196,160 @@
            $text.text("Submit");
        }
 
-       const formData = {
-           SlipNum      : $("#slipnumber").val(),
-           BookigNum    : $("#booking_number").val(),
-           EventName    : $("#event_name").val(),
-           GuestName    : $("#guest_completename").val(),
-           ChargeType   : $("#chargeslip_no").val(),
-           IncidentDate : $("#incident_date").val(),
-           IncidentTime : $("#inident_time").val(),
-           Quantity     : $("#report_quantity").val(),
-           Description  : $("#report_description").val(),
-           UnitCost     : $("#unit-cost").val(),
-           ChargeAmount : $("#charge-amount").val(),
-           Evidence     : $("#photo-preview").attr("src") || ""
-       };
+
+
+       // use FormData
+       var formData = new FormData();
+
+
+       formData.append(
+           "SlipNum",
+           $("#slipnumber").val()
+       );
+
+       formData.append(
+           "BookigNum",
+           $("#booking_number").val()
+       );
+
+       formData.append(
+           "EventName",
+           $("#event_name").val()
+       );
+
+       formData.append(
+           "GuestName",
+           $("#guest_completename").val()
+       );
+
+       formData.append(
+           "ChargeType",
+           $("#chargeslip_no").val()
+       );
+
+       formData.append(
+           "IncidentDate",
+           $("#incident_date").val()
+       );
+
+       formData.append(
+           "IncidentTime",
+           $("#inident_time").val()
+       );
+
+       formData.append(
+           "Quantity",
+           $("#report_quantity").val()
+       );
+
+       formData.append(
+           "Description",
+           $("#report_description").val()
+       );
+
+       formData.append(
+           "UnitCost",
+           $("#unit-cost").val()
+       );
+
+       formData.append(
+           "ChargeAmount",
+           $("#charge-amount").val()
+       );
+
+
+
+       // attach captured image
+       if($("#evidence_proof")[0].files.length > 0){
+
+           formData.append(
+               "Evidence",
+               $("#evidence_proof")[0].files[0]
+           );
+
+       }
+
+
 
        showLoading();
 
-       $.post(
-           "dirs/dashboard/actions/save_charge_evidence.php",
-           formData,
-           function(data){
+       $.ajax({
+
+           url: "dirs/dashboard/actions/save_charge_evidence.php",
+
+           type: "POST",
+
+           data: formData,
+
+           contentType: false,
+
+           processData: false,
+
+
+           success:function(data){
+
                if($.trim(data) === "OK"){
+
                    $("#frm-charge-slip")[0].reset();
+
                    loadEventCharges();
+
                    resetPhotoCapture();
+
                    $("#mld-charge-slip").modal("hide");
+
+
                    Swal.fire({
-                       toast: true,
-                       position: "top-end",
-                       icon: "success",
-                       title: "Successfully submitted",
-                       showConfirmButton: false,
-                       timer: 2000
+                       toast:true,
+                       position:"top-end",
+                       icon:"success",
+                       title:"Successfully submitted",
+                       showConfirmButton:false,
+                       timer:2000
                    });
+
+
                    hideLoading();
+
+
                }else{
+
+
                    hideLoading();
+
+
                    Swal.fire({
-                       icon: "error",
-                       title: "Oops!",
-                       text: data
+                       icon:"error",
+                       title:"Oops!",
+                       text:data
                    });
+
+
                }
+
+           },
+
+
+           error:function(xhr){
+
+
+               hideLoading();
+
+
+               Swal.fire({
+                   icon:"error",
+                   title:"Connection Error",
+                   text:"Unable to connect to the server. Please try again."
+               });
+
+
+               console.log(xhr.responseText);
+
            }
-       ).fail(function(){
 
-           hideLoading();
-
-           Swal.fire({
-               icon: "error",
-               title: "Connection Error",
-               text: "Unable to connect to the server. Please try again."
-           });
        });
-   });
+       })
+
 
 
     function resetPhotoCapture() {
