@@ -731,7 +731,7 @@
 <!-- Modal Review Charge Slip -->
 <div class="modal fade" id="mdl-view-charges" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exportLedgerModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+            <div class="modal-content border-0 shadow-lg rounded-4">
                 <div class="modal-header border-bottom p-4">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -761,7 +761,7 @@
                                             <th>Description</th>
                                             <th class="text-center">Qty</th>
                                             <th width="150" class="text-end">Unit Cost</th>
-                                            <th width="150" class="text-end">Amount</th>
+                                            <th width="150" class="text-end">Settlement</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -796,20 +796,55 @@
                             </div>
                             <img  src="#"  id="r_evidence_proof_preview" class="evidence-preview d-none">
                         </div>
-                        <div>
-                            <small class="text-muted d-block mb-1">
-                                Prepared By
-                            </small>
-                            <h6 class="fw-semibold mb-0" id="submitby"></h6>
-                            <small class="text-muted" id="werkposition"></small>
+                        <div class="row g-3">
+
+                            <!-- Prepared Information -->
+                            <div class="col-md-6">
+                                <div class="card border-0 shadow-sm h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <h6 class="mb-0 fw-semibold">
+                                                Prepared by
+                                            </h6>
+                                        </div>
+                                        <h6 class="fw-semibold mb-1" id="submitby">
+                                        </h6>
+                                        <small class="text-muted" id="werkposition">
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Processed Information -->
+                            <div class="col-md-6" id="rejected-chargeslip">
+                                <div class="card border-0 shadow-sm h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <h6 class="mb-0 fw-semibold">
+                                                Processed by
+                                            </h6>
+                                        </div>
+                                        <h6 class="fw-semibold mb-1" id="processedby">
+                                        </h6>
+                                        <small class="text-muted d-block mb-3" id="procposition">
+                                        </small>
+                                        <div class="border-top pt-3">
+                                            <small class="text-muted d-block mb-1">
+                                                Remarks
+                                            </small>
+                                            <p id="r_remarks"class="mb-0 text-danger fw-semibold"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer bg-white px-4 py-3 border-top justify-content-end gap-2">
+                <div class="modal-footer bg-white px-4 py-3 border-top justify-content-end gap-2" id="slip-action-buttons">
                     <button type="button" class="btn btn-secondary shadow px-4 py-2 rounded-3 fw-medium">
                         <i class="bi bi-printer"></i> Print
                     </button>
-                    <button type="button" class="btn btn-success shadow px-4 py-2 rounded-3 fw-medium">
+                    <button type="button" class="btn btn-success shadow px-4 py-2 rounded-3 fw-medium" onclick="mdalPayment()">
                         Approve
                     </button>
                     <button type="button" class="btn btn-danger shadow px-4 py-2 rounded-3 fw-medium" onclick="mldReject()">
@@ -821,46 +856,37 @@
     </div>
 
 <!-- Modal rejct charges application -->
+<form id="frm-reject-slip">
 <div class="modal fade" id="mdl-reject-charges" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exportLedgerModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body p-4">
-
+                    <input type="hidden" id="slipnumber_rjct">
                     <div class="text-center mb-4">
                         <div class="mb-3">
                             <i class="bi bi-exclamation-triangle-fill text-danger fs-1"></i>
                         </div>
-
                         <h5 class="fw-bold mb-1">Reject Charge Slip</h5>
                         <p class="text-muted mb-0">
                             Please provide a reason for rejecting this charge slip.
                         </p>
                     </div>
-
                     <div class="mb-3">
                         <label class="form-label fw-semibold">
                             Remarks
                         </label>
-
-                        <textarea
-                            class="form-control"
-                            id="remarks-reject"
-                            rows="5"
-                            placeholder="Description..."
-                        ></textarea>
-
+                        <textarea class="form-control" maxlength="100" id="remarks-reject" rows="5" placeholder="Description..." required></textarea>
                         <div class="form-text">
-                            Example: Incorrect charge amount, wrong attachment evidence, duplicate entry, etc.
+                            100 Max Character.
                         </div>
                     </div>
-
                 </div>
                 <div class="modal-footer bg-white px-4 py-3 border-top justify-content-end gap-2">
-                    <button id="btn-submit-rejcharge" class="btn btn-success shadow px-4 py-2 rounded-3">
+                    <button type="submit" id="btn-submit-rejcharge" class="btn btn-success shadow px-4 py-2 rounded-3">
                       <span class="spinner-border spinner-border-sm d-none" id="btn-spinner-rejcharge"></span>
                       <span class="btn-text-rejcharge">Save</span>
                     </button>
-                    <button type="button" id="btn-rej-cancel" class="btn btn-secondary shadow px-4 py-2 rounded-3 fw-medium" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" id="btn-cancel-rejcharge" class="btn btn-secondary shadow px-4 py-2 rounded-3 fw-medium" data-bs-dismiss="modal" aria-label="Close">
                         Cancel
                     </button>
                 </div>
@@ -869,6 +895,57 @@
     </div>
 
 <script>
+
+
+    $("#frm-reject-slip").submit(function(event){
+        event.preventDefault();
+        let $btnSubmit = $("#btn-submit-rejcharge");
+        let $btnCancel = $("#btn-cancel-rejcharge");
+        let $spinner = $("#btn-spinner");
+        let $text = $btnSubmit.find(".btn-text-rejcharge");
+        $btnSubmit.prop("disabled", true);
+        $btnCancel.prop("disabled", true);
+        $spinner.removeClass("d-none");
+        $text.text("Saving...");
+
+        var SlipNom  = $("#slipnumber_rjct").val();
+        var Remarks   = $("#remarks-reject").val();
+
+        $.post("dirs/dashboard/actions/update_rejectcharge.php", {
+            SlipNom: SlipNom,
+            Remarks: Remarks
+        }, function(data){
+            $btnSubmit.prop("disabled", false);
+            $btnCancel.prop("disabled", false);
+            $spinner.addClass("d-none");
+            $text.text("Save");
+            if($.trim(data) == "success"){
+                loadEvent_Charges();
+                $text.text("Save");
+                $("#frm-reject-slip")[0].reset();
+                $("#mdl-reject-charges").modal('hide');
+                Swal.fire({
+                    toast: true,
+                    position: "top-end",
+                    icon: "success",
+                    title: "Charge rejected.",
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true
+                });
+
+            }else{
+               Swal.fire({
+                 icon: "error",
+                 title: "Oops!",
+                 text: data,
+                 confirmButtonText: "OK"
+               });
+               $("#mdl-reject-charges").modal('hide');
+
+            }
+        });
+    });
   
     /*Function to show again then view charges modal */
     $("#btn-rej-cancel").on('click', function () {
@@ -1417,7 +1494,7 @@
 
     .evidence-preview{
         width:100%;
-        height:250px;
+        height:auto;
         object-fit:cover;
         border-radius:10px;
     }
@@ -1433,3 +1510,331 @@
         background: #f1f3f5;
     }
 </style>
+
+
+<style>
+  /* VISUAL PAYMENT METHOD SELECTION CARDS */
+  .payment-method-card {
+    border: 2px solid #dee2e6;
+    border-radius: 12px;
+    padding: 14px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+    background-color: #f8f9fa;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+  }
+
+  .payment-method-card i {
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+    color: #6c757d;
+    transition: color 0.2s ease-in-out;
+  }
+
+  .payment-method-card span {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #495057;
+  }
+
+  /* HIDDEN CHECKBOX INPUTS UNDER THE CARDS */
+  .payment-check-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* SELECTED STATE STYLE CHANGES (MULTI-SELECT COMPATIBLE) */
+  .payment-check-input:checked + .payment-method-card {
+    border-color: #198754; /* Success Green Theme */
+    background-color: rgba(25, 135, 84, 0.04);
+  }
+
+  .payment-check-input:checked + .payment-method-card i {
+    color: #198754;
+  }
+
+  .payment-check-input:checked + .payment-method-card span {
+    color: #198754;
+  }
+
+  /* COMPACT CUSTOM LAYOUT EXTENSION FOR CONDITIONAL INLINE BLOCKS */
+  .payment-sub-form-section {
+    background-color: #f8f9fa;
+    border: 1px dashed #dee2e6;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 12px;
+  }
+  
+  .payment-sub-form-section h6 {
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+  }
+
+  /* ENHANCE SEGMENT CONTAINERS FOR ABSOLUTE ELEMENT MANAGEMENT */
+  .payment-sub-form-section.position-relative {
+    padding-top: 8px !important;
+  }
+
+  /* PRINTS SAFE BUFFER ZONES SO TITLES NEVER MERGE OVER LAP WITH X BUTTONS */
+  .payment-sub-form-section .font-monospace.mb-2 {
+    padding-right: 35px !important;
+  }
+
+  /* MODERN DRAG-AND-DROP BROKEN LINE ZONE CONTAINER */
+  .modern-dropzone-wrapper {
+    width: 100%;
+    min-height: 200px; /* Starting size when empty */
+    height: auto;      /* Allows container to grow/shrink with the image size */
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    background-color: #ffffff;
+    cursor: pointer;
+    position: relative;
+    transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    
+    /* Centers placeholder text when empty */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* HOVER EFFECT SETUP */
+  .modern-dropzone-wrapper:hover {
+    border-color: #0d6efd;
+    background-color: rgba(13, 110, 253, 0.02);
+  }
+
+  /* MORPHS INTO A SOLID BOX WHEN A FILE IS UPLOADED */
+  .modern-dropzone-wrapper.has-file {
+    border-style: solid;
+    border-color: #198754; 
+    padding: 0; /* Clear padding so the image meets the borders cleanly */
+  }
+
+  /* THE NATURAL ADAPTIVE IMAGE ENGINE */
+  .modern-dropzone-wrapper .modern-preview-img {
+    display: block;
+    max-width: 100%;   /* Prevents the image from overflowing your bootstrap column width */
+    height: auto;      /* Keeps the exact true aspect ratio of the photo */
+    border-radius: 10px; /* Matches the parent container rounding nicely */
+  }
+
+  /* SAFE CENTERED RENDER EXTENSION FOR STANDARD DIRECT PDF DROPS */
+  .modern-dropzone-wrapper .pdf-attached-layout {
+    padding: 20px;
+  }
+
+  .tiny-text {
+    font-size: 0.72rem !important;
+  }
+
+  .filename-metadata-tray {
+    font-size: 0.78rem;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Controls the responsive footprint of your brand logo layouts */
+  .provider-radio {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  /* Modern Visual Card Base Style */
+  .provider-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    padding: 12px 8px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 85px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
+  }
+
+  /* Micro-interactions when tapping/hovering */
+  .provider-card:hover {
+    border-color: #ced4da;
+    transform: translateY(-1px);
+  }
+
+  /* Premium Selected State Accent */
+  .provider-radio:checked + .provider-card {
+    border-color: #0d6efd;
+    background-color: #f8faff;
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.08);
+  }
+
+  /* Embedded Micro Logo Constraints */
+  .provider-micro-logo {
+    height: 28px;
+    max-width: 90%;
+    object-fit: contain;
+    margin-bottom: 4px;
+  }
+
+  /* Master Hero Preview Logo on the right side */
+  .digital-bank-logo {
+    width: 100%;
+    max-width: 140px;
+    height: 50px;
+    object-fit: contain;
+    animation: smoothFadeIn 0.2s ease-out;
+  }
+
+  @keyframes smoothFadeIn {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  /* Responsive optimizations for shorter tablet views */
+  @media screen and (max-height: 600px) {
+    .provider-card { height: 75px; padding: 8px 4px; }
+    .digital-bank-logo { height: 38px; }
+  }
+</style>
+
+<form id="frm-confirmation-booking" autocomplete="off" class="needs-validation" novalidate>
+  <div class="modal fade" id="mdl-payment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content border-0 shadow-lg rounded-4">
+        
+        <div class="modal-header border-bottom px-4 pt-4 pb-3">
+          <div>
+            <h5 class="modal-title fs-5 fw-bold text-dark">Payment</h5>
+            <p class="text-muted small mb-0">Choose one or more payment options to settle the amount.</p>
+          </div>
+        </div>
+
+        <div class="modal-body p-4 position-relative">
+          
+          <div class="sticky-top bg-white pt-2 pb-3 mb-3 border-bottom" style="top: -24px; z-index: 1020; margin-left: -24px; margin-right: -24px; padding-left: 24px; padding-right: 24px;">
+            <div class="row g-3 align-items-end">
+              
+              <div class="col-12 col-md-12">
+                <label class="form-label small text-muted fw-bold mb-1" for="gross-total-paid">Total Amount Received</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light border-end-0 fw-bold text-muted">PHP</span>
+                  <input type="text" class="form-control border-start-0 fw-semibold text-muted bg-light with-comma" id="gross-total-paid" name="gross-total-paid" value="0.00" readonly>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-3">
+              <label class="form-label small text-muted fw-bold mb-2">Select Payment Method(s)</label>
+              <div class="row g-2 align-items-center">
+                
+                <div class="col-4 col-md-2">
+                  <input type="checkbox" name="payment_method" id="pay-cash" value="Cash" class="payment-check-input" checked>
+                  <label for="pay-cash" class="payment-method-card mb-0">
+                    <i class="bi bi-cash-stack"></i>
+                    <span>Cash</span>
+                  </label>
+                </div>
+
+                <div class="col-4 col-md-2">
+                  <input type="checkbox" name="payment_method" id="pay-bank" value="Bank Transfer" class="payment-check-input">
+                  <label for="pay-bank" class="payment-method-card mb-0">
+                    <i class="bi bi-bank"></i>
+                    <span>Bank</span>
+                  </label>
+                </div>
+
+                <div class="col-4 col-md-2">
+                  <input type="checkbox" name="payment_method" id="pay-check" value="Check" class="payment-check-input">
+                  <label for="pay-check" class="payment-method-card mb-0">
+                    <i class="bi bi-card-heading"></i>
+                    <span>Check</span>
+                  </label>
+                </div>
+
+                <div class="col-4 col-md-2">
+                  <input type="checkbox" name="payment_method" id="pay-card" value="Debit/Card" class="payment-check-input">
+                  <label for="pay-card" class="payment-method-card mb-0">
+                    <i class="bi bi-credit-card"></i>
+                    <span>Card</span>
+                  </label>
+                </div>
+
+                <div class="col-4 col-md-2">
+                  <input type="checkbox" name="payment_method" id="pay-online" value="Online Banking" class="payment-check-input">
+                  <label for="pay-online" class="payment-method-card mb-0">
+                    <i class="bi bi-globe"></i>
+                    <span>E-Wallet</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3 pt-2">
+            <div id="payment-forms"></div>
+          </div>
+          
+        </div> 
+        <div class="modal-footer border-top px-4 py-3 bg-light rounded-bottom-4">
+          <button type="submit" id="btn-submit-booking" class="btn btn-success px-4 py-2 fw-semibold rounded-3 shadow-sm d-inline-flex align-items-center gap-2">
+            <span class="spinner-border spinner-border-sm d-none" id="btn-spinner-booking" role="status"></span>
+            <span class="btn-text-booking">Proceed</span>
+          </button>
+          <button type="button" class="btn btn-light border px-3 py-2 small fw-medium rounded-3 text-secondary" data-bs-target="#mdl-view-charges" data-bs-toggle="modal">Cancel</button>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</form>
+
+<script>
+    $(document).ready(function () {
+        loadPaymentTemplates();
+    });
+
+    /*Function to switch and add type of payment method*/
+    $(document).on("change", ".payment-check-input", function () {
+        loadPaymentTemplates();
+    });
+  
+  function loadPaymentTemplates() {
+      const templates = {
+          "Cash": "#template-payment-cash",
+          "Bank Transfer": "#template-payment-bank",
+          "Check": "#template-payment-check",
+          "Debit/Card": "#template-payment-card",
+          "Online Banking": "#template-payment-digibank"
+      };
+      let html = "";
+      $(".payment-check-input:checked").each(function () {
+          let templateId = templates[$(this).val()];
+          if (templateId) {
+            html += $(templateId).html();
+          }
+      });
+      $("#payment-forms").html(html); /*Display type of payment*/
+  }
+
+
+  /*Function payment validation*/
+  function validatePaymentUsage(argument) {
+      // body...
+  }
+</script>
+
+
+

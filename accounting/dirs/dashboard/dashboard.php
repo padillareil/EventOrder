@@ -4,3 +4,4 @@
 
 <?php include 'modal.php';  ?>
 <?php include 'skeleton.php';  ?>
+<?php include 'payment_templates.php';  ?>

@@ -455,6 +455,7 @@ function viewSelectedCharges(Slip_RefNo){
         if(jQuery.trim(response.isSuccess) == "success"){
             $("#mdl-view-charges").modal('show');
             $("#r_slipnomber").val(response.Data.Slip_RefNo);
+             $("#slipnumber_rjct").val(response.Data.Slip_RefNo);
             $("#r_eventname").text(response.Data.EventName);
             $("#r_guest").text(response.Data.Guest);
             $("#r_chargetype").text(response.Data.ChargeType);
@@ -463,6 +464,19 @@ function viewSelectedCharges(Slip_RefNo){
             $("#r_description").text(response.Data.Inci_Description);
             $("#r_unicost").text(response.Data.UnitCost);
             $("#r_amont").text(response.Data.ChargeAmount);
+
+            /*Condition on appearing the remarks*/
+            if (response.Data.DocStatus === 'R') {
+                $("#rejected-chargeslip").removeClass('d-none');
+                $("#slip-action-buttons").addClass('d-none');
+            } else {
+                $("#rejected-chargeslip").addClass('d-none');
+                $("#slip-action-buttons").removeClass('d-none');
+            }
+            $("#procposition").text(response.Data.ProcessedPosition);
+            $("#processedby").text(response.Data.ProcessedBy);
+            $("#r_remarks").text(response.Data.Remarks);
+
             $("#submitby").text(response.Data.SubmmitedBy);
             $("#werkposition").text(response.Data.WorkPosition);
             if(response.Data.Proof && response.Data.Proof !== ""){
@@ -504,6 +518,13 @@ function mldReject() {
 
 }
 
+
+
+/*Function to apply modal payments*/
+function mdalPayment() {
+    $("#mdl-view-charges").modal('hide');
+    $("#mdl-payment").modal('show');
+}
 
 
 

@@ -74,10 +74,12 @@
 
                     <div class="table-responsive border overflow-auto" style="height:50vh;">
                         <table class="table table-bordered table-sm table-hover align-middle mb-0" style="font-size:13px;">
-                            <thead class="table-secondary text-uppercase">
+                            <thead class="table-secondary">
                                 <tr>
-                                    <th class="text-nowrap">Time</th>
-                                    <th class="text-nowrap">Charge No.</th>
+                                    <th class="text-nowrap">
+                                        <i class="bi bi-clock"></i>
+                                    </th>
+                                    <th class="text-nowrap">Charge Slip No.</th>
                                     <th>Description</th>
                                     <th class="text-end text-nowrap">Settlement</th>
                                     <th class="text-end text-nowrap">Status</th>
@@ -240,7 +242,7 @@ function printCharges() {
                     <td>
                         ${charges.Inci_Description || '--'}
                     </td>
-                    <td class="text-end text-danger">
+                    <td class="text-end">
                         PHP ${cleanDecimal(charges.ChargeAmnt || '0')}
                     </td>
                     <td class="text-end fw-semibold ${statusClass}">
