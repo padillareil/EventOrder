@@ -721,6 +721,236 @@
 
 </template>
 
+
+<template id="skeleton-charges">
+    <div class="container">
+        <div class="card card-body mb-2 shadow-sm border-0">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 rounded-2">
+                <div class="d-flex align-items-center gap-3">
+                    <button type="button" class="btn btn-sm skeleton-loader rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width:36px;height:36px;" title="Back to customer list">
+                    </button>
+                    <div>
+                        <h5 class="fw-bold text-dark mb-1 skeleton-loader">
+                        </h5>
+                        <div class="d-flex flex-wrap gap-3 small text-muted">
+                            <span class="skeleton-loader">
+                                Document No:
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-wrap justify-content-md-end gap-2">
+                    <button type="button" class="btn skeleton-loader rounded-3 px-3">
+                        Print Charges
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-12 col-lg-12">
+                <div class="card border-0 shadow-sm rounded-2 bg-white p-4">
+                    <div class="row g-3 border-bottom pb-4 mb-4">
+                        <div class="col-12 col-sm-12">
+                            <small class="text-uppercase tracking-wider text-muted fs-7 d-block mb-1 skeleton-loader">
+                            </small>
+                            <div class="fw-bold text-dark mb-1 skeleton-loader">
+                            </div>
+                            <div class="text-muted small skeleton-loader">
+                            </div>
+
+                            <div class="text-muted small skeleton-loader">
+                                Event Date: 
+                            </div>
+
+                            <div class="text-muted small skeleton-loader">
+                                Person In Charge:
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <h6 class="fw-bold text-dark mb-3 skeleton-loader">Event Damages & Charges</h6>
+                        <div class="justify-content-end d-flex mb-2 mt-2">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination pagination-sm mb-0 gap-1">
+                                    <li class="page-item skeleton-loader">
+                                        <a class="page-link rounded-3 border shadow-sm px-2 py-1" href="#">
+                                            <i class="bi bi-chevron-left"></i>
+                                        </a>
+                                    </li>
+                                    <li class="page-item skeleton-loader">
+                                        <a class="page-link rounded-3 border shadow-sm px-2 py-1" href="#">
+                                            <i class="bi bi-chevron-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+
+
+
+                            <table class="table table-bordered table-sm align-middle mb-0" style="font-size:13px;">
+                                <thead class="table-secondary text-uppercase">
+                                    <tr>
+                                        <th class="text-nowrap">
+                                            <div class="skeleton-loader" style="height:14px;width:120px;"></div>
+                                        </th>
+                                        <th class="text-nowrap">
+                                            <div class="skeleton-loader" style="height:14px;width:120px;"></div>
+                                        </th>
+                                        <th>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;"></div>
+                                        </th>
+                                        <th class="text-end text-nowrap">
+                                            <div class="skeleton-loader" style="height:14px;width:120px;"></div>
+                                        </th>
+                                        <th class="text-end text-nowrap">
+                                            <div class="skeleton-loader" style="height:14px;width:120px;"></div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="skeleton-loader" style="height:14px;width:120px;">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>
+
 <style>
     .skeleton-loader {
         position: relative;

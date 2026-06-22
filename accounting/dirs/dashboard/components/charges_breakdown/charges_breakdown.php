@@ -7,8 +7,8 @@
                     <i class="bi bi-arrow-left text-secondary fs-5"></i>
                 </button>
                 <div>
-                    <h5 class="fw-bold text-dark mb-1" id="event-titles">
-                    </h5>
+                    <h6 class="fw-bold text-dark mb-1" id="event-titles">
+                    </h6>
                     <div class="d-flex flex-wrap gap-3 small text-muted">
                         <span>
                             Document No:
@@ -19,7 +19,7 @@
             </div>
             <input type="hidden" id="docs_numberesad">
             <div class="d-flex flex-wrap justify-content-md-end gap-2">
-                <button type="button" class="btn btn-secondary shadow rounded-3 px-3" onclick="window.print()">
+                <button type="button" class="btn btn-secondary shadow rounded-3 px-3" onclick="printCharges()">
                     <i class="bi bi-printer me-2"></i>
                     Print Charges
                 </button>
@@ -76,7 +76,7 @@
                         <table class="table table-bordered table-sm table-hover align-middle mb-0" style="font-size:13px;">
                             <thead class="table-secondary text-uppercase">
                                 <tr>
-                                    <th class="text-nowrap">Incident Time</th>
+                                    <th class="text-nowrap">Time</th>
                                     <th class="text-nowrap">Charge No.</th>
                                     <th>Description</th>
                                     <th class="text-end text-nowrap">Settlement</th>
@@ -85,7 +85,7 @@
                             </thead>
                             <tbody id="eventdamge_charges">
                                 
-                            </tfoot>
+                            </tbody>
                         </table>
                     </div>  
                 </div>
@@ -96,6 +96,11 @@
 
 
 <script>
+
+function printCharges() {
+    
+}
+
     function cleanDecimal(value) {
         let num = parseFloat(value || 0);
 
@@ -223,7 +228,7 @@
 
             srvdisplay.append(`
 
-                <tr>
+                <tr onclick="viewSelectedCharges('${charges.Slip_RefNo}')">
                     <td class="text-nowrap">
                         ${charges.IncidentTime || '--'}
                     </td>
@@ -247,8 +252,6 @@
 
         });
     }
-
-   
 
 
 

@@ -726,9 +726,152 @@
 </form>
 
 
+<!-- Modal Review Charge Slip -->
+<div class="modal fade" id="mdl-view-charges" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exportLedgerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header border-bottom p-4">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="row g-3 border-bottom pb-4 mb-4">
+                            <div class="col-12 col-sm-12">
+                                <small class="text-uppercase tracking-wider text-muted fs-7 d-block mb-1" id="r_eventname">
+                                </small>
+                                <div class="fw-bold text-dark mb-1" id="r_guest">
+                                </div>
+                                <div class="text-muted small" id="r_chargetype">
+                                </div>
+                                <div class="text-muted small">
+                                    Incident Date: 
+                                    <span class="fw-semibold text-dark" id="r_incidate">
+                                    </span>
+                                </div>
+                                <input type="hidden" id="r_slipnomber">
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-sm align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Description</th>
+                                            <th class="text-center">Qty</th>
+                                            <th width="150" class="text-end">Unit Cost</th>
+                                            <th width="150" class="text-end">Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td id="r_description">
+                                            </td>
+                                            <td class="text-center" id="r_quantity">
+                                            </td>
+                                            <td class="text-end" id="r_unicost">
+                                            </td>
+                                            <td class="text-end" id="r_amont">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Summary -->
+                    <div class="card border-0 shadow-sm">
+                        <div class="card evidence-card mb-2">
+                            <div class="evidence-empty" id="evidence-empty">
+                                <div class="evidence-icon">
+                                    <i class="bi bi-image"></i>
+                                </div>
+
+                                <h6 class="mb-1">No Proof Evidence</h6>
+                                <small>
+                                    No attached image or document was provided.
+                                </small>
+                            </div>
+                            <img  src="#"  id="r_evidence_proof_preview" class="evidence-preview d-none">
+                        </div>
+                        <div>
+                            <small class="text-muted d-block mb-1">
+                                Prepared By
+                            </small>
+                            <h6 class="fw-semibold mb-0" id="submitby"></h6>
+                            <small class="text-muted" id="werkposition"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-white px-4 py-3 border-top justify-content-end gap-2">
+                    <button type="button" class="btn btn-secondary shadow px-4 py-2 rounded-3 fw-medium">
+                        <i class="bi bi-printer"></i> Print
+                    </button>
+                    <button type="button" class="btn btn-success shadow px-4 py-2 rounded-3 fw-medium">
+                        Approve
+                    </button>
+                    <button type="button" class="btn btn-danger shadow px-4 py-2 rounded-3 fw-medium" onclick="mldReject()">
+                        Reject
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Modal rejct charges application -->
+<div class="modal fade" id="mdl-reject-charges" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exportLedgerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body p-4">
+
+                    <div class="text-center mb-4">
+                        <div class="mb-3">
+                            <i class="bi bi-exclamation-triangle-fill text-danger fs-1"></i>
+                        </div>
+
+                        <h5 class="fw-bold mb-1">Reject Charge Slip</h5>
+                        <p class="text-muted mb-0">
+                            Please provide a reason for rejecting this charge slip.
+                        </p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">
+                            Remarks
+                        </label>
+
+                        <textarea
+                            class="form-control"
+                            id="remarks-reject"
+                            rows="5"
+                            placeholder="Description..."
+                        ></textarea>
+
+                        <div class="form-text">
+                            Example: Incorrect charge amount, wrong attachment evidence, duplicate entry, etc.
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer bg-white px-4 py-3 border-top justify-content-end gap-2">
+                    <button id="btn-submit-rejcharge" class="btn btn-success shadow px-4 py-2 rounded-3">
+                      <span class="spinner-border spinner-border-sm d-none" id="btn-spinner-rejcharge"></span>
+                      <span class="btn-text-rejcharge">Save</span>
+                    </button>
+                    <button type="button" id="btn-rej-cancel" class="btn btn-secondary shadow px-4 py-2 rounded-3 fw-medium" data-bs-dismiss="modal" aria-label="Close">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <script>
   
+    /*Function to show again then view charges modal */
+    $("#btn-rej-cancel").on('click', function () {
+        $("#mdl-view-charges").modal('show');
+    });
 
 
 
@@ -1006,6 +1149,50 @@
 </script>
 
 <style>
+    .evidence-card {
+        min-height: 250px;
+        border: 1px dashed #dee2e6;
+        overflow: hidden;
+        background: #fafafa;
+    }
+
+
+    .evidence-empty {
+        height: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #6c757d;
+        text-align: center;
+        padding: 20px;
+    }
+
+
+    .evidence-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: #f1f3f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+
+    .evidence-icon i {
+        font-size: 35px;
+        color: #adb5bd;
+    }
+
+
+    .evidence-preview {
+        width: 100%;
+        max-height: 350px;
+        object-fit: contain;
+        background: white;
+    }
     #photo-container {
         cursor: pointer;
         min-height: 250px;

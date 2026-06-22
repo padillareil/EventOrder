@@ -417,17 +417,73 @@ function viewAllCharges() {
 
 
 // ================================
-// Load Event Charges Breakdown
+// Load Charges Breakdown for Review
 // ================================
-function breakdownCharges(BookingNum) {
-    $.post("dirs/dashboard/components/charges_breakdown/charges_breakdown.php", {
-    }, function (html) {
-        $("#dashboard-display-content").html(html);
-        loadEventCharges_header(BookingNum);
+function skeletonCharges() {
+    const template = document.getElementById("skeleton-charges");
+    $("#dashboard-display-content").html(template.innerHTML);
+}
 
+function breakdownCharges(BookingNum) {
+    skeletonCharges();
+    $.post("dirs/dashboard/components/charges_breakdown/charges_breakdown.php", {}, function (html) {
+        let result = $.trim(html);
+        setTimeout(function () {
+            if (!result) return;
+            $("#dashboard-display-content")
+                .hide()
+                .html(result)
+                .fadeIn(300, function () {
+                    loadEventCharges_header(BookingNum);
+                });
+        }, 300);
+    }).fail(function () {
+        skeletonCharges();
     });
 
 }
+
+
+
+
+/*Function show modal charges(Single)*/
+function viewSelectedCharges(Slip_RefNo){
+    $.post("dirs/dashboard/actions/get_selectedcharges.php",{
+        Slip_RefNo : Slip_RefNo
+    },function(data){
+        response = JSON.parse(data);
+        if(jQuery.trim(response.isSuccess) == "success"){
+            $("#mdl-view-charges").modal('show');
+            $("#r_slipnomber").val(response.Data.Slip_RefNo);
+            $("#r_eventname").text(response.Data.EventName);
+            $("#r_guest").text(response.Data.Guest);
+            $("#r_chargetype").text(response.Data.ChargeType);
+            $("#r_incidate").text(response.Data.IncidentDate);
+            $("#r_quantity").text(response.Data.Quantity);
+            $("#r_description").text(response.Data.Inci_Description);
+            $("#r_unicost").text(response.Data.UnitCost);
+            $("#r_amont").text(response.Data.ChargeAmount);
+            $("#submitby").text(response.Data.SubmmitedBy);
+            $("#werkposition").text(response.Data.WorkPosition);
+              
+            $("#r_evidence_proof_preview") .attr("src","data:image/jpeg;base64," + response.Proof.Proof);
+
+        }else{
+            console.log(jQuery.trim(response.Data));
+        }
+    });
+}
+
+
+// Function to reject the charge with remakrs modal
+function mldReject() {
+    $("#mdl-reject-charges").modal('show');
+    $("#mdl-view-charges").modal('hide');
+
+}
+
+
+
 
 
 
@@ -493,14 +549,6 @@ function formatEventDate(startDate, endDate) {
     // Different month/year
     return `${startFormatted} - ${endFormatted}`;
 }
-
-
-
-
-
-
-
-
 
 
 
