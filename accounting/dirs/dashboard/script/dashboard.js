@@ -465,7 +465,31 @@ function viewSelectedCharges(Slip_RefNo){
             $("#r_amont").text(response.Data.ChargeAmount);
             $("#submitby").text(response.Data.SubmmitedBy);
             $("#werkposition").text(response.Data.WorkPosition);
-            $("#r_evidence_proof_preview").attr("src","../"+ response.Data.Proof);
+            if(response.Data.Proof && response.Data.Proof !== ""){
+
+                $("#r_evidence_proof_preview")
+                    .attr(
+                        "src",
+                        "../" + response.Data.Proof
+                    )
+                    .removeClass("d-none");
+
+
+                $("#evidence-empty")
+                    .addClass("d-none");
+
+
+            }else{
+
+                $("#r_evidence_proof_preview")
+                    .attr("src","")
+                    .addClass("d-none");
+
+
+                $("#evidence-empty")
+                    .removeClass("d-none");
+
+            }
         }else{
             console.log(jQuery.trim(response.Data));
         }
