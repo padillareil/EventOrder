@@ -1788,7 +1788,7 @@
           
         </div> 
         <div class="modal-footer border-top px-4 py-3 bg-light rounded-bottom-4">
-          <button type="submit" id="btn-submit-booking" class="btn btn-success px-4 py-2 fw-semibold rounded-3 shadow-sm d-inline-flex align-items-center gap-2">
+          <button type="button" id="btn-submit-booking" class="btn btn-success px-4 py-2 fw-semibold rounded-3 shadow-sm d-inline-flex align-items-center gap-2" onclick="mdlapplyPayment()">
             <span class="spinner-border spinner-border-sm d-none" id="btn-spinner-booking" role="status"></span>
             <span class="btn-text-booking">Proceed</span>
           </button>
@@ -1834,6 +1834,24 @@
   function validatePaymentUsage(argument) {
       // body...
   }
+
+
+/*Tommorow update for applying payment*/
+  // function mdlapplyPayment(){
+  //     var SlipNo = $("#r_slipnomber").val();
+  //     $.post("dirs/dashboard/actions/update_apply_payment.php", {
+  //         SlipNo : SlipNo,
+  //     }, function(data){
+  //         if($.trim(data) == "OK"){
+  //             alert("Student added.");
+  //             $("#modal-add-student").modal("hide");
+  //             load_student_list();
+  //         }else{
+  //             alert("Error: " + data);
+  //         }
+  //     });
+  // }
+
 </script>
 
 

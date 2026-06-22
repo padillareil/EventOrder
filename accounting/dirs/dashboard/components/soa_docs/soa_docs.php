@@ -81,6 +81,7 @@
 	            	                <option>Down Payment</option>
 	            	                <option>Partial Payment</option>
 	            	                <option>Final Payment</option>
+	            	                <option>Other Charges</option>
 	            	                <option>Refund</option>
 	            	                <option>Adjustment</option>
 	            	            </select>
