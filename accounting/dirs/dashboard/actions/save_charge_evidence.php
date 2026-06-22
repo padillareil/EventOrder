@@ -16,34 +16,17 @@ $Description   = $_POST['Description'];
 
 $UnitCost = str_replace(',', '', $_POST['UnitCost']);
 $ChargeAmount = str_replace(',', '', $_POST['ChargeAmount']);
-
-
-// default no image
 $EvidencePath = null;
-
-
-
 try {
-
     $conn->beginTransaction();
-
-
-
-    // upload evidence
     if(
         isset($_FILES['Evidence']) && 
         $_FILES['Evidence']['error'] === UPLOAD_ERR_OK
     ){
-
-
         $folder = "../../../../assets/image/evidence/";
-
-
         if(!is_dir($folder)){
             mkdir($folder,0777,true);
         }
-
-
 
         $extension = strtolower(
             pathinfo(
@@ -51,42 +34,22 @@ try {
                 PATHINFO_EXTENSION
             )
         );
-
-
-
         $FileName = 
             $SlipNum . "_" . time() . "." . $extension;
 
-
-
         $target = $folder . $FileName;
-
-
-
         if(move_uploaded_file(
             $_FILES['Evidence']['tmp_name'],
             $target
         )){
-
-
-            // database path
             $EvidencePath =
                 "assets/image/evidence/" . $FileName;
-
         }
-
-
     }
-
-
-
-
 
     $ins_charges = $conn->prepare("
         EXEC SubmitEvent_Charges ?,?,?,?,?,?,?,?,?,?,?,?,?
     ");
-
-
 
     $ins_charges->execute([
 
@@ -105,9 +68,6 @@ try {
         $EvidencePath
 
     ]);
-
-
-
 
     $conn->commit();
 

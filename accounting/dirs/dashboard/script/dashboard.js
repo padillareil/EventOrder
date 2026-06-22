@@ -465,9 +465,7 @@ function viewSelectedCharges(Slip_RefNo){
             $("#r_amont").text(response.Data.ChargeAmount);
             $("#submitby").text(response.Data.SubmmitedBy);
             $("#werkposition").text(response.Data.WorkPosition);
-              
-            $("#r_evidence_proof_preview") .attr("src","data:image/jpeg;base64," + response.Proof.Proof);
-
+            $("#r_evidence_proof_preview").attr("src","../"+ response.Data.Proof);
         }else{
             console.log(jQuery.trim(response.Data));
         }
