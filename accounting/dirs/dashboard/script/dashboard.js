@@ -464,7 +464,7 @@ function viewSelectedCharges(Slip_RefNo){
             $("#r_description").text(response.Data.Inci_Description);
             $("#r_unicost").text(response.Data.UnitCost);
             $("#r_amont").text(response.Data.ChargeAmount);
-
+            $("#r_chargeamount").val(response.Data.Amount);
             /*Condition on appearing the remarks*/
             if (response.Data.DocStatus === 'R') {
                 $("#rejected-chargeslip").removeClass('d-none');

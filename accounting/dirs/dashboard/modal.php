@@ -751,6 +751,7 @@
                                     </span>
                                 </div>
                                 <input type="hidden" id="r_slipnomber">
+                                <input type="hidden" id="r_chargeamount">
                             </div>
                         </div>
                         <div class="card-body p-0">
@@ -1730,7 +1731,7 @@
                 <label class="form-label small text-muted fw-bold mb-1" for="gross-total-paid">Total Amount Received</label>
                 <div class="input-group">
                   <span class="input-group-text bg-light border-end-0 fw-bold text-muted">PHP</span>
-                  <input type="text" class="form-control border-start-0 fw-semibold text-muted bg-light with-comma" id="gross-total-paid" name="gross-total-paid" value="0.00" readonly>
+                  <input type="text" class="form-control border-start-0 fw-semibold text-muted bg-light with-comma" id="gross-total-paid" name="gross-total-paid">
                 </div>
               </div>
             </div>
@@ -1804,6 +1805,8 @@
 <script>
     $(document).ready(function () {
         loadPaymentTemplates();
+        calculateGrossTotalPaid();
+
     });
 
     /*Function to switch and add type of payment method*/
@@ -1819,14 +1822,50 @@
           "Debit/Card": "#template-payment-card",
           "Online Banking": "#template-payment-digibank"
       };
-      let html = "";
-      $(".payment-check-input:checked").each(function () {
-          let templateId = templates[$(this).val()];
-          if (templateId) {
-            html += $(templateId).html();
+
+      // Load Cash by default
+      $(document).ready(function () {
+
+          if ($("#payment-Cash").length === 0) {
+              $("#payment-forms").append(
+                  `<div id="payment-Cash">
+                      ${$(templates["Cash"]).html()}
+                  </div>`
+              );
           }
+
+          // Optional: check the Cash checkbox automatically
+          $('.payment-check-input[value="Cash"]').prop('checked', true);
       });
-      $("#payment-forms").html(html); /*Display type of payment*/
+
+      $(document).on("change", ".payment-check-input", function () {
+
+          const paymentType = $(this).val();
+
+          // Prevent Cash from being removed
+          if (paymentType === "Cash") {
+              $(this).prop("checked", true);
+              return;
+          }
+
+          const sectionId = "payment-" + paymentType.replace(/[^a-zA-Z0-9]/g, "");
+
+          if ($(this).is(":checked")) {
+
+              if ($("#" + sectionId).length === 0) {
+                  $("#payment-forms").append(
+                      `<div id="${sectionId}">
+                          ${$(templates[paymentType]).html()}
+                      </div>`
+                  );
+              }
+
+          } else {
+              $("#" + sectionId).remove();
+          }
+
+          calculateGrossTotalPaid();
+      });
   }
 
 
@@ -1836,23 +1875,54 @@
   }
 
 
+
+ function calculateGrossTotalPaid() {
+     let total = 0;
+
+     $('input[name="amount"]').each(function () {
+         let value = ($(this).val() || '').replace(/,/g, '');
+         total += parseFloat(value) || 0;
+     });
+
+     $('#gross-total-paid').val(
+         total.toLocaleString('en-US', {
+             minimumFractionDigits: 2,
+             maximumFractionDigits: 2
+         })
+     );
+ }
+
+ $(document).on('input', 'input[name="amount"]', function () {
+     calculateGrossTotalPaid();
+ });
+
+
+
 /*Tommorow update for applying payment*/
-  // function mdlapplyPayment(){
-  //     var SlipNo = $("#r_slipnomber").val();
-  //     $.post("dirs/dashboard/actions/update_apply_payment.php", {
-  //         SlipNo : SlipNo,
-  //     }, function(data){
-  //         if($.trim(data) == "OK"){
-  //             alert("Student added.");
-  //             $("#modal-add-student").modal("hide");
-  //             load_student_list();
-  //         }else{
-  //             alert("Error: " + data);
-  //         }
-  //     });
-  // }
+  function mdlapplyPayment(){
+      var SlipNo = $("#r_slipnomber").val();
+      var ChargeAmount = $("#r_chargeamount").val();
+
+
+
+
+
+
+      $.post("dirs/dashboard/actions/update_apply_payment.php", {
+          SlipNo : SlipNo,
+      }, function(data){
+          if($.trim(data) == "OK"){
+              $("#mdl-payment").modal('hide')
+              $("#modal-add-student").modal("hide");
+              loadEvent_Charges();
+          }else{
+              console.log("Error: " + data);
+          }
+      });
+  }
 
 </script>
+
 
 
 
